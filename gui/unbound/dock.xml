@@ -13877,11 +13877,11 @@
 					</block>
 				</block>
 			</block>
-			<bind name="watch" value="'_isReadyBtnEnabled'; (readyBtnDisableReason == 'no_reason') ? true : false"/>
+			<bind name="watch" value="'isReadyBtnEnabled'; (readyBtnDisableReason == 'no_reason') ? true : false"/>
 			<block>
 				<bind name="name" value="divisionData.isReady ? 'isReadyDivision' : 'isNotReadyDivision'"/>
-				<bind name="tooltip" value="'SimpleWarningTooltip'; !(_isReadyBtnEnabled) ? {_text: readyBtnDisableReason} : null"/>
-				<bind name="tooltip" value="'FormationReadyButtonTooltip'; _isReadyBtnEnabled ? {} : null; 0"/>
+				<bind name="tooltip" value="'SimpleWarningTooltip'; !(isReadyBtnEnabled) ? {_text: readyBtnDisableReason} : null"/>
+				<bind name="tooltip" value="'FormationReadyButtonTooltip'; isReadyBtnEnabled ? {} : null; 0"/>
 				<style>
 					<width value="92px"/>
 					<height value="27px"/>
@@ -13889,8 +13889,8 @@
 				<block className="status_ready_item" type="native">
 					<bind name="name" value="'readyDivision'"/>
 					<styleClass value="$Fullsize"/>
-					<bind name="style" value="'colorMatrixFilter'; _isReadyBtnEnabled ? '0 0 0 0' : '0 -100 0 -40'"/>
-					<bind name="style" value="'mouseEnabled'; (!(divisionData.isReady) &amp;&amp; _isReadyBtnEnabled)"/>
+					<bind name="style" value="'colorMatrixFilter'; isReadyBtnEnabled ? '0 0 0 0' : '0 -100 0 -40'"/>
+					<bind name="style" value="'mouseEnabled'; (!(divisionData.isReady) &amp;&amp; isReadyBtnEnabled)"/>
 					<bind name="label" value="toUpperCase(tr('IDS_READY'))"/>
 					<bind name="action" value="'buttonClick'; 'setIsReadyInDivision'; {isReady: true}"/>
 					<bind name="selected" value="divisionData.isReady"/>
@@ -38180,19 +38180,19 @@
 					</block>
 				</block>
 			</block>
-			<bind name="watch" value="'_isReadyBtnEnabled'; (readyBtnDisableReason == 'no_reason') ? true : false"/>
+			<bind name="watch" value="'isReadyBtnEnabled'; (readyBtnDisableReason == 'no_reason') ? true : false"/>
 			<block>
-				<bind name="name" value="_isReadyBtnEnabled ? 'isNotReadyClub' : ''"/>
-				<bind name="tooltip" value="'SimpleWarningTooltip'; !(_isReadyBtnEnabled) ? {_text: readyBtnDisableReason} : null"/>
-				<bind name="tooltip" value="'FormationReadyButtonTooltip'; _isReadyBtnEnabled ? {} : null; 0"/>
+				<bind name="name" value="isReadyBtnEnabled ? 'isNotReadyClub' : ''"/>
+				<bind name="tooltip" value="'SimpleWarningTooltip'; !(isReadyBtnEnabled) ? {_text: readyBtnDisableReason} : null"/>
+				<bind name="tooltip" value="'FormationReadyButtonTooltip'; isReadyBtnEnabled ? {} : null; 0"/>
 				<block className="status_ready_item" type="native">
 					<bind name="name" value="'readyClub'"/>
 					<style>
 						<width value="92px"/>
 						<height value="27px"/>
 					</style>
-					<bind name="style" value="'colorMatrixFilter'; _isReadyBtnEnabled ? '0 0 0 0' : '0 -100 0 -40'"/>
-					<bind name="style" value="'mouseEnabled'; _isReadyBtnEnabled"/>
+					<bind name="style" value="'colorMatrixFilter'; isReadyBtnEnabled ? '0 0 0 0' : '0 -100 0 -40'"/>
+					<bind name="style" value="'mouseEnabled'; isReadyBtnEnabled"/>
 					<bind name="label" value="toUpperCase(tr('IDS_READY'))"/>
 					<bind name="action" value="'buttonClick'; _isCreateParty ? 'createParty' : 'enterParty'; {clubId: club.id, shipId: shipId}"/>
 					<bind name="selected" value="isPartyMember"/>
@@ -42300,8 +42300,8 @@
 			<bind name="visible" value="(!_isShipSuitable || !_isBattleSuitable || _isUseless) &amp;&amp; (state != 3)"/>
 			<styleClass value="$FullsizeAbsolute"/>
 			<block>
+				<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
 				<style>
-					<alpha value="0.3"/>
 					<hitTest value="false"/>
 				</style>
 				<styleClass value="$FullsizeAbsolute"/>
@@ -42335,7 +42335,8 @@
 					</block>
 				</block>
 				<block className="modal_panel" type="native">
-					<styleClass value="$FullsizeAbsolute"/>
+					<styleClass value="$Fullsize"/>
+					<bind name="style" value="'alpha'; optionData.contrast ? 1.0 : 0.3"/>
 				</block>
 			</block>
 			<block type="text">
@@ -52637,8 +52638,8 @@
 				<width value="146px"/>
 				<height value="51px"/>
 			</style>
-			<bind name="tooltip" value="'SimpleWarningTooltip'; !(isReadyBtnEnabled) ? {_text: disableReasonButton} : null"/>
-			<bind name="tooltip" value="'FormationReadyButtonTooltip'; isReadyBtnEnabled ? {} : null"/>
+			<bind name="tooltip" value="'SimpleWarningTooltip'; !isReadyBtnEnabled &amp;&amp; !(divisionData.isReady) ? {_text: disableReasonButton} : null"/>
+			<bind name="tooltip" value="'FormationReadyButtonTooltip'; isReadyBtnEnabled || divisionData.isReady ? {} : null"/>
 			<block className="status_ready_item_big" type="native">
 				<style>
 					<marginLeft value="2px"/>
@@ -52646,8 +52647,8 @@
 					<marginBottom value="2px"/>
 				</style>
 				<styleClass value="$Fullsize"/>
-				<bind name="style" value="'colorMatrixFilter'; _isReadyBtnEnabled ? '0 0 0 0' : '0 -100 0 -40'"/>
-				<bind name="style" value="'mouseEnabled'; (!(divisionData.isReady) &amp;&amp; isReadyBtnEnabled)"/>
+				<bind name="style" value="'colorMatrixFilter'; isReadyBtnEnabled || divisionData.isReady ? '0 0 0 0' : '0 -100 0 -40'"/>
+				<bind name="style" value="'mouseEnabled'; !(divisionData.isReady) &amp;&amp; isReadyBtnEnabled"/>
 				<bind name="label" value="toUpperCase(tr('IDS_READY'))"/>
 				<bind name="action" value="'buttonClick'; 'setIsReadyInDivision'; {isReady: true}"/>
 				<bind name="selected" value="divisionData.isReady"/>
