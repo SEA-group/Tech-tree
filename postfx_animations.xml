@@ -1,0 +1,268 @@
+<postfx_animations.xml>
+	<animation>
+		<name>BattleEndVictory</name>
+		<intro>0.1</intro>
+		<timeline>
+			<frame>
+				<t>0</t>
+				<vignetteColor group="Common">1.0 1.0 1.0 1.0</vignetteColor>
+				<vignetteInnerRadius group="Common">0</vignetteInnerRadius>
+				<vignetteOuterRadius group="Common">0.9</vignetteOuterRadius>
+				<vignetteIntensity group="Common">0</vignetteIntensity>
+				<desaturation group="Common">0</desaturation>
+			</frame>
+
+			<frame>
+				<t>0.2</t>
+				<vignetteColor group="Common">1.0 1.0 1.0 1.0</vignetteColor>
+				<vignetteInnerRadius group="Common">0</vignetteInnerRadius>
+				<vignetteOuterRadius group="Common">0.8</vignetteOuterRadius>
+				<vignetteIntensity group="Common">0.1</vignetteIntensity>
+				<desaturation group="Common">-0.1</desaturation>
+			</frame>
+
+			<frame>
+				<t>0.4</t>
+				<vignetteColor group="Common">1.0 1.0 1.0 1.0</vignetteColor>
+				<vignetteInnerRadius group="Common">0</vignetteInnerRadius>
+				<vignetteOuterRadius group="Common">0.7</vignetteOuterRadius>
+				<vignetteIntensity group="Common">0.2</vignetteIntensity>
+				<desaturation group="Common">-0.2</desaturation>
+			</frame>
+
+			<frame>
+				<t>0.6</t>
+				<vignetteColor group="Common">1.0 1.0 1.0 1.0</vignetteColor>
+				<vignetteInnerRadius group="Common">0</vignetteInnerRadius>
+				<vignetteOuterRadius group="Common">0.6</vignetteOuterRadius>
+				<vignetteIntensity group="Common">0.3</vignetteIntensity>
+				<desaturation group="Common">-0.3</desaturation>
+			</frame>
+
+			<frame>
+				<t>0.8</t>
+				<vignetteColor group="Common">1.0 1.0 1.0 1.0</vignetteColor>
+				<vignetteInnerRadius group="Common">0</vignetteInnerRadius>
+				<vignetteOuterRadius group="Common">0.55</vignetteOuterRadius>
+				<vignetteIntensity group="Common">0.3</vignetteIntensity>
+				<desaturation group="Common">-0.4</desaturation>
+			</frame>
+
+			<frame>
+				<t>1</t>
+				<vignetteColor group="Common">0.0 0.0 0.0 1.0</vignetteColor>
+				<vignetteInnerRadius group="Common">0</vignetteInnerRadius>
+				<vignetteOuterRadius group="Common">0.8</vignetteOuterRadius>
+				<vignetteIntensity group="Common">0.2</vignetteIntensity>
+				<desaturation group="Common">-0.5</desaturation>
+			</frame>
+		</timeline>
+	</animation>
+
+	<animation>
+		<name>BattleEndDefeat</name>
+		<intro>0.1</intro>
+		<timeline>
+			<frame>
+				<t>0</t>
+				<vignetteColor group="Common">1.0 1.0 1.0 1.0</vignetteColor>
+				<vignetteInnerRadius group="Common">0</vignetteInnerRadius>
+				<vignetteOuterRadius group="Common">0.9</vignetteOuterRadius>
+				<vignetteIntensity group="Common">0</vignetteIntensity>
+				<desaturation group="Common">0</desaturation>
+			</frame>
+
+			<frame>
+				<t>0.2</t>
+				<vignetteColor group="Common">1.0 1.0 1.0 1.0</vignetteColor>
+				<vignetteInnerRadius group="Common">0</vignetteInnerRadius>
+				<vignetteOuterRadius group="Common">0.8</vignetteOuterRadius>
+				<vignetteIntensity group="Common">0.1</vignetteIntensity>
+				<desaturation group="Common">0.1</desaturation>
+			</frame>
+
+			<frame>
+				<t>0.4</t>
+				<vignetteColor group="Common">1.0 1.0 1.0 1.0</vignetteColor>
+				<vignetteInnerRadius group="Common">0</vignetteInnerRadius>
+				<vignetteOuterRadius group="Common">0.7</vignetteOuterRadius>
+				<vignetteIntensity group="Common">0.2</vignetteIntensity>
+				<desaturation group="Common">0.2</desaturation>
+			</frame>
+
+			<frame>
+				<t>0.6</t>
+				<vignetteColor group="Common">1.0 1.0 1.0 1.0</vignetteColor>
+				<vignetteInnerRadius group="Common">0</vignetteInnerRadius>
+				<vignetteOuterRadius group="Common">0.6</vignetteOuterRadius>
+				<vignetteIntensity group="Common">0.3</vignetteIntensity>
+				<desaturation group="Common">0.3</desaturation>
+			</frame>
+
+			<frame>
+				<t>0.8</t>
+				<vignetteColor group="Common">1.0 1.0 1.0 1.0</vignetteColor>
+				<vignetteInnerRadius group="Common">0</vignetteInnerRadius>
+				<vignetteOuterRadius group="Common">0.55</vignetteOuterRadius>
+				<vignetteIntensity group="Common">0.3</vignetteIntensity>
+				<desaturation group="Common">0.4</desaturation>
+			</frame>
+
+			<frame>
+				<t>1</t>
+				<vignetteColor group="Common">0.0 0.0 0.0 1.0</vignetteColor>
+				<vignetteInnerRadius group="Common">0</vignetteInnerRadius>
+				<vignetteOuterRadius group="Common">0.8</vignetteOuterRadius>
+				<vignetteIntensity group="Common">0.2</vignetteIntensity>
+				<desaturation group="Common">0.5</desaturation>
+			</frame>
+		</timeline>
+	</animation>
+
+	<animation>
+		<name>Death</name>
+		<intro>0.0</intro>
+		<timeline>
+			<frame>
+				<t>0</t>
+				<desaturation group="Common">0.0</desaturation>
+				<screenBlurIntensity group="ScreenBlur">0.3</screenBlurIntensity>
+				<radialBlurIntensity group="RadialBlur">0.3</radialBlurIntensity>
+				<radialBlurSize group="RadialBlur">0.7</radialBlurSize>
+			</frame>
+			<frame>
+				<t>0.3</t>
+				<desaturation group="Common">0.8</desaturation>
+				<screenBlurIntensity group="ScreenBlur">0.5</screenBlurIntensity>
+				<radialBlurIntensity group="RadialBlur">100</radialBlurIntensity>
+				<radialBlurSize group="RadialBlur">0.7</radialBlurSize>
+			</frame>		
+			<frame>
+				<t>0.5</t>
+				<desaturation group="Common">1</desaturation>
+				<screenBlurIntensity group="ScreenBlur">1</screenBlurIntensity>
+				<radialBlurIntensity group="RadialBlur">20</radialBlurIntensity>
+				<radialBlurSize group="RadialBlur">0.7</radialBlurSize>
+			</frame>
+			<frame>
+				<t>2</t>
+				<desaturation group="Common">0.5</desaturation>
+				<screenBlurIntensity group="ScreenBlur">0.1</screenBlurIntensity>
+				<radialBlurIntensity group="RadialBlur">0</radialBlurIntensity>
+				<radialBlurSize group="RadialBlur">0.7</radialBlurSize>
+			</frame>
+			<frame>
+				<t>4</t>
+				<desaturation group="Common">0.0</desaturation>
+				<screenBlurIntensity group="ScreenBlur">0</screenBlurIntensity>
+				<radialBlurIntensity group="RadialBlur">0</radialBlurIntensity>
+				<radialBlurSize group="RadialBlur">0.7</radialBlurSize>
+			</frame>
+		</timeline>
+	</animation>
+	
+	<animation>
+		<name>BinocularShot</name>
+		<intro>0.0</intro>
+		<timeline>
+			<frame>
+				<t>0</t>
+				<colorTintIntensityOverbright group="Common">0.0</colorTintIntensityOverbright>
+			</frame>
+			<frame>
+				<t>0.7</t>
+				<colorTintIntensityOverbright group="Common">0</colorTintIntensityOverbright>
+			</frame>
+		</timeline>
+	</animation>
+	
+	<animation>
+		<name>DockShipOwned</name>
+		<intro>0.5</intro>
+		<timeline>
+			<frame>
+				<t>0</t>
+				<screenBlurIntensity group="ScreenBlur">0.0</screenBlurIntensity>
+				<smokescreenIntensity group="Common">0.0</smokescreenIntensity>
+				<desaturation group="Common">0.0</desaturation>
+			</frame>
+			<frame>
+				<t>1</t>
+				<screenBlurIntensity group="ScreenBlur">0.0</screenBlurIntensity>
+				<smokescreenIntensity group="Common">0.0</smokescreenIntensity>
+				<desaturation group="Common">0.0</desaturation>
+			</frame>
+		</timeline>
+	</animation>
+	
+	<animation>
+		<name>DockShipExplored</name>
+		<intro>1.0</intro>
+		<timeline>
+			<frame>
+				<t>0</t>
+				<screenBlurIntensity group="ScreenBlur">0.0</screenBlurIntensity>
+				<smokescreenIntensity group="Common">0.0</smokescreenIntensity>
+				<desaturation group="Common">0.0</desaturation>
+			</frame>
+		</timeline>
+	</animation>
+	
+	<animation>
+		<name>DockShipAbsent</name>
+		<intro>1.0</intro>
+		<timeline>
+			<frame>
+				<t>0</t>
+				<screenBlurIntensity group="ScreenBlur">0.0</screenBlurIntensity>
+				<smokescreenIntensity group="Common">0.0</smokescreenIntensity>
+				<desaturation group="Common">0.0</desaturation>
+			</frame>
+		</timeline>
+	</animation>
+	
+	<animation>
+		<name>DockShipJustOwned</name>
+		<intro>0.5</intro>
+		<timeline>
+			<frame>
+				<t>0</t>
+				<screenBlurIntensity group="ScreenBlur">0.2</screenBlurIntensity>
+				<smokescreenIntensity group="Common">0.0</smokescreenIntensity>
+				<desaturation group="Common">-1.0</desaturation>
+				<colorTintIntensityOverbright group="Common">0.3</colorTintIntensityOverbright>
+			</frame>
+			<frame>
+				<t>0.5</t>
+				<screenBlurIntensity group="ScreenBlur">0.0</screenBlurIntensity>
+				<smokescreenIntensity group="Common">0.0</smokescreenIntensity>
+				<desaturation group="Common">0.0</desaturation>
+				<colorTintIntensityOverbright group="Common">0</colorTintIntensityOverbright>
+			</frame>
+		</timeline>
+	</animation>
+	
+	<animation>
+		<name>DockShipJustExplored</name>
+		<intro>0.5</intro>
+		<timeline>
+			<frame>
+				<t>0</t>
+				<screenBlurIntensity group="ScreenBlur">0.6</screenBlurIntensity>
+				<smokescreenIntensity group="Common">0.0</smokescreenIntensity>
+				<desaturation group="Common">0.0</desaturation>
+				<colorTintIntensityOverbright group="Common">0.3</colorTintIntensityOverbright>
+			</frame>
+			<frame>
+				<t>0.5</t>
+				<screenBlurIntensity group="ScreenBlur">0.0</screenBlurIntensity>
+				<smokescreenIntensity group="Common">0.0</smokescreenIntensity>
+				<desaturation group="Common">0.0</desaturation>
+				<colorTintIntensityOverbright group="Common">0.0</colorTintIntensityOverbright>
+			</frame>
+		</timeline>
+	</animation>
+	
+	
+
+</postfx_animations.xml>

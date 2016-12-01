@@ -1,0 +1,725 @@
+<ship_tree>
+	<nation name='USA'>
+		<arrows>
+			<arrow item0='4266538992' item1='4274927600'>
+				<cell x='6' y='2'/>
+				<cell x='6' y='3'/>
+			</arrow>
+			<arrow item0='4276041712' item1='4277090288'>
+				<cell x='2' y='8'/>
+				<cell x='2' y='9'/>
+			</arrow>
+			<arrow item0='4274927600' item1='4280170480'>
+				<cell x='6' y='3'/>
+				<cell x='6' y='4'/>
+			</arrow>
+			<arrow item0='4277057520' item1='4273911792'>
+				<cell x='4' y='8'/>
+				<cell x='4' y='9'/>
+			</arrow>
+			<arrow item0='4272830448' item1='4281219056'>
+				<cell x='6' y='8'/>
+				<cell x='6' y='9'/>
+			</arrow>
+			<arrow item0='4259264496' item1='4286527472'>
+				<cell x='2' y='5'/>
+				<cell x='2' y='6'/>
+			</arrow>
+			<arrow item0='4280170480' item1='4289607664'>
+				<cell x='6' y='4'/>
+				<cell x='6' y='5'/>
+			</arrow>
+			<arrow item0='4288624624' item1='4259264496'>
+				<cell x='2' y='4'/>
+				<cell x='2' y='5'/>
+			</arrow>
+			<arrow item0='4280203248' item1='4277057520'>
+				<cell x='4' y='7'/>
+				<cell x='4' y='8'/>
+			</arrow>
+			<arrow item0='4281317360' item1='4279220208'>
+				<cell x='0' y='8'/>
+				<cell x='0' y='9'/>
+			</arrow>
+			<arrow item0='4282300400' item1='4280203248'>
+				<cell x='4' y='6'/>
+				<cell x='4' y='7'/>
+			</arrow>
+			<arrow item0='4286461936' item1='4272830448'>
+				<cell x='6' y='7'/>
+				<cell x='6' y='8'/>
+			</arrow>
+			<arrow item0='4282333168' item1='4276041712'>
+				<cell x='2' y='7'/>
+				<cell x='2' y='8'/>
+			</arrow>
+			<arrow item0='4282365936' item1='4281317360'>
+				<cell x='0' y='7'/>
+				<cell x='0' y='8'/>
+			</arrow>
+			<arrow item0='4287543280' item1='4282300400'>
+				<cell x='4' y='5'/>
+				<cell x='4' y='6'/>
+			</arrow>
+			<arrow item0='4290689008' item1='4269717488'>
+				<cell x='4' y='2'/>
+				<cell x='4' y='3'/>
+			</arrow>
+			<arrow item0='4284463088' item1='4282365936'>
+				<cell x='0' y='6'/>
+				<cell x='0' y='7'/>
+			</arrow>
+			<arrow item0='4286527472' item1='4282333168'>
+				<cell x='2' y='6'/>
+				<cell x='2' y='7'/>
+			</arrow>
+			<arrow item0='4288559088' item1='4286461936'>
+				<cell x='6' y='6'/>
+				<cell x='6' y='7'/>
+			</arrow>
+			<arrow item0='4288657392' item1='4284463088'>
+				<cell x='0' y='5'/>
+				<cell x='0' y='6'/>
+			</arrow>
+			<arrow item0='4289607664' item1='4288559088'>
+				<cell x='6' y='5'/>
+				<cell x='6' y='6'/>
+			</arrow>
+			<arrow item0='4289640432' item1='4287543280'>
+				<cell x='4' y='4'/>
+				<cell x='4' y='5'/>
+			</arrow>
+			<arrow item0='4290721776' item1='4288624624'>
+				<cell x='2' y='3'/>
+				<cell x='2' y='4'/>
+			</arrow>
+			<arrow item0='4292753392' item1='4266538992'>
+				<cell x='6' y='1'/>
+				<cell x='6' y='2'/>
+			</arrow>
+			<arrow item0='4292851696' item1='4288657392'>
+				<cell x='0' y='4'/>
+				<cell x='0' y='5'/>
+			</arrow>
+			<arrow item0='4269717488' item1='4289640432'>
+				<cell x='4' y='3'/>
+				<cell x='4' y='4'/>
+			</arrow>
+			<arrow item0='4290721776' item1='4290754544'>
+				<cell x='2' y='3'/>
+				<cell x='0' y='3'/>
+			</arrow>
+			<arrow item0='4292786160' item1='4290689008'>
+				<cell x='4' y='1'/>
+				<cell x='4' y='2'/>
+			</arrow>
+			<arrow item0='4293867504' item1='4290721776'>
+				<cell x='2' y='2'/>
+				<cell x='2' y='3'/>
+			</arrow>
+			<arrow item0='4292786160' item1='4292753392'>
+				<cell x='4' y='1'/>
+				<cell x='6' y='1'/>
+			</arrow>
+			<arrow item0='4290754544' item1='4292851696'>
+				<cell x='0' y='3'/>
+				<cell x='0' y='4'/>
+			</arrow>
+			<arrow item0='4290689008' item1='4293867504'>
+				<cell x='4' y='2'/>
+				<cell x='2' y='2'/>
+			</arrow>
+			<arrow item0='4293834736' item1='4292786160'>
+				<cell x='4' y='0'/>
+				<cell x='4' y='1'/>
+			</arrow>
+		</arrows>
+		<ships>
+				<ship shipid='4259264496' x='2' y='5' /> <!--PASB034_New_Mexico_1941 (T6 USA upgradeable Battleship) -->
+				<ship shipid='4266538992' x='6' y='2' /> <!--PASD027_Wickes_1918 (T3 USA upgradeable Destroyer) -->
+				<ship shipid='4269717488' x='4' y='3' /> <!--PASC024_Phoenix_1917 (T4 USA upgradeable Cruiser) -->
+				<ship shipid='4272830448' x='6' y='8' /> <!--PASD021_Fletcher_1943 (T9 USA upgradeable Destroyer) -->
+				<ship shipid='4273911792' x='4' y='9' /> <!--PASC020_Des_Moines_1948 (T10 USA upgradeable Cruiser) -->
+				<ship shipid='4274927600' x='6' y='3' /> <!--PASD019_Clemson_1920 (T4 USA upgradeable Destroyer) -->
+				<ship shipid='4276041712' x='2' y='8' /> <!--PASB018_Iowa_1944 (T9 USA upgradeable Battleship) -->
+				<ship shipid='4277057520' x='4' y='8' /> <!--PASC017_Baltimore_1944 (T9 USA upgradeable Cruiser) -->
+				<ship shipid='4277090288' x='2' y='9' /> <!--PASB017_Montana_1945 (T10 USA upgradeable Battleship) -->
+				<ship shipid='4279220208' x='0' y='9' /> <!--PASA015_Midway_1945 (T10 USA upgradeable AirCarrier) -->
+				<ship shipid='4280170480' x='6' y='4' /> <!--PASD014_Leader_1919 (T5 USA upgradeable Destroyer) -->
+				<ship shipid='4280203248' x='4' y='7' /> <!--PASC014_New_Orlean_1944 (T8 USA upgradeable Cruiser) -->
+				<ship shipid='4281219056' x='6' y='9' /> <!--PASD013_Gearing_1945 (T10 USA upgradeable Destroyer) -->
+				<ship shipid='4281317360' x='0' y='8' /> <!--PASA013_Essex_1945 (T9 USA upgradeable AirCarrier) -->
+				<ship shipid='4282300400' x='4' y='6' /> <!--PASC012_Pensacola_1944 (T7 USA upgradeable Cruiser) -->
+				<ship shipid='4282333168' x='2' y='7' /> <!--PASB012_North_Carolina_1945 (T8 USA upgradeable Battleship) -->
+				<ship shipid='4282365936' x='0' y='7' /> <!--PASA012_Lexington_1944 (T8 USA upgradeable AirCarrier) -->
+				<ship shipid='4284463088' x='0' y='6' /> <!--PASA010_Ranger_1944 (T7 USA upgradeable AirCarrier) -->
+				<ship shipid='4286461936' x='6' y='7' /> <!--PASD008_Benson_1945 (T8 USA upgradeable Destroyer) -->
+				<ship shipid='4286527472' x='2' y='6' /> <!--PASB008_Colorado_1945 (T7 USA upgradeable Battleship) -->
+				<ship shipid='4287543280' x='4' y='5' /> <!--PASC007_Cleveland_1945 (T6 USA upgradeable Cruiser) -->
+				<ship shipid='4288559088' x='6' y='6' /> <!--PASD006_Mahan_1936 (T7 USA upgradeable Destroyer) -->
+				<ship shipid='4288624624' x='2' y='4' /> <!--PASB006_New_York_1934 (T5 USA upgradeable Battleship) -->
+				<ship shipid='4288657392' x='0' y='5' /> <!--PASA006_Independence_1945 (T6 USA upgradeable AirCarrier) -->
+				<ship shipid='4289607664' x='6' y='5' /> <!--PASD005_Farragut_1944 (T6 USA upgradeable Destroyer) -->
+				<ship shipid='4289640432' x='4' y='4' /> <!--PASC005_Omaha_1923 (T5 USA upgradeable Cruiser) -->
+				<ship shipid='4290689008' x='4' y='2' /> <!--PASC004_St_Louis_1906 (T3 USA upgradeable Cruiser) -->
+				<ship shipid='4290721776' x='2' y='3' /> <!--PASB004_Arkansas_1912 (T4 USA upgradeable Battleship) -->
+				<ship shipid='4290754544' x='0' y='3' /> <!--PASA004_Langley_1929 (T4 USA upgradeable AirCarrier) -->
+				<ship shipid='4292753392' x='6' y='1' /> <!--PASD002_Sampson_1917 (T2 USA upgradeable Destroyer) -->
+				<ship shipid='4292786160' x='4' y='1' /> <!--PASC002_Chester_1908 (T2 USA upgradeable Cruiser) -->
+				<ship shipid='4292851696' x='0' y='4' /> <!--PASA002_Bogue_1942 (T5 USA upgradeable AirCarrier) -->
+				<ship shipid='4293834736' x='4' y='0' /> <!--PASC001_Erie_1936 (T1 USA start Cruiser) -->
+				<ship shipid='4293867504' x='2' y='2' /> <!--PASB001_Michigan_1916 (T3 USA upgradeable Battleship) -->
+				<ship shipid='4274960368' x='8' y='9' /> <!--PASC019_Burlington_1944 (T10 USA disabled Cruiser)-->
+				<ship shipid='4248745968' x='8' y='4' /> <!--PASC044_Marblehead_1924 (T5 USA special Cruiser) -->
+				<ship shipid='4247697392' x='10' y='4' /> <!--PASC045_Marblehead_1924_Asus (T5 USA special Cruiser) -->
+				<!--<ship shipid='4287903728' x='10' y='5' /> PASX006_Cimarron_invisible (T5 USA unavailable Auxiliary) -->
+				<ship shipid='3555670000' x='12' y='4' /> <!--PASB705_Texas_1944 (T5 USA event Battleship) -->
+				<ship shipid='4281284592' x='8' y='3' /> <!--PASB013_Arkansas_1912 (T4 USA special Battleship) -->
+				<ship shipid='4291737584' x='8' y='1' /> <!--PASC003_Albany_1898 (T2 USA special Cruiser) -->
+				<ship shipid='4288591856' x='8' y='6' /> <!--PASC006_Atlanta_1942 (T7 USA premium Cruiser) -->
+				<ship shipid='4264441840' x='10' y='6' /> <!--PASD029_Sims_1941 (T7 USA special Destroyer) -->
+				<ship shipid='3763320816' x='12' y='6' /> <!--PASA507_Saipan_1946 (T7 USA special AirCarrier) -->
+				<!-- <ship shipid='3453925360' x='10' y='2' /> PASC802_Cimarron_Target (T5 USA unavailable Cruiser) -->
+				<!-- <ship shipid='4293146608' x='10' y='0' /> Cimarron (T5 USA unavailable Auxiliary) -->
+				<ship shipid='4278106096' x='10' y='9' /> <!--PASC016_Worcester_1948 (T10 USA disabled Cruiser) -->
+				<!-- <ship shipid='4286560240' x='8' y='5' /> PASA008_Saipan_1943 (T6 USA disabled AirCarrier) -->
+				<!--<ship shipid='3345987568' x='8' y='5' /> PASA905_Essex_1945_Halloween (T5 USA disabled AirCarrier) -->
+				<ship shipid='3768465392' x='10' y='1' /> <!--PASD502_Smith (T2 USA special Destroyer) -->
+				<ship shipid='3763255280' x='8' y='7' /> <!--PASC507_Indianapolis_1945 (T7 USA special Cruiser) -->
+				<ship shipid='3764336624' x='10' y='7' /> <!--PASB506_Arizona_1941 (T7 USA special Battleship) -->
+				<ship shipid='3553540080' x='12' y='7' /> <!--PASC707_Flint (T7 USA demoWithoutStats Cruiser) -->
+				<ship shipid='3551410160' x='8' y='8' /> <!--PASD709_Black (T9 USA demoWithoutStats Destroyer) -->
+				<!-- <ship shipid='3455006704' x='8' y='2' /> PASB801_False_Michigan_1916 (T3 USA unavailable Battleship) -->
+				<!--<ship shipid='3453958128' x='8' y='2' /> PASB802_FALSE_ENEMY_Michigan (T3 USA unavailable Battleship) -->
+				<!-- <ship shipid='3451828208' x='8' y='0' /> PASC804_FALSE_ENEMY_Erie_1936 (T1 USA unavailable Cruiser) -->			
+				<!-- <ship shipid='3450779632' x='10' y='0' /> PASC805_FALSE_ENEMY_Erie_1936 (T1 USA unavailable Cruiser) -->
+				<!--<ship shipid='3343824880' x='10' y='3' /> PASC907_Des_Moines_1948_Halloween (T4 USA disabled Cruiser) -->			
+				<!-- <ship shipid='3450779632' x='12' y='3' /> PASD801_FALSE_ENEMY_Sampson (T4 USA unavailable Destroyer) -->
+				<ship shipid='3761190896' x='10' y='8' /> <!--PASB509_Missouri (T9 USA demoWithoutStats Battleship) -->
+		</ships>
+		<types>
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+		</types>
+	</nation>
+	<nation name='Germany'>
+		<arrows>
+			<arrow item0='4180588336' item1='4179539760'>
+				<cell x='4' y='8'/>
+				<cell x='4' y='9'/>
+			</arrow>
+			<arrow item0='4181636912' item1='4180588336'>
+				<cell x='4' y='7'/>
+				<cell x='4' y='8'/>
+			</arrow>
+			<arrow item0='4182685488' item1='4181636912'>
+				<cell x='4' y='6'/>
+				<cell x='4' y='7'/>
+			</arrow>
+			<arrow item0='4183734064' item1='4182685488'>
+				<cell x='4' y='5'/>
+				<cell x='4' y='6'/>
+			</arrow>
+			<arrow item0='4184782640' item1='4183734064'>
+				<cell x='4' y='4'/>
+				<cell x='4' y='5'/>
+			</arrow>
+			<arrow item0='4185831216' item1='4184782640'>
+				<cell x='4' y='3'/>
+				<cell x='4' y='4'/>
+			</arrow>
+			<arrow item0='4186879792' item1='4185831216'>
+				<cell x='4' y='2'/>
+				<cell x='4' y='3'/>
+			</arrow>
+			<arrow item0='4292785968' item1='4186879792'>
+				<cell x='4' y='1'/>
+				<cell x='4' y='2'/>
+			</arrow>
+			<arrow item0='4293834544' item1='4292785968'>
+				<cell x='4' y='0'/>
+				<cell x='4' y='1'/>
+			</arrow>
+		</arrows>
+		<ships>
+				<ship shipid='4179539760' x='4' y='9' /> <!--PGSC110_Hindenburg (T10 Germany upgradeable Cruiser) -->
+				<ship shipid='4180588336' x='4' y='8' /> <!--PGSC109_Roon (T9 Germany upgradeable Cruiser) -->
+				<ship shipid='4181636912' x='4' y='7' /> <!--PGSC108_Hipper (T8 Germany upgradeable Cruiser) -->
+				<ship shipid='4182685488' x='4' y='6' /> <!--PGSC107_Yorck (T7 Germany upgradeable Cruiser) -->
+				<ship shipid='4183734064' x='4' y='5' /> <!--PGSC106_Nurnberg (T6 Germany upgradeable Cruiser) -->
+				<ship shipid='4184782640' x='4' y='4' /> <!--PGSC105_Konigsberg (T5 Germany upgradeable Cruiser) -->
+				<ship shipid='4185831216' x='4' y='3' /> <!--PGSC104_Karlsruhe (T4 Germany upgradeable Cruiser) -->
+				<ship shipid='4186879792' x='4' y='2' /> <!--PGSC103_Kolberg (T3 Germany upgradeable Cruiser) -->
+				<ship shipid='4292785968' x='4' y='1' /> <!--PGSC002_Drezden_1908 (T2 Germany upgradeable Cruiser) -->
+				<ship shipid='4293834544' x='4' y='0' /> <!--PGSC001_Hermelin_1940 (T1 Germany start Cruiser) -->
+				<!-- <ship shipid='4293867312' x='2' y='7' /> Бисмарк, удален -->
+				<ship shipid='4292818736' x='8' y='7' /> <!--PGSB002_Tirpiz_1942 (T8 Germany special Battleship) -->
+				<ship shipid='3768497968' x='8' y='1' /> <!--PGSC502_Emden_1908 (T2 Germany special Cruiser) -->
+				<ship shipid='3767482160' x='8' y='2' /> <!--PGSB503_Koenig_Albert (T3 Germany special Battleship) -->
+				<ship shipid='3763287856' x='8' y='6' /> <!--PGSB507_Scharnhorst (T7 Germany special Battleship) -->
+				<ship shipid='4186912560' x='2' y='2' /><!--PGSB103_Nassau (T3 Germany upgradeable Battleship) -->
+				<ship shipid='4185863984' x='2' y='3' /><!--PGSB104_Kaiser (T4 Germany upgradeable Battleship) -->
+				<ship shipid='4184815408' x='2' y='4' /><!--PGSB105_Koenig (T5 Germany upgradeable Battleship) -->
+				<ship shipid='4183766832' x='2' y='5' /><!--PGSB106_Bayern (T6 Germany upgradeable Battleship) -->
+				<ship shipid='4182718256' x='2' y='6' /><!--PGSB107_Gneisenau (T7 Germany upgradeable Battleship) -->
+				<ship shipid='4181669680' x='2' y='7' /><!--PGSB108_Bismarck (T8 Germany upgradeable Battleship) -->
+				<ship shipid='4180621104' x='2' y='8' /><!--PGSB109_Friedrich_der_Grosse (T9 Germany upgradeable Battleship) -->
+				<ship shipid='4179572528' x='2' y='9' /><!--PGSB110_Grossdeutschland (T10 Germany upgradeable Battleship) -->
+				<ship shipid='3762206512' x='10' y='7' /> <!--PGSC508_Prinz_Eugen (T8 Germany demoWithoutStats Cruiser) -->
+				<ship shipid='3764303664' x='8' y='5' /> <!--PGSC506_Admiral_Graf_Spee (T6 Germany demoWithoutStats Cruiser) -->
+				<ship shipid='4187895600' x='6' y='1' /> <!--PGSD102_V_25 (T2 Germany demoWithoutStats Destroyer) -->
+				<ship shipid='4186847024' x='6' y='2' /> <!--PGSD103_G_101 (T3 Germany demoWithoutStats Destroyer) -->
+				<ship shipid='4185798448' x='6' y='3' /> <!--PGSD104_V_170 (T4 Germany demoWithoutStats Destroyer) -->
+				<ship shipid='4184749872' x='6' y='4' /> <!--PGSD105_T_22 (T5 Germany demoWithoutStats Destroyer) -->
+				<ship shipid='4183701296' x='6' y='5' /> <!--PGSD106_Ernst_Gaede (T6 Germany demoWithoutStats Destroyer) -->
+				<ship shipid='4182652720' x='6' y='6' /> <!--PGSD107_Leberecht_Maass (T7 Germany demoWithoutStats Destroyer) -->
+				<ship shipid='4181604144' x='6' y='7' /> <!--PGSD108_Z_23 (T8 Germany demoWithoutStats Destroyer) -->
+				<ship shipid='4180555568' x='6' y='8' /> <!--PGSD109_Z_46 (T9 Germany demoWithoutStats Destroyer) -->
+				<ship shipid='4179506992' x='6' y='9' /> <!--PGSD110_Z_52 (T10 Germany demoWithoutStats Destroyer) -->
+		</ships>
+		<types>
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+		</types>
+	</nation>
+	<nation name='Japan'>
+		<arrows>
+			<arrow item0='4256085712' item1='4258182864'>
+				<cell x='4' y='0'/>
+				<cell x='4' y='1'/>
+			</arrow>
+			<arrow item0='4258182864' item1='4279154384'>
+				<cell x='4' y='1'/>
+				<cell x='4' y='2'/>
+			</arrow>
+			<arrow item0='4272895696' item1='4276041424'>
+				<cell x='2' y='8'/>
+				<cell x='2' y='9'/>
+			</arrow>
+			<arrow item0='4279154384' item1='4281251536'>
+				<cell x='4' y='2'/>
+				<cell x='4' y='3'/>
+			</arrow>
+			<arrow item0='4279219920' item1='4277122768'>
+				<cell x='0' y='8'/>
+				<cell x='0' y='9'/>
+			</arrow>
+			<arrow item0='4281251536' item1='4289640144'>
+				<cell x='4' y='3'/>
+				<cell x='4' y='4'/>
+			</arrow>
+			<arrow item0='4282300112' item1='4259231440'>
+				<cell x='4' y='8'/>
+				<cell x='4' y='9'/>
+			</arrow>
+			<arrow item0='4281284304' item1='4272895696'>
+				<cell x='2' y='7'/>
+				<cell x='2' y='8'/>
+			</arrow>
+			<arrow item0='4282365648' item1='4279219920'>
+				<cell x='0' y='7'/>
+				<cell x='0' y='8'/>
+			</arrow>
+			<arrow item0='4283414224' item1='4282365648'>
+				<cell x='0' y='6'/>
+				<cell x='0' y='7'/>
+			</arrow>
+			<arrow item0='4269684432' item1='4291704528'>
+				<cell x='6' y='2'/>
+				<cell x='6' y='3'/>
+			</arrow>
+			<arrow item0='4258182864' item1='4292753104'>
+				<cell x='4' y='1'/>
+				<cell x='6' y='1'/>
+			</arrow>
+			<arrow item0='4279154384' item1='4293867216'>
+				<cell x='4' y='2'/>
+				<cell x='2' y='2'/>
+			</arrow>
+			<arrow item0='4284364496' item1='4282267344'>
+				<cell x='6' y='8'/>
+				<cell x='6' y='9'/>
+			</arrow>
+			<arrow item0='4284430032' item1='4281284304'>
+				<cell x='2' y='6'/>
+				<cell x='2' y='7'/>
+			</arrow>
+			<arrow item0='4285445840' item1='4282300112'>
+				<cell x='4' y='7'/>
+				<cell x='4' y='8'/>
+			</arrow>
+			<arrow item0='4285511376' item1='4283414224'>
+				<cell x='0' y='5'/>
+				<cell x='0' y='6'/>
+			</arrow>
+			<arrow item0='4286494416' item1='4285445840'>
+				<cell x='4' y='6'/>
+				<cell x='4' y='7'/>
+			</arrow>
+			<arrow item0='4287510224' item1='4284364496'>
+				<cell x='6' y='7'/>
+				<cell x='6' y='8'/>
+			</arrow>
+			<arrow item0='4288624336' item1='4284430032'>
+				<cell x='2' y='5'/>
+				<cell x='2' y='6'/>
+			</arrow>
+			<arrow item0='4288657104' item1='4285511376'>
+				<cell x='0' y='4'/>
+				<cell x='0' y='5'/>
+			</arrow>
+			<arrow item0='4287542992' item1='4286494416'>
+				<cell x='4' y='5'/>
+				<cell x='4' y='6'/>
+			</arrow>
+			<arrow item0='4288558800' item1='4287510224'>
+				<cell x='6' y='6'/>
+				<cell x='6' y='7'/>
+			</arrow>
+			<arrow item0='4289640144' item1='4287542992'>
+				<cell x='4' y='4'/>
+				<cell x='4' y='5'/>
+			</arrow>
+			<arrow item0='4291770064' item1='4287575760'>
+				<cell x='2' y='3'/>
+				<cell x='2' y='4'/>
+			</arrow>
+			<arrow item0='4292753104' item1='4269684432'>
+				<cell x='6' y='1'/>
+				<cell x='6' y='2'/>
+			</arrow>
+			<arrow item0='4287575760' item1='4288624336'>
+				<cell x='2' y='4'/>
+				<cell x='2' y='5'/>
+			</arrow>
+			<arrow item0='4289607376' item1='4288558800'>
+				<cell x='6' y='5'/>
+				<cell x='6' y='6'/>
+			</arrow>
+			<arrow item0='4292851408' item1='4288657104'>
+				<cell x='0' y='3'/>
+				<cell x='0' y='4'/>
+			</arrow>
+			<arrow item0='4290655952' item1='4289607376'>
+				<cell x='6' y='4'/>
+				<cell x='6' y='5'/>
+			</arrow>
+			<arrow item0='4291704528' item1='4290655952'>
+				<cell x='6' y='3'/>
+				<cell x='6' y='4'/>
+			</arrow>
+			<arrow item0='4293867216' item1='4291770064'>
+				<cell x='2' y='2'/>
+				<cell x='2' y='3'/>
+			</arrow>
+			<arrow item0='4291770064' item1='4292851408'>
+				<cell x='2' y='3'/>
+				<cell x='0' y='3'/>
+			</arrow>
+		</arrows>
+		<ships>
+				<ship shipid='4256085712' x='4' y='0' /> <!--PJSC037_Hashidate_1940 (T1 Japan start Cruiser) -->
+				<ship shipid='4258182864' x='4' y='1' /> <!--PJSC035_Chikuma_1912 (T2 Japan upgradeable Cruiser) -->
+				<ship shipid='4259231440' x='4' y='9' /> <!--PJSC034_Zao_1944 (T10 Japan upgradeable Cruiser) -->
+				<ship shipid='4272895696' x='2' y='8' /> <!--PJSB021_Izumo_1938 (T9 Japan upgradeable Battleship) -->
+				<ship shipid='4276041424' x='2' y='9' /> <!--PJSB018_Yamato_1944 (T10 Japan upgradeable Battleship) -->
+				<ship shipid='4277122768' x='0' y='9' /> <!--PJSA017_Hakuryu_1942 (T10 Japan upgradeable AirCarrier) -->
+				<ship shipid='4279154384' x='4' y='2' /> <!--PJSC015_Tatsuta_1919 (T3 Japan upgradeable Cruiser) -->
+				<ship shipid='4279219920' x='0' y='8' /> <!--PJSA015_Taiho_1944 (T9 Japan upgradeable AirCarrier) -->
+				<ship shipid='4281251536' x='4' y='3' /> <!--PJSC013_Kuma_1938 (T4 Japan upgradeable Cruiser) -->
+				<ship shipid='4281284304' x='2' y='7' /> <!--PJSB013_Amagi_1942 (T8 Japan upgradeable Battleship) -->
+				<ship shipid='4282300112' x='4' y='8' /> <!--PJSC012_Ibuki_1944 (T9 Japan upgradeable Cruiser) -->
+				<ship shipid='4282365648' x='0' y='7' /> <!--PJSA012_Zuikaku_1944 (T8 Japan upgradeable AirCarrier) -->
+				<ship shipid='4283414224' x='0' y='6' /> <!--PJSA011_Hiryu_1942 (T7 Japan upgradeable AirCarrier) -->
+				<ship shipid='4284430032' x='2' y='6' /> <!--PJSB010_Nagato_1944 (T7 Japan upgradeable Battleship) -->
+				<ship shipid='4285445840' x='4' y='7' /> <!--PJSC009_Mogami_1935 (T8 Japan upgradeable Cruiser) -->
+				<ship shipid='4285511376' x='0' y='5' /> <!--PJSA009_Ryujo_1933 (T6 Japan upgradeable AirCarrier) -->
+				<ship shipid='4286494416' x='4' y='6' /> <!--PJSC008_Myoko_1945 (T7 Japan upgradeable Cruiser) -->
+				<ship shipid='4287542992' x='4' y='5' /> <!--PJSC007_Aoba_1943 (T6 Japan upgradeable Cruiser) -->
+				<ship shipid='4287575760' x='2' y='4' /> <!--PJSB007_Kongo_1942 (T5 Japan upgradeable Battleship) -->
+				<ship shipid='4288624336' x='2' y='5' /> <!--PJSB006_Fuso_1943 (T6 Japan upgradeable Battleship) -->
+				<ship shipid='4288657104' x='0' y='4' /> <!--PJSA006_Zuiho_1944 (T5 Japan upgradeable AirCarrier) -->
+				<ship shipid='4289640144' x='4' y='4' /> <!--PJSC005_Furutaka_1926 (T5 Japan upgradeable Cruiser) -->
+				<ship shipid='4291770064' x='2' y='3' /> <!--PJSB003_Myogi_1912 (T4 Japan upgradeable Battleship) -->
+				<ship shipid='4292851408' x='0' y='3' /> <!--PJSA002_Hosho_1939 (T4 Japan upgradeable AirCarrier) -->
+				<ship shipid='4293867216' x='2' y='2' /> <!--PJSB001_Kawachi_1912 (T3 Japan upgradeable Battleship) -->
+				<ship shipid='4255037136' x='10' y='7' /> <!--PJSC038_Atago_1944 (T8 Japan premium Cruiser) -->				
+				<ship shipid='4286527184' x='14' y='3' /> <!--PJSB008_Ishizuchi_1921 (T4 Japan premium Battleship) -->
+				<ship shipid='4290688720' x='10' y='3' /> <!--PJSC004_Yubari_1944 (T4 Japan special Cruiser) -->
+				<ship shipid='4267620048' x='12' y='3' /> <!--PJSC026_Iwaki_1944 (T4 Japan special Cruiser) -->			
+				<ship shipid='3767449296' x='10' y='2' /> <!-- PJSC503_Katori (T3 Japan special Cruiser) -->
+				<ship shipid='4283381456' x='14' y='1' /> <!-- Mikasa_1905 (T2 Japan special Battleship) -->
+				<ship shipid='4276008656' x='10' y='6' /> <!--PJSC018_Tone (T7 Japan special Cruiser) -->
+				<!-- <ship shipid='3455006416' x='10' y='0' />  PJSB801_False_Kawachi_1912 (T3 Japan unavailable Battleship) -->
+				<!-- <ship shipid='3453957840' x='12' y='0' />  PJSB802_False_Ally_Kawachi_1912 (T3 Japan unavailable Battleship) -->
+				<!-- <ship shipid='3453957840' x='14' y='0' />  PJSC837_False_Hashidate_1940 (T1 Japan unavailable Cruiser) -->
+				<!-- <ship shipid='3416176336' x='16' y='0' />  PJSC838_False_Hashidate_1940 (T1 Japan unavailable Cruiser) -->
+				<ship shipid='3247355600' x='10' y='9' />  <!--PJSC999_Yubari_Special (T10 Japan event Cruiser) -->
+				<ship shipid='4280202960' x='12' y='7' /> <!-- Kitakami_1945 (T8 Japan disabled Cruiser) -->
+				<!--科技树驱逐舰-->
+				<ship shipid='4292753104' x='6' y='1' /> <!--PJSD002_Umikaze_1925 (T2 Japan upgradeable Destroyer) -->
+				<ship shipid='4269684432' x='6' y='2' /> <!--PJSD024_Wakatake_1923 (T3 Japan upgradeable Destroyer) -->
+				<ship shipid='4291704528' x='6' y='3' /> <!--PJSD003_Isokaze_1917 (T4 Japan upgradeable Destroyer) -->
+				<ship shipid='4184749776' x='6' y='4' /> <!--PJSD105_Mutsuki (T5 Japan upgradeable Destroyer) -->
+				<ship shipid='4183701200' x='6' y='5' /> <!--PJSD106_Fubuki (T6 Japan upgradeable Destroyer) -->
+				<ship shipid='4182652624' x='6' y='6' /> <!--PJSD107_Akatsuki (T7 Japan upgradeable Destroyer) -->
+				<ship shipid='4076746448' x='6' y='7' /> <!--PJSD208_Kagero (T8 Japan upgradeable Destroyer) -->
+				<ship shipid='4075697872' x='6' y='8' /> <!--PJSD209_Yugumo (T9 Japan upgradeable Destroyer) -->
+				<ship shipid='4282267344' x='6' y='9' /> <!--PJSD012_Shimakaze_1943 (T10 Japan upgradeable Destroyer) -->
+				<ship shipid='4290655952' x='8' y='4' /> <!--PJSD004_Minekadze_1920 (T5 Japan upgradeable Destroyer) -->
+				<ship shipid='4078843600' x='8' y='5' /> <!--PJSD206_Hatsuharu (T6 Japan upgradeable Destroyer) -->
+				<ship shipid='4077795024' x='8' y='6' /> <!--PJSD207_Shiratsuyu (T7 Japan upgradeable Destroyer) -->
+				<ship shipid='4181604048' x='8' y='7' /> <!--PJSD108_Akizuki (T8 Japan upgradeable Destroyer) -->
+				<!--金币驱逐舰-->
+				<ship shipid='4293801680' x='10' y='1' /> <!--PJSD001_Tachibana_1912 (T2 Japan special Destroyer) -->
+				<ship shipid='4280170192' x='12' y='1' /> <!--PJSD014_Tachibana_1912_Asus (T2 Japan special Destroyer) -->
+				<ship shipid='4268635856' x='10' y='4' /> <!-- True_Kamikaze (T5 Japan special Destroyer) -->
+				<ship shipid='4267587280' x='12' y='4' /> <!-- Camo_Kamikaze (T5 Japan special Destroyer) -->				
+				<ship shipid='4277024464' x='14' y='4' /> <!--PJSD017_Kamikaze_1930 (T5 Japan special Destroyer) (Fujin) -->
+				<ship shipid='3554555600' x='10' y='5' /> <!--PJSD706_Shinonome (T6 Japan demoWithoutStats Destroyer) -->
+				<!--删除驱逐舰-->
+				<!-- <ship shipid='3766367952' x='14' y='4' /> PJSD504_Okikaze (T5 Japan demoWithoutStats Destroyer) -->
+				<!-- <ship shipid='3767416528' x='14' y='3' /> PJSD503_Amatsukaze (T4 Japan demoWithoutStats Destroyer) -->
+				<!-- <ship shipid='3452843728' x='10' y='9' />  False_Isokaze_1917 (T4 Japan unavailable Destroyer) -->
+
+		</ships>
+		<types>
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+		</types>
+	</nation>
+	<nation name='Arpeggio'>
+		<arrows>
+		</arrows>
+		<ships>
+				<ship shipid='3555669712' x='0' y='4' /> <!--PJSB705_Kongou (T5 Japan peculiar Battleship) -->
+				<ship shipid='3554621136' x='2' y='4' /> <!--PJSB706_Kirishima (T5 Japan peculiar Battleship) -->
+				<ship shipid='3553572560' x='4' y='4' /> <!--PJSB707_Haruna (T5 Japan peculiar Battleship) -->
+				<ship shipid='3552523984' x='6' y='4' /> <!--PJSB708_Hiei_Arpeggio (T5 Japan peculiar Battleship) -->
+				<ship shipid='3555636944' x='0' y='6' /> <!--PJSC705_Myoko (T7 Japan peculiar Cruiser) -->	
+				<ship shipid='3522082512' x='2' y='6' /> <!-- PJSC737_Nachi (T7 Japan peculiar Cruiser) -->			
+				<ship shipid='3553539792' x='4' y='6' /> <!-- PJSC707_Ashigara (T7 Japan peculiar Cruiser) -->
+				<ship shipid='3551442640' x='6' y='6' /> <!-- PJSC709_Haguro (T7 Japan peculiar Cruiser) -->
+				<ship shipid='3552491216' x='0' y='7' /> <!--PJSC708_ARP_Takao (T8 Japan peculiar Cruiser) -->
+				<ship shipid='3559143120' x='2' y='9' /> <!--PJSX701_Support (T11 Japan unavailable Auxiliary) -->
+				<ship shipid='3558094544' x='4' y='9' /> <!--PJSX702_Support (T11 Japan unavailable Auxiliary) -->
+		</ships>
+		<types>
+				<type id='4' nameIDS='Fog Fleet' x='3' y='-1' />
+		</types>
+	</nation>
+	<nation name='Dragons'>
+		<arrows>
+		</arrows>
+		<ships>
+				<ship shipid='3543054032' x='0' y='6' /> <!--PJSC717_Yellow_Dragon (T7 Japan special Cruiser) -->				
+				<ship shipid='3532568272' x='2' y='6' /> <!-- PJSC727_Blue_Dragon (T7 Japan special Cruiser) -->
+		</ships>
+		<types>
+				<type id='4' nameIDS='Dragons' x='3' y='-1' />
+		</types>
+	</nation>
+	<nation name='Commonwealth'>
+		<arrows>
+		</arrows>
+		<ships>
+				<ship shipid='3764303216' x='0' y='5' /> <!--PUSC506_Perth_1942 (T6 Commonwealth special Cruiser) -->
+		</ships>
+		<types>
+				<type id='4' nameIDS='Commonwealth' x='3' y='-1' />
+		</types>
+	</nation>
+	<nation name='Russia'>
+		<arrows>
+			<arrow item0='4182652368' item1='4179506640'>
+				<cell x='4' y='8'/>
+				<cell x='4' y='9'/>
+			</arrow>
+			<arrow item0='4183700944' item1='4180555216'>
+				<cell x='4' y='5'/>
+				<cell x='4' y='6'/>
+			</arrow>
+			<arrow item0='4180555216' item1='4181603792'>
+				<cell x='4' y='6'/>
+				<cell x='4' y='7'/>
+			</arrow>
+			<arrow item0='4181603792' item1='4182652368'>
+				<cell x='4' y='7'/>
+				<cell x='4' y='8'/>
+			</arrow>
+			<arrow item0='4184749520' item1='4183700944'>
+				<cell x='4' y='4'/>
+				<cell x='4' y='5'/>
+			</arrow>
+			<arrow item0='4185798096' item1='4184749520'>
+				<cell x='4' y='3'/>
+				<cell x='4' y='4'/>
+			</arrow>
+			<arrow item0='4186846672' item1='4185798096'>
+				<cell x='4' y='2'/>
+				<cell x='4' y='3'/>
+			</arrow>
+			<arrow item0='4187895248' item1='4186846672'>
+				<cell x='4' y='1'/>
+				<cell x='4' y='2'/>
+			</arrow>
+			<arrow item0='4187928016' item1='4187895248'>
+				<cell x='2' y='1'/>
+				<cell x='4' y='1'/>
+			</arrow>
+			<arrow item0='4188976592' item1='4187928016'>
+				<cell x='2' y='0'/>
+				<cell x='2' y='1'/>
+			</arrow>
+			<arrow item0='4187928016' item1='4186879440'>
+				<cell x='2' y='1'/>
+				<cell x='2' y='2'/>
+			</arrow>
+			<arrow item0='4186879440' item1='4185830864'>
+				<cell x='2' y='2'/>
+				<cell x='2' y='3'/>
+			</arrow>
+			<arrow item0='4185830864' item1='4184782288'>
+				<cell x='2' y='3'/>
+				<cell x='2' y='4'/>
+			</arrow>
+			<arrow item0='4184782288' item1='4183733712'>
+				<cell x='2' y='4'/>
+				<cell x='2' y='5'/>
+			</arrow>
+			<arrow item0='4183733712' item1='4182685136'>
+				<cell x='2' y='5'/>
+				<cell x='2' y='6'/>
+			</arrow>
+			<arrow item0='4182685136' item1='4181636560'>
+				<cell x='2' y='6'/>
+				<cell x='2' y='7'/>
+			</arrow>
+			<arrow item0='4181636560' item1='4180587984'>
+				<cell x='2' y='7'/>
+				<cell x='2' y='8'/>
+			</arrow>
+			<arrow item0='4180587984' item1='4179539408'>
+				<cell x='2' y='8'/>
+				<cell x='2' y='9'/>
+			</arrow>
+		</arrows>
+		<ships>
+				<ship shipid='4179506640' x='4' y='9' /> <!--PRSD110_Pr_24_Khabarovsk (T10 Russia upgradeable Destroyer) -->
+				<ship shipid='4182652368' x='4' y='8' /> <!--PRSD107_Pr_35_Udaloy (T9 Russia upgradeable Destroyer) -->
+				<ship shipid='4181603792' x='4' y='7' /> <!--PRSD108_Pr_20i_Tashkent (T8 Russia upgradeable Destroyer) -->
+				<ship shipid='4180555216' x='4' y='6' /> <!--PRSD109_Pr_48_Kiev (T7 Russia upgradeable Destroyer) -->
+				<ship shipid='4183700944' x='4' y='5' /> <!--PRSD106_Pr_30_Ognevoy (T6 Russia upgradeable Destroyer) -->
+				<ship shipid='4184749520' x='4' y='4' /> <!--PRSD105_Pr_7_Gnevny (T5 Russia upgradeable Destroyer) -->
+				<ship shipid='4185798096' x='4' y='3' /> <!--PRSD104_Izyaslav (T4 Russia upgradeable Destroyer) -->
+				<ship shipid='4186846672' x='4' y='2' /> <!--PRSD103_Derzky (T3 Russia upgradeable Destroyer) -->
+				<ship shipid='4187895248' x='4' y='1' /> <!--PRSD102_SM_Storojevoy (T2 Russia upgradeable Destroyer) -->
+				<ship shipid='4188976592' x='2' y='0' /> <!--PRSC101 PRSC101_Orlan (T1 Russia start Cruiser) -->
+				<ship shipid='4187928016' x='2' y='1' /> <!--PRSC102_Novik (T2 Russia event Cruiser -->
+				<ship shipid='4186879440' x='2' y='2' /> <!--PRSC103_Bogatyr (T3 Russia event Cruiser) -->
+				<ship shipid='4185830864' x='2' y='3' /> <!--PRSC104_Svetlana (T4 Russia event Cruiser) -->
+				<ship shipid='4184782288' x='2' y='4' /> <!--PRSC105_Kirov (T5 Russia event Cruiser) -->
+				<ship shipid='4183733712' x='2' y='5' /> <!--PRSC106_Pr_94_Budeny (T6 Russia event Cruiser) -->
+				<ship shipid='4182685136' x='2' y='6' /> <!--PRSC107_Schors (T7 Russia event Cruiser) -->
+				<ship shipid='4181636560' x='2' y='7' /> <!--PRSC108_Pr_68_Chapaev (T8 Russia event Cruiser) -->
+				<ship shipid='4180587984' x='2' y='8' /> <!--PRSC109_Dmitry_Donskoy (T9 Russia event Cruiser) -->
+				<ship shipid='4179539408' x='2' y='9' /> <!--PPRSC110_Pr_66_Moskva (T10 Russia event Cruiser) --> 
+				<ship shipid='4292785616' x='6' y='1' /> <!--PRSC002_Diana_1905 (T2 Russia special Cruiser) -->
+				<ship shipid='4284397008' x='8' y='1' /> <!--PRSC010_Diana_1905_Asus (T2 Russia special Cruiser) -->
+				<ship shipid='4293834192' x='6' y='2' /> <!--PRSC001_Avrora_1917 (T3 Russia premium Cruiser) -->
+				<ship shipid='4293866960' x='6' y='3' /> <!--PRSB001_Nikolay_I (T4 Russia special Battleship) -->
+				<ship shipid='4291737040' x='6' y='4' /> <!--PRSC003_Murmansk_1944 (T5 Russia premium Cruiser) -->
+				<ship shipid='4293801424' x='8' y='4' /> <!--PRSD001_Gremyashchy_1942 (T5 Russia special Destroyer) -->
+				<!--<ship shipid='3765351888' x='10' y='4' /> PRSC505_Profintern (T5 Russia disabled Cruiser) -->
+				<ship shipid='3764303312' x='6' y='5' /> <!--PRSC506_Molotov_1943 (T6 Russia event Cruiser) -->
+				<ship shipid='3762206160' x='6' y='7' /> <!--PRSC508_Kutuzov_1952 (T8 Russia special Cruiser) -->
+				<ship shipid='3765351888' x='10' y='4' /> <!--PRSC505_KrasniKrym (T5 Russia demoWithoutStats Cruiser) -->
+				<ship shipid='3763221968' x='6' y='6' /> <!--PRSD507_Leningrad_1944 (T7 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3767449040' x='8' y='2' /> <!--PRSC503_Oleg (T3 Russia demoWithoutStats Cruiser) -->
+		</ships>
+		<types>
+				<type id='0' nameIDS='IDS_DESTROYER' x='4' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='2' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='6' y='-1' />
+		</types>
+	</nation>
+	<nation name='United_Kingdom'>
+		<arrows>
+		</arrows>
+		<ships>
+				<ship shipid='3767416784' x='8' y='2' /> <!--PBSD503_Campbeltown_1941 (T3 United_Kingdom event Destroyer) -->
+				<ship shipid='4292818896' x='8' y='5' /> <!--PBSB002_Warspite_1941 (T6 United_Kingdom special Battleship) -->
+				<ship shipid='4188977104' x='2' y='0' /> <!--PBSC101_Black_Swan (T1 United_Kingdom demoWithoutStats Cruiser) -->
+				<ship shipid='4187928528' x='2' y='1' /> <!--PBSC102_Weymouth (T2 United_Kingdom demoWithoutStats Cruiser -->
+				<ship shipid='4186879952' x='2' y='2' /> <!--PBSC103_Caledon (T3 United_Kingdom demoWithoutStats Cruiser) -->
+				<ship shipid='4185831376' x='2' y='3' /> <!--PBSC104_Danae (T4 United_Kingdom demoWithoutStats Cruiser) -->
+				<ship shipid='4184782800' x='2' y='4' /> <!--PBSC105_Emerald (T5 United_Kingdom demoWithoutStats Cruiser) -->
+				<ship shipid='4183734224' x='2' y='5' /> <!--PBSC106_Leander (T6 United_Kingdom demoWithoutStats Cruiser) -->
+				<ship shipid='4182685648' x='2' y='6' /> <!--PBSC107_Fiji (T7 United_Kingdom demoWithoutStats Cruiser) -->
+				<ship shipid='4181637072' x='2' y='7' /> <!--PBSC108_Edinburgh (T8 United_Kingdom demoWithoutStats Cruiser) -->
+				<ship shipid='4180588496' x='2' y='8' /> <!--PBSC109_Neptune (T9 United_Kingdom demoWithoutStats Cruiser) -->
+				<ship shipid='4179539920' x='2' y='9' /> <!--PBSC110_Minotaur (T10 United_Kingdom demoWithoutStats Cruiser) --> 
+				<ship shipid='3763255248' x='8' y='6' /> <!--PBSC507_Belfast_1959 (T7 United_Kingdom demoWithoutStats Cruiser) -->
+		</ships>
+		<types>
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+		</types>
+	</nation>
+	<nation name='France'>
+		<arrows>
+		</arrows>
+		<ships>
+				<ship shipid='3764336464' x='8' y='2' /> <!--PFSB506_Dunkerque_1940 (T6 France special Battleship) -->
+		</ships>
+		<types>
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+		</types>
+	</nation>
+	<nation name='Poland'>
+		<arrows>
+		</arrows>
+		<ships>
+				<ship shipid='3769513264' x='8' y='6' /> <!--PWSD501_Blyskawica (T7 Poland special Destroyer) -->
+		</ships>
+		<types>
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+		</types>
+	</nation>
+	<nation name='Pan_Asia'>
+		<arrows>
+		</arrows>
+		<ships>
+				<ship shipid='3764270288' x='8' y='5' /> <!-- PZSD506_Anshan (T6 Pan_Asia special Destroyer) -->
+				<ship shipid='3762173136' x='8' y='7' /> <!-- PZSD508_LoYang (T8 Pan_Asia special Destroyer) -->
+		</ships>
+		<types>
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+		</types>
+	</nation>
+</ship_tree>
