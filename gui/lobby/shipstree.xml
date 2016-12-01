@@ -494,7 +494,7 @@
 				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
 				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
 				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
-				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
 		</types>
 	</nation>
 	<nation name='Arpeggio'>
@@ -723,3 +723,4 @@
 		</types>
 	</nation>
 </ship_tree>
+<!--SEA group-->
