@@ -196,6 +196,7 @@
 				<!--<ship shipid='3343824880' x='10' y='3' /> PASC907_Des_Moines_1948_Halloween (T4 USA disabled Cruiser) -->			
 				<!-- <ship shipid='3450779632' x='12' y='3' /> PASD801_FALSE_ENEMY_Sampson (T4 USA unavailable Destroyer) -->
 				<ship shipid='3761190896' x='10' y='8' /> <!--PASB509_Missouri (T9 USA demoWithoutStats Battleship) -->
+				<ship shipid='3552524272' x='12' y='8' /> <!--PASB708_Alabama (T8 USA demoWithoutStats Battleship) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
@@ -494,7 +495,7 @@
 				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
 				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
 				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
-				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
 		</types>
 	</nation>
 	<nation name='Arpeggio'>
@@ -723,3 +724,4 @@
 		</types>
 	</nation>
 </ship_tree>
+<!--SEA group-->
