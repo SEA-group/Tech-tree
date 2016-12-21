@@ -132,6 +132,9 @@
 	<css name="$FontAccentSize1">
 		<fontSize value="60"/>
 	</css>
+	<css name="$FontMBTSize">
+		<fontSize value="80"/>
+	</css>	
 	<css name="$LetterSpacingSmall">
 		<letterSpacing value="0.8"/>
 	</css>
@@ -496,6 +499,13 @@
 	<css name="$ModalWindowLargeCostMargins">
 		<marginLeft value="5px"/>
 		<marginRight value="4px"/>
+	</css>
+	<css name="$DefaultHScrollBar"><!--!!!-->
+		<wheelScrollSpeed value="194"/>
+		<scrollbarController value="lesta.unbound.style.UbScrollingControllerTouch"/>
+		<scrollArea value="ModernScrollAreaHorizontal"/>
+		<scrollbar value="ModernScrollBar"/>
+		<scrollbarTrackMode value="scrollToCursor"/>
 	</css>
 	<css name="$SelectTypeListItem">
 		<width value="100%"/>
@@ -1641,6 +1651,11 @@
 		<textColor value="0x08222a"/>
 	</css>
 	<block className="NationButton">
+		<style>
+			<marginTop value="-15px"/>
+		</style>
+		<bind name="scaleX" value="0.8"/>
+		<bind name="scaleY" value="0.8"/>
 		<block className="BlurMapCustom">
 			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
 			<style>
@@ -1701,7 +1716,7 @@
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountResourceInfo'; 'creditsUpdate,goldUpdate,freeExpUpdate'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'pricesAll'; PriceInfoSet.OP_BUY +  shipId; 'shipBuyPrice'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'pricesAll'; PriceInfoSet.OP_EXPLORE + shipId; 'shipExplorePrice'"/>
-		<bind name="watch" value="'availableToDisplay'; (shipInfo.group == 'start') || (shipInfo.group == 'upgradeableExclusive') || (shipInfo.group == 'upgradeable') || (shipInfo.group == 'premium') || (shipInfo.isEventLike)"/>
+		<bind name="watch" value="'availableToDisplay'; true"/>
 		<bind name="watch" value="'unavailable'; !(upgradableShipInfo.dependencyResearched || isOwned || upgradableShipInfo.isExplored || shipInfo.isEventLike)"/>
 		<bind name="action" value="'buttonClick';  availableToDisplay ? 'selectShipUpgrade' : '' ; {shipId : shipId}"/>
 		<style>
@@ -1733,7 +1748,7 @@
 			<bind name="tooltip" value="'ShipExtendedTooltip'; availableToDisplay ? { shipId: shipId, _hOffset: 0, _testShipParams: selectedShipInfo.params} : null; 2"/>
 			<bind name="tooltip" value="'SimpleWarningTooltip'; availableToDisplay ? null :  { _text: 'IDS_UNAVAILABLE_TO_DISPLAY_' + toUpperCase(shipInfo.group) }; 0"/>
 			<bind name="enabled" value="availableToDisplay"/>
-			<bind name="style" value="'alpha'; (availableToDisplay &amp;&amp; shipInfoSlim.isDownloaded) ? 1 : 0.5"/>
+			<!--<bind name="style" value="'alpha'; (availableToDisplay &amp;&amp; shipInfoSlim.isDownloaded) ? 1 : 0.5"/>-->
 			<bind name="style" value="'minWidth'; _isNextShip ? 100 : 0"/>
 			<params>
 				<param name="focusable" value="false"/>
@@ -1856,7 +1871,7 @@
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'pricesAll'; PriceInfoSet.OP_EXPLORE + shipId; 'shipExplorePrice'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'pricesAll'; PriceInfoSet.OP_BUY + shipId; 'shipBuyPrice'"/>
 		<bind name="feature" value="'17'; ''"/>
-		<bind name="watch" value="'availableToDisplay'; (shipInfo.group == 'start') || (shipInfo.group == 'upgradeableExclusive') || (shipInfo.group == 'upgradeable') || (shipInfo.group == 'premium') || (shipInfo.isEventLike)"/>
+		<!--<bind name="watch" value="'availableToDisplay'; (shipInfo.group == 'start') || (shipInfo.group == 'upgradeableExclusive') || (shipInfo.group == 'upgradeable') || (shipInfo.group == 'premium') || (shipInfo.isEventLike)"/>-->
 		<bind name="action" value="'buttonClick';  availableToDisplay ? 'selectShipUpgrade' : '' ; {shipId : shipId}"/>
 		<style>
 			<width value="1px"/>
@@ -1896,7 +1911,7 @@
 			<bind name="tooltip" value="'ShipExtendedTooltip'; availableToDisplay ? { shipId: shipId, _hOffset: -75} : null; 2"/>
 			<bind name="tooltip" value="'SimpleWarningTooltip'; availableToDisplay ? null :  { _text: 'IDS_UNAVAILABLE_TO_DISPLAY_' + toUpperCase(shipInfo.group) }; 0"/>
 			<bind name="menu" value="'ShipTreeMenu'; availableToDisplay &amp;&amp; (feature_17 != 'locked') ? { shipId: shipId } : null"/>
-			<bind name="style" value="'alpha'; (shipInfo.isEventLike &amp;&amp; !isOwned) || !(shipInfoSlim.isDownloaded) || !(availableToDisplay) ? 0.3 : 1"/>
+			<!--<bind name="style" value="'alpha'; (shipInfo.isEventLike &amp;&amp; !isOwned) || !(shipInfoSlim.isDownloaded) || !(availableToDisplay) ? 0.3 : 1"/>-->
 			<bind name="gotoAndStop!" value="isOwned 	? 'Normal'
 										: shipInfo.isPremium ? (shipInfo.costGold &lt;= accountResourceInfo.gold ? 'Special' : 'Normal') 
 										: (!(upgradableShipInfo.isExplored) &amp;&amp; upgradableShipInfo.expDeficit &lt;= 0 &amp;&amp; upgradableShipInfo.dependencyResearched) 
@@ -2021,7 +2036,7 @@
 				<bind name="gotoAndStop!" value="'normal'"/>
 			</block>
 		</block>
-		<block>
+		<!--<block>
 			<bind name="visible" value="shipInfo.isEventLike &amp;&amp; !isOwned"/>
 			<styleClass value="$MiddleVAlignedAbsolutely"/>
 			<block className="icon_issued" type="native">
@@ -2036,7 +2051,7 @@
 				<innerBind elementName="item.item" name="text" value="toUpperCase(tr('IDS_UNAVAILABLE_TO_DISPLAY_SOON'))"/>
 				<bind name="gotoAndPlay!" value="'issued'"/>
 			</block>
-		</block>
+		</block>-->
 		<block>
 			<style>
 				<position value="absolute"/>
@@ -2387,7 +2402,7 @@
 					</block>
 				</block>
 				<block>
-					<bind name="visible" value="!(_shipInfo.isEventLike &amp;&amp; !_isOwned)"/>
+					<bind name="visible" value="true"/>
 					<styleClass value="$MiddleAligned"/>
 					<block>
 						<style>
@@ -2908,7 +2923,7 @@
 			</block>
 		</block>
 		<block>
-			<bind name="visible" value="!shipInfo.isEventLike"/>
+			<bind name="visible" value="true"/>
 			<styleClass value="$MiddleAligned"/>
 			<style>
 				<hitTest value="false"/>
@@ -4512,13 +4527,13 @@
 				</block>
 			</block>
 			<block>
-				<bind name="visible" value="(_isEventLike &amp;&amp; _shipIsOwned) || !(_isEventLike)"/>
+				<bind name="visible" value="true"/>
 				<styleClass value="$InfoBlockIndent"/>
 				<bind name="instance" value="'ModuleStatus'; {	_isStock: moduleInfo.isStock, _isExplored: moduleInfo.isExplored, _count: moduleInfo.count,
 												_unableToInstallIncompatibles: moduleInfo.unableToInstallIncompatibles }"/>
 			</block>
 			<block>
-				<bind name="visible" value="(_isEventLike &amp;&amp; _shipIsOwned) || !(_isEventLike)"/>
+				<bind name="visible" value="true"/>
 				<style>
 					<width value="100%"/>
 				</style>
@@ -4619,7 +4634,7 @@
 					</block>
 				</block>
 			</block>
-			<block>
+			<!--<block>
 				<bind name="visible" value="((_isEventLike) &amp;&amp; !(_shipIsOwned))"/>
 				<style>
 					<width value="100%"/>
@@ -4641,7 +4656,7 @@
 						</block>
 					</block>
 				</block>
-			</block>
+			</block>-->
 		</block>
 		<block className="dock_panel_pin_h" type="native">
 			<style>
@@ -4713,7 +4728,7 @@
 				</block>
 			</block>
 			<block>
-				<bind name="visible" value="(_isEventLike &amp;&amp; _shipIsOwned) || !(_isEventLike)"/>
+				<bind name="visible" value="true"/>
 				<style>
 					<width value="100%"/>
 				</style>
@@ -4809,7 +4824,7 @@
 																															: null"/>
 				</block>
 			</block>
-			<block>
+			<!--<block>
 				<bind name="visible" value="((_isEventLike) &amp;&amp; !(_shipIsOwned))"/>
 				<style>
 					<width value="100%"/>
@@ -4831,7 +4846,7 @@
 						</block>
 					</block>
 				</block>
-			</block>
+			</block>-->
 		</block>
 	</block>
 	<block className="ModuleTreeHelpTooltip">
@@ -16398,10 +16413,9 @@
 			<width value="122px"/>
 			<height value="22px"/>
 		</style>
-		<bind name="style" value="'right'; (shipInfo.subtype == ShipTypes.Destroyer)	? '-26px'
-																		:	(shipInfo.subtype ==  ShipTypes.Cruiser)	? '-12px'
-																														: '0px'"/>
-		<bind name="style" value="'backgroundImage'; 'url:' + shipInfo.pathTinyIcon"/>
+		<bind name="scaleX" value="0.4"/>
+		<bind name="scaleY" value="0.4"/>
+		<bind name="style" value="'backgroundImage'; 'url:' + shipInfo.pathPreview"/>
 	</block>
 	<block className="ShipPanel">
 		<bind name="primaryEntityDH" value="'shipOwnEntity'; CC.ownShip; shipId; 'evUpdate'"/>
@@ -16489,7 +16503,7 @@
 					<bind name="style" value="'backgroundImage'; 'url:' + shipInfo.pathPreview"/>
 				</block>
 				<block>
-					<bind name="visible" value="!shipInfo.isEventLike"/>
+					<bind name="visible" value="true"/>
 					<bind name="style" value="'marginTop'; isOwned ? '-15px' : 0px'"/>
 					<style>
 						<width value="100%"/>
@@ -16598,9 +16612,9 @@
 					<overflow value="scroll"/>
 				</style>
 				<styleClass value="$DefaultScrollBar"/>
-				<bind name="instance" value="'ShipParamsListView'; (shipInfo.isEventLike) &amp;&amp; !isOwned ? null : { viewParams: viewParams }"/>
+				<bind name="instance" value="'ShipParamsListView'; {secondLevelTooltip: secondLevelTooltip, viewParams: viewParams}"/>
 			</block>
-			<block>
+			<!--<block>
 				<bind name="visible" value="(shipInfo.isEventLike) &amp;&amp; !isOwned"/>
 				<style>
 					<width value="100%"/>
@@ -16622,7 +16636,7 @@
 						</block>
 					</block>
 				</block>
-			</block>
+			</block>-->
 		</block>
 	</block>
 	<block className="ShowLabelComingSoon">
@@ -29866,6 +29880,7 @@
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'slimClientData'"/>
 		<bind name="feature" value="'17'; ''"/>
 		<bind name="action" value="'click'; 'selectShip'; {shipId: shipId}"/>
+		<bind name="visible" value="!(filterDict[shipId])"/>
 		<style>
 			<width value="216px"/>
 		</style>
@@ -30374,14 +30389,14 @@
 				<block>
 					<style>
 						<position value="absolute"/>
-						<bottom value="2px"/>
-						<right value="0"/>
+						<bottom value="-4px"/>
+						<right value="10"/>
 					</style>
 					<block type="text">
 						<style>
-							<width value="115px"/>
-							<textAlign value="right"/>
-							<multiline value="false"/>
+							<width value="180px"/>
+							<textAlign value="left"/>
+                            <fontSize value="14"/>
 						</style>
 						<styleClass value="$TextDefaultBold"/>
 						<bind name="class" value="'$LetterSpacingSmall'"/>
@@ -30401,7 +30416,7 @@
 				<block className="icon_primary_ribbon" type="native"/>
 			</block>
 			<block>
-				<bind name="visible" value="(playerShipInfo.timeRent &gt; 0)"/>
+				<!--<bind name="visible" value="(playerShipInfo.timeRent &gt; 0)"/>
 				<bind name="name" value="'timeRent_' + shipInfo.fullName"/>
 				<style>
 					<position value="absolute"/>
@@ -30410,16 +30425,13 @@
 				</style>
 				<bind name="instance" value="'RentTimer'; (playerShipInfo.timeRent &gt; 0) ? {_timeRent: playerShipInfo.timeRent} : null"/>
 			</block>
-			<block>
+			<block>-->
 				<bind name="style" value="'alpha'; (isNeedRepair || isNeedShell || isLocked || (playerShipInfo.crewId == 0) || (!isDownloaded)) ? 0.3 : 1"/>
-				<bind name="tooltip" value="'MouseInstructionTooltip'; {_multiParagraphArray: [	{ _paragraphText: (playerShipInfo.remainingExpBonusWins &gt; 1) 	? subst('IDS_TOOLTIP_EXPERIENCE_MULTIPLIER', [], {_battleAmount: playerShipInfo.remainingExpBonusWins}, playerShipInfo.remainingExpBonusWins)
-																																				: 'IDS_TOOLTIP_EXPERIENCE_MULTIPLIER_FIRST_WIN' },
-																				{ _paragraphText: 'IDS_FIRST_WIN_HINT_EXT' }
-																				], _maxWidth: 300}"/>
+				<bind name="tooltip" value="'SimpleTooltip'; {tooltipText: 'IDS_TOOLTIP_EXPERIENCE_MULTIPLIER'}"/>
 				<style>
 					<position value="absolute"/>
-					<bottom value="4px"/>
-					<left value="4px"/>
+					<top value="2px"/>
+					<right value="4px"/>
 				</style>
 				<bind name="instance" value="'DoubleExperience';(playerShipInfo.expMultiply &gt; 1) ? { expMultiplyPercentsString : subst('%m',[playerShipInfo.expMultiply]) } : null"/>
 			</block>
@@ -39423,7 +39435,7 @@
 				</block>
 			</block>
 		</block>
-		<block>
+		<!--<block>
 			<bind name="visible" value="_eventShips &amp;&amp; !_isOwned"/>
 			<style>
 				<width value="80px"/>
@@ -39439,7 +39451,7 @@
 				<innerBind elementName="item.item" name="text" value="toUpperCase(tr('IDS_UNAVAILABLE_TO_DISPLAY_SOON'))"/>
 				<bind name="gotoAndPlay!" value="'issued'"/>
 			</block>
-		</block>
+		</block>-->
 	</block>
 	<block className="LevelItem">
 		<style>
@@ -40207,7 +40219,7 @@
 			<bind name="instance" value="'ShipDescription'; {_shipNameIDS: shipInfo.nameIDS, _isPaperShip: shipInfo.isPaperShip, _peculiarity: shipInfo.peculiarity}"/>
 		</block>
 		<block>
-			<bind name="visible" value="(shipInfo.isEventLike &amp;&amp; isOwned) || !(shipInfo.isEventLike)"/>
+			<bind name="visible" value="true"/>
 			<block className="HorizontalDivider">
 				<styleClass value="$PxHorizontalCorrection"/>
 				<style>
@@ -40226,7 +40238,7 @@
 			{ inSideCompare: inSideCompare, typeList : 'tooltipShipParams', params: _testShipParams, testParams: (nonPlayerShipParams ? nonPlayerShipParams : (playerShipInfo != null ? playerShipInfo.params : shipInfo.params)), testObjectIsBaseForView: 1, testObjectIsBaseForCompare: 0, showCompareWithZero: 1}
 			: { typeList : 'tooltipShipParams', params: (playerShipInfo != null ? playerShipInfo.params : shipInfo.params)}"/>
 		</block>
-		<block>
+		<!--<block>
 			<bind name="visible" value="!isOwned &amp;&amp; shipInfo.isEventLike"/>
 			<block className="HorizontalDivider">
 				<styleClass value="$PxHorizontalCorrection"/>
@@ -40258,7 +40270,7 @@
 					</block>
 				</block>
 			</block>
-		</block>
+		</block>-->
 		<block>
 			<bind name="visible" value="(_inRewards == true) &amp;&amp; (_isPRMP != true)"/>
 			<style>
@@ -50171,8 +50183,8 @@
 		<bind name="tooltip" value="'SimpleWarningTooltip'; isEnabled ? null : {_text: tr('IDS_NOT_ENABLED_ON_LOW_RESOLUTION')}"/>
 		<block>
 			<styleClass value="$Fullsize"/>
-			<bind name="style" value="'alpha'; isEnabled ? 1 : 0.5"/>
-			<bind name="style" value="'hitTest'; isEnabled"/>
+			<!--<bind name="style" value="'alpha'; isEnabled ? 1 : 0.5"/>-->
+			<!--<bind name="style" value="'hitTest'; isEnabled"/>-->
 			<block className="MenuItemWithSelection">
 				<styleClass value="$Fullsize"/>
 				<bind name="name" value="$value"/>
@@ -53331,11 +53343,11 @@
 				<top value="24px"/>
 			</style>
 			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
-			<block className="wows_logo_pb" type="native">
+			<!--<block className="wows_logo_pb" type="native">
 				<bind name="scaleX" value="0.4"/>
 				<bind name="scaleY" value="0.4"/>
 				<bind name="gotoAndStop!" value="realmConstants.wowsLogo"/>
-			</block>
+			</block>-->
 		</block>
 		<block>
 			<style>
