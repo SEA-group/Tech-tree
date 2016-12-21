@@ -27146,7 +27146,6 @@
 	</css>
 	<block className="StartBattleButtonBig">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountResourceInfo'; 'creditsUpdate,goldUpdate,freeExpUpdate,slotsNumUpdate,accountResourceLockUpdate'"/>
-		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionData'"/>
 		<bind name="collectionDH" value="CC.ownShip; 'shipsInFormation'; 'shipsInFormation'"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'shipId'; ['dockEntity.shipSelection.evShipUpdate']; dockEntity.shipSelection.currentShipId"/>
@@ -27193,7 +27192,6 @@
 	</block>
 	<block className="StartBattleButtonSmall">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountResourceInfo'; 'creditsUpdate,goldUpdate,freeExpUpdate,slotsNumUpdate,accountResourceLockUpdate'"/>
-		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionData'"/>
 		<bind name="collectionDH" value="CC.ownShip; 'shipsInFormation'; 'shipsInFormation'"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'shipId'; ['dockEntity.shipSelection.evShipUpdate']; dockEntity.shipSelection.currentShipId"/>
@@ -53310,6 +53308,7 @@
 		<bind name="controller" value="lesta.dialogs.dock.controllers.ControllerLobby"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountResourceInfo'; 'creditsUpdate,goldUpdate,freeExpUpdate,slotsNumUpdate,accountResourceLockUpdate'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionData'"/>
+		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'playersInDivision'; 'playersInDivision'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; selectedBattle.type == BattleTypes.TRAINING_BATTLE ? 'serverState' : null"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; selectedBattle.type == BattleTypes.RANKED_BATTLE ? 'rankedBattlesSeason' : null"/>
@@ -54163,7 +54162,6 @@
 							<right value="333px"/>
 						</style>
 						<block className="ButtonDivision">
-							<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
 							<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'slimClientData'"/>
 							<bind name="visible" value="(slimClientData.isFull)"/>
 							<style>
@@ -54292,7 +54290,6 @@
 						<block>
 							<block className="StartBattleButtonBig">
 								<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountResourceInfo'; 'creditsUpdate,goldUpdate,freeExpUpdate,slotsNumUpdate,accountResourceLockUpdate'"/>
-								<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionData'"/>
 								<bind name="collectionDH" value="CC.ownShip; 'shipsInFormation'; 'shipsInFormation'"/>
 								<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 								<bind name="watchDH" value="'shipId'; ['dockEntity.shipSelection.evShipUpdate']; dockEntity.shipSelection.currentShipId"/>
@@ -54651,7 +54648,6 @@
 		</block>
 	</block>
 	<block className="ButtonDivision">
-		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'slimClientData'"/>
 		<bind name="visible" value="(slimClientData.isFull)"/>
 		<style>
