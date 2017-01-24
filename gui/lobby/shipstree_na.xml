@@ -488,6 +488,8 @@
 				<!-- <ship shipid='3766367952' x='14' y='4' /> PJSD504_Okikaze (T5 Japan demoWithoutStats Destroyer) -->
 				<!-- <ship shipid='3767416528' x='14' y='3' /> PJSD503_Amatsukaze (T4 Japan demoWithoutStats Destroyer) -->
 				<!-- <ship shipid='3452843728' x='10' y='9' />  False_Isokaze_1917 (T4 Japan unavailable Destroyer) -->
+				<!--日本金币船-->
+				<ship shipid='3764336336' x='12' y='5' /> <!--PJSB506_Mutsu (T6 Japan demoWithoutStats Battleship) -->
 
 		</ships>
 		<types>
