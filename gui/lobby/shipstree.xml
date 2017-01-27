@@ -648,6 +648,17 @@
 				<ship shipid='3765351888' x='10' y='4' /> <!--PRSC505_KrasniKrym (T5 Russia demoWithoutStats Cruiser) -->
 				<ship shipid='3763221968' x='6' y='6' /> <!--PRSD507_Leningrad_1944 (T7 Russia demoWithoutStats Destroyer) -->
 				<ship shipid='3767449040' x='8' y='2' /> <!--PRSC503_Oleg (T3 Russia demoWithoutStats Cruiser) -->
+				<ship shipid='3765319120' x='12' y='4' /> <!--PRSD505_Okhotnik_1917 (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4079891920' x='14' y='4' /> <!--PRSD205_Podvoisky_pr_1929 (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4078843344' x='14' y='5' /> <!--PRSD206_Pr_7 (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4077794768' x='14' y='6' /> <!--PRSD207_Minsk (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4076746192' x='14' y='7' /> <!--PRSD208_Pr_30 (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4075697616' x='14' y='8' /> <!--PRSD209_Pr_35 (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4074649040' x='14' y='9' /> <!--PRSD210_Grozovoy_pr_40N (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3971888592' x='12' y='7' /> <!--PRSD308_Pr_48 (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3970840016' x='12' y='8' /> <!--PRSD309_Pr_20i (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3969791440' x='12' y='9' /> <!--PRSD310_Pr_24 (T5 Russia demoWithoutStats Destroyer) -->
+
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='4' y='-1' />
