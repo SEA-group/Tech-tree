@@ -32589,7 +32589,7 @@
 		<bind name="watchDH" value="'selectedShipCrew'; ['crewEntity.crew.evBasketChanged', 'crewEntity.crew.evLevelUp', 'crewEntity.crew.evExpChanged', 'crewEntity.crew.evShipChanged', 'crewEntity.crew.evSkillsChanged', 'crewEntity.crew.evResetCostChanged', 'crewEntity.crew.evAdaptationUpdated']; crewEntity.crew"/>
 		<bind name="watchDH" value="'selectedShipCrew'+'Retraining'; ['crewEntity.crew.evRetrainingUpdated']; crewEntity.retraining"/>
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
-		<bind name="watchDH" value="'accountGold';		['resourceEntity.accountResource.evChangedGold'];		resourceEntity.accountResource.gold"/>
+		<bind name="watchDH" value="'accountGold'; ['resourceEntity.accountResource.evChangedGold'];	resourceEntity.accountResource.gold"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'pricesAll'; PriceInfoSet.OP_BUY +  'BARRAC_CAP_Increase'; 'barracksCapacityPrice'"/>
 		<bind name="var" value="{ selectedCrewDest: 0 }"/>
@@ -32634,7 +32634,7 @@
 					<width value="100%"/>
 					<height value="85px"/>
 				</style>
-				<bind name="instance" value="'CrewShipPanelInnerBlock'; _crewId ? {	_fromCrewSelect: _fromCrewSelect, _crewId: _crewId } : null"/>
+				<bind name="instance" value="'CrewShipPanelInnerBlock'; _crewId ? {	_fromCrewSelect: _fromCrewSelect, _crewId: _crewId, _shipId: _shipId } : null"/>
 				<block>
 					<style>
 						<width value="100%"/>
@@ -32711,30 +32711,23 @@
 					</block>
 				</block>
 			</block>
-			<bind name="watch" value="'isInAdapatationOrNeedRetraining'; (selectedShipCrewRetraining.isInAdaptation == true) || (selectedShipCrewRetraining.needRetraining == true)"/>
 			<block>
-				<bind name="visible" value="(selectedShipCrew != null) &amp;&amp; (selectedShipCrew.specializationID != _shipId)"/>
 				<style>
 					<width value="100%"/>
 					<marginTop value="3px"/>
-					<flow value="htile"/>
-					<align value="center"/>
 				</style>
-				<block type="text">
-					<styleClass value="$TextDefault"/>
-					<bind name="text" value="selectedShipCrewRetraining.isInAdaptation ? ('IDS_CREW_IN_ADAPTATION') : (tr('IDS_SPECIALITY') + tr('IDS_COLON'))"/>
-				</block>
+				<bind name="visible" value="(selectedShipCrew != null) &amp;&amp; (selectedShipCrew.specializationID != _shipId)"/>
+				<bind name="tooltip" value="'CrewSpecializationTooltip'; { _shipId: selectedShipCrew.specializationID, 
+														 _isInAdaptation: selectedShipCrewRetraining.isInAdaptation,
+														 _crewId: _crewId }"/>
 				<block>
-					<style>
-						<marginLeft value="6px"/>
-						<marginTop value="6px"/>
-					</style>
-					<bind name="instance" value="'ShipLineItem'; { _shipId: selectedShipCrew.specializationID, _width: 'auto'}"/>
+					<styleClass value="$MiddleAligned"/>
+					<bind name="instance" value="'CrewSpecializationItem'; {	_shipId: selectedShipCrew.specializationID, 
+															_isInAdaptation: selectedShipCrewRetraining.isInAdaptation }"/>
 				</block>
 				<block>
 					<style>
 						<width value="100%"/>
-						<position value="absolute"/>
 						<bottom value="-2px"/>
 					</style>
 					<block className="HorizontalDivider">
@@ -32749,13 +32742,15 @@
 					</block>
 				</block>
 			</block>
+			<bind name="watch" value="'isInAdapatationOrNeedRetraining'; (selectedShipCrewRetraining.isInAdaptation == true) || (selectedShipCrewRetraining.needRetraining == true)"/>
+			<bind name="watch" value="'isRetrainStartNeeded'; (_shipId != selectedShipCrew.specializationID) &amp;&amp; (!shipInfo.isPremium)"/>
 			<block>
+				<bind name="visible" value="isInAdapatationOrNeedRetraining"/>
 				<style>
 					<width value="100%"/>
 					<marginTop value="4px"/>
 					<marginBottom value="4px"/>
 				</style>
-				<bind name="visible" value="isInAdapatationOrNeedRetraining"/>
 				<block type="text">
 					<style>
 						<width value="100%"/>
@@ -32765,8 +32760,8 @@
 					</style>
 					<styleClass value="$TextDefault"/>
 					<bind name="class" value="'$FontColorUnready'"/>
-					<bind name="text" value="(_shipId != selectedShipCrew.specializationID	? 'IDS_CREW_RETRAINING_NEEDED'
-																			: 'IDS_CREW_RETRAINING_FINISH_NEEDED')"/>
+					<bind name="text" value="isRetrainStartNeeded	? 'IDS_CREW_RETRAINING_NEEDED'
+													: 'IDS_CREW_RETRAINING_FINISH_NEEDED'"/>
 				</block>
 				<block>
 					<styleClass value="$MiddleAligned"/>
@@ -32775,9 +32770,9 @@
 							<width value="200px"/>
 						</style>
 						<bind name="enabled" value="!(playerShipInfo.isLocked)"/>
-						<bind name="label" value="(_shipId != selectedShipCrew.specializationID)	? toUpperCase(tr('IDS_CREW_RETRAIN'))
-																				: toUpperCase(tr('IDS_CREW_SPEED_UP_RETRAINING'))"/>
-						<bind name="request" value="'buttonClick'; 'retrainCrew'; {shipId: _shipId, crewID: _crewId}"/>
+						<bind name="label" value="isRetrainStartNeeded	? toUpperCase(tr('IDS_CREW_RETRAIN'))
+														: toUpperCase(tr('IDS_CREW_SPEED_UP_RETRAINING'))"/>
+						<bind name="request" value="'buttonClick'; 'retrainCrew'; {shipId:  (shipInfo.isPremium ? selectedShipCrew.specializationID : _shipId), crewID: _crewId}"/>
 					</block>
 				</block>
 				<block>
@@ -33035,6 +33030,10 @@
 		<bind name="primaryEntityDH" value="'crewEntity'; CC.crew; _crewId"/>
 		<bind name="watchDH" value="'crew'; ['crewEntity.crew.evBasketChanged', 'crewEntity.crew.evLevelUp', 'crewEntity.crew.evExpChanged', 'crewEntity.crew.evShipChanged', 'crewEntity.crew.evSkillsChanged', 'crewEntity.crew.evResetCostChanged', 'crewEntity.crew.evAdaptationUpdated']; crewEntity.crew"/>
 		<bind name="watchDH" value="'crew'+'Retraining'; ['crewEntity.crew.evRetrainingUpdated']; crewEntity.retraining"/>
+		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; crew.shipID; 'evUpdate'"/>
+		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watch" value="'isNeedRetraining'; ((crew.shipID &amp;&amp; (crew.shipID != crew.specializationID)) &amp;&amp; !(shipInfo.isPremium) &amp;&amp; (shipInfo.group != 'upgradeableExclusive'))"/>
 		<bind name="name" value="'CrewShipPanelBlock'"/>
 		<styleClass value="$Fullsize"/>
 		<block className="dock_submenu_item" type="native">
@@ -33069,15 +33068,15 @@
 				<bind name="instance" value="'CrewSkillPointItem'; { _skillPoints: crew.freeSkillPoints, _allSkillPoints: crew.allSkillPoints }"/>
 			</block>
 			<block>
-				<bind name="visible" value="(crewRetraining.needRetraining != true)"/>
+				<bind name="visible" value="!(isNeedRetraining)"/>
 				<style>
 					<position value="absolute"/>
 					<bottom value="4px"/>
 				</style>
-				<bind name="instance" value="'CrewExperienceBar'; { _crewId: crew.id }"/>
+				<bind name="instance" value="'CrewExperienceBar'; { _crewId: crew.id}"/>
 			</block>
 			<block>
-				<bind name="visible" value="(crewRetraining.needRetraining == true)"/>
+				<bind name="visible" value="isNeedRetraining"/>
 				<style>
 					<width value="100%"/>
 					<position value="absolute"/>
@@ -33100,7 +33099,12 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'crewsSingleton'; ['dockEntity.crewData.evUpdate']; dockEntity.crewData"/>
+		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; _shipId; 'evUpdate'"/>
+		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watch" value="'enabledDropdown'; !(_inTooltip) &amp;&amp; (selectedShipCrew.dismissDelay == 0)"/>
+		<bind name="watch" value="'specializationShip'; !(selectedShipCrew.shipID) || (selectedShipCrew.shipID == selectedShipCrew.specializationID)"/>
+		<bind name="watch" value="'isNeedRetraining'; !specializationShip &amp;&amp; !shipInfo.isPremium &amp;&amp; (shipInfo.group != 'upgradeableExclusive')"/>
 		<styleClass value="$Fullsize"/>
 		<styleClass value="$InfoBlockHorizontalIndent"/>
 		<block>
@@ -33124,6 +33128,7 @@
 															_fromCrewSelect: _fromCrewSelect, _enabled: enabledDropdown}"/>
 		</block>
 		<block>
+			<bind name="visible" value="!(isNeedRetraining)"/>
 			<style>
 				<width value="100%"/>
 				<position value="absolute"/>
@@ -33156,7 +33161,21 @@
 				<flow value="horizontal"/>
 			</style>
 		</block>
-	</block>
+		<block>
+			<bind name="visible" value="isNeedRetraining"/>
+			<style>
+				<width value="100%"/>
+				<position value="absolute"/>
+				<bottom value="2px"/>
+			</style>
+			<block type="text">
+				<styleClass value="$TextHeaderBold"/>
+				<styleClass value="$MouseDisable"/>
+				<bind name="class" value="'$FontColorUnready'"/>
+				<bind name="text" value="toUpperCase(tr('IDS_CREW_NEED_RETRAINING'))"/>
+			</block>
+		</block>
+	</block>		
 	<block className="CrewHireShipPanelBlock">
 		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
 		<styleClass value="$Fullsize"/>
@@ -33204,6 +33223,79 @@
 		</style>
 		<bind name="generatorDH" value="CC.crew; 'CrewListItemRenderer'; path; {_selectedShipId: _selectedShipId}"/>
 	</block>
+	<block className="CrewSpecializationItem">
+		<block>
+			<block type="text">
+				<styleClass value="$TextDefault"/>
+				<bind name="text" value="_isInAdaptation ? ('IDS_CREW_IN_ADAPTATION') : (tr('IDS_SPECIALITY') + tr('IDS_COLON'))"/>
+			</block>
+			<block>
+				<style>
+					<marginLeft value="6px"/>
+					<marginTop value="6px"/>
+				</style>
+				<bind name="instance" value="'ShipLineItem'; { _shipId: _shipId, _width: 'auto'}"/>
+			</block>
+			<style>
+				<flow value="horizontal"/>
+			</style>
+		</block>
+	</block>
+	<block className="CrewSpecializationTooltip">
+		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+		<styleClass value="$DefaultTooltipBehaviour"/>
+		<style>
+			<width value="300px"/>
+		</style>
+		<block className="DeclareBlurLayer">
+			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+			<bind name="visible" value="optionData.blurEnabled"/>
+			<block className="transparentPixel" type="native">
+				<bind name="blurLayer" value="0"/>
+			</block>
+			<style>
+				<position value="absolute"/>
+			</style>
+		</block>
+		<block className="BlurMap">
+			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+			<style>
+				<position value="absolute"/>
+				<width value="100%"/>
+				<height value="100%"/>
+				<hitTest value="false"/>
+			</style>
+			<bind name="visible" value="optionData.blurEnabled"/>
+			<block className="mc_blurmap5" type="native">
+				<bind name="appear" value="'startShow'; 0.3; 0; {alpha: 0}; {alpha: 1}"/>
+				<bind name="appear" value="'startHide'; 0.15; 0; {alpha: 1}; {alpha: 0}"/>
+				<style>
+					<width value="100%"/>
+					<height value="100%"/>
+				</style>
+				<bind name="blurMap" value="0"/>
+			</block>
+		</block>
+		<block className="contrast_panel" type="native">
+			<styleClass value="$FullsizeAbsolute"/>
+			<bind name="visible" value="optionData.contrast"/>
+		</block>
+		<block className="hint_panel" type="native">
+			<styleClass value="$FullsizeAbsolute"/>
+		</block>
+		<block>
+			<styleClass value="$InfoBlockIndent"/>
+			<block>
+				<bind name="instance" value="'CrewSpecializationItem'; {	_shipId: _shipId, _isInAdaptation: _isInAdaptation,	_inTooltip: true }"/>
+			</block>
+			<block>
+				<style>
+					<marginTop value="15px"/>
+				</style>
+				<bind name="instance" value="'CrewExperienceBar'; { _crewId: _crewId }"/>
+			</block>
+		</block>
+	</block>	
 	<block className="LootboxesBanner">
 		<params>
 			<param name="name" value="LootboxesBanner"/>
@@ -35303,7 +35395,7 @@
 		<style>
 			<width value="330px"/>
 		</style>
-		<bind name="style" value="'width'; _width ? _width : 330"/>
+		<bind name="style" value="'width'; _width ? _width : '330px'"/>
 		<block className="DeclareBlurLayer">
 			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
 			<bind name="visible" value="optionData.blurEnabled"/>
@@ -35335,9 +35427,7 @@
 		</block>
 		<block className="GUIContrast">
 			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
-			<style>
-				<width value="100%"/>
-			</style>
+			<styleClass value="$FullsizeAbsolute"/>
 			<block className="contrast_panel" type="native">
 				<styleClass value="$FullsizeAbsolute"/>
 				<bind name="visible" value="optionData.contrast"/>
@@ -35416,9 +35506,7 @@
 	</block>
 	<block className="GUIContrast">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
-		<style>
-			<width value="100%"/>
-		</style>
+		<styleClass value="$FullsizeAbsolute"/>
 		<block className="contrast_panel" type="native">
 			<styleClass value="$FullsizeAbsolute"/>
 			<bind name="visible" value="optionData.contrast"/>
@@ -42315,6 +42403,9 @@
 		<bind name="watchDH" value="'crew'+'Retraining'; ['crewEntity.crew.evRetrainingUpdated']; crewEntity.retraining"/>
 		<bind name="primaryEntityDH" value="'shipOwnEntity'; CC.ownShip; crew.shipID; 'evUpdate'"/>
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
+		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; crew.shipID; 'evUpdate'"/>
+		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
 		<styleClass value="$DefaultMenuBehaviour"/>
 		<styleClass value="$ContextMenuDimentions"/>
@@ -42392,7 +42483,7 @@
 			<bind name="style" value="'hitTest'; playerShipInfo.isLocked ? false : true"/>
 			<block className="dock_submenu_item" type="native">
 				<styleClass value="$FullsizeAbsolute"/>
-				<bind name="request" value="'buttonClick'; 'retrainCrew'; {shipId: crew.shipID, crewID: _crewId}"/>
+				<bind name="request" value="'buttonClick'; 'retrainCrew'; {shipId: (shipInfo.isPremium ? crew.specializationID : crew.shipID), crewID: _crewId}"/>
 			</block>
 			<block type="text">
 				<styleClass value="$TextDefault"/>
@@ -49978,6 +50069,7 @@
 			<bind name="catch" value="'browser.onLoadFailed'; {loadFailed: true}"/>
 			<bind name="catch" value="'browser.onLoadEnd'; {loadFailed: false}"/>
 			<bind name="catch" value="'browser.onLoadEnd'; {firstRequestedPageLoaded: true}"/>
+			<bind name="name" value="firstRequestedPageLoaded ? 'BrowserIsLoaded' : 'BrowserIsNotLoaded'"/>
 			<block>
 				<styleClass value="$Fullsize"/>
 				<bind name="appear" value="'startShow'; 0.15; 0.3; {alpha: 0, top: 5}; {alpha: 1, top: 0}"/>
@@ -54499,7 +54591,7 @@
 		<bind name="name" value="'QuestsSmallItem_' + sseId"/>
 		<bind name="watch" value="'activeStepInfo'; steps[activeStep]"/>
 		<bind name="watch" value="'isLimitedPerDay'; activeStepInfo.limit&gt;0 &amp;&amp; activeStepInfo.isDaily"/>
-		<bind name="watch" value="'isDoneForToday'; activeStepInfo.limit&gt;0 &amp;&amp; activeStepInfo.isDaily &amp;&amp; progress == 1"/>
+		<bind name="watch" value="'isDoneForToday'; (activeStepInfo.limit &gt; 0) &amp;&amp; (activeStepInfo.isDaily) &amp;&amp; (progress == 1) &amp;&amp; (activeStepInfo.limit == activeStepInfo.count)"/>
 		<bind name="watch" value="'isChallenge'; type == SSETypes.CHALLENGE"/>
 		<bind name="var" value="{bgWidthSmall: (isChallenge ? 524 : 304)}"/>
 		<bind name="var" value="{bgHeightSmall: (isChallenge ? 164 : 154)}"/>
@@ -54512,6 +54604,7 @@
 			<styleClass value="$MiddleVAligned"/>
 			<bind name="style" value="'width'; bgWidthSmall + 'px'"/>
 			<bind name="style" value="'height'; bgHeightSmall + 'px'"/>
+			<bind name="style" value="'alpha'; isDoneForToday ? 0.6 : 1"/>
 			<block className="DropShadow">
 				<styleClass value="$FullsizeAbsolute"/>
 				<styleClass value="$MouseDisable"/>
@@ -54635,7 +54728,7 @@
 		<bind name="watch" value="'isChallenge'; type == SSETypes.CHALLENGE"/>
 		<bind name="watch" value="'activeStepInfo'; steps[activeStep]"/>
 		<bind name="watch" value="'isLimitedPerDay'; activeStepInfo.limit &gt; 0 &amp;&amp; activeStepInfo.isDaily"/>
-		<bind name="watch" value="'isDoneForToday'; activeStepInfo.limit &gt; 0 &amp;&amp; activeStepInfo.isDaily &amp;&amp; progress == 1 &amp;&amp; (activeStepInfo.limit == activeStepInfo.count)"/>
+		<bind name="watch" value="'isDoneForToday'; (activeStepInfo.limit &gt; 0) &amp;&amp; (activeStepInfo.isDaily) &amp;&amp; (progress == 1) &amp;&amp; (activeStepInfo.limit == activeStepInfo.count)"/>
 		<bind name="style" value="'width'; _itemWidth + 'px'"/>
 		<bind name="transition" value="($index == currentSelectedIndex) || rollOver; 0.2; {alpha: 0.8}; {alpha: 1}"/>
 		<bind name="dispatch" value="'click'; 'changeSelectedIndex'; {currentSelectedIndex: $index}"/>
