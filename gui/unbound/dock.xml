@@ -33461,91 +33461,94 @@
 																: !(isPremiumAccount) &amp;&amp; (choosenTasks.length == totalSlots) 	? totalSlots 
 																																: common
 																: common"/>
-		<style>
-			<width value="223px"/>
-			<height value="80px"/>
-		</style>
-		<bind name="visible" value="(campaignsDone.length) != (campaignParamsCollection.length)"/>
 		<bind name="feature" value="22; 'click'"/>
 		<bind name="soundSet" value="'default_button'"/>
 		<bind name="action" value="'click'; 'openChooseCampaignsWindow'; {}"/>
 		<bind name="tooltip" value="'MouseInstructionTooltip'; {_mouseInstructions: [{_type: 'left', _instructionText: 'IDS_TOOLTIP_GO_TO_CAMPAIGN'}], _maxWidth: 230}"/>
+		<style>
+			<width value="223px"/>
+		</style>
 		<block>
 			<style>
-				<width value="223px"/>
+				<width value="100%"/>
 				<height value="80px"/>
-				<backgroundSize value="cover"/>
-				<position value="absolute"/>
 			</style>
-			<bind name="transition" value="rollOver &amp;&amp; !(mouseDown); 0.15; {alpha: 0.8}; {alpha: 1.0}"/>
-			<bind name="style" value="'backgroundImage'; (stateDone.length &gt; 0) 	? 'url:../campaigns/bg_task_item/task_bg_campaign_' + (stateDone[0].campaignTaskParams.bgIconID ? stateDone[0].campaignTaskParams.bgIconID : stateDone[0].campaignTaskParams.number) + '.png':
-										selectedTask 			? 'url:../campaigns/bg_task_item/task_bg_campaign_' + (choosenTasks[0].campaignTaskParams.bgIconID ? choosenTasks[0].campaignTaskParams.bgIconID : choosenTasks[0].campaignTaskParams.number) + '.png'
-																: 'url:../campaigns/banner/banner_bg_new.png'"/>
-		</block>
-		<block className="quest_thumb_title" type="native">
-			<style>
-				<width value="223px"/>
-				<height value="36px"/>
-			</style>
-			<bind name="transition" value="rollOver &amp;&amp; !(mouseDown); 0.15; {alpha: 0.8}; {alpha: 1.0}"/>
-			<block type="text">
+			<bind name="visible" value="(campaignsDone.length != campaignParamsCollection.length)"/>
+			<block>
 				<style>
-					<marginLeft value="8px"/>
+					<backgroundSize value="cover"/>
 				</style>
-				<styleClass value="$MiddleVAligned"/>
+				<styleClass value="$FullsizeAbsolute"/>
+				<bind name="transition" value="rollOver &amp;&amp; !(mouseDown); 0.15; {alpha: 0.8}; {alpha: 1.0}"/>
+				<bind name="style" value="'backgroundImage'; (stateDone.length &gt; 0) 	? 'url:../campaigns/bg_task_item/task_bg_campaign_' + (stateDone[0].campaignTaskParams.bgIconID ? stateDone[0].campaignTaskParams.bgIconID : stateDone[0].campaignTaskParams.number) + '.png':
+											selectedTask 			? 'url:../campaigns/bg_task_item/task_bg_campaign_' + (choosenTasks[0].campaignTaskParams.bgIconID ? choosenTasks[0].campaignTaskParams.bgIconID : choosenTasks[0].campaignTaskParams.number) + '.png'
+																	: 'url:../campaigns/banner/banner_bg_new.png'"/>
+			</block>
+			<block className="quest_thumb_title" type="native">
+				<style>
+					<width value="100%"/>
+					<height value="36px"/>
+				</style>
+				<bind name="transition" value="rollOver &amp;&amp; !(mouseDown); 0.15; {alpha: 0.8}; {alpha: 1.0}"/>
+				<block type="text">
+					<style>
+						<marginLeft value="8px"/>
+					</style>
+					<styleClass value="$MiddleVAligned"/>
+					<styleClass value="$TextHeaderWhiteBold"/>
+					<bind name="text" value="toUpperCase(tr('IDS_CAMPAIGNS'))"/>
+				</block>
+			</block>
+			<block>
+				<bind name="visible" value="(stateDone.length &gt; 0) || (noSelectedTask)"/>
+				<style>
+					<width value="110px"/>
+					<height value="80px"/>
+					<backgroundSize value="cover"/>
+					<position value="absolute"/>
+					<right value="0px"/>
+				</style>
+				<bind name="transition" value="rollOver &amp;&amp; !(mouseDown); 0.15; {alpha: 0.8}; {alpha: 1.0}"/>
+				<bind name="style" value="'backgroundImage'; (stateDone.length &gt; 0)	? 'url:../campaigns/banner/banner_reward.png':
+											noSelectedTask			? 'url:../campaigns/banner/banner_logo.png'
+																	: 'url:../campaigns/banner/banner_logo.png'"/>
+			</block>
+			<block type="text">
+				<bind name="visible" value="(stateDone.length &gt; 0) || (selectedTask)"/>
+				<style>
+					<position value="absolute"/>
+					<bottom value="10px"/>
+					<left value="8px"/>
+				</style>
 				<styleClass value="$TextHeaderWhiteBold"/>
-				<bind name="text" value="toUpperCase(tr('IDS_CAMPAIGNS'))"/>
+				<bind name="class" value="'$FontColorBlueish'"/>
+				<bind name="text" value="(stateDone.length &gt; 0) 	? ('IDS_CAMPAIGN_TAKE_REWARD'):
+						selectedTask			? (tr('IDS_CAMPAIGN_TASKS_IN_PROGRESS')) + ' ' + choosenTasks.length + '/' + totalAvailableTaskCount
+												: ''"/>
 			</block>
 		</block>
 		<block>
-			<bind name="visible" value="(stateDone.length &gt; 0) || (noSelectedTask)"/>
+			<bind name="visible" value="(campaignsDone.length == campaignParamsCollection.length)"/>
 			<style>
-				<width value="110px"/>
-				<height value="80px"/>
-				<backgroundSize value="cover"/>
-				<position value="absolute"/>
-				<right value="0px"/>
-			</style>
-			<bind name="transition" value="rollOver &amp;&amp; !(mouseDown); 0.15; {alpha: 0.8}; {alpha: 1.0}"/>
-			<bind name="style" value="'backgroundImage'; (stateDone.length &gt; 0)	? 'url:../campaigns/banner/banner_reward.png':
-										noSelectedTask			? 'url:../campaigns/banner/banner_logo.png'
-																: 'url:../campaigns/banner/banner_logo.png'"/>
-		</block>
-		<block type="text">
-			<bind name="visible" value="(stateDone.length &gt; 0) || (selectedTask)"/>
-			<style>
-				<position value="absolute"/>
-				<bottom value="10px"/>
-				<left value="8px"/>
-			</style>
-			<styleClass value="$TextHeaderWhiteBold"/>
-			<bind name="class" value="'$FontColorBlueish'"/>
-			<bind name="text" value="(stateDone.length &gt; 0) 	? ('IDS_CAMPAIGN_TAKE_REWARD'):
-					selectedTask			? (tr('IDS_CAMPAIGN_TASKS_IN_PROGRESS')) + ' ' + choosenTasks.length + '/' + totalAvailableTaskCount
-											: ''"/>
-		</block>
-		<block>
-			<bind name="visible" value="(campaignsDone.length) == (campaignParamsCollection.length)"/>
-			<style>
-				<width value="223px"/>
+				<width value="100%"/>
 				<height value="36px"/>
 			</style>
 			<block className="quest_thumb_title" type="native">
+				<style>
+					<alpha value="0.7"/>
+				</style>
 				<styleClass value="$FullsizeAbsolute"/>
-				<bind name="transition" value="rollOver &amp;&amp; !(mouseDown); 0.15; {alpha: 0.8}; {alpha: 1.0}"/>
+				<bind name="transition" value="rollOver &amp;&amp; !(mouseDown); 0.15; {alpha: 0.75}; {alpha: 1.0}"/>
 			</block>
-			<block>
-				<styleClass value="$FullsizeAbsolute"/>
-				<block type="text">
-					<styleClass value="$MiddleAligned"/>
-					<styleClass value="$MiddleVAligned"/>
-					<styleClass value="$TextHeaderWhiteBold"/>
-					<style>
-						<width value="100%"/>
-						<textAlign value="center"/>
-					</style>
-					<bind name="text" value="toUpperCase(tr('IDS_CAMPAIGNS'))"/>
-				</block>
+			<block type="text">
+				<style>
+					<alpha value="0.5"/>
+					<width value="100%"/>
+					<textAlign value="center"/>
+				</style>
+				<styleClass value="$TextHeaderWhiteBold"/>
+				<styleClass value="$MiddleVAligned"/>
+				<bind name="text" value="toUpperCase(tr('IDS_CAMPAIGNS'))"/>
 			</block>
 		</block>
 	</block>
