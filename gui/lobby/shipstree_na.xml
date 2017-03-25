@@ -702,8 +702,54 @@
 	</nation>
 	<nation name='France'>
 		<arrows>
+			<arrow item0='4180588368' item1='4179539792'>
+				<cell x='0' y='8'/>
+				<cell x='0' y='9'/>
+			</arrow>
+			<arrow item0='4181636944' item1='4180588368'>
+				<cell x='0' y='7'/>
+				<cell x='0' y='8'/>
+			</arrow>
+			<arrow item0='4182685520' item1='4181636944'>
+				<cell x='0' y='6'/>
+				<cell x='0' y='7'/>
+			</arrow>
+			<arrow item0='4183734096' item1='4182685520'>
+				<cell x='0' y='5'/>
+				<cell x='0' y='6'/>
+			</arrow>
+			<arrow item0='4184782672' item1='4183734096'>
+				<cell x='0' y='4'/>
+				<cell x='0' y='5'/>
+			</arrow>
+			<arrow item0='4185831248' item1='4184782672'>
+				<cell x='0' y='3'/>
+				<cell x='0' y='4'/>
+			</arrow>
+			<arrow item0='4186879824' item1='4185831248'>
+				<cell x='0' y='2'/>
+				<cell x='0' y='3'/>
+			</arrow>
+			<arrow item0='4187928400' item1='4186879824'>
+				<cell x='0' y='1'/>
+				<cell x='0' y='2'/>
+			</arrow>
+			<arrow item0='4188976976' item1='4187928400'>
+				<cell x='0' y='0'/>
+				<cell x='0' y='1'/>
+			</arrow>
 		</arrows>
 		<ships>
+				<ship shipid='4179539792' x='0' y='9' /> <!--PFSC110_Henri_IV (T10 France special Battleship) -->
+				<ship shipid='4180588368' x='0' y='8' /> <!--PFSC109_Saint_Louis (T9 France special Battleship) -->
+				<ship shipid='4181636944' x='0' y='7' /> <!--PFSC108_Charles_Martel (T8 France special Battleship) -->
+				<ship shipid='4182685520' x='0' y='6' /> <!--PFSC107_Algerie (T7 France special Battleship) -->
+				<ship shipid='4183734096' x='0' y='5' /> <!--PFSC106_La_Galissonniere (T6 France special Battleship) -->
+				<ship shipid='4184782672' x='0' y='4' /> <!--PFSC105_Emile_Bertin (T5 France special Battleship) -->
+				<ship shipid='4185831248' x='0' y='3' /> <!--PFSC104_Duguay_Trouin (T4 France special Battleship) -->
+				<ship shipid='4186879824' x='0' y='2' /> <!--PFSC103_Friant (T3 France special Battleship) -->
+				<ship shipid='4187928400' x='0' y='1' /> <!--PFSC102_Jurien (T2 France special Battleship) -->
+				<ship shipid='4188976976' x='0' y='0' /> <!--PFSC101_Bougainville (T1 France special Battleship) -->
 				<ship shipid='3764336464' x='8' y='2' /> <!--PFSB506_Dunkerque_1940 (T6 France special Battleship) -->
 		</ships>
 		<types>
@@ -741,6 +787,38 @@
 				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
 				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
 				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+		</types>
+	</nation>
+	<nation name='Italy'>
+		<arrows>
+		</arrows>
+		<ships>
+				<ship shipid='3764303600' x='8' y='5' /> <!-- PISC506_DucadAosta (T6 Italy demoWithoutStats Cruiser) -->
+		</ships>
+		<types>
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+		</types>
+	</nation>
+	<nation name='Events'>	
+		<arrows>
+		</arrows>
+		<ships>
+			<ship shipid='4293866768' x='0' y='0' /> <!--PXSB001_Mr_Hyde (T11 Events event Battleship)-->
+			<ship shipid='4292818192' x='0' y='1' /> <!--PXSB002_Rasputin (T4 Events unavailable Battleship)-->
+			<ship shipid='4291769616' x='0' y='2' /> <!--PXSB003_Zeekasa (T2 Events unavailable Battleship)-->
+			<ship shipid='4293801232' x='0' y='3' /> <!--PXSD001_VanHellsink (T11 Events event Destroyer)-->
+			<ship shipid='4293834000' x='0' y='4' /> <!--PXSC001_Dr_Frankenship (T11 Events event Cruiser)-->
+			<ship shipid='4293145872' x='0' y='5' /> <!--PXSX001_Transylvania (T5 Events unavailable Auxiliary)-->
+	        <ship shipid='4278465808' x='2' y='5' /> <!--PXSX015_Schuka (T11 Events event Auxiliary)-->
+		</ships>
+		<types>	
+		        <type id='0' nameIDS='2016 Halloween' x='0' y='-1' />
+				<type id='1' nameIDS='2017 April' x='2' y='-1' />
+				
 		</types>
 	</nation>
 </ship_tree>

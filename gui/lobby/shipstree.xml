@@ -456,14 +456,14 @@
 				<ship shipid='4290688720' x='10' y='3' /> <!--PJSC004_Yubari_1944 (T4 Japan special Cruiser) -->
 				<ship shipid='4267620048' x='12' y='3' /> <!--PJSC026_Iwaki_1944 (T4 Japan special Cruiser) -->			
 				<ship shipid='3767449296' x='10' y='2' /> <!-- PJSC503_Katori (T3 Japan special Cruiser) -->
-				<ship shipid='4283381456' x='14' y='1' /> <!-- Mikasa_1905 (T2 Japan special Battleship) -->
+				<ship shipid='4283381456' x='14' y='1' /> <!-- PJSB011_Mikasa_1905 (T2 Japan special Battleship) -->
 				<ship shipid='4276008656' x='10' y='6' /> <!--PJSC018_Tone (T7 Japan special Cruiser) -->
 				<!-- <ship shipid='3455006416' x='10' y='0' />  PJSB801_False_Kawachi_1912 (T3 Japan unavailable Battleship) -->
 				<!-- <ship shipid='3453957840' x='12' y='0' />  PJSB802_False_Ally_Kawachi_1912 (T3 Japan unavailable Battleship) -->
 				<!-- <ship shipid='3453957840' x='14' y='0' />  PJSC837_False_Hashidate_1940 (T1 Japan unavailable Cruiser) -->
 				<!-- <ship shipid='3416176336' x='16' y='0' />  PJSC838_False_Hashidate_1940 (T1 Japan unavailable Cruiser) -->
 				<ship shipid='3247355600' x='10' y='9' />  <!--PJSC999_Yubari_Special (T10 Japan event Cruiser) -->
-				<ship shipid='4280202960' x='12' y='7' /> <!-- Kitakami_1945 (T8 Japan disabled Cruiser) -->
+				<ship shipid='4280202960' x='12' y='7' /> <!-- PJSC014_Kitakami_1945 (T8 Japan disabled Cruiser) -->
 				<!--科技树驱逐舰-->
 				<ship shipid='4292753104' x='6' y='1' /> <!--PJSD002_Umikaze_1925 (T2 Japan upgradeable Destroyer) -->
 				<ship shipid='4269684432' x='6' y='2' /> <!--PJSD024_Wakatake_1923 (T3 Japan upgradeable Destroyer) -->
@@ -481,14 +481,14 @@
 				<!--金币驱逐舰-->
 				<ship shipid='4293801680' x='10' y='1' /> <!--PJSD001_Tachibana_1912 (T2 Japan special Destroyer) -->
 				<ship shipid='4280170192' x='12' y='1' /> <!--PJSD014_Tachibana_1912_Asus (T2 Japan special Destroyer) -->
-				<ship shipid='4268635856' x='10' y='4' /> <!-- True_Kamikaze (T5 Japan special Destroyer) -->
-				<ship shipid='4267587280' x='12' y='4' /> <!-- Camo_Kamikaze (T5 Japan special Destroyer) -->				
+				<ship shipid='4268635856' x='10' y='4' /> <!-- PJSD025_True_Kamikaze (T5 Japan special Destroyer) -->
+				<ship shipid='4267587280' x='12' y='4' /> <!-- PJSD026_Camo_Kamikaze (T5 Japan special Destroyer) -->				
 				<ship shipid='4277024464' x='14' y='4' /> <!--PJSD017_Kamikaze_1930 (T5 Japan special Destroyer) (Fujin) -->
 				<ship shipid='3554555600' x='10' y='5' /> <!--PJSD706_Shinonome (T6 Japan demoWithoutStats Destroyer) -->
 				<!--删除驱逐舰-->
 				<!-- <ship shipid='3766367952' x='14' y='4' /> PJSD504_Okikaze (T5 Japan demoWithoutStats Destroyer) -->
 				<!-- <ship shipid='3767416528' x='14' y='3' /> PJSD503_Amatsukaze (T4 Japan demoWithoutStats Destroyer) -->
-				<!-- <ship shipid='3452843728' x='10' y='9' />  False_Isokaze_1917 (T4 Japan unavailable Destroyer) -->
+				<!-- <ship shipid='3452843728' x='10' y='9' />  PJSD803_False_Isokaze_1917 (T4 Japan unavailable Destroyer) -->
 				<!--日本金币船-->
 				<ship shipid='3764336336' x='12' y='5' /> <!--PJSB506_Mutsu (T6 Japan demoWithoutStats Battleship) -->
 
@@ -702,8 +702,54 @@
 	</nation>
 	<nation name='France'>
 		<arrows>
+			<arrow item0='4180588368' item1='4179539792'>
+				<cell x='0' y='8'/>
+				<cell x='0' y='9'/>
+			</arrow>
+			<arrow item0='4181636944' item1='4180588368'>
+				<cell x='0' y='7'/>
+				<cell x='0' y='8'/>
+			</arrow>
+			<arrow item0='4182685520' item1='4181636944'>
+				<cell x='0' y='6'/>
+				<cell x='0' y='7'/>
+			</arrow>
+			<arrow item0='4183734096' item1='4182685520'>
+				<cell x='0' y='5'/>
+				<cell x='0' y='6'/>
+			</arrow>
+			<arrow item0='4184782672' item1='4183734096'>
+				<cell x='0' y='4'/>
+				<cell x='0' y='5'/>
+			</arrow>
+			<arrow item0='4185831248' item1='4184782672'>
+				<cell x='0' y='3'/>
+				<cell x='0' y='4'/>
+			</arrow>
+			<arrow item0='4186879824' item1='4185831248'>
+				<cell x='0' y='2'/>
+				<cell x='0' y='3'/>
+			</arrow>
+			<arrow item0='4187928400' item1='4186879824'>
+				<cell x='0' y='1'/>
+				<cell x='0' y='2'/>
+			</arrow>
+			<arrow item0='4188976976' item1='4187928400'>
+				<cell x='0' y='0'/>
+				<cell x='0' y='1'/>
+			</arrow>
 		</arrows>
 		<ships>
+				<ship shipid='4179539792' x='4' y='9' /> <!--PFSC110_Henri_IV (T10 France special Battleship) -->
+				<ship shipid='4180588368' x='4' y='8' /> <!--PFSC109_Saint_Louis (T9 France special Battleship) -->
+				<ship shipid='4181636944' x='4' y='7' /> <!--PFSC108_Charles_Martel (T8 France special Battleship) -->
+				<ship shipid='4182685520' x='4' y='6' /> <!--PFSC107_Algerie (T7 France special Battleship) -->
+				<ship shipid='4183734096' x='4' y='5' /> <!--PFSC106_La_Galissonniere (T6 France special Battleship) -->
+				<ship shipid='4184782672' x='4' y='4' /> <!--PFSC105_Emile_Bertin (T5 France special Battleship) -->
+				<ship shipid='4185831248' x='4' y='3' /> <!--PFSC104_Duguay_Trouin (T4 France special Battleship) -->
+				<ship shipid='4186879824' x='4' y='2' /> <!--PFSC103_Friant (T3 France special Battleship) -->
+				<ship shipid='4187928400' x='4' y='1' /> <!--PFSC102_Jurien (T2 France special Battleship) -->
+				<ship shipid='4188976976' x='4' y='0' /> <!--PFSC101_Bougainville (T1 France special Battleship) -->
 				<ship shipid='3764336464' x='8' y='2' /> <!--PFSB506_Dunkerque_1940 (T6 France special Battleship) -->
 		</ships>
 		<types>
@@ -741,6 +787,38 @@
 				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
 				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
 				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+		</types>
+	</nation>
+	<nation name='Italy'>
+		<arrows>
+		</arrows>
+		<ships>
+				<ship shipid='3764303600' x='8' y='5' /> <!-- PISC506_DucadAosta (T6 Italy demoWithoutStats Cruiser) -->
+		</ships>
+		<types>
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+		</types>
+	</nation>
+	<nation name='Events'>	
+		<arrows>
+		</arrows>
+		<ships>
+			<ship shipid='4293866768' x='0' y='0' /> <!--PXSB001_Mr_Hyde (T11 Events event Battleship)-->
+			<ship shipid='4292818192' x='0' y='1' /> <!--PXSB002_Rasputin (T4 Events unavailable Battleship)-->
+			<ship shipid='4291769616' x='0' y='2' /> <!--PXSB003_Zeekasa (T2 Events unavailable Battleship)-->
+			<ship shipid='4293801232' x='0' y='3' /> <!--PXSD001_VanHellsink (T11 Events event Destroyer)-->
+			<ship shipid='4293834000' x='0' y='4' /> <!--PXSC001_Dr_Frankenship (T11 Events event Cruiser)-->
+			<ship shipid='4293145872' x='0' y='5' /> <!--PXSX001_Transylvania (T5 Events unavailable Auxiliary)-->
+	        <ship shipid='4278465808' x='2' y='5' /> <!--PXSX015_Schuka (T11 Events event Auxiliary)-->
+		</ships>
+		<types>	
+		        <type id='0' nameIDS='2016 Halloween' x='0' y='-1' />
+				<type id='1' nameIDS='2017 April' x='2' y='-1' />
+				
 		</types>
 	</nation>
 </ship_tree>
