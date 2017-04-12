@@ -4725,13 +4725,13 @@
 					</block>
 				</block>
 			</block>
-			<block>
-				<!--<bind name="visible" value="!showStats"/>-->
+			<!--<block>
+				<bind name="visible" value="!showStats"/>
 				<style>
 					<width value="100%"/>
 				</style>
 				<bind name="instance" value="'LabelComingSoon'; { _showTestSampleLabel: showStats }"/>
-			</block>
+			</block>-->
 		</block>
 		<block className="dock_panel_pin_h" type="native">
 			<style>
@@ -4900,13 +4900,13 @@
 																															: null"/>
 				</block>
 			</block>
-			<block>
-				<!--<bind name="visible" value="!showStats"/>-->
+			<!--<block>
+				<bind name="visible" value="!showStats"/>
 				<style>
 					<width value="100%"/>
 				</style>
 				<bind name="instance" value="'LabelComingSoon'; { _showTestSampleLabel: showStats }"/>
-			</block>
+			</block>-->
 		</block>
 	</block>
 	<block className="ModuleTreeHelpTooltip">
@@ -10372,7 +10372,7 @@
 			<styleClass value="$PxCorrection"/>
 		</block>
 	</block>
-	<block className="NotificationShipResearch">
+	<block className="NotificationShipResearch"><!--hibiki techtree-->
 		<block>
 			<bind name="instance" value="'NotificationHeader'; { _header: 'IDS_SYS_MESSAGE_HEADER_MS_ACC_SHIP_EXPLORE', _class: '$FontColorWhite'}"/>
 		</block>
@@ -14136,7 +14136,7 @@
 			<bind name="instance" value="'FormationReadySwitcher'; {}"/>
 		</block>
 	</block>
-	<block className="FormationReadySwitcher">
+	<block className="FormationReadySwitcher"><!--Type Sh-->
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionData'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'dockDefaultValues'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
@@ -14160,9 +14160,10 @@
 		<bind name="watch" value="'isShipUnavailableForPartyByLvl'; ((shipInfo.level &gt; shipLevelMax) || (shipInfo.level &lt; shipLevelMin))"/>
 		<bind name="watch" value="'isShipUnavailableByType'; (divisionData.shipRestrictions[shipInfo.subtype][2] &gt;= divisionData.shipRestrictions[shipInfo.subtype][1])"/>
 		<bind name="watch" value="'readyBtnDisableReason';	divisionData.isReady																? 'no_reason' :
+											(shipInfo.group == 'event')															? tr('IDS_READY_TO_BATTLE_DENY_REASON_EVENT_PLAN_B') :
 											(isFormationInBattle || divisionData.countdownType != 0) 							? (divisionEntranceData.divisionType == 'party') 	? tr('IDS_YOUR_PARTY_IS_IN_BATTLE')
 																																													: tr('IDS_YOUR_DIVISION_IS_IN_BATTLE') :
-											(shipId &lt;= 0)														? tr('IDS_READY_TO_BATTLE_DENY_REASON_NO_SHIP')	:		
+											(shipId &lt;= 0)																		? tr('IDS_READY_TO_BATTLE_DENY_REASON_NO_SHIP')	:		
 											shipInfo.onlyPVPPVE	&amp;&amp; dockDefaultValues.battleType == BattleTypes.CLUB_BATTLE		? tr('IDS_EVENT_SHIPS_ARE_NOT_ALLOWED_IN_CLUB_BATTLES') :											
 											((divisionEntranceData.divisionType == 'party') &amp;&amp; isShipUnavailableForPartyByLvl) 	? (subst(shipsRestrictionString, [], {levelMin: RDigits[shipLevelMin], levelMax: RDigits[shipLevelMax]})) :
 											(isShipUnavailableByType) 															? (tr('IDS_MAX_COUNT_'+toUpperCase(shipInfo.subtype)+'_IN_' + toUpperCase(divisionEntranceData.divisionType))+tr('IDS_COLON')+' '+ divisionData.shipRestrictions[shipInfo.subtype][1]) :
@@ -40414,7 +40415,7 @@
 			<bind name="gotoAndStop!" value="_state"/>
 		</block>
 	</block>
-	<block className="ShipHeaderModuleTree">
+	<block className="ShipHeaderModuleTree"><!--hibiki techtree-->
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 		<bind name="watchDH" value="'accountFreeXP';		['resourceEntity.accountResource.evChangedFreeXP'];	resourceEntity.accountResource.freeXP"/>
 		<bind name="watchDH" value="'accountGold';		['resourceEntity.accountResource.evChangedGold'];	resourceEntity.accountResource.gold"/>
@@ -53665,7 +53666,7 @@
 						<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
 						<bind name="countdown" value="1495112400; 'projectRTimeTillEnd'; 'H'"/>
 						<bind name="countdown" value="1492088400; 'projectRTimeTillStart'; 'H'"/>
-						<bind name="visible" value="(realmConstants.currentRealm == 'EU' || realmConstants.currentRealm == 'ASIA') &amp;&amp; (projectRTimeTillEnd &gt; 0) &amp;&amp; (projectRTimeTillStart == 0)"/>
+						<bind name="visible" value="(realmConstants.currentRealm == 'NA' || realmConstants.currentRealm == 'RU' || realmConstants.currentRealm == 'EU' || realmConstants.currentRealm == 'ASIA') &amp;&amp; (projectRTimeTillEnd &gt; 0) &amp;&amp; (projectRTimeTillStart == 0)"/>
 						<bind name="appear" value="'startShow'; 0.15; 0.27; {alpha: 0, top: 0}; {alpha: 0.8, top: 0}"/>
 						<bind name="appear" value="'startHide'; 0.15; 0.27; {alpha: 0.8, top: 0}; {alpha: 0, top: 0}"/>
 						<bind name="tooltip" value="'SimpleTooltip';{tooltipText: 'IDS_FORWARD_TO_WOWS_WEBSITE'}"/>
@@ -53806,7 +53807,7 @@
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
 		<bind name="countdown" value="1495112400; 'projectRTimeTillEnd'; 'H'"/>
 		<bind name="countdown" value="1492088400; 'projectRTimeTillStart'; 'H'"/>
-		<bind name="visible" value="(realmConstants.currentRealm == 'EU' || realmConstants.currentRealm == 'ASIA') &amp;&amp; (projectRTimeTillEnd &gt; 0) &amp;&amp; (projectRTimeTillStart == 0)"/>
+		<bind name="visible" value="(realmConstants.currentRealm == 'NA' || realmConstants.currentRealm == 'RU' || realmConstants.currentRealm == 'EU' || realmConstants.currentRealm == 'ASIA') &amp;&amp; (projectRTimeTillEnd &gt; 0) &amp;&amp; (projectRTimeTillStart == 0)"/>
 		<bind name="appear" value="'startShow'; 0.15; 0.27; {alpha: 0, top: 0}; {alpha: 0.8, top: 0}"/>
 		<bind name="appear" value="'startHide'; 0.15; 0.27; {alpha: 0.8, top: 0}; {alpha: 0, top: 0}"/>
 		<bind name="tooltip" value="'SimpleTooltip';{tooltipText: 'IDS_FORWARD_TO_WOWS_WEBSITE'}"/>
