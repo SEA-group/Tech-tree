@@ -132,9 +132,6 @@
 	<css name="$FontAccentSize1">
 		<fontSize value="60"/>
 	</css>
-	<css name="$FontMBTSize">
-		<fontSize value="80"/>
-	</css>			
 	<css name="$LetterSpacingSmall">
 		<letterSpacing value="0.8"/>
 	</css>
@@ -500,13 +497,6 @@
 		<marginLeft value="5px"/>
 		<marginRight value="4px"/>
 	</css>
-	<css name="$DefaultHScrollBar"><!--!!!-->
-		<wheelScrollSpeed value="194"/>
-		<scrollbarController value="lesta.unbound.style.UbScrollingControllerTouch"/>
-		<scrollArea value="ModernScrollAreaHorizontal"/>
-		<scrollbar value="ModernScrollBar"/>
-		<scrollbarTrackMode value="scrollToCursor"/>
-	</css>			
 	<css name="$SelectTypeListItem">
 		<width value="100%"/>
 		<height value="74px"/>
@@ -1114,7 +1104,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipEntity.ownShip.evUpdate', 'shipEntity.ownShip.evCrewChanged']; shipEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity2'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity2.ship.evUpdate']; shipEntity2.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity2.slimClientComponent.evUpdate']; shipEntity2.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity2.slimClientComponent.evUpdate']; shipEntity2.slimClientComponent"/>
 		<bind name="primaryEntityDH" value="'crewEntity'; CC.crew; playerShipInfo.crewId"/>
 		<bind name="watchDH" value="'crew'; ['crewEntity.crew.evBasketChanged', 'crewEntity.crew.evLevelUp', 'crewEntity.crew.evExpChanged', 'crewEntity.crew.evShipChanged', 'crewEntity.crew.evSkillsChanged', 'crewEntity.crew.evResetCostChanged', 'crewEntity.crew.evAdaptationUpdated']; crewEntity.crew"/>
 		<bind name="watchDH" value="'crew'+'Retraining'; ['crewEntity.crew.evRetrainingUpdated']; crewEntity.retraining"/>
@@ -1757,12 +1747,12 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<bind name="watch" value="'isOwned'; playerShipInfo != null"/>
 		<bind name="primaryEntityDH" value="'selectedShipEntity'; CC.ship; _selectedShipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'selectedShipInfo'; ['selectedShipEntity.ship.evUpdate']; selectedShipEntity.ship"/>
-		<bind name="watchDH" value="'selectedShipInfo' + 'Slim''; ['selectedShipEntity.slimClientComponent.evUpdate']; selectedShipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'selectedShipInfo' + 'Slim'; ['selectedShipEntity.slimClientComponent.evUpdate']; selectedShipEntity.slimClientComponent"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'pricesAll'; PriceInfoSet.OP_BUY +  shipId; 'shipBuyPrice'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'pricesAll'; PriceInfoSet.OP_EXPLORE + shipId; 'shipExplorePrice'"/>
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
@@ -1915,7 +1905,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<bind name="watch" value="'isOwned'; playerShipInfo != null"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'pricesAll'; PriceInfoSet.OP_EXPLORE + shipId; 'shipExplorePrice'"/>
@@ -1923,7 +1913,6 @@
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 		<bind name="watchDH" value="'accountGold';	['resourceEntity.accountResource.evChangedGold'];	resourceEntity.accountResource.gold"/>
 		<bind name="feature" value="'17'; ''"/>
-		<!--<bind name="watch" value="'availableToDisplay'; (shipInfo.group == 'start') || (shipInfo.group == 'upgradeableExclusive') || (shipInfo.group == 'upgradeable') || (shipInfo.group == 'premium') || (shipInfo.isEventLike)"/>-->
 		<bind name="watch" value="'availableToDisplay'; true"/>		
 		<bind name="action" value="'buttonClick';  availableToDisplay ? 'selectShipUpgrade' : '' ; {shipId : shipId}"/>
 		<style>
@@ -2114,7 +2103,7 @@
 			<bind name="instance" value="'IconSlimClient'; !(shipInfoSlim.isDownloaded) ? { _isEventLike: shipInfo.isEventLike } : null"/>
 		</block>
 	</block>
-	<block className="ShipResearchInset"><!--let's do it-->
+	<block className="ShipResearchInset">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
 		<bind name="controller" value="lesta.dialogs.dock.controllers.ControllerResearchInset"/>
 		<styleClass value="$Fullsize"/>
@@ -2486,7 +2475,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<bind name="collectionDH" value="CC.userPrefs; 'userPrefsCollection'"/>
 		<bind name="entityDH" value="'userPrefsEntity'; userPrefsCollection[0].id"/>
@@ -4615,7 +4604,7 @@
 					<styleClass value="$Fullsize"/>
 				</block>
 			</block>
-			<bind name="watch" value="'showStats'; true"/><!--techtree-->
+			<bind name="watch" value="'showStats'; true"/>
 			<block>
 				<bind name="visible" value="showStats"/>
 				<styleClass value="$InfoBlockIndent"/>
@@ -6021,7 +6010,7 @@
 	</css>
 	<block className="Notification">
 		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
-		<bind name="watch" value="'isBigNotification'; (data.groupId == 6) || (data.groupId == 7) || (data.groupId == 2)"/>
+		<bind name="watch" value="'isBigNotification'; (data.groupId == 6) || (data.groupId == 7) || (data.groupId == 2) || (data.groupId == 10)"/>
 		<bind name="var" value="{	defaultWidth	: 245,
 					bigWidth		: 290}"/>
 		<bind name="style" value="'width';  isBigNotification ? (bigWidth + 'px') : (defaultWidth + 'px')"/>
@@ -6037,7 +6026,7 @@
 									_width: isBigNotification	? bigWidth
 																: defaultWidth};	'NotificationCrew'; 'NotificationModernization'; 'NotificationDivisions';
 																					'NotificationAccount'; 'NotificationExterior'; 'NotificationShipAndModule';
-																					'NotificationVotes'; 'NotificationClubs'; 'EmptyItem'; 'NotificationCampaign'"/>
+																					'NotificationVotes'; 'NotificationClubs'; 'EmptyItem'; 'NotificationCampaign'; 'NotificationClan'"/>
 		</block>
 	</block>
 	<block className="NotificationAccount">
@@ -6183,6 +6172,150 @@
 					'CampaignTaskDeactivated';
 					'CampaignTaskRewarded';
 					'CampaignFinalTaskEnabled'"/>
+		</block>
+	</block>
+	<block className="NotificationClan">
+		<bind name="controller" value="lesta.unbound.core.UbController"/>
+		<block>
+			<bind name="child" value="data.idInGroup; {data: data, _width: _width};
+					'ClanCommon'"/>
+		</block>
+	</block>
+	<css name="$NotificationTextStyleSheet">
+		<styleSheet value="
+		body {
+			leading: -1
+		}
+
+		.bold_default {
+			font-family: $WWSDefaultFontBold;
+			color: #EEEEEE
+		}
+
+		.bold_currentPlayerRelated {
+			font-family: $WWSDefaultFontBold;
+			color: #FFCC66
+		}
+
+		.bold_error {
+			font-family: $WWSDefaultFontBold;
+			color: #FF6600
+		}
+
+		.bold_warning {
+			font-family: $WWSDefaultFontBold;
+			color: #FF9900
+		}
+
+		.default {
+			font-family: $WWSDefaultFont;
+			color: #EEEEEE
+		}
+
+		.currentPlayerRelated {
+			font-family: $WWSDefaultFont;
+			color: #FFCC66
+		}
+
+		.error {
+			font-family: $WWSDefaultFont;
+			color: #FF6600
+		}
+
+		.warning {
+			font-family: $WWSDefaultFont;
+			color: #FF9900
+		}
+	"/>
+	</css>
+	<block className="ClanCommon">
+		<style>
+			<width value="1px"/>
+			<minHeight value="40"/>
+		</style>
+		<bind name="style" value="'width'; _width"/>
+		<block>
+			<bind name="visible" value="data.hasHeader == true"/>
+			<style>
+				<width value="100%"/>
+			</style>
+			<block>
+				<styleClass value="$InfoBlockHorizontalIndent"/>
+				<style>
+					<marginTop value="2px"/>
+					<marginBottom value="1px"/>
+				</style>
+				<block type="text">
+					<styleClass value="$TextHeaderBold"/>
+					<styleClass value="$NotificationTextStyleSheet"/>
+					<bind name="style" value="'maxWidth'; _width - 55"/>
+					<bind name="text" value="'&lt;body&gt;'+ data.header +'&lt;/body&gt;'"/>
+				</block>
+			</block>
+			<block className="HorizontalDivider">
+				<styleClass value="$PxHorizontalCorrection"/>
+				<style>
+					<width value="100%"/>
+					<height value="3px"/>
+				</style>
+				<block className="divider_h" type="native">
+					<styleClass value="$Fullsize"/>
+				</block>
+			</block>
+		</block>
+		<block type="text">
+			<styleClass value="$InfoBlockHorizontalIndent"/>
+			<styleClass value="$InfoLineBoundaries"/>
+			<styleClass value="$TextHeaderBigDefault"/>
+			<styleClass value="$NotificationTextStyleSheet"/>
+			<style>
+				<leading value="-1"/>
+			</style>
+			<bind name="style" value="'maxWidth'; _width - 55"/>
+			<bind name="text" value="'&lt;body&gt;' + data.message + '&lt;/body&gt;'"/>
+			<bind name="substitute" value="''; 5;
+							{
+								'[commander]': 'icon_clan_position_commander',
+								'[exec_officer]': 'icon_clan_position_dep_commander',
+								'[private]': 'icon_clan_position_line_officer',
+								'[recr_officer]': 'icon_clan_position_recruiter'
+							}"/>
+		</block>
+		<block>
+			<bind name="visible" value="data.cost != null"/>
+			<style>
+				<width value="100%"/>
+			</style>
+			<block className="HorizontalDivider">
+				<styleClass value="$PxHorizontalCorrection"/>
+				<style>
+					<width value="100%"/>
+					<height value="3px"/>
+				</style>
+				<block className="divider_h" type="native">
+					<styleClass value="$Fullsize"/>
+				</block>
+			</block>
+		</block>
+		<block>
+			<bind name="visible" value="data.cost != null"/>
+			<styleClass value="$InfoBlockHorizontalIndent"/>
+			<styleClass value="$InfoLineBoundaries"/>
+			<bind name="instance" value="'PriceInLine'; { priceInfo: {finalPrice: data.cost, basePrice: data.cost, currency: data.currency}, _customLabel: 'IDS_COST', _medium: true}"/>
+			<style>
+				<flow value="horizontal"/>
+			</style>
+		</block>
+		<block>
+			<style>
+				<alpha value="0.6"/>
+				<right value="5px"/>
+				<top value="3px"/>
+				<position value="absolute"/>
+				<width value="35px"/>
+				<height value="35px"/>
+				<backgroundImage value="symbol:icon_account_clan"/>
+			</style>
 		</block>
 	</block>
 	<block className="CampaignTaskActivated">
@@ -6804,7 +6937,7 @@
 				<block className="ExteriorHeader">
 					<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; data.data.shipId; 'evUpdate'"/>
 					<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-					<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+					<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 					<bind name="watch" value="'_isPermoflage'; exteriorConfig.type == ExteriorTypes.CAMOUFLAGE &amp;&amp; exteriorConfig.isPermanent"/>
 					<block>
 						<style>
@@ -6877,7 +7010,7 @@
 				<block className="ExteriorHeader">
 					<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; data.data.shipId; 'evUpdate'"/>
 					<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-					<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+					<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 					<bind name="watch" value="'_isPermoflage'; exteriorConfig.type == ExteriorTypes.CAMOUFLAGE &amp;&amp; exteriorConfig.isPermanent"/>
 					<block>
 						<style>
@@ -6980,7 +7113,7 @@
 				<block className="ExteriorHeader">
 					<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; data.data.shipId; 'evUpdate'"/>
 					<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-					<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+					<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 					<bind name="watch" value="'_isPermoflage'; exteriorConfig.type == ExteriorTypes.CAMOUFLAGE &amp;&amp; exteriorConfig.isPermanent"/>
 					<block>
 						<style>
@@ -7068,7 +7201,7 @@
 	<block className="ExteriorHeader">
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; data.data.shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watch" value="'_isPermoflage'; exteriorConfig.type == ExteriorTypes.CAMOUFLAGE &amp;&amp; exteriorConfig.isPermanent"/>
 		<block>
 			<style>
@@ -10372,7 +10505,7 @@
 			<styleClass value="$PxCorrection"/>
 		</block>
 	</block>
-	<block className="NotificationShipResearch"><!--hibiki techtree-->
+	<block className="NotificationShipResearch">
 		<block>
 			<bind name="instance" value="'NotificationHeader'; { _header: 'IDS_SYS_MESSAGE_HEADER_MS_ACC_SHIP_EXPLORE', _class: '$FontColorWhite'}"/>
 		</block>
@@ -11790,7 +11923,6 @@
 						<marginBottom value="2px"/>
 						<maxWidth value="200"/>
 					</style>
-					<styleClass value="$AlignLeft"/>
 					<styleClass value="$TextDefaultBold"/>
 					<bind name="text" value="_header"/>
 					<bind name="class" value="_class"/>
@@ -13707,7 +13839,6 @@
 			<bind name="style" value="'marginBottom'; _verticalMargins ? (_verticalMargins + 'px') : '1px'"/>
 			<block type="text">
 				<bind name="style" value="'maxWidth'; _maxWidth ? _maxWidth: 220"/>
-				<styleClass value="$AlignLeft"/>
 				<styleClass value="$TextDefaultBold"/>
 				<bind name="text" value="_header"/>
 				<bind name="class" value="_class"/>
@@ -14136,7 +14267,7 @@
 			<bind name="instance" value="'FormationReadySwitcher'; {}"/>
 		</block>
 	</block>
-	<block className="FormationReadySwitcher"><!--Type Sh-->
+	<block className="FormationReadySwitcher">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionData'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'dockDefaultValues'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
@@ -14147,7 +14278,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'playersInDivision'; 'playersInDivision'"/>
 		<bind name="collectionDH" value="CC.clubsCommon; 'clubsCommonCollection'"/>
 		<bind name="entityDH" value="'clubsCommonEntity'; clubsCommonCollection[0].id"/>
@@ -14160,10 +14291,9 @@
 		<bind name="watch" value="'isShipUnavailableForPartyByLvl'; ((shipInfo.level &gt; shipLevelMax) || (shipInfo.level &lt; shipLevelMin))"/>
 		<bind name="watch" value="'isShipUnavailableByType'; (divisionData.shipRestrictions[shipInfo.subtype][2] &gt;= divisionData.shipRestrictions[shipInfo.subtype][1])"/>
 		<bind name="watch" value="'readyBtnDisableReason';	divisionData.isReady																? 'no_reason' :
-											(shipInfo.group == 'event')															? tr('IDS_READY_TO_BATTLE_DENY_REASON_EVENT_PLAN_B') :
 											(isFormationInBattle || divisionData.countdownType != 0) 							? (divisionEntranceData.divisionType == 'party') 	? tr('IDS_YOUR_PARTY_IS_IN_BATTLE')
 																																													: tr('IDS_YOUR_DIVISION_IS_IN_BATTLE') :
-											(shipId &lt;= 0)																		? tr('IDS_READY_TO_BATTLE_DENY_REASON_NO_SHIP')	:		
+											(shipId &lt;= 0)														? tr('IDS_READY_TO_BATTLE_DENY_REASON_NO_SHIP')	:		
 											shipInfo.onlyPVPPVE	&amp;&amp; dockDefaultValues.battleType == BattleTypes.CLUB_BATTLE		? tr('IDS_EVENT_SHIPS_ARE_NOT_ALLOWED_IN_CLUB_BATTLES') :											
 											((divisionEntranceData.divisionType == 'party') &amp;&amp; isShipUnavailableForPartyByLvl) 	? (subst(shipsRestrictionString, [], {levelMin: RDigits[shipLevelMin], levelMax: RDigits[shipLevelMax]})) :
 											(isShipUnavailableByType) 															? (tr('IDS_MAX_COUNT_'+toUpperCase(shipInfo.subtype)+'_IN_' + toUpperCase(divisionEntranceData.divisionType))+tr('IDS_COLON')+' '+ divisionData.shipRestrictions[shipInfo.subtype][1]) :
@@ -14784,7 +14914,7 @@
 	<block className="FormationPlayerItem">
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
 		<bind name="style" value="'height'; _height ? _height : '100%'"/>
 		<bind name="var" value="{isAnimationPreUnlocked: false,
@@ -14858,7 +14988,7 @@
 			<styleClass value="$MiddleVAligned"/>
 			<style>
 				<position value="absolute"/>
-				<right value="6px"/>
+				<right value="-1px"/>
 			</style>
 			<bind name="request" value="'buttonClick'; (isInBattle &amp;&amp; _formationType == 'party') ? '' : 'kickPlayerFromDivision'; {playerId: id, name: nickName, subtitle: 'IDS_EXCLUDE_PLAYER_FROM_' + toUpperCase(_formationType) + '_QUESTION'}"/>
 		</block>
@@ -14886,7 +15016,7 @@
 			</block>
 			<block type="text">
 				<styleClass value="$MiddleVAligned"/>
-				<bind name="style" value="'width'; _textfieldsWidth ? _textfieldsWidth : '70px'"/>
+				<bind name="style" value="'width'; _textfieldsWidth ? _textfieldsWidth : '84px'"/>
 				<style>
 					<marginLeft value="1px"/>
 					<multiline value="false"/>
@@ -16352,7 +16482,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; _shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<bind name="watch" value="'isOwned'; playerShipInfo != null"/>
 		<style>
@@ -16394,7 +16524,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<bind name="watch" value="'isOwned'; playerShipInfo != null"/>
 		<style>
@@ -16773,10 +16903,10 @@
 			<bind name="repeat" value="viewParams.list; 'ShipInfoTabRow'; {secondLevelTooltip: secondLevelTooltip, viewParams: viewParams, _armourOff: _armourOff}"/>
 		</block>
 	</block>
-	<block className="ShipSilhouetteRightAligned"><!--dockshipicon-->
+	<block className="ShipSilhouetteRightAligned">
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; _shipID; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<style>
 			<width value="122px"/>
 			<height value="22px"/>
@@ -16785,7 +16915,7 @@
 		<bind name="scaleY" value="0.4"/>
 		<bind name="style" value="'backgroundImage'; 'url:' + shipInfo.pathPreview"/>
 	</block>
-	<block className="ShipPanel"><!--HOW TO FIX SOON?-->
+	<block className="ShipPanel">
 		<bind name="collectionDH" value="CC.userPrefs; 'userPrefsCollection'"/>
 		<bind name="entityDH" value="'userPrefsEntity'; userPrefsCollection[0].id"/>
 		<bind name="watchDH" value="'userPrefs'; ['userPrefsEntity.userPrefs.evUserPrefsChanged']; userPrefsEntity.userPrefs.userPrefs"/>
@@ -16793,7 +16923,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<bind name="primaryEntityDH" value="'compareItemEntity'; CC.compareItem; 'testShipParams'"/>
 		<bind name="watchDH" value="'testShipParams'; ['compareItemEntity.compareItem.evUpdate']; compareItemEntity.dataComponent.data"/>
@@ -16811,7 +16941,7 @@
 		<params>
 			<param name="name" value="panelShipStats"/>
 		</params>
-		<styleClass value="$ShipTechStats"/><!---->
+		<styleClass value="$ShipTechStats"/>
 		<style>
 			<top value="92px"/>
 		</style>
@@ -16873,7 +17003,7 @@
 				</block>
 				<block>
 					<bind name="visible" value="true"/>
-					<bind name="style" value="'marginTop'; isOwned ? '-15px' : 0px'"/>
+					<bind name="style" value="'marginTop'; isOwned ? '-15px' : '0px'"/>
 					<style>
 						<width value="100%"/>
 					</style>
@@ -16894,10 +17024,9 @@
 						<bind name="watchDH" value="'isLazyLogin'; ['loginEntity.loginData.evUpdate']; (loginEntity.loginData.currentLoginType == 'DEMO')"/>
 						<block>
 							<style>
-								<width value="50%"/>
-								<marginLeft value="-50%"/>
-								<left value="50%"/>
+								<width value="220px"/>
 							</style>
+							<styleClass value="$MiddleAligned"/>
 							<bind name="action" value="'click'; (isLazyLogin &amp;&amp; (shipInfo.level &gt; realmConstants.lazyAccountMaxShipTier)) ? 'forceCreateAccount' : null"/>
 							<bind name="instance" value="'DefaultButtonCostMedium'; isOwned ? null
 													: !(upgradableShipInfo.dependencyResearched || upgradableShipInfo.isExplored) ? null
@@ -16983,7 +17112,7 @@
 					<overflow value="scroll"/>
 				</style>
 				<styleClass value="$DefaultScrollBar"/>
-				<bind name="instance" value="'ShipParamsListView'; showStats ? { viewParams: viewParams } : null"/><!--level saf sp hibiki-->
+				<bind name="instance" value="'ShipParamsListView'; showStats ? { viewParams: viewParams } : null"/>
 			</block>
 			<!--<block>
 				<bind name="visible" value="showLabelComingSoon"/>
@@ -17028,10 +17157,9 @@
 		<bind name="watchDH" value="'isLazyLogin'; ['loginEntity.loginData.evUpdate']; (loginEntity.loginData.currentLoginType == 'DEMO')"/>
 		<block>
 			<style>
-				<width value="50%"/>
-				<marginLeft value="-50%"/>
-				<left value="50%"/>
+				<width value="220px"/>
 			</style>
+			<styleClass value="$MiddleAligned"/>
 			<bind name="action" value="'click'; (isLazyLogin &amp;&amp; (shipInfo.level &gt; realmConstants.lazyAccountMaxShipTier)) ? 'forceCreateAccount' : null"/>
 			<bind name="instance" value="'DefaultButtonCostMedium'; isOwned ? null
 													: !(upgradableShipInfo.dependencyResearched || upgradableShipInfo.isExplored) ? null
@@ -18221,7 +18349,7 @@
 					<bind name="dataRefDH" value="'participants'; 'channelEntity.channel.participants.ref.items'"/>
 					<bind name="visible" value="(participants.length != 0)"/>
 					<style>
-						<width value="156px"/>
+						<width value="170px"/>
 						<height value="100%"/>
 						<marginLeft value="3px"/>
 					</style>
@@ -21189,7 +21317,7 @@
 		<bind name="watchDH" value="'shipIdForModuleInset'; ['dockEntity.shipSelection.evShipViewUpdate']; dockEntity.shipSelection.currentShipIdForModuleInset"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ownShip; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'playerShipInfo'; ['shipEntity.ownShip.evUpdate', 'shipEntity.ownShip.evCrewChanged']; shipEntity.ownShip"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<style>
@@ -21454,7 +21582,7 @@
 	<block className="ExteriorItem">
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ownShip; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'playerShipInfo'; ['shipEntity.ownShip.evUpdate', 'shipEntity.ownShip.evCrewChanged']; shipEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'exteriorEntity'; CC.exteriorConfig; $value"/>
 		<bind name="watchDH" value="'exteriorConfig'; []; exteriorEntity.exteriorConfig"/>
@@ -21624,7 +21752,7 @@
 	<block className="ExteriorInset">
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ownShip; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'playerShipInfo'; ['shipEntity.ownShip.evUpdate', 'shipEntity.ownShip.evCrewChanged']; shipEntity.ownShip"/>
 		<bind name="collectionDH" value="CC.ownShip; 'playerShips'"/>
 		<bind name="primaryEntityDH" value="'crewEntity'; CC.crew; playerShipInfo.crewId"/>
@@ -21814,7 +21942,7 @@
 		<bind name="watchDH" value="'shipIdForModuleInset'; ['dockEntity.shipSelection.evShipViewUpdate']; dockEntity.shipSelection.currentShipIdForModuleInset"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ownShip; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'playerShipInfo'; ['shipEntity.ownShip.evUpdate', 'shipEntity.ownShip.evCrewChanged']; shipEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'exteriorEntity'; CC.exteriorConfig; _exteriorId"/>
 		<bind name="watchDH" value="'exteriorConfig'; []; exteriorEntity.exteriorConfig"/>
@@ -22616,7 +22744,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipEntity.ownShip.evUpdate', 'shipEntity.ownShip.evCrewChanged']; shipEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; _shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="primaryEntityDH" value="'exteriorEntity'; CC.exteriorConfig; _exteriorId"/>
 		<bind name="watchDH" value="'exteriorConfig'; []; exteriorEntity.exteriorConfig"/>
 		<bind name="watchDH" value="'count'; ['exteriorEntity.countComponent.evUpdate']; exteriorEntity.countComponent.value"/>
@@ -22724,7 +22852,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
 		<style>
 			<width value="100%"/>
@@ -24578,17 +24706,20 @@
 		</block>
 		<block>
 			<bind name="visible" value="realmConstants.premshopUIAvailable"/>
-			<bind name="request" value="'click'; 'webBrowser'; {url: URL.PREMSHOP_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+			<bind name="request" value="'click'; 'webBrowser'; {url: URL.SHOP_IN_GAME, browserTextureName: 'BrowserRender'}"/>
 			<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_PREMSHOP', tooltipSubText: 'IDS_TOOLTIP_PREMSHOP'}"/>
 			<block>
 				<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_PREMSHOP')), _icon: 'premshop', _external: false }"/>
 			</block>
 		</block>
 		<block>
-			<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_BUY_GOLD_LC', tooltipSubText: 'IDS_HINT_REDIRECT_TO_STORE'}"/>
-			<bind name="instance" value="'AccountInfotipItem'; { _text: 'IDS_BUY_GOLD', _icon: 'buy_gold', _external: true}"/>
+			<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
+			<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 			<bind name="name" value="'buttonBuyGold'"/>
-			<bind name="action" value="'click'; 'gotoUrlByIdent'; {ident:URL.BUY_GOLD}"/>
+			<bind name="action" value="'click'; isSteamClient == true ? null : 'gotoUrlByIdent'; {ident: URL.BUY_GOLD}"/>
+			<bind name="request" value="'click'; isSteamClient == true ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+			<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_BUY_GOLD_LC', tooltipSubText: 'IDS_HINT_REDIRECT_TO_STORE'}"/>
+			<bind name="instance" value="'AccountInfotipItem'; { _text: 'IDS_BUY_GOLD', _icon: 'buy_gold', _external: !(isSteamClient)}"/>
 		</block>
 		<block>
 			<bind name="visible" value="accountLevelInfo.accountLevel &gt;= 3"/>
@@ -24618,7 +24749,7 @@
 			<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
 			<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
 			<bind name="visible" value="!(selfPlayerEntity.clanman)"/>
-			<bind name="request" value="'click'; 'webBrowser'; {url: URL.CLANS_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+			<bind name="request" value="'click'; 'clanWebBrowser'; {}"/>
 			<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_CLANS', tooltipSubText: 'IDS_HINT_CLANS'}"/>
 			<block>
 				<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_CLANS')), _icon: 'clans', _external: false }"/>
@@ -24984,17 +25115,20 @@
 						</block>
 						<block>
 							<bind name="visible" value="realmConstants.premshopUIAvailable"/>
-							<bind name="request" value="'click'; 'webBrowser'; {url: URL.PREMSHOP_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+							<bind name="request" value="'click'; 'webBrowser'; {url: URL.SHOP_IN_GAME, browserTextureName: 'BrowserRender'}"/>
 							<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_PREMSHOP', tooltipSubText: 'IDS_TOOLTIP_PREMSHOP'}"/>
 							<block>
 								<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_PREMSHOP')), _icon: 'premshop', _external: false }"/>
 							</block>
 						</block>
 						<block>
-							<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_BUY_GOLD_LC', tooltipSubText: 'IDS_HINT_REDIRECT_TO_STORE'}"/>
-							<bind name="instance" value="'AccountInfotipItem'; { _text: 'IDS_BUY_GOLD', _icon: 'buy_gold', _external: true}"/>
+							<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
+							<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 							<bind name="name" value="'buttonBuyGold'"/>
-							<bind name="action" value="'click'; 'gotoUrlByIdent'; {ident:URL.BUY_GOLD}"/>
+							<bind name="action" value="'click'; isSteamClient == true ? null : 'gotoUrlByIdent'; {ident: URL.BUY_GOLD}"/>
+							<bind name="request" value="'click'; isSteamClient == true ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+							<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_BUY_GOLD_LC', tooltipSubText: 'IDS_HINT_REDIRECT_TO_STORE'}"/>
+							<bind name="instance" value="'AccountInfotipItem'; { _text: 'IDS_BUY_GOLD', _icon: 'buy_gold', _external: !(isSteamClient)}"/>
 						</block>
 						<block>
 							<bind name="visible" value="accountLevelInfo.accountLevel &gt;= 3"/>
@@ -25024,7 +25158,7 @@
 							<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
 							<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
 							<bind name="visible" value="!(selfPlayerEntity.clanman)"/>
-							<bind name="request" value="'click'; 'webBrowser'; {url: URL.CLANS_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+							<bind name="request" value="'click'; 'clanWebBrowser'; {}"/>
 							<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_CLANS', tooltipSubText: 'IDS_HINT_CLANS'}"/>
 							<block>
 								<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_CLANS')), _icon: 'clans', _external: false }"/>
@@ -25058,7 +25192,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; _shipID ? _shipID : shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'rankedBattlesSeason'"/>
 		<block>
@@ -27066,7 +27200,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="primaryEntityDH" value="'armorPick'; CC.shipArmorPick; shipId; 'evUpdate'"/>
 		<bind name="primaryEntityDH" value="'armorConfig'; CC.shipArmorConfig; shipId; 'evUpdate'"/>
 		<bind name="primaryEntityDH" value="'armorParts'; CC.shipStructuralParts; shipId; 'evUpdate'"/>
@@ -27462,6 +27596,7 @@
 					{ _isExternal: prmpEntity.pRMPComponent.data.isIngameUrl == false };
 					{	video: 'PrmpContentVideo',
 						text: 'PrmpContentText',
+						survey: 'PrmpContentSurvey',
 						empty: 'EmptyItem'}"/>
 		</block>
 	</block>
@@ -27534,6 +27669,33 @@
 				</params>
 				<bind name="input"/>
 				<bind name="label" value="toUpperCase(tr('IDS_READ'))"/>
+			</block>
+			<block className="icon_guide" type="native">
+				<styleClass value="$MiddleVAligned"/>
+				<style>
+					<position value="absolute"/>
+					<left value="8px"/>
+				</style>
+			</block>
+		</block>
+		<block className="icon_out_grey" type="native">
+			<bind name="visible" value="_isExternal == true"/>
+			<style>
+				<position value="absolute"/>
+				<top value="4px"/>
+				<right value="4px"/>
+				<hitTest value="false"/>
+			</style>
+		</block>
+	</block>
+	<block className="PrmpContentSurvey">
+		<block className="BannerButton">
+			<block className="button_infopanel" type="native">
+				<params>
+					<param name="name" value="none"/>
+				</params>
+				<bind name="input"/>
+				<bind name="label" value="toUpperCase(tr('IDS_GO_TO_SURVEY'))"/>
 			</block>
 			<block className="icon_guide" type="native">
 				<styleClass value="$MiddleVAligned"/>
@@ -27737,7 +27899,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipsInFormation[0].ownShip.id ? shipsInFormation[0].ownShip.id : shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="collectionDH" value="CC.enterBattle; 'enterBattleCollection'"/>
 		<bind name="entityDH" value="'enterBattleEntity'; enterBattleCollection[0].id"/>
 		<bind name="watchDH" value="'buttonEnabled'; ['enterBattleEntity.enterBattle.evUpdate']; enterBattleEntity.enterBattle.enabled"/>
@@ -27784,7 +27946,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipsInFormation[0].ownShip.id ? shipsInFormation[0].ownShip.id : shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="collectionDH" value="CC.enterBattle; 'enterBattleCollection'"/>
 		<bind name="entityDH" value="'enterBattleEntity'; enterBattleCollection[0].id"/>
 		<bind name="watchDH" value="'buttonEnabled'; ['enterBattleEntity.enterBattle.evUpdate']; enterBattleEntity.enterBattle.enabled"/>
@@ -27995,7 +28157,7 @@
 		<bind name="watchDH" value="'shipIdForModuleInset'; ['dockEntity.shipSelection.evShipViewUpdate']; dockEntity.shipSelection.currentShipIdForModuleInset"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipsInFormation[0].ownShip.id ? shipsInFormation[0].ownShip.id : shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'selectedShipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'selectedShipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'selectedShipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'isPrimeTimeOn'; ['clubsCommonEntity.clubsCommon.evRulesChanged']; clubsCommonEntity.clubsCommon.isPrimeTimeOn"/>
 		<bind name="watchDH" value="'primeTimeFinishTime'; ['clubsCommonEntity.clubsCommon.evRulesChanged']; clubsCommonEntity.clubsCommon.primeTimeFinishTime"/>
 		<bind name="watchDH" value="'primeTimeStartTime'; ['clubsCommonEntity.clubsCommon.evRulesChanged']; clubsCommonEntity.clubsCommon.primeTimeStartTime"/>
@@ -29308,7 +29470,7 @@
 			<width value="100%"/>
 		</style>
 		<bind name="entityDH" value="'entityAccount'; data.playerEntityId"/>
-		<bind name="watchDH" value="'playerName'; ['entityAccount.accountName.evChanged']; entityAccount.accountName.nickName"/>
+		<bind name="watchDH" value="'playerName'; ['entityAccount.accountName.evChanged']; entityAccount.accountName.name"/>
 		<block className="inner_panel" type="native">
 			<style>
 				<marginLeft value="1px"/>
@@ -29332,7 +29494,14 @@
 							font-family: $WWSDefaultFontBold;
 						}"/>
 				</style>
-				<bind name="text" value="'&lt;body&gt;' + subst('IDS_PLAYER_INVITES_YOU_TO_JOIN_A_CLAN', [], {playerName: '&lt;h3&gt;' + playerName + '&lt;/h3&gt;'}) + '&lt;/body&gt;'"/>
+				<bind name="substitute" value="''; 5;
+								{
+									'[commander]': 'icon_clan_position_commander',
+									'[exec_officer]': 'icon_clan_position_dep_commander',
+									'[private]': 'icon_clan_position_line_officer',
+									'[recr_officer]': 'icon_clan_position_recruiter'
+								}"/>
+				<bind name="text" value="'&lt;body&gt;' + '[' + data.initiator_role + ']' + ' ' + subst('IDS_PLAYER_INVITES_YOU_TO_JOIN_A_CLAN', [], {playerName: '&lt;h3&gt;' + playerName + '&lt;/h3&gt;'}) + '&lt;/body&gt;'"/>
 			</block>
 			<block>
 				<style>
@@ -29345,12 +29514,13 @@
 					<styleClass value="$TextHeader"/>
 					<bind name="class" value="'$Bold'"/>
 					<bind name="class" value="'$FontSizeHeader4'"/>
+					<bind name="style" value="'textColor'; data.clan_color != '' ? '0x' + data.clan_color : 0xEEEEEE"/>
 					<style>
 						<maxWidth value="340"/>
 						<marginBottom value="-6px"/>
 						<textAlign value="center"/>
 					</style>
-					<bind name="text" value="data.clan_tag"/>
+					<bind name="text" value="'[' + data.clan_tag + ']'"/>
 				</block>
 				<block type="text">
 					<styleClass value="$MiddleAligned"/>
@@ -30473,7 +30643,6 @@
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'slimClientData'"/>
 		<bind name="feature" value="'17'; ''"/>
 		<bind name="action" value="'click'; 'selectShip'; {shipId: shipId}"/>
-		<bind name="visible" value="!(filterDict[shipId])"/>		
 		<style>
 			<width value="216px"/>
 		</style>
@@ -30720,7 +30889,7 @@
 		<bind name="transition" value="_selected; 0.15; {width: 204, height: 120}; {width: 216, height: 126}"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ownShip; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'playerShipInfo'; ['shipEntity.ownShip.evUpdate', 'shipEntity.ownShip.evCrewChanged']; shipEntity.ownShip"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<block className="thumb_hl_red" type="native">
@@ -30909,7 +31078,7 @@
 	<block className="ShipCarouselSmallSlot">
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ownShip; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'playerShipInfo'; ['shipEntity.ownShip.evUpdate', 'shipEntity.ownShip.evCrewChanged']; shipEntity.ownShip"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
@@ -31008,7 +31177,7 @@
 						<style>
 							<width value="180px"/>
 							<textAlign value="left"/>
-                            <fontSize value="14"/>
+              <fontSize value="14"/>
 						</style>
 						<styleClass value="$TextDefaultBold"/>
 						<bind name="class" value="'$LetterSpacingSmall'"/>
@@ -31028,12 +31197,25 @@
 				<block className="icon_primary_ribbon" type="native"/>
 			</block>
 			<block>
-				<bind name="style" value="'alpha'; (isNeedRepair || isNeedShell || isLocked || (playerShipInfo.crewId == 0) || (!isDownloaded)) ? 0.5 : 1"/>
-				<bind name="tooltip" value="'SimpleTooltip'; {tooltipText: 'IDS_TOOLTIP_EXPERIENCE_MULTIPLIER'}"/>
+				<bind name="visible" value="(playerShipInfo.timeRent &gt; 0)"/>
+				<bind name="name" value="'timeRent_' + shipInfo.fullName"/>
 				<style>
 					<position value="absolute"/>
-					<top value="2px"/>
-					<right value="4px"/>
+					<right value="3px"/>
+					<top value="3px"/>
+				</style>
+				<bind name="instance" value="'RentTimer'; (playerShipInfo.timeRent &gt; 0) ? {_timeRent: playerShipInfo.timeRent} : null"/>
+			</block>
+			<block>
+				<bind name="style" value="'alpha'; (isNeedRepair || isNeedShell || isLocked || (playerShipInfo.crewId == 0) || (!isDownloaded)) ? 0.5 : 1"/>
+				<bind name="tooltip" value="'MouseInstructionTooltip'; {_multiParagraphArray: [	{ _paragraphText: (playerShipInfo.remainingExpBonusWins &gt; 1) 	? subst('IDS_TOOLTIP_EXPERIENCE_MULTIPLIER', [], {_battleAmount: playerShipInfo.remainingExpBonusWins}, playerShipInfo.remainingExpBonusWins)
+																																				: 'IDS_TOOLTIP_EXPERIENCE_MULTIPLIER_FIRST_WIN' },
+																				{ _paragraphText: 'IDS_FIRST_WIN_HINT_EXT' }
+																				], _maxWidth: 300}"/>
+				<style>
+					<position value="absolute"/>
+					<bottom value="4px"/>
+					<left value="4px"/>
 				</style>
 				<bind name="instance" value="'DoubleExperience';(playerShipInfo.expMultiply &gt; 1) ? { expMultiplyPercentsString : subst('%m',[playerShipInfo.expMultiply]) } : null"/>
 			</block>
@@ -32000,7 +32182,7 @@
 		<bind name="watchDH" value="'crewsSingleton'; ['dockEntity.crewData.evUpdate']; dockEntity.crewData"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="primaryEntityDH" value="'shipOwnEntity'; CC.ownShip; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="watch" value="'crewId'; playerShipInfo == null ? 0 : playerShipInfo.crewId"/>
@@ -32225,14 +32407,14 @@
 				<bind name="visible" value="crewId == 0 &amp;&amp; recruitable"/>
 				<styleClass value="$MiddleAlignedAbsolutely"/>
 				<style>
-					<width value="648px"/>
+					<width value="450px"/>
 					<top value="42%"/>
 					<marginTop value="-50%"/>
+					<align value="center"/>
 				</style>
 				<block type="text">
-					<styleClass value="$MiddleAligned"/>
 					<style>
-						<width value="50%"/>
+						<width value="100%"/>
 						<textAlign value="center"/>
 						<marginBottom value="6px"/>
 					</style>
@@ -32241,9 +32423,8 @@
 					<text value="IDS_NO_CREW"/>
 				</block>
 				<block type="text">
-					<styleClass value="$MiddleAligned"/>
 					<style>
-						<width value="50%"/>
+						<width value="100%"/>
 						<textAlign value="center"/>
 						<leading value="-3"/>
 					</style>
@@ -32251,7 +32432,6 @@
 					<text value="IDS_HIRE_CREW_HINT"/>
 				</block>
 				<block>
-					<styleClass value="$MiddleAligned"/>
 					<style>
 						<width value="200px"/>
 						<marginTop value="18px"/>
@@ -32447,14 +32627,14 @@
 			<bind name="visible" value="crewId == 0 &amp;&amp; recruitable"/>
 			<styleClass value="$MiddleAlignedAbsolutely"/>
 			<style>
-				<width value="648px"/>
+				<width value="450px"/>
 				<top value="42%"/>
 				<marginTop value="-50%"/>
+				<align value="center"/>
 			</style>
 			<block type="text">
-				<styleClass value="$MiddleAligned"/>
 				<style>
-					<width value="50%"/>
+					<width value="100%"/>
 					<textAlign value="center"/>
 					<marginBottom value="6px"/>
 				</style>
@@ -32463,9 +32643,8 @@
 				<text value="IDS_NO_CREW"/>
 			</block>
 			<block type="text">
-				<styleClass value="$MiddleAligned"/>
 				<style>
-					<width value="50%"/>
+					<width value="100%"/>
 					<textAlign value="center"/>
 					<leading value="-3"/>
 				</style>
@@ -32473,7 +32652,6 @@
 				<text value="IDS_HIRE_CREW_HINT"/>
 			</block>
 			<block>
-				<styleClass value="$MiddleAligned"/>
 				<style>
 					<width value="200px"/>
 					<marginTop value="18px"/>
@@ -32552,7 +32730,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; _shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="primaryEntityDH" value="'crewEntity'; CC.crew; _crewId"/>
 		<bind name="watchDH" value="'selectedShipCrew'; ['crewEntity.crew.evBasketChanged', 'crewEntity.crew.evLevelUp', 'crewEntity.crew.evExpChanged', 'crewEntity.crew.evShipChanged', 'crewEntity.crew.evSkillsChanged', 'crewEntity.crew.evResetCostChanged', 'crewEntity.crew.evAdaptationUpdated']; crewEntity.crew"/>
 		<bind name="watchDH" value="'selectedShipCrew'+'Retraining'; ['crewEntity.crew.evRetrainingUpdated']; crewEntity.retraining"/>
@@ -33000,7 +33178,7 @@
 		<bind name="watchDH" value="'crew'+'Retraining'; ['crewEntity.crew.evRetrainingUpdated']; crewEntity.retraining"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; crew.shipID; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watch" value="'isNeedRetraining'; ((crew.shipID &amp;&amp; (crew.shipID != crew.specializationID)) &amp;&amp; !(shipInfo.isPremium) &amp;&amp; (shipInfo.group != 'upgradeableExclusive'))"/>
 		<bind name="name" value="'CrewShipPanelBlock'"/>
 		<styleClass value="$Fullsize"/>
@@ -33070,7 +33248,7 @@
 		<bind name="watchDH" value="'crewsSingleton'; ['dockEntity.crewData.evUpdate']; dockEntity.crewData"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; _shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watch" value="'enabledDropdown'; !(_inTooltip) &amp;&amp; (selectedShipCrew.dismissDelay == 0)"/>
 		<bind name="watch" value="'specializationShip'; !(selectedShipCrew.shipID) || (selectedShipCrew.shipID == selectedShipCrew.specializationID)"/>
 		<bind name="watch" value="'isNeedRetraining'; !specializationShip &amp;&amp; !shipInfo.isPremium &amp;&amp; (shipInfo.group != 'upgradeableExclusive')"/>
@@ -35478,7 +35656,7 @@
 	<block className="ShipTitleWithIconAndSilhouette">
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; _shipID; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<block>
 			<block>
 				<bind name="instance" value="'ShipTitleWithIconAndLevel'; {_shipID : _shipID}"/>
@@ -35502,7 +35680,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; _shipID; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<block>
 			<style>
@@ -36950,7 +37128,7 @@
 	<block className="StatRow">
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; hintVehicleId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="tooltip" value="'StatsRowHint' ; {tooltipText: title + '_TOOLTIP_PROFILE', shipInfo:shipInfo, shipLevelRome: shipInfo.levelRome, hintVehicleId: hintVehicleId}"/>
 		<styleClass value="$TableCell"/>
 		<block>
@@ -37170,7 +37348,6 @@
 						<width value="100%"/>
 						<overflow value="scroll"/>
 					</style>
-					<bind name="tooltip" value="'MouseInstructionTooltip'; { _mouseInstructions: [{_type: 'left', _instructionText: 'IDS_SELECT_SHIP_FOR_DETAILED_STAT'}], _maxWidth: 250}"/>
 					<bind name="repeat" value="shipsList; 'ShipRowItem'; {battleType: battleType, currentVehicleId: statData.vehicleId, curSeasonIndex: curSeasonIndex, seasonId: seasonId, _curItemIndex: _curItemIndex}; !(userPrefs.shipSortStatsDirection)"/>
 				</block>
 				<block>
@@ -37180,10 +37357,42 @@
 			</block>
 		</block>
 	</block>
+	<block className="ShipStatsTooltip">
+		<styleClass value="$DefaultTooltipBehaviour"/>
+		<style>
+			<width value="300px"/>
+			<hitTest value="false"/>
+		</style>
+		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; _vehicleId; 'evUpdate'"/>
+		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<block>
+			<styleClass value="$FullsizeAbsolute"/>
+			<bind name="instance" value="'TooltipBackground'; {_isInBattle: _isInBattle}"/>
+		</block>
+		<block>
+			<styleClass value="$InfoBlockIndent"/>
+			<bind name="instance" value="'ShipFlagIconLevelName'; {shipInfo: shipInfo, _multiline: true}"/>
+		</block>
+		<block className="HorizontalDivider">
+			<styleClass value="$PxHorizontalCorrection"/>
+			<style>
+				<width value="100%"/>
+				<height value="3px"/>
+			</style>
+			<block className="divider_h" type="native">
+				<styleClass value="$Fullsize"/>
+			</block>
+		</block>
+		<block>
+			<styleClass value="$InfoBlockIndent"/>
+			<bind name="instance" value="'MouseInstruction'; { _type: 'left', _instructionText: 'IDS_SELECT_SHIP_FOR_DETAILED_STAT', _maxWidth: 250}"/>
+		</block>
+	</block>
 	<block className="ShipPrewiewItem">
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; currentVehicleId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<style>
 			<width value="214px"/>
 			<height value="126px"/>
@@ -38001,7 +38210,8 @@
 		<bind name="watchDH" value="'userPrefs'; ['userPrefsEntity.userPrefs.evUserPrefsChanged']; userPrefsEntity.userPrefs.userPrefs"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; vehicleId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="tooltip" value="'ShipStatsTooltip'; { _vehicleId: vehicleId, _maxWidth: 250}"/>
 		<style>
 			<width value="100%"/>
 			<height value="36px"/>
@@ -38027,18 +38237,18 @@
 			<block>
 				<style>
 					<width value="100%"/>
+					<marginRight value="2px"/>
 				</style>
-				<bind name="instance" value="'ShipFlagIconLevelName'; {shipInfo: shipInfo, shipLevelRome: shipInfo.levelRome}"/>
+				<bind name="instance" value="'ShipFlagIconLevelName'; {shipInfo: shipInfo}"/>
 			</block>
 			<block type="text">
 				<styleClass value="$MiddleVAligned"/>
-				<style>
-					<right value="0"/>
-					<position value="absolute"/>
-				</style>
 				<styleClass value="$TextHeaderBold"/>
 				<bind name="text" value="(userPrefs.shipStatsSortIndex == 1)	? battlesCount : winRate"/>
 			</block>
+			<style>
+				<flow value="horizontal"/>
+			</style>
 		</block>
 		<block>
 			<style>
@@ -38062,7 +38272,7 @@
 		<bind name="watchDH" value="'userPrefs'; ['userPrefsEntity.userPrefs.evUserPrefsChanged']; userPrefsEntity.userPrefs.userPrefs"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; vehicleId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watch" value="'currentVehicleId'; 0"/>
 		<bind name="var" value="{vehicleId:0}"/>
 		<style>
@@ -38130,7 +38340,6 @@
 		<style>
 			<flow value="horizontal"/>
 			<width value="100%"/>
-			<height value="36px"/>
 		</style>
 		<block>
 			<style>
@@ -38140,9 +38349,9 @@
 			<bind name="instance" value="'NationFlagsTiny'; {shipCountry: shipInfo.flagName}"/>
 		</block>
 		<block>
-			<styleClass value="$MiddleVAligned"/>
 			<style>
 				<marginLeft value="-15px"/>
+				<marginTop value="12px"/>
 			</style>
 			<block>
 				<bind name="visible" value="shipInfo.isElite || shipInfo.isPremium || shipInfo.uiSpecial"/>
@@ -38164,25 +38373,24 @@
 		<block type="text">
 			<style>
 				<marginLeft value="6px"/>
+				<marginTop value="4px"/>
+				<multiline value="false"/>
 			</style>
 			<styleClass value="$TextHeaderBold"/>
-			<styleClass value="$MiddleVAligned"/>
 			<bind name="class" value="shipInfo.isPremium || shipInfo.uiSpecial ? '$FontColorGold' : '$FontColorWhite'"/>
-			<bind name="text" value="shipLevelRome"/>
+			<bind name="text" value="shipInfo.levelRome"/>
 		</block>
-		<block>
+		<block type="text">
 			<style>
-				<width value="130px"/>
+				<width value="100%"/>
 				<marginLeft value="3px"/>
-				<height value="100%"/>
+				<marginTop value="4px"/>
 			</style>
-			<block type="text">
-				<styleClass value="$MiddleVAligned"/>
-				<styleClass value="$TextHeaderBold"/>
-				<bind name="class" value="'$LetterSpacingSmall'"/>
-				<bind name="class" value="shipInfo.isPremium || shipInfo.uiSpecial ? '$FontColorGold' : '$FontColorWhite'"/>
-				<bind name="text" value="toUpperCase(tr(shipInfo.nameIDS))"/>
-			</block>
+			<bind name="style" value="'multiline'; _multiline ? _multiline : false"/>
+			<styleClass value="$TextHeaderBold"/>
+			<bind name="class" value="'$LetterSpacingSmall'"/>
+			<bind name="class" value="shipInfo.isPremium || shipInfo.uiSpecial ? '$FontColorGold' : '$FontColorWhite'"/>
+			<bind name="text" value="toUpperCase(tr(shipInfo.nameIDS))"/>
 		</block>
 	</block>
 	<block className="StatsRowHint">
@@ -39324,7 +39532,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionData'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
 		<bind name="entityDH" value="'entityClub'; _clubEntityId"/>
@@ -39810,7 +40018,7 @@
 						<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 						<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 						<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-						<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+						<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 						<bind name="collectionDH" value="CC.clubsCommon; 'clubsCommonCollection'"/>
 						<bind name="entityDH" value="'clubsCommonEntity'; clubsCommonCollection[0].id"/>
 						<bind name="watchDH" value="'seasonId'; ['clubsCommonEntity.clubsCommon.evRulesChanged']; clubsCommonEntity.clubsCommon.seasonId"/>
@@ -40415,7 +40623,7 @@
 			<bind name="gotoAndStop!" value="_state"/>
 		</block>
 	</block>
-	<block className="ShipHeaderModuleTree"><!--hibiki techtree-->
+	<block className="ShipHeaderModuleTree">
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 		<bind name="watchDH" value="'accountFreeXP';		['resourceEntity.accountResource.evChangedFreeXP'];	resourceEntity.accountResource.freeXP"/>
 		<bind name="watchDH" value="'accountGold';		['resourceEntity.accountResource.evChangedGold'];	resourceEntity.accountResource.gold"/>
@@ -40573,7 +40781,7 @@
 		<bind name="watchDH" value="'isLazyLogin'; ['loginEntity.loginData.evUpdate']; (loginEntity.loginData.currentLoginType == 'DEMO')"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; _shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watch" value="'defaultButtonCostSmallData'; _isOwned 	? null
 																: !(_dependencyResearched || _isExplored) ? null
 																: !(_isExplored) &amp;&amp; (_expDeficit &lt;= 0) &amp;&amp; (_group == 'upgradeable' || _group == 'upgradeableExclusive') ? { _label: toUpperCase(tr('IDS_DO_RESEARCH')), priceInfo: (_totalCostXP == $parent.shipExplorePrice.prices[0].finalPrice ? $parent.shipExplorePrice.prices[0] : { finalPrice: _totalCostXP, currency: 'exp' }), _action: (isLazyLogin &amp;&amp; (shipInfo.level &gt; realmConstants.lazyAccountMaxShipTier)) ? null : 'researchShip', _actionParams: { shipId: _shipId }, _enabled: true, _showDiscountTag:true }
@@ -40594,7 +40802,7 @@
 											: _isExplored &amp;&amp; _isPremium &amp;&amp; (accountGold - $parent.shipBuyPrice.prices[0].finalPrice) &lt; 0 ? {priceInfo: $parent.shipBuyPrice.prices[0], _label: 'IDS_PURCHASE_COST', _deficit: -(accountGold - $parent.shipBuyPrice.prices[0].finalPrice), _tooltipText: 'IDS_TOOLTIP_NO_GOLD', _small : true }
 											: null"/>
 		<block>
-			<bind name="visible" value="true"/><!--techtree-->
+			<bind name="visible" value="true"/>
 			<style>
 				<right value="6px"/>
 				<position value="absolute"/>
@@ -41085,7 +41293,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<bind name="watch" value="'isOwned'; playerShipInfo != null"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'slimClientData'"/>
@@ -41316,7 +41524,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<bind name="watch" value="'isOwned'; playerShipInfo != null"/>
 		<bind name="style" value="'userData'; { rightOffset: _hOffset }"/>
@@ -41894,12 +42102,12 @@
 		<bind name="watchDH" value="'targetPlayerShipInfo'; ['shipTargetOwnEntity.ownShip.evUpdate', 'shipTargetOwnEntity.ownShip.evCrewChanged']; shipTargetOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipTargetEntity'; CC.ship; _selectedShipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'targetShipInfo'; ['shipTargetEntity.ship.evUpdate']; shipTargetEntity.ship"/>
-		<bind name="watchDH" value="'targetShipInfo' + 'Slim''; ['shipTargetEntity.slimClientComponent.evUpdate']; shipTargetEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'targetShipInfo' + 'Slim'; ['shipTargetEntity.slimClientComponent.evUpdate']; shipTargetEntity.slimClientComponent"/>
 		<bind name="primaryEntityDH" value="'shipOwnEntity'; CC.ownShip; crew.shipID; 'evUpdate'"/>
 		<bind name="watchDH" value="'thisPlayerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'ShipEntity'; CC.ship; crew.specializationID; 'evUpdate'"/>
 		<bind name="watchDH" value="'thisShipInfo'; ['ShipEntity.ship.evUpdate']; ShipEntity.ship"/>
-		<bind name="watchDH" value="'thisShipInfo' + 'Slim''; ['ShipEntity.slimClientComponent.evUpdate']; ShipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'thisShipInfo' + 'Slim'; ['ShipEntity.slimClientComponent.evUpdate']; ShipEntity.slimClientComponent"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'crewsSingleton'; ['dockEntity.crewData.evUpdate']; dockEntity.crewData"/>
 		<bind name="watch" value="'hasSpaceToAssignCrew'; !(targetPlayerShipInfo.crewId) || !(crew.shipID) || crewsSingleton.canDisassignCrew"/>
@@ -42157,12 +42365,12 @@
 		<bind name="watchDH" value="'targetPlayerShipInfo'; ['shipTargetOwnEntity.ownShip.evUpdate', 'shipTargetOwnEntity.ownShip.evCrewChanged']; shipTargetOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipTargetEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'targetShipInfo'; ['shipTargetEntity.ship.evUpdate']; shipTargetEntity.ship"/>
-		<bind name="watchDH" value="'targetShipInfo' + 'Slim''; ['shipTargetEntity.slimClientComponent.evUpdate']; shipTargetEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'targetShipInfo' + 'Slim'; ['shipTargetEntity.slimClientComponent.evUpdate']; shipTargetEntity.slimClientComponent"/>
 		<bind name="primaryEntityDH" value="'shipThisEntity'; CC.ownShip; crew.shipID; 'evUpdate'"/>
 		<bind name="watchDH" value="'thisPlayerShipInfo'; ['shipThisEntity.ownShip.evUpdate', 'shipThisEntity.ownShip.evCrewChanged']; shipThisEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'targetShipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'targetShipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'targetShipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="primaryEntityDH" value="'crewEntity'; CC.crew; crewID"/>
 		<bind name="watchDH" value="'crew'; ['crewEntity.crew.evBasketChanged', 'crewEntity.crew.evLevelUp', 'crewEntity.crew.evExpChanged', 'crewEntity.crew.evShipChanged', 'crewEntity.crew.evSkillsChanged', 'crewEntity.crew.evResetCostChanged', 'crewEntity.crew.evAdaptationUpdated']; crewEntity.crew"/>
 		<bind name="watchDH" value="'crew'+'Retraining'; ['crewEntity.crew.evRetrainingUpdated']; crewEntity.retraining"/>
@@ -42349,7 +42557,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; crew.shipID; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
 		<styleClass value="$DefaultMenuBehaviour"/>
 		<styleClass value="$ContextMenuDimentions"/>
@@ -42706,12 +42914,12 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; crew.shipID ? crew.shipID : crew.specializationID; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="primaryEntityDH" value="'shipTargetOwnEntity'; CC.ownShip; targetShipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'targetPlayerShipInfo'; ['shipTargetOwnEntity.ownShip.evUpdate', 'shipTargetOwnEntity.ownShip.evCrewChanged']; shipTargetOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipTargetEntity'; CC.ship; targetShipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'targetShipInfo'; ['shipTargetEntity.ship.evUpdate']; shipTargetEntity.ship"/>
-		<bind name="watchDH" value="'targetShipInfo' + 'Slim''; ['shipTargetEntity.slimClientComponent.evUpdate']; shipTargetEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'targetShipInfo' + 'Slim'; ['shipTargetEntity.slimClientComponent.evUpdate']; shipTargetEntity.slimClientComponent"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'crewsSingleton'; ['dockEntity.crewData.evUpdate']; dockEntity.crewData"/>
 		<styleClass value="$DefaultTooltipBehaviour"/>
@@ -48469,7 +48677,7 @@
 		<bind name="watchDH" value="'exteriorConfig'; []; exteriorEntity.exteriorConfig"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; rewardItem.params.shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watch" value="'_isPermoflage'; exteriorConfig.type == ExteriorTypes.CAMOUFLAGE &amp;&amp; exteriorConfig.isPermanent"/>
 		<bind name="watchDH" value="'count'; ['exteriorEntity.countComponent.evUpdate']; exteriorEntity.countComponent.value"/>
 		<styleClass value="$DefaultTooltipBehaviour"/>
@@ -48928,7 +49136,7 @@
 			<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 			<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 			<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-			<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+			<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 			<bind name="visible" value="(shipId &gt; 0) &amp;&amp; (playerShipInfo.sigInstalled &lt; 8 &amp;&amp; !(playerShipInfo.exteriors[_exteriorId]) &amp;&amp; !(playerShipInfo.isLocked) &amp;&amp; !(playerShipInfo.isInFormation))"/>
 			<style>
 				<height value="36px"/>
@@ -49060,7 +49268,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; _crew.shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<style>
 			<width value="143px"/>
@@ -49207,7 +49415,7 @@
 		<bind name="watchDH" value="'exteriorConfig'; []; exteriorEntity.exteriorConfig"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; rewardItem.params.shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<style>
 			<flow value="horizontal"/>
 		</style>
@@ -49359,7 +49567,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; rewardItem.id; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="tooltip" value="'ShipExtendedTooltip'; { shipId: rewardItem.id, _inRewards: true, _rewardReasons: rewardItem.reasons, _isPRMP: rewardItem.isPRMP}"/>
 		<bind name="action" value="'click'; rewardItem.isPRMP ? '' : 'selectShipUpgrade' ; {shipId : rewardItem.id}"/>
 		<style>
@@ -53674,7 +53882,7 @@
 							<style>
 								<width value="190px"/>
 							</style>
-							<bind name="action" value="'click'; 'gotoUrlByIdent'; {ident: URL.PROJECT_R}"/>
+							<bind name="request" value="'click'; 'webBrowser'; {url: URL.PROJECT_R, browserTextureName: 'BrowserRender'}"/>
 							<params>
 								<param name="label" value=""/>
 							</params>
@@ -53815,7 +54023,7 @@
 			<style>
 				<width value="190px"/>
 			</style>
-			<bind name="action" value="'click'; 'gotoUrlByIdent'; {ident: URL.PROJECT_R}"/>
+			<bind name="request" value="'click'; 'webBrowser'; {url: URL.PROJECT_R, browserTextureName: 'BrowserRender'}"/>
 			<params>
 				<param name="label" value=""/>
 			</params>
@@ -54667,7 +54875,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipId; 'evUpdate'"/>
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-		<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="collectionDH" value="CC.ownShip; 'shipsInFormation'; 'shipsInFormation'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionData'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
@@ -55527,19 +55735,11 @@
 				<left value="36px"/>
 				<top value="24px"/>
 			</style>
-			<!--<block className="wows_logo_pb" type="native">
+			<block className="wows_logo_pb" type="native">
 				<bind name="scaleX" value="0.4"/>
 				<bind name="scaleY" value="0.4"/>
 				<bind name="gotoAndStop!" value="realmConstants.wowsLogo"/>
-			</block>-->
-			<!--<block className="wows_logo_pb">
-				<block type="text">
-					<styleClass value="$TextDefaultBold"/>
-					<styleClass value="$FontColorGold"/>
-					<styleClass value="$FontMBTSize"/>
-					<text value="戰艦世界模組技術學院"/>
-				</block>
-			</block>-->
+			</block>
 		</block>
 		<block>
 			<style>
@@ -56531,7 +56731,7 @@
 								<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
 								<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; shipsInFormation[0].ownShip.id ? shipsInFormation[0].ownShip.id : shipId; 'evUpdate'"/>
 								<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate']; shipEntity.ship"/>
-								<bind name="watchDH" value="'shipInfo' + 'Slim''; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+								<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 								<bind name="collectionDH" value="CC.enterBattle; 'enterBattleCollection'"/>
 								<bind name="entityDH" value="'enterBattleEntity'; enterBattleCollection[0].id"/>
 								<bind name="watchDH" value="'buttonEnabled'; ['enterBattleEntity.enterBattle.evUpdate']; enterBattleEntity.enterBattle.enabled"/>
@@ -56672,13 +56872,16 @@
 						<bind name="watchDH" value="'walletAvailable'; ['resourceEntity.accountResource.evChangedWalletStatus']; resourceEntity.accountResource.walletStatus"/>
 						<bind name="watchDH" value="'splitGold'; ['resourceEntity.accountResource.evUpdateSplitCurrency']; resourceEntity.accountResource.splitGold"/>
 						<bind name="watch" value="'showWGWalletWarning'; (!(isLazyLogin) &amp;&amp; ((isSyncedWithWallet == false) || (walletAvailable == false)))"/>
+						<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
+						<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 						<block>
 							<style>
 								<backgroundColor value="0x01000000"/>
 							</style>
 							<bind name="style" value="'alpha'; showWGWalletWarning ? 0.5 : 1"/>
-							<bind name="action" value="'click';	isLazyLogin	? 'forceCreateAccount'
-														: 'gotoUrlByIdent'; {ident: URL.BUY_GOLD}"/>
+							<bind name="action" value="'click';	isSteamClient == true 	? null :
+											isLazyLogin				? 'forceCreateAccount' : 'gotoUrlByIdent'; {ident: URL.BUY_GOLD}"/>
+							<bind name="request" value="'click'; isSteamClient == true ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME, browserTextureName: 'BrowserRender'}"/>
 							<bind name="tooltip" value="'DockResourcesWidgetTooltip';	isLazyLogin	?	{	_currency: 'gold', _showSplitCurrency: splitGold,
 																					_multiParagraphArray: [{_paragraphText: 'IDS_GOLD_PURCHACE_NOT_AVAILABLE_FOR_LAZY_TOOLTIP'}],
 																					_mouseInstructions: [{_type: 'left', _instructionText: 'IDS_REGISTER_ACCOUNT_MOUSE_INSTRUCTION'}],  _maxWidth: 250 }

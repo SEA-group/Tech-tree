@@ -491,6 +491,7 @@
 				<!-- <ship shipid='3452843728' x='10' y='9' />  PJSD803_False_Isokaze_1917 (T4 Japan unavailable Destroyer) -->
 				<!--日本金币船-->
 				<ship shipid='3764336336' x='12' y='5' /> <!--PJSB506_Mutsu (T6 Japan demoWithoutStats Battleship) -->
+				<ship shipid='3763320528' x='12' y='6' /> <!-- PJSA507_Kaga (T7 Japan special AirCarrier) -->
 
 		</ships>
 		<types>
@@ -691,6 +692,7 @@
 				<ship shipid='4180588496' x='2' y='8' /> <!--PBSC109_Neptune (T9 United_Kingdom demoWithoutStats Cruiser) -->
 				<ship shipid='4179539920' x='2' y='9' /> <!--PBSC110_Minotaur (T10 United_Kingdom demoWithoutStats Cruiser) --> 
 				<ship shipid='3763255248' x='8' y='6' /> <!--PBSC507_Belfast_1959 (T7 United_Kingdom demoWithoutStats Cruiser) -->
+				<ship shipid='3763288016' x='10' y='6' /> <!--PBSB507_Hood (T7 United_Kingdom demoWithoutStats Battleship) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
