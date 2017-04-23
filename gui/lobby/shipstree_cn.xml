@@ -462,6 +462,7 @@
 				<!-- <ship shipid='3416176336' x='16' y='0' />  PJSC838_False_Hashidate_1940 (T1 Japan unavailable Cruiser) -->
 				<ship shipid='3247355600' x='10' y='9' />  <!--PJSC999_Yubari_Special (T10 Japan event Cruiser) -->
 				<ship shipid='4280202960' x='12' y='7' /> <!-- Kitakami_1945 (T8 Japan disabled Cruiser) -->
+				<ship shipid='4280202960' x='12' y='6' /> <!-- PJSA507_Kaga (T7 Japan special AirCarrier) -->
 				<!--科技树驱逐舰-->
 				<ship shipid='4292753104' x='6' y='1' /> <!--PJSD002_Umikaze_1925 (T2 Japan upgradeable Destroyer) -->
 				<ship shipid='4269684432' x='6' y='2' /> <!--PJSD024_Wakatake_1923 (T3 Japan upgradeable Destroyer) -->
@@ -670,6 +671,7 @@
 				<ship shipid='4180588496' x='2' y='8' /> <!--PBSC109_Neptune (T9 United_Kingdom demoWithoutStats Cruiser) -->
 				<ship shipid='4179539920' x='2' y='9' /> <!--PBSC110_Minotaur (T10 United_Kingdom demoWithoutStats Cruiser) --> 
 				<ship shipid='3763255248' x='8' y='6' /> <!--PBSC507_Belfast_1959 (T7 United_Kingdom demoWithoutStats Cruiser) -->
+				<ship shipid='3763288016' x='10' y='6' /> <!--PBSB507_Hood (T7 United_Kingdom demoWithoutStats Battleship) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
