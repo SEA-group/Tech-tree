@@ -132,6 +132,9 @@
 	<css name="$FontAccentSize1">
 		<fontSize value="60"/>
 	</css>
+	<css name="$FontMBTSize">
+		<fontSize value="80"/>
+	</css>			
 	<css name="$LetterSpacingSmall">
 		<letterSpacing value="0.8"/>
 	</css>
@@ -31214,8 +31217,8 @@
 																				], _maxWidth: 300}"/>
 				<style>
 					<position value="absolute"/>
-					<bottom value="4px"/>
-					<left value="4px"/>
+					<top value="2px"/>
+					<right value="4px"/>
 				</style>
 				<bind name="instance" value="'DoubleExperience';(playerShipInfo.expMultiply &gt; 1) ? { expMultiplyPercentsString : subst('%m',[playerShipInfo.expMultiply]) } : null"/>
 			</block>
