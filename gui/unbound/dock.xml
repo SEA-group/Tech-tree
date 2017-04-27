@@ -53875,9 +53875,12 @@
 					</style>
 					<block className="BannerProjectR">
 						<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
-						<bind name="countdown" value="1495112400; 'projectRTimeTillEnd'; 'H'"/>
-						<bind name="countdown" value="1492088400; 'projectRTimeTillStart'; 'H'"/>
-						<bind name="visible" value="(realmConstants.currentRealm == 'NA' || realmConstants.currentRealm == 'RU' || realmConstants.currentRealm == 'EU' || realmConstants.currentRealm == 'ASIA') &amp;&amp; (projectRTimeTillEnd &gt; 0) &amp;&amp; (projectRTimeTillStart == 0)"/>
+						<bind name="serverTime" value="'serverTime'"/>
+						<bind name="watch" value="'projectRTimeTillEnd'; (1495112400 - serverTime)"/>
+						<bind name="watch" value="'projectRTimeTillStart'; (1492088400 - serverTime)"/>
+						<bind name="visible" value="(realmConstants.currentRealm == 'NA' || realmConstants.currentRealm == 'RU' ||
+					realmConstants.currentRealm == 'EU' || realmConstants.currentRealm == 'ASIA')	&amp;&amp; (projectRTimeTillEnd &gt; 0)
+																									&amp;&amp; (projectRTimeTillStart &lt; 0)"/>
 						<bind name="appear" value="'startShow'; 0.15; 0.27; {alpha: 0, top: 0}; {alpha: 0.8, top: 0}"/>
 						<bind name="appear" value="'startHide'; 0.15; 0.27; {alpha: 0.8, top: 0}; {alpha: 0, top: 0}"/>
 						<bind name="tooltip" value="'SimpleTooltip';{tooltipText: 'IDS_FORWARD_TO_WOWS_WEBSITE'}"/>
@@ -54016,9 +54019,12 @@
 	</block>
 	<block className="BannerProjectR">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
-		<bind name="countdown" value="1495112400; 'projectRTimeTillEnd'; 'H'"/>
-		<bind name="countdown" value="1492088400; 'projectRTimeTillStart'; 'H'"/>
-		<bind name="visible" value="(realmConstants.currentRealm == 'NA' || realmConstants.currentRealm == 'RU' || realmConstants.currentRealm == 'EU' || realmConstants.currentRealm == 'ASIA') &amp;&amp; (projectRTimeTillEnd &gt; 0) &amp;&amp; (projectRTimeTillStart == 0)"/>
+		<bind name="serverTime" value="'serverTime'"/>
+		<bind name="watch" value="'projectRTimeTillEnd'; (1495112400 - serverTime)"/>
+		<bind name="watch" value="'projectRTimeTillStart'; (1492088400 - serverTime)"/>
+		<bind name="visible" value="(realmConstants.currentRealm == 'NA' || realmConstants.currentRealm == 'RU' ||
+					realmConstants.currentRealm == 'EU' || realmConstants.currentRealm == 'ASIA')	&amp;&amp; (projectRTimeTillEnd &gt; 0)
+																									&amp;&amp; (projectRTimeTillStart &lt; 0)"/>
 		<bind name="appear" value="'startShow'; 0.15; 0.27; {alpha: 0, top: 0}; {alpha: 0.8, top: 0}"/>
 		<bind name="appear" value="'startHide'; 0.15; 0.27; {alpha: 0.8, top: 0}; {alpha: 0, top: 0}"/>
 		<bind name="tooltip" value="'SimpleTooltip';{tooltipText: 'IDS_FORWARD_TO_WOWS_WEBSITE'}"/>
