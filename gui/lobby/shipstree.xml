@@ -198,6 +198,7 @@
 				<ship shipid='3761190896' x='10' y='8' /> <!--PASB509_Missouri (T9 USA demoWithoutStats Battleship) -->
 				<ship shipid='3552524272' x='12' y='8' /> <!--PASB708_Alabama (T8 USA demoWithoutStats Battleship) -->
 				<ship shipid='3762239472' x='14' y='8' /> <!--PASB508_Alabama (T8 USA demoWithoutStats Battleship) -->
+				<ship shipid='3762173936' x='16' y='8' /> <!--PASD508_Kidd (T8 USA demoWithoutStats Destroyer) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
@@ -742,17 +743,18 @@
 			</arrow>
 		</arrows>
 		<ships>
-				<ship shipid='4179539792' x='4' y='9' /> <!--PFSC110_Henri_IV (T10 France special Battleship) -->
-				<ship shipid='4180588368' x='4' y='8' /> <!--PFSC109_Saint_Louis (T9 France special Battleship) -->
-				<ship shipid='4181636944' x='4' y='7' /> <!--PFSC108_Charles_Martel (T8 France special Battleship) -->
-				<ship shipid='4182685520' x='4' y='6' /> <!--PFSC107_Algerie (T7 France special Battleship) -->
-				<ship shipid='4183734096' x='4' y='5' /> <!--PFSC106_La_Galissonniere (T6 France special Battleship) -->
-				<ship shipid='4184782672' x='4' y='4' /> <!--PFSC105_Emile_Bertin (T5 France special Battleship) -->
-				<ship shipid='4185831248' x='4' y='3' /> <!--PFSC104_Duguay_Trouin (T4 France special Battleship) -->
-				<ship shipid='4186879824' x='4' y='2' /> <!--PFSC103_Friant (T3 France special Battleship) -->
-				<ship shipid='4187928400' x='4' y='1' /> <!--PFSC102_Jurien (T2 France special Battleship) -->
-				<ship shipid='4188976976' x='4' y='0' /> <!--PFSC101_Bougainville (T1 France special Battleship) -->
+				<ship shipid='4179539792' x='4' y='9' /> <!--PFSC110_Henri_IV (T10 France special Cruiser) -->
+				<ship shipid='4180588368' x='4' y='8' /> <!--PFSC109_Saint_Louis (T9 France special Cruiser) -->
+				<ship shipid='4181636944' x='4' y='7' /> <!--PFSC108_Charles_Martel (T8 France special Cruiser) -->
+				<ship shipid='4182685520' x='4' y='6' /> <!--PFSC107_Algerie (T7 France special Cruiser) -->
+				<ship shipid='4183734096' x='4' y='5' /> <!--PFSC106_La_Galissonniere (T6 France special Cruiser) -->
+				<ship shipid='4184782672' x='4' y='4' /> <!--PFSC105_Emile_Bertin (T5 France special Cruiser) -->
+				<ship shipid='4185831248' x='4' y='3' /> <!--PFSC104_Duguay_Trouin (T4 France special Cruiser) -->
+				<ship shipid='4186879824' x='4' y='2' /> <!--PFSC103_Friant (T3 France special Cruiser) -->
+				<ship shipid='4187928400' x='4' y='1' /> <!--PFSC102_Jurien (T2 France special Cruiser) -->
+				<ship shipid='4188976976' x='4' y='0' /> <!--PFSC101_Bougainville (T1 France special Cruiser) -->
 				<ship shipid='3764336464' x='8' y='2' /> <!--PFSB506_Dunkerque_1940 (T6 France special Battleship) -->
+				<ship shipid='3764303696' x='8' y='5' /> <!--PFSC506_De_Grasse (T6 France special Cruiser) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
