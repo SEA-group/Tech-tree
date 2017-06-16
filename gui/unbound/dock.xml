@@ -1871,7 +1871,7 @@
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 		<bind name="watchDH" value="'accountGold';	['resourceEntity.accountResource.evChangedGold'];	resourceEntity.accountResource.gold"/>
 		<bind name="feature" value="'17'; ''"/>
-		<bind name="watch" value="'availableToDisplay'; true"/>		
+		<bind name="watch" value="'availableToDisplay'; true"/>
 		<bind name="action" value="'buttonClick';  availableToDisplay ? 'selectShipUpgrade' : '' ; {shipId : shipId}"/>
 		<style>
 			<width value="1px"/>
@@ -2952,7 +2952,7 @@
 		<bind name="entityDH" value="'userTaskEntity'; userTaskCollection[0].id"/>
 		<bind name="watchDH" value="'currentUserTaskFlag'; ['userTaskEntity.userTask.evFlagChanged']; userTaskEntity.userTask.flag"/>
 		<bind name="action" value="'click'; 'ServerUIDataUSS.setUserTaskExecuted'; { taskId: _userTaskFlag }"/>
-		<bind name="request" value="'click'; 'webBrowser'; {url: _videoUrlId, browserTextureName: 'BrowserRender'}"/>
+		<bind name="request" value="'click'; 'webBrowser'; {url: _videoUrlId}"/>
 		<block className="button_play_video" type="native">
 			<bind name="selected" value="(currentUserTaskFlag &amp; _userTaskFlag) != 0"/>
 		</block>
@@ -3144,43 +3144,44 @@
 		</block>
 	</block>
 	<block className="DockButtonCostMedium">
-		<style>
-			<width value="100%"/>
-		</style>
-		<block className="button_dock" type="native">
+		<bind name="style" value="'alpha'; _enabled ? 1 : 0.4"/>
+		<styleClass value="$MiddleVAligned"/>
+		<styleClass value="$MiddleAligned"/>
+		<block>
 			<style>
-				<width value="100%"/>
-				<height value="30px"/>
+				<marginTop value="4px"/>
 			</style>
-			<bind name="enabled" value="_enabled"/>
-			<bind name="event" value="'buttonClick'; _method ? _method : null"/>
-			<bind name="request" value="'buttonClick'; _request ? _request : null; _request ? _requestParams : null"/>
-			<bind name="action" value="'buttonClick'; _action ? _action : null; _actionParams"/>
+			<block className="button_dock" type="native">
+				<style>
+					<marginBottom value="-8px"/>
+					<marginLeft value="-24px"/>
+					<marginRight value="-24px"/>
+					<marginTop value="-8px"/>
+				</style>
+				<styleClass value="$FullsizeAbsolute"/>
+				<bind name="enabled" value="_enabled"/>
+				<bind name="event" value="'buttonClick'; _method ? _method : null"/>
+				<bind name="request" value="'buttonClick'; _request ? _request : null; _request ? _requestParams : null"/>
+				<bind name="action" value="'buttonClick'; _action ? _action : null; _actionParams"/>
+			</block>
 			<block>
 				<style>
-					<marginTop value="8px"/>
 					<hitTest value="false"/>
 				</style>
-				<styleClass value="$MiddleAligned"/>
-				<bind name="style" value="'alpha'; _enabled ? 1 : 0.4"/>
 				<block type="text">
-					<styleClass value="$TextDefaultBold"/>
-					<styleClass value="$MiddleVAligned"/>
+					<style>
+						<alpha value="0.9"/>
+					</style>
+					<styleClass value="$TextDefaultBoldNM"/>
 					<bind name="text" value="_label"/>
 				</block>
 				<block>
-					<styleClass value="$MiddleVAligned"/>
-					<block>
-						<style>
-							<marginBottom value="1px"/>
-							<marginLeft value="4px"/>
-						</style>
-						<bind name="instance" value="'PriceTag'; {priceInfo: priceInfo}"/>
-					</block>
+					<styleClass value="$MiddleAligned"/>
+					<style>
+						<marginTop value="3px"/>
+					</style>
+					<bind name="instance" value="'PriceTag'; {priceInfo: priceInfo, _showDiscountTag: true}"/>
 				</block>
-				<style>
-					<flow value="horizontal"/>
-				</style>
 			</block>
 		</block>
 	</block>
@@ -14061,7 +14062,7 @@
 							{_systemLogMessageEntityId: $dataRef.ref.id}"/>
 		<bind name="watch" value="'systemLogMessage'; $dataRef.ref.dataComponent.data"/>
 		<bind name="primaryEntityDH" value="'battleResultsEntity'; CC.battleResultsComponent; systemLogMessage.data.arenaUniqueID"/>
-		<bind name="request" value="'click'; systemLogMessage.extendedData.game_data.battle_mode_id == 6 || systemLogMessage.extendedData.game_data.battle_mode_id == 7 ? 'pveBattlesShowStats' : null; {common: systemLogMessage.extendedData.game_data, 'private': battleResultsEntity.dataComponent.data.privateData}"/>
+		<bind name="request" value="'click'; systemLogMessage.extendedData.game_data.battle_mode_id == 6 || systemLogMessage.extendedData.game_data.battle_mode_id == 7 ? 'pveBattlesShowStats' : null; {common: battleResultsEntity.dataComponent.data.common, 'private': battleResultsEntity.dataComponent.data.privateData}"/>
 	</block>
 	<block className="SystemLogNotificationShortElement">
 		<style>
@@ -14076,7 +14077,7 @@
 							{_systemLogMessageEntityId: $dataRef.ref.id}"/>
 		<bind name="watch" value="'systemLogMessage'; $dataRef.ref.dataComponent.data"/>
 		<bind name="primaryEntityDH" value="'battleResultsEntity'; CC.battleResultsComponent; systemLogMessage.data.arenaUniqueID"/>
-		<bind name="request" value="'click'; systemLogMessage.extendedData.game_data.battle_mode_id == 6 || systemLogMessage.extendedData.game_data.battle_mode_id == 7 ? 'pveBattlesShowStats' : null; {common: systemLogMessage.extendedData.game_data, 'private': battleResultsEntity.dataComponent.data.privateData}"/>
+		<bind name="request" value="'click'; systemLogMessage.extendedData.game_data.battle_mode_id == 6 || systemLogMessage.extendedData.game_data.battle_mode_id == 7 ? 'pveBattlesShowStats' : null; {common: battleResultsEntity.dataComponent.data.common, 'private': battleResultsEntity.dataComponent.data.privateData}"/>
 	</block>
 	<css name="$BattleResultNotificationMargins">
 		<marginLeft value="2px"/>
@@ -24517,7 +24518,7 @@
 		</block>
 		<block>
 			<bind name="visible" value="realmConstants.premshopUIAvailable"/>
-			<bind name="request" value="'click'; 'webBrowser'; {url: URL.SHOP_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+			<bind name="request" value="'click'; 'webBrowser'; {url: URL.SHOP_IN_GAME}"/>
 			<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_PREMSHOP', tooltipSubText: 'IDS_TOOLTIP_PREMSHOP'}"/>
 			<block>
 				<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_PREMSHOP')), _icon: 'premshop', _external: false }"/>
@@ -24528,14 +24529,14 @@
 			<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 			<bind name="name" value="'buttonBuyGold'"/>
 			<bind name="action" value="'click'; isSteamClient == true ? null : 'gotoUrlByIdent'; {ident: URL.BUY_GOLD}"/>
-			<bind name="request" value="'click'; isSteamClient == true ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+			<bind name="request" value="'click'; isSteamClient == true ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME}"/>
 			<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_BUY_GOLD_LC', tooltipSubText: 'IDS_HINT_REDIRECT_TO_STORE'}"/>
 			<bind name="instance" value="'AccountInfotipItem'; { _text: 'IDS_BUY_GOLD', _icon: 'buy_gold', _external: !(isSteamClient)}"/>
 		</block>
 		<block>
 			<bind name="visible" value="accountLevelInfo.accountLevel &gt;= 3"/>
 			<bind name="name" value="'buttonPlaytogether'"/>
-			<bind name="request" value="'click'; 'webBrowser'; {url: URL.PLAYTOGETHER_WEBSITE, browserTextureName: 'BrowserRender'}"/>
+			<bind name="request" value="'click'; 'webBrowser'; {url: URL.PLAYTOGETHER_WEBSITE}"/>
 			<bind name="collectionDH" value="CC.userTask; 'userTaskCollection'"/>
 			<bind name="entityDH" value="'userTaskEntity'; userTaskCollection[0].id"/>
 			<bind name="watchDH" value="'currentUserTaskFlag'; ['userTaskEntity.userTask.evFlagChanged']; userTaskEntity.userTask.flag"/>
@@ -24560,7 +24561,7 @@
 			<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
 			<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
 			<bind name="visible" value="!(selfPlayerEntity.clanman)"/>
-			<bind name="request" value="'click'; 'clanWebBrowser'; {}"/>
+			<bind name="request" value="'click'; 'webBrowser'; {url: 'clansInGame'}"/>
 			<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_CLANS', tooltipSubText: 'IDS_HINT_CLANS'}"/>
 			<block>
 				<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_CLANS')), _icon: 'clans', _external: false }"/>
@@ -24570,7 +24571,7 @@
 			<bind name="feature" value="23; 'rollOver'"/>
 			<bind name="visible" value="feature_23 != 'locked'"/>
 			<bind name="name" value="'buttonWarehouse'"/>
-			<bind name="request" value="'click'; 'webBrowser'; {url: URL.WAREHOUSE_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+			<bind name="request" value="'click'; 'webBrowser'; {url: URL.WAREHOUSE_IN_GAME}"/>
 			<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_WAREHOUSE', tooltipSubText: 'IDS_HINT_WAREHOUSE'}"/>
 			<block>
 				<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_WAREHOUSE')), _icon: 'warehouse', _external: false }"/>
@@ -24926,7 +24927,7 @@
 						</block>
 						<block>
 							<bind name="visible" value="realmConstants.premshopUIAvailable"/>
-							<bind name="request" value="'click'; 'webBrowser'; {url: URL.SHOP_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+							<bind name="request" value="'click'; 'webBrowser'; {url: URL.SHOP_IN_GAME}"/>
 							<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_PREMSHOP', tooltipSubText: 'IDS_TOOLTIP_PREMSHOP'}"/>
 							<block>
 								<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_PREMSHOP')), _icon: 'premshop', _external: false }"/>
@@ -24937,14 +24938,14 @@
 							<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 							<bind name="name" value="'buttonBuyGold'"/>
 							<bind name="action" value="'click'; isSteamClient == true ? null : 'gotoUrlByIdent'; {ident: URL.BUY_GOLD}"/>
-							<bind name="request" value="'click'; isSteamClient == true ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+							<bind name="request" value="'click'; isSteamClient == true ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME}"/>
 							<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_BUY_GOLD_LC', tooltipSubText: 'IDS_HINT_REDIRECT_TO_STORE'}"/>
 							<bind name="instance" value="'AccountInfotipItem'; { _text: 'IDS_BUY_GOLD', _icon: 'buy_gold', _external: !(isSteamClient)}"/>
 						</block>
 						<block>
 							<bind name="visible" value="accountLevelInfo.accountLevel &gt;= 3"/>
 							<bind name="name" value="'buttonPlaytogether'"/>
-							<bind name="request" value="'click'; 'webBrowser'; {url: URL.PLAYTOGETHER_WEBSITE, browserTextureName: 'BrowserRender'}"/>
+							<bind name="request" value="'click'; 'webBrowser'; {url: URL.PLAYTOGETHER_WEBSITE}"/>
 							<bind name="collectionDH" value="CC.userTask; 'userTaskCollection'"/>
 							<bind name="entityDH" value="'userTaskEntity'; userTaskCollection[0].id"/>
 							<bind name="watchDH" value="'currentUserTaskFlag'; ['userTaskEntity.userTask.evFlagChanged']; userTaskEntity.userTask.flag"/>
@@ -24969,7 +24970,7 @@
 							<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
 							<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
 							<bind name="visible" value="!(selfPlayerEntity.clanman)"/>
-							<bind name="request" value="'click'; 'clanWebBrowser'; {}"/>
+							<bind name="request" value="'click'; 'webBrowser'; {url: 'clansInGame'}"/>
 							<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_CLANS', tooltipSubText: 'IDS_HINT_CLANS'}"/>
 							<block>
 								<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_CLANS')), _icon: 'clans', _external: false }"/>
@@ -24979,7 +24980,7 @@
 							<bind name="feature" value="23; 'rollOver'"/>
 							<bind name="visible" value="feature_23 != 'locked'"/>
 							<bind name="name" value="'buttonWarehouse'"/>
-							<bind name="request" value="'click'; 'webBrowser'; {url: URL.WAREHOUSE_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+							<bind name="request" value="'click'; 'webBrowser'; {url: URL.WAREHOUSE_IN_GAME}"/>
 							<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_WAREHOUSE', tooltipSubText: 'IDS_HINT_WAREHOUSE'}"/>
 							<block>
 								<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_WAREHOUSE')), _icon: 'warehouse', _external: false }"/>
@@ -28677,79 +28678,8 @@
 	</block>
 	<block className="ClanInset">
 		<styleClass value="$Fullsize"/>
-		<block className="BlurMap">
-			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
-			<style>
-				<position value="absolute"/>
-				<width value="100%"/>
-				<height value="100%"/>
-				<hitTest value="false"/>
-			</style>
-			<bind name="visible" value="optionData.blurEnabled"/>
-			<block className="mc_blurmap5" type="native">
-				<bind name="appear" value="'startShow'; 0.3; 0; {alpha: 0}; {alpha: 1}"/>
-				<bind name="appear" value="'startHide'; 0.15; 0; {alpha: 1}; {alpha: 0}"/>
-				<style>
-					<width value="100%"/>
-					<height value="100%"/>
-				</style>
-				<bind name="blurMap" value="0"/>
-			</block>
-		</block>
-		<block className="modal_panel" type="native">
-			<styleClass value="$FullsizeAbsolute"/>
-		</block>
-		<bind name="action" value="'addedToStage'; 'initBrowser'; { browserTextureName: 'BrowserRender1' }"/>
-		<block>
-			<styleClass value="$Fullsize"/>
-			<bind name="var" value="{ browserInit: false }"/>
-			<bind name="catch" value="'browser.onInitializationComplete'; { browserInit: true }"/>
-			<bind name="var" value="{loadFailed: false}"/>
-			<bind name="catch" value="'browser.onLoadFailed'; {loadFailed: true}"/>
-			<bind name="catch" value="'browser.onLoadEnd'; {firstRequestedPageLoaded: true}"/>
-			<block className="indicator_busy_1" type="native">
-				<bind name="appear" value="'startShow'; 0.15; 0.15; {alpha: 0, top: 5}; {alpha: 1, top: 0}"/>
-				<bind name="transition" value="firstRequestedPageLoaded; 0.15; {alpha: 1, top: 0}; {alpha: 0, top: 0}"/>
-				<style>
-					<position value="absolute"/>
-					<hitTest value="false"/>
-				</style>
-				<styleClass value="$MiddleAligned"/>
-				<styleClass value="$MiddleVAligned"/>
-			</block>
-			<bind name="controller" value="lesta.unbound.controls.UbWebBrowserController; 'BrowserRender1'"/>
-			<bind name="event" value="'browser.onInitializationComplete'; navigate; URL.CLANS_IN_GAME"/>
-			<bind name="var" value="{ browserTextureName: 'BrowserRender1' }"/>
-			<block className="BrowserRender">
-				<bind name="visible" value="!(loadFailed)"/>
-				<styleClass value="$Fullsize"/>
-				<params>
-					<param name="name" value="browser_target"/>
-				</params>
-				<block className="lesta.controls.BitmapEx" type="native">
-					<styleClass value="$Fullsize"/>
-					<bind name="event" value="'browser.onInitializationComplete'; registerMouseHandlers; 'browser_target'"/>
-					<bind name="event" value="'browser.onInitializationComplete'; resizeBrowser; 'browser_target'"/>
-					<bind name="event" value="'resize'; resizeBrowser; 'browser_target' "/>
-					<bind name="bitmapDataClassName" value="firstRequestedPageLoaded ? browserTextureName : null"/>
-				</block>
-			</block>
-		</block>
-		<block className="BrowserLoadFailed">
-			<bind name="visible" value="loadFailed"/>
-			<styleClass value="$FullsizeAbsolute"/>
-			<block type="text">
-				<bind name="transition" value="loadFailed; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
-				<styleClass value="$MiddleAligned"/>
-				<styleClass value="$TextAccentBold"/>
-				<bind name="class" value="'$FontColorUnready'"/>
-				<style>
-					<top value="33%"/>
-					<hitTest value="false"/>
-				</style>
-				<bind name="text" value="toUpperCase(tr('IDS_SERVICE_IS_UNAVAILABLE_WEB'))"/>
-			</block>
-		</block>
+		<bind name="action" value="'addedToStage'; 'openClansWindow'; {'url': URL.CLANS_IN_GAME}"/>
+		<bind name="action" value="'removedFromStage'; 'closeClansWindow'; {}"/>
 	</block>
 	<block className="InteractiveNotifications">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'shipOverview'"/>
@@ -29039,7 +28969,7 @@
 													: toUpperCase(tr('IDS_ACCEPT'))"/>
 					<bind name="dispatch" value="'mouseDown'; 'dragDisabledDown'"/>
 					<bind name="dispatch" value="'buttonClick'; 'clickAcceptButton'"/>
-					<bind name="action" value="'click'; data.idInGroup == 3 ? 'goToClanInvites' : null; {ident: URL.CLAN_INVITES, url: data.url}"/>
+					<bind name="action" value="'click'; data.idInGroup == 3 ? 'goToClanInvites' : null; {url: URL.CLAN_INVITES, redirect_to: data.url}"/>
 					<bind name="action" value="'buttonClick'; data.actionName; data.callbackData[0]"/>
 				</block>
 			</block>
@@ -30660,7 +30590,7 @@
 		<bind name="watchDH" value="'playerShipInfo'; ['shipEntity.ownShip.evUpdate', 'shipEntity.ownShip.evCrewChanged']; shipEntity.ownShip"/>
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
-		<bind name="watchDH" value="'accountGold'; ['resourceEntity.accountResource.evChangedGold']; resourceEntity.accountResource.gold"/>
+		<bind name="watchDH" value="'accountResource';	['resourceEntity.accountResource.evChangedGold','resourceEntity.accountResource.evChangedCredit'];	resourceEntity.accountResource"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'pricesAll'; PriceInfoSet.OP_BUY + 'CANCEL_BATTLE_LOCK_COOLDOWN_Cost'; 'pveCooldownCost'"/>
 		<bind name="firstEntityDH" value="'enterBattleEntity'; CC.enterBattle"/>
 		<bind name="watchDH" value="'selectedBattle'; ['enterBattleEntity.enterBattle.evBattleTypesUpdated']; enterBattleEntity.enterBattle.selectedBattle"/>
@@ -30668,7 +30598,7 @@
 		<bind name="primaryEntityDH" value="'shipFreezeListEntity'; CC.freezeList; freezeListPath"/>
 		<bind name="watchDH" value="'freezeListArr'; ['shipFreezeListEntity.freezeList.evUpdate']; shipFreezeListEntity.freezeList.items"/>
 		<bind name="watch" value="'isShipFrozen'; (shipFreezeListEntity ? true : false)"/>
-		<bind name="watch" value="'freezeDeficit'; (pveCooldownCost.prices[0].finalPrice - accountGold)"/>
+		<bind name="watch" value="'freezeDeficit'; pveCooldownCost.prices[0].finalPrice - accountResource[pveCooldownCost.prices[0].currency]"/>
 		<block className="thumb_hl_red" type="native">
 			<styleClass value="$FullsizeAbsolute"/>
 			<style>
@@ -30862,8 +30792,8 @@
 			<style>
 				<hitTest value="false"/>
 			</style>
-			<bind name="instance" value="'CarouselNaturalIndicator';  isFreezeDeficit						? { _costGold: pveCooldownCost.prices[0].finalPrice, _goldDeficit: freezeDeficit, _label: 'IDS_PVE_FREEZE_COST'} :
-													 (isRepairDeficit &amp;&amp; !(isShipFrozen))	? { _costCR: playerShipInfo.costTotal, _creditsDeficit: playerShipInfo.creditsDeficit, _label: 'IDS_SERVICE_COST'}
+			<bind name="instance" value="'CarouselNaturalIndicator';  isFreezeDeficit						? { _priceInfo: pveCooldownCost.prices[0], _label: 'IDS_PVE_FREEZE_COST', _deficit: freezeDeficit} :
+													 (isRepairDeficit &amp;&amp; !(isShipFrozen))	? { _priceInfo: {finalPrice: playerShipInfo.costTotal, currency: 'credits'}, _label: 'IDS_SERVICE_COST', _deficit: playerShipInfo.creditsDeficit}
 																							: null"/>
 		</block>
 		<block>
@@ -30883,7 +30813,7 @@
 		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
-		<bind name="watchDH" value="'accountGold'; ['resourceEntity.accountResource.evChangedGold']; resourceEntity.accountResource.gold"/>
+		<bind name="watchDH" value="'accountResource';	['resourceEntity.accountResource.evChangedGold','resourceEntity.accountResource.evChangedCredit'];	resourceEntity.accountResource"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'pricesAll'; PriceInfoSet.OP_BUY + 'CANCEL_BATTLE_LOCK_COOLDOWN_Cost'; 'pveCooldownCost'"/>
 		<bind name="firstEntityDH" value="'enterBattleEntity'; CC.enterBattle"/>
 		<bind name="watchDH" value="'selectedBattle'; ['enterBattleEntity.enterBattle.evBattleTypesUpdated']; enterBattleEntity.enterBattle.selectedBattle"/>
@@ -30891,7 +30821,7 @@
 		<bind name="primaryEntityDH" value="'shipFreezeListEntity'; CC.freezeList; freezeListPath"/>
 		<bind name="watchDH" value="'freezeListArr'; ['shipFreezeListEntity.freezeList.evUpdate']; shipFreezeListEntity.freezeList.items"/>
 		<bind name="watch" value="'isShipFrozen'; (shipFreezeListEntity ? true : false)"/>
-		<bind name="watch" value="'freezeDeficit'; (pveCooldownCost.prices[0].finalPrice - accountGold)"/>
+		<bind name="watch" value="'freezeDeficit'; pveCooldownCost.prices[0].finalPrice - accountResource[pveCooldownCost.prices[0].currency]"/>
 		<style>
 			<width value="204px"/>
 			<height value="56px"/>
@@ -31090,8 +31020,8 @@
 			<style>
 				<hitTest value="false"/>
 			</style>
-			<bind name="instance" value="'CarouselNaturalIndicator';  isFreezeDeficit						? { _costGold: pveCooldownCost.prices[0].finalPrice, _goldDeficit: freezeDeficit, _label: 'IDS_PVE_FREEZE_COST'} :
-													 (isRepairDeficit &amp;&amp; !(isShipFrozen))	? { _costCR: playerShipInfo.costTotal, _creditsDeficit: playerShipInfo.creditsDeficit, _label: 'IDS_SERVICE_COST'}
+			<bind name="instance" value="'CarouselNaturalIndicator';  isFreezeDeficit						? { _priceInfo: pveCooldownCost.prices[0], _label: 'IDS_PVE_FREEZE_COST', _deficit: freezeDeficit} :
+													 (isRepairDeficit &amp;&amp; !(isShipFrozen))	? { _priceInfo: {finalPrice: playerShipInfo.costTotal, currency: 'credits'}, _label: 'IDS_SERVICE_COST', _deficit: playerShipInfo.creditsDeficit}
 																							: null"/>
 		</block>
 	</block>
@@ -31226,8 +31156,7 @@
 				<bind name="text" value="_label"/>
 			</block>
 			<block>
-				<bind name="instance" value="'CostGoldNano';	_costGold	? { _class: '$TextSecondary', _costGold:	_costGold}	: null"/>
-				<bind name="instance" value="'CostCRNano';	_costCR		? { _class: '$TextSecondary', _costCR:		_costCR }	: null"/>
+				<bind name="instance" value="'PriceTag'; { priceInfo: _priceInfo, _showDiscountTag: true, _small: true}"/>
 			</block>
 			<style>
 				<flow value="horizontal"/>
@@ -31235,11 +31164,11 @@
 		</block>
 		<block>
 			<style>
-				<marginTop value="-7px"/>
+				<marginTop value="-4px"/>
 			</style>
 			<styleClass value="$MiddleAligned"/>
-			<bind name="instance" value="'GoldDeficitNano';	_goldDeficit	? { _goldDeficit: _goldDeficit } : null"/>
-			<bind name="instance" value="'CRDeficitNano';	_creditsDeficit	? { _creditsDeficit: _creditsDeficit } : null"/>
+			<bind name="instance" value="'GoldDeficitNano';	(_priceInfo.currency == 'gold')		?	{ _goldDeficit: _deficit } : null"/>
+			<bind name="instance" value="'CRDeficitNano';	(_priceInfo.currency == 'credits')	?	{ _creditsDeficit: _deficit } : null"/>
 		</block>
 	</block>
 	<block className="CarouselFiltersContentInfotip">
@@ -36986,7 +36915,7 @@
 				<width value="100%"/>
 				<height value="100%"/>
 			</style>
-			<bind name="request" value="'click'; 'webBrowser'; {url: 'guideFeature_' + (_level + 1) + '_InGame', browserTextureName: 'BrowserRender'}"/>
+			<bind name="request" value="'click'; 'webBrowser'; {url: 'guideFeature_' + (_level + 1) + '_InGame'}"/>
 			<block>
 				<style>
 					<alpha value="0.9"/>
@@ -39771,14 +39700,23 @@
 		<bind name="watch" value="'collectionID'; _collectionID ? _collectionID : albumCollection[0].id"/>
 		<bind name="catch" value="'selectedAlbumChanged'"/>
 		<styleClass value="$Fullsize"/>
+		<style>
+			<flow value="horizontal"/>
+		</style>
+		<block>
+			<style>
+				<width value="190px"/>
+				<height value="100%"/>
+			</style>
+		</block>
 		<block>
 			<style>
 				<width value="100%"/>
 			</style>
 			<block>
+				<styleClass value="$MiddleAligned"/>
 				<style>
-					<marginLeft value="1280:220,1920:300aw"/>
-					<marginTop value="1280:40,1920:70aw"/>
+					<marginTop value="720:40,1080:70ah"/>
 				</style>
 				<bind name="instance" value="'CollectionCarousel'; { _selectedAlbumID: id, _cards: cards }"/>
 			</block>
@@ -40025,14 +39963,16 @@
 		</block>
 		<block>
 			<style>
-				<marginTop value="1280:12,1920:20aw"/>
-				<marginBottom value="1280:12,1920:20aw"/>
+				<marginTop value="720:12,1080:20ah"/>
+				<marginBottom value="720:12,1080:20ah"/>
 				<marginLeft value="1280:12,1920:20aw"/>
 				<marginRight value="1280:12,1920:20aw"/>
 			</style>
 			<bind name="stageSize"/>
-			<bind name="watch" value="'objectWidth'; (stageWidth &lt;= 1366) ? '80px' : (stageWidth &lt;= 1600) ? '95px' : '120px'"/>
-			<bind name="watch" value="'objectHeight'; (stageWidth &lt;= 1366) ? '80px' : (stageWidth &lt;= 1600) ? '95px' : '120px'"/>
+			<bind name="watch" value="'objectWidth'; (stageWidth &lt;= 1366) || (stageHeight &lt;= 768)	? '80px' :
+									(stageWidth &lt;= 1600) || (stageHeight &lt;= 900)	? '95px' 
+																					: '120px'"/>
+			<bind name="watch" value="'objectHeight'; objectWidth"/>
 			<block>
 				<bind name="tooltip" value="'ObjectItemTooltip'; { _objID: $value }"/>
 				<bind name="action" value="'rollOver'; isPasted ? 'CollectionProxy.makeCardSeen' : null; { cardID: $value }"/>
@@ -40279,7 +40219,7 @@
 		<bind name="watchDH" value="'duplicates';		['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.duplicates"/>
 		<bind name="watchDH" value="'isFull';			['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.isFull"/>
 		<style>
-			<marginTop value="1280:2,1920:12aw"/>
+			<marginTop value="720:2,1080:12ah"/>
 		</style>
 		<bind name="watch" value="'collectionNameQuotes'; (tr('IDS_' +  toUpperCase(name) + '_QUOTES'))"/>
 		<block type="text">
@@ -40295,9 +40235,9 @@
 			<bind name="stageSize"/>
 			<styleClass value="$DefaultScrollBar"/>
 			<style>
-				<height value="1280:240,1920:360aw"/>
+				<height value="720:240,1080:360ah"/>
 				<width value="1280:300,1920:340aw"/>
-				<marginTop value="1280:2,1920:12aw"/>
+				<marginTop value="720:2,1080:12ah"/>
 				<overflow value="scroll"/>
 			</style>
 			<block type="text">
@@ -40309,14 +40249,14 @@
 		<block>
 			<style>
 				<width value="100%"/>
-				<marginTop value="1280:2,1920:12aw"/>
+				<marginTop value="720:2,1080:12ah"/>
 			</style>
 			<bind name="instance" value="'CollectionProgressBar'; { _collectionID: _collectionID }"/>
 		</block>
 		<block>
 			<bind name="visible" value="isFull == false"/>
 			<style>
-				<marginTop value="1280:2,1920:12aw"/>
+				<marginTop value="720:2,1080:12ah"/>
 			</style>
 			<bind name="tooltip" value="'SimpleTooltip'; {tooltipText: 'IDS_DUPLICATE_INFO'}"/>
 			<block type="text">
@@ -48307,7 +48247,7 @@
 					<bind name="text" value="'IDS_PROFILE'"/>
 				</block>
 			</block>
-			<bind name="request" value="'click'; 'showPlayerStat'; { playerId: accountDbId + '' }"/>
+			<bind name="request" value="'click'; 'webBrowser'; { playerId: accountDbId + '',  url: 'playerStats' }"/>
 		</block>
 	</block>
 	<block className="VoiceChatContextMenuItem">
@@ -51080,6 +51020,9 @@
 			</block>
 		</block>
 		<block>
+			<bind name="var" value="{paddingTop: $root.paddingTop}"/>
+			<bind name="var" value="{hideHeader: $root.hideHeader}"/>
+			<bind name="style" value="'paddingTop'; paddingTop"/>
 			<bind name="appear" value="'startShow'; 0.15; 0.3; {alpha: 0}; {alpha: 1}"/>
 			<bind name="appear" value="'startHide'; 0.15; 0.3; {alpha: 1}; {alpha: 0}"/>
 			<style>
@@ -51089,6 +51032,7 @@
 			<styleClass value="$MiddleAligned"/>
 			<styleClass value="$MiddleVAligned"/>
 			<block>
+				<bind name="visible" value="!hideHeader"/>
 				<bind name="appear" value="'startShow'; 0.15; 0.15; {alpha: 0, top: 5}; {alpha: 1, top: 0}"/>
 				<bind name="appear" value="'startHide'; 0.15; 0; {alpha: 1, top: 0}; {alpha: 0, top: -10}"/>
 				<style>
@@ -54967,7 +54911,7 @@
 								<bind name="style" value="'alpha'; showWGWalletWarning ? 0.5 : 1"/>
 								<bind name="action" value="'click';	isSteamClient == true 	? null :
 												isLazyLogin				? 'forceCreateAccount' : 'gotoUrlByIdent'; {ident: URL.BUY_GOLD}"/>
-								<bind name="request" value="'click'; isSteamClient == true ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME, browserTextureName: 'BrowserRender'}"/>
+								<bind name="request" value="'click'; isSteamClient == true ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME}"/>
 								<bind name="tooltip" value="'DockResourcesWidgetTooltip';	isLazyLogin	?	{	_currency: 'gold', _showSplitCurrency: splitGold,
 																						_multiParagraphArray: [{_paragraphText: 'IDS_GOLD_PURCHACE_NOT_AVAILABLE_FOR_LAZY_TOOLTIP'}],
 																						_mouseInstructions: [{_type: 'left', _instructionText: 'IDS_REGISTER_ACCOUNT_MOUSE_INSTRUCTION'}],  _maxWidth: 250 }
