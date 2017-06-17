@@ -451,61 +451,72 @@
 			</arrow>
 		</arrows>
 		<ships>
-				<ship shipid='4188976592' x='2' y='0' /> <!--PRSC101 PRSC101_Orlan (T1 Russia start Cruiser) -->
-
-				<!--<ship shipid='4187895248' x='4' y='1' /> PRSD102_SM_Storojevoy (T2 Russia upgradeable Destroyer) -->
-				<ship shipid='4187928016' x='2' y='1' /> <!--PRSC102_Novik (T2 Russia event Cruiser -->
-				<ship shipid='4187895248' x='4' y='1' /> <!--PRSD102_SM_Storojevoy (T2 Russia upgradeable Destroyer) -->
-				<ship shipid='4292785616' x='8' y='1' /> <!--PRSC002_Diana_1905 (T2 Russia special Cruiser) -->
-				<ship shipid='4284397008' x='10' y='1' /> <!--PRSC010_Diana_1905_Asus (T2 Russia special Cruiser) -->
-
-				<!--<ship shipid='4186846672' x='4' y='2' /> PRSD103_Derzky (T3 Russia upgradeable Destroyer) -->
-				<ship shipid='4186879440' x='2' y='2' /> <!--PRSC103_Bogatyr (T3 Russia event Cruiser) -->
-				<ship shipid='4186846672' x='4' y='2' /> <!--PRSD103_Derzky (T3 Russia upgradeable Destroyer) -->
-				<ship shipid='4293834192' x='8' y='2' /> <!--PRSC001_Avrora_1917 (T3 Russia premium Cruiser) -->
-				<ship shipid='3767449040' x='10' y='2' /> <!--PRSC503_Oleg (T3 Russia demoWithoutStats Cruiser) -->
-
-				<!--<ship shipid='4185798096' x='4' y='3' /> PRSD104_Izyaslav (T4 Russia upgradeable Destroyer) -->
-				<ship shipid='4185830864' x='2' y='3' /> <!--PRSC104_Svetlana (T4 Russia event Cruiser) -->
-				<ship shipid='4185798096' x='4' y='3' /> <!--PRSD104_Izyaslav (T4 Russia upgradeable Destroyer) -->
-				<ship shipid='4293866960' x='8' y='3' /> <!--PRSB001_Nikolay_I (T4 Russia special Battleship) -->
-
-				<!--<ship shipid='4184749520' x='4' y='4' /> PRSD105_Pr_7_Gnevny (T5 Russia upgradeable Destroyer) -->
-				<ship shipid='4184782288' x='2' y='4' /> <!--PRSC105_Kirov (T5 Russia event Cruiser) -->
-				<ship shipid='4079891920' x='4' y='4' /> <!--PRSD205_Podvoisky_pr_1929 (T5 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='4291737040' x='8' y='4' /> <!--PRSC003_Murmansk_1944 (T5 Russia premium Cruiser) -->
-				<ship shipid='4293801424' x='10' y='4' /> <!--PRSD001_Gremyashchy_1942 (T5 Russia special Destroyer) -->
-				<!--<ship shipid='3765351888' x='10' y='4' /> PRSC505_Profintern (T5 Russia disabled Cruiser) -->
-				<ship shipid='3765351888' x='12' y='4' /> <!--PRSC505_KrasniKrym (T5 Russia demoWithoutStats Cruiser) -->
-				<ship shipid='3765319120' x='14' y='4' /> <!--PRSD505_Okhotnik_1917 (T5 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='3765384656' x='16' y='4' /> <!--PRSB505_Oktyabrskaya_Revolutsiya (T5 Russia demoWithoutStats Battleship) -->
-
-				<!--<ship shipid='4183700944' x='4' y='5' /> PRSD106_Pr_30_Ognevoy (T6 Russia upgradeable Destroyer) -->
-				<ship shipid='4183733712' x='2' y='5' /> <!--PRSC106_Pr_94_Budeny (T6 Russia event Cruiser) -->
-				<ship shipid='4078843344' x='4' y='5' /> <!--PRSD206_Pr_7 (T6 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='3764303312' x='8' y='5' /> <!--PRSC506_Molotov_1943 (T6 Russia event Cruiser) -->
-				<ship shipid='3659445712' x='10' y='5' /> <!--PRSC606_Admiral_Makarov (T6 Russia event Cruiser) -->
-
-				<!--<ship shipid='4180555216' x='4' y='6' /> PRSD109_Pr_48_Kiev (T7 Russia upgradeable Destroyer) -->
-				<ship shipid='4182685136' x='2' y='6' /> <!--PRSC107_Schors (T7 Russia event Cruiser) -->
-				<ship shipid='4077794768' x='4' y='6' /> <!--PRSD207_Minsk (T7 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='3763221968' x='8' y='6' /> <!--PRSD507_Leningrad_1944 (T7 Russia demoWithoutStats Destroyer) -->
-
-				<!--<ship shipid='4181603792' x='4' y='7' /> PRSD108_Pr_20i_Tashkent (T8 Russia upgradeable Destroyer) -->
-				<ship shipid='4181636560' x='2' y='7' /> <!--PRSC108_Pr_68_Chapaev (T8 Russia event Cruiser) -->
-				<ship shipid='3971888592' x='4' y='7' /> <!--PRSD308_Pr_48 (T8 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='4076746192' x='6' y='7' /> <!--PRSD208_Pr_30 (T8 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='3762206160' x='8' y='7' /> <!--PRSC508_Kutuzov_1952 (T8 Russia special Cruiser) -->
-
-				<!--<ship shipid='4182652368' x='4' y='8' /> PRSD107_Pr_35_Udaloy (T9 Russia upgradeable Destroyer) -->
-				<ship shipid='4180587984' x='2' y='8' /> <!--PRSC109_Dmitry_Donskoy (T9 Russia event Cruiser) -->
-				<ship shipid='3865982416' x='4' y='8' /> <!--PRSD409_Pr_20i_Tashkent (T9 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='4182652368' x='6' y='8' /> <!--PRSD107_Pr_35_Udaloy (T9 Russia demoWithoutStats Destroyer) -->
-
-				<!--<ship shipid='4179506640' x='4' y='9' /> PRSD110_Pr_24_Khabarovsk (T10 Russia upgradeable Destroyer) -->
-				<ship shipid='4179539408' x='2' y='9' /> <!--PPRSC110_Pr_66_Moskva (T10 Russia event Cruiser) --> 
-				<ship shipid='4179506640' x='4' y='9' /> <!--PRSD110_Pr_24_Khabarovsk (T10 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='4074649040' x='6' y='9' /> <!--PRSD210_Grozovoy_pr_40N (T10 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4256085712' x='4' y='0' /> <!--PJSC037_Hashidate_1940 (T1 Japan start Cruiser) -->
+				<ship shipid='4258182864' x='4' y='1' /> <!--PJSC035_Chikuma_1912 (T2 Japan upgradeable Cruiser) -->
+				<ship shipid='4259231440' x='4' y='9' /> <!--PJSC034_Zao_1944 (T10 Japan upgradeable Cruiser) -->
+				<ship shipid='4272895696' x='2' y='8' /> <!--PJSB021_Izumo_1938 (T9 Japan upgradeable Battleship) -->
+				<ship shipid='4276041424' x='2' y='9' /> <!--PJSB018_Yamato_1944 (T10 Japan upgradeable Battleship) -->
+				<ship shipid='4277122768' x='0' y='9' /> <!--PJSA017_Hakuryu_1942 (T10 Japan upgradeable AirCarrier) -->
+				<ship shipid='4279154384' x='4' y='2' /> <!--PJSC015_Tatsuta_1919 (T3 Japan upgradeable Cruiser) -->
+				<ship shipid='4279219920' x='0' y='8' /> <!--PJSA015_Taiho_1944 (T9 Japan upgradeable AirCarrier) -->
+				<ship shipid='4281251536' x='4' y='3' /> <!--PJSC013_Kuma_1938 (T4 Japan upgradeable Cruiser) -->
+				<ship shipid='4281284304' x='2' y='7' /> <!--PJSB013_Amagi_1942 (T8 Japan upgradeable Battleship) -->
+				<ship shipid='4282300112' x='4' y='8' /> <!--PJSC012_Ibuki_1944 (T9 Japan upgradeable Cruiser) -->
+				<ship shipid='4282365648' x='0' y='7' /> <!--PJSA012_Zuikaku_1944 (T8 Japan upgradeable AirCarrier) -->
+				<ship shipid='4283414224' x='0' y='6' /> <!--PJSA011_Hiryu_1942 (T7 Japan upgradeable AirCarrier) -->
+				<ship shipid='4284430032' x='2' y='6' /> <!--PJSB010_Nagato_1944 (T7 Japan upgradeable Battleship) -->
+				<ship shipid='4285445840' x='4' y='7' /> <!--PJSC009_Mogami_1935 (T8 Japan upgradeable Cruiser) -->
+				<ship shipid='4285511376' x='0' y='5' /> <!--PJSA009_Ryujo_1933 (T6 Japan upgradeable AirCarrier) -->
+				<ship shipid='4286494416' x='4' y='6' /> <!--PJSC008_Myoko_1945 (T7 Japan upgradeable Cruiser) -->
+				<ship shipid='4287542992' x='4' y='5' /> <!--PJSC007_Aoba_1943 (T6 Japan upgradeable Cruiser) -->
+				<ship shipid='4287575760' x='2' y='4' /> <!--PJSB007_Kongo_1942 (T5 Japan upgradeable Battleship) -->
+				<ship shipid='4288624336' x='2' y='5' /> <!--PJSB006_Fuso_1943 (T6 Japan upgradeable Battleship) -->
+				<ship shipid='4288657104' x='0' y='4' /> <!--PJSA006_Zuiho_1944 (T5 Japan upgradeable AirCarrier) -->
+				<ship shipid='4289640144' x='4' y='4' /> <!--PJSC005_Furutaka_1926 (T5 Japan upgradeable Cruiser) -->
+				<ship shipid='4291770064' x='2' y='3' /> <!--PJSB003_Myogi_1912 (T4 Japan upgradeable Battleship) -->
+				<ship shipid='4292851408' x='0' y='3' /> <!--PJSA002_Hosho_1939 (T4 Japan upgradeable AirCarrier) -->
+				<ship shipid='4293867216' x='2' y='2' /> <!--PJSB001_Kawachi_1912 (T3 Japan upgradeable Battleship) -->
+				<ship shipid='4255037136' x='10' y='7' /> <!--PJSC038_Atago_1944 (T8 Japan premium Cruiser) -->				
+				<ship shipid='4286527184' x='14' y='3' /> <!--PJSB008_Ishizuchi_1921 (T4 Japan premium Battleship) -->
+				<ship shipid='4290688720' x='10' y='3' /> <!--PJSC004_Yubari_1944 (T4 Japan special Cruiser) -->
+				<ship shipid='4267620048' x='12' y='3' /> <!--PJSC026_Iwaki_1944 (T4 Japan special Cruiser) -->			
+				<ship shipid='3767449296' x='10' y='2' /> <!-- PJSC503_Katori (T3 Japan special Cruiser) -->
+				<ship shipid='4283381456' x='14' y='1' /> <!-- PJSB011_Mikasa_1905 (T2 Japan special Battleship) -->
+				<ship shipid='4276008656' x='10' y='6' /> <!--PJSC018_Tone (T7 Japan special Cruiser) -->
+				<!-- <ship shipid='3455006416' x='10' y='0' />  PJSB801_False_Kawachi_1912 (T3 Japan unavailable Battleship) -->
+				<!-- <ship shipid='3453957840' x='12' y='0' />  PJSB802_False_Ally_Kawachi_1912 (T3 Japan unavailable Battleship) -->
+				<!-- <ship shipid='3453957840' x='14' y='0' />  PJSC837_False_Hashidate_1940 (T1 Japan unavailable Cruiser) -->
+				<!-- <ship shipid='3416176336' x='16' y='0' />  PJSC838_False_Hashidate_1940 (T1 Japan unavailable Cruiser) -->
+				<ship shipid='3247355600' x='10' y='9' />  <!--PJSC999_Yubari_Special (T10 Japan event Cruiser) -->
+				<ship shipid='4280202960' x='12' y='7' /> <!-- PJSC014_Kitakami_1945 (T8 Japan disabled Cruiser) -->
+				<!--科技树驱逐舰-->
+				<ship shipid='4292753104' x='6' y='1' /> <!--PJSD002_Umikaze_1925 (T2 Japan upgradeable Destroyer) -->
+				<ship shipid='4269684432' x='6' y='2' /> <!--PJSD024_Wakatake_1923 (T3 Japan upgradeable Destroyer) -->
+				<ship shipid='4291704528' x='6' y='3' /> <!--PJSD003_Isokaze_1917 (T4 Japan upgradeable Destroyer) -->
+				<ship shipid='4184749776' x='6' y='4' /> <!--PJSD105_Mutsuki (T5 Japan upgradeable Destroyer) -->
+				<ship shipid='4183701200' x='6' y='5' /> <!--PJSD106_Fubuki (T6 Japan upgradeable Destroyer) -->
+				<ship shipid='4182652624' x='6' y='6' /> <!--PJSD107_Akatsuki (T7 Japan upgradeable Destroyer) -->
+				<ship shipid='4076746448' x='6' y='7' /> <!--PJSD208_Kagero (T8 Japan upgradeable Destroyer) -->
+				<ship shipid='4075697872' x='6' y='8' /> <!--PJSD209_Yugumo (T9 Japan upgradeable Destroyer) -->
+				<ship shipid='4282267344' x='6' y='9' /> <!--PJSD012_Shimakaze_1943 (T10 Japan upgradeable Destroyer) -->
+				<ship shipid='4290655952' x='8' y='4' /> <!--PJSD004_Minekadze_1920 (T5 Japan upgradeable Destroyer) -->
+				<ship shipid='4078843600' x='8' y='5' /> <!--PJSD206_Hatsuharu (T6 Japan upgradeable Destroyer) -->
+				<ship shipid='4077795024' x='8' y='6' /> <!--PJSD207_Shiratsuyu (T7 Japan upgradeable Destroyer) -->
+				<ship shipid='4181604048' x='8' y='7' /> <!--PJSD108_Akizuki (T8 Japan upgradeable Destroyer) -->
+				<!--金币驱逐舰-->
+				<ship shipid='4293801680' x='10' y='1' /> <!--PJSD001_Tachibana_1912 (T2 Japan special Destroyer) -->
+				<ship shipid='4280170192' x='12' y='1' /> <!--PJSD014_Tachibana_1912_Asus (T2 Japan special Destroyer) -->
+				<ship shipid='4268635856' x='10' y='4' /> <!-- PJSD025_True_Kamikaze (T5 Japan special Destroyer) -->
+				<ship shipid='4267587280' x='12' y='4' /> <!-- PJSD026_Camo_Kamikaze (T5 Japan special Destroyer) -->				
+				<ship shipid='4277024464' x='14' y='4' /> <!--PJSD017_Kamikaze_1930 (T5 Japan special Destroyer) (Fujin) -->
+				<ship shipid='3554555600' x='10' y='5' /> <!--PJSD706_Shinonome (T6 Japan demoWithoutStats Destroyer) -->
+				<!--删除驱逐舰-->
+				<!-- <ship shipid='3766367952' x='14' y='4' /> PJSD504_Okikaze (T5 Japan demoWithoutStats Destroyer) -->
+				<!-- <ship shipid='3767416528' x='14' y='3' /> PJSD503_Amatsukaze (T4 Japan demoWithoutStats Destroyer) -->
+				<!-- <ship shipid='3452843728' x='10' y='9' />  PJSD803_False_Isokaze_1917 (T4 Japan unavailable Destroyer) -->
+				<!--日本金币船-->
+				<ship shipid='3764336336' x='12' y='5' /> <!--PJSB506_Mutsu (T6 Japan demoWithoutStats Battleship) -->
+				<ship shipid='3763320528' x='12' y='6' /> <!-- PJSA507_Kaga (T7 Japan special AirCarrier) -->
 
 		</ships>
 		<types>
@@ -633,8 +644,61 @@
 			</arrow>
 		</arrows>
 		<ships>
+				<ship shipid='4188976592' x='2' y='0' /> <!--PRSC101 PRSC101_Orlan (T1 Russia start Cruiser) -->
 
+				<!--<ship shipid='4187895248' x='4' y='1' /> PRSD102_SM_Storojevoy (T2 Russia upgradeable Destroyer) -->
+				<ship shipid='4187928016' x='2' y='1' /> <!--PRSC102_Novik (T2 Russia event Cruiser -->
+				<ship shipid='4187895248' x='4' y='1' /> <!--PRSD102_SM_Storojevoy (T2 Russia upgradeable Destroyer) -->
+				<ship shipid='4292785616' x='8' y='1' /> <!--PRSC002_Diana_1905 (T2 Russia special Cruiser) -->
+				<ship shipid='4284397008' x='10' y='1' /> <!--PRSC010_Diana_1905_Asus (T2 Russia special Cruiser) -->
 
+				<!--<ship shipid='4186846672' x='4' y='2' /> PRSD103_Derzky (T3 Russia upgradeable Destroyer) -->
+				<ship shipid='4186879440' x='2' y='2' /> <!--PRSC103_Bogatyr (T3 Russia event Cruiser) -->
+				<ship shipid='4186846672' x='4' y='2' /> <!--PRSD103_Derzky (T3 Russia upgradeable Destroyer) -->
+				<ship shipid='4293834192' x='8' y='2' /> <!--PRSC001_Avrora_1917 (T3 Russia premium Cruiser) -->
+				<ship shipid='3767449040' x='10' y='2' /> <!--PRSC503_Oleg (T3 Russia demoWithoutStats Cruiser) -->
+
+				<!--<ship shipid='4185798096' x='4' y='3' /> PRSD104_Izyaslav (T4 Russia upgradeable Destroyer) -->
+				<ship shipid='4185830864' x='2' y='3' /> <!--PRSC104_Svetlana (T4 Russia event Cruiser) -->
+				<ship shipid='4185798096' x='4' y='3' /> <!--PRSD104_Izyaslav (T4 Russia upgradeable Destroyer) -->
+				<ship shipid='4293866960' x='8' y='3' /> <!--PRSB001_Nikolay_I (T4 Russia special Battleship) -->
+
+				<!--<ship shipid='4184749520' x='4' y='4' /> PRSD105_Pr_7_Gnevny (T5 Russia upgradeable Destroyer) -->
+				<ship shipid='4184782288' x='2' y='4' /> <!--PRSC105_Kirov (T5 Russia event Cruiser) -->
+				<ship shipid='4079891920' x='4' y='4' /> <!--PRSD205_Podvoisky_pr_1929 (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4291737040' x='8' y='4' /> <!--PRSC003_Murmansk_1944 (T5 Russia premium Cruiser) -->
+				<ship shipid='4293801424' x='10' y='4' /> <!--PRSD001_Gremyashchy_1942 (T5 Russia special Destroyer) -->
+				<!--<ship shipid='3765351888' x='10' y='4' /> PRSC505_Profintern (T5 Russia disabled Cruiser) -->
+				<ship shipid='3765351888' x='12' y='4' /> <!--PRSC505_KrasniKrym (T5 Russia demoWithoutStats Cruiser) -->
+				<ship shipid='3765319120' x='14' y='4' /> <!--PRSD505_Okhotnik_1917 (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3765384656' x='16' y='4' /> <!--PRSB505_Oktyabrskaya_Revolutsiya (T5 Russia demoWithoutStats Battleship) -->
+
+				<!--<ship shipid='4183700944' x='4' y='5' /> PRSD106_Pr_30_Ognevoy (T6 Russia upgradeable Destroyer) -->
+				<ship shipid='4183733712' x='2' y='5' /> <!--PRSC106_Pr_94_Budeny (T6 Russia event Cruiser) -->
+				<ship shipid='4078843344' x='4' y='5' /> <!--PRSD206_Pr_7 (T6 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3764303312' x='8' y='5' /> <!--PRSC506_Molotov_1943 (T6 Russia event Cruiser) -->
+				<ship shipid='3659445712' x='10' y='5' /> <!--PRSC606_Admiral_Makarov (T6 Russia event Cruiser) -->
+
+				<!--<ship shipid='4180555216' x='4' y='6' /> PRSD109_Pr_48_Kiev (T7 Russia upgradeable Destroyer) -->
+				<ship shipid='4182685136' x='2' y='6' /> <!--PRSC107_Schors (T7 Russia event Cruiser) -->
+				<ship shipid='4077794768' x='4' y='6' /> <!--PRSD207_Minsk (T7 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3763221968' x='8' y='6' /> <!--PRSD507_Leningrad_1944 (T7 Russia demoWithoutStats Destroyer) -->
+
+				<!--<ship shipid='4181603792' x='4' y='7' /> PRSD108_Pr_20i_Tashkent (T8 Russia upgradeable Destroyer) -->
+				<ship shipid='4181636560' x='2' y='7' /> <!--PRSC108_Pr_68_Chapaev (T8 Russia event Cruiser) -->
+				<ship shipid='3971888592' x='4' y='7' /> <!--PRSD308_Pr_48 (T8 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4076746192' x='6' y='7' /> <!--PRSD208_Pr_30 (T8 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3762206160' x='8' y='7' /> <!--PRSC508_Kutuzov_1952 (T8 Russia special Cruiser) -->
+
+				<!--<ship shipid='4182652368' x='4' y='8' /> PRSD107_Pr_35_Udaloy (T9 Russia upgradeable Destroyer) -->
+				<ship shipid='4180587984' x='2' y='8' /> <!--PRSC109_Dmitry_Donskoy (T9 Russia event Cruiser) -->
+				<ship shipid='3865982416' x='4' y='8' /> <!--PRSD409_Pr_20i_Tashkent (T9 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4182652368' x='6' y='8' /> <!--PRSD107_Pr_35_Udaloy (T9 Russia demoWithoutStats Destroyer) -->
+
+				<!--<ship shipid='4179506640' x='4' y='9' /> PRSD110_Pr_24_Khabarovsk (T10 Russia upgradeable Destroyer) -->
+				<ship shipid='4179539408' x='2' y='9' /> <!--PPRSC110_Pr_66_Moskva (T10 Russia event Cruiser) --> 
+				<ship shipid='4179506640' x='4' y='9' /> <!--PRSD110_Pr_24_Khabarovsk (T10 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4074649040' x='6' y='9' /> <!--PRSD210_Grozovoy_pr_40N (T10 Russia demoWithoutStats Destroyer) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='5' y='-1' />
