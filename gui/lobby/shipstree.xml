@@ -671,7 +671,6 @@
 				<!--<ship shipid='3765351888' x='10' y='4' /> PRSC505_Profintern (T5 Russia disabled Cruiser) -->
 				<ship shipid='3765351888' x='12' y='4' /> <!--PRSC505_KrasniKrym (T5 Russia demoWithoutStats Cruiser) -->
 				<ship shipid='3765319120' x='14' y='4' /> <!--PRSD505_Okhotnik_1917 (T5 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='3765384656' x='16' y='4' /> <!--PRSB505_Oktyabrskaya_Revolutsiya (T5 Russia demoWithoutStats Battleship) -->
 
 				<!--<ship shipid='4183700944' x='4' y='5' /> PRSD106_Pr_30_Ognevoy (T6 Russia upgradeable Destroyer) -->
 				<ship shipid='4183733712' x='2' y='5' /> <!--PRSC106_Pr_94_Budeny (T6 Russia event Cruiser) -->
@@ -725,21 +724,17 @@
 
 				<ship shipid='4183734224' x='2' y='5' /> <!--PBSC106_Leander (T6 United_Kingdom demoWithoutStats Cruiser) -->
 				<ship shipid='4292818896' x='8' y='5' /> <!--PBSB002_Warspite_1941 (T6 United_Kingdom special Battleship) -->
-				<ship shipid='3764271056' x='10' y='5' /> <!--IDS_PBSD506 (T6 United_Kingdom event Destroyers) -->
+				<ship shipid='3764271056' x='10' y='5' /> <!--PBSD506_Gallant (T6 United_Kingdom event Destroyers) -->
 
 				<ship shipid='4182685648' x='2' y='6' /> <!--PBSC107_Fiji (T7 United_Kingdom demoWithoutStats Cruiser) -->
 				<ship shipid='4182718416' x='0' y='6' /> <!--PBSB107_Nelson (T7 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='3763255248' x='8' y='6' /> <!--PBSC507_Belfast_1959 (T7 United_Kingdom demoWithoutStats Cruiser) -->
-				<ship shipid='3763288016' x='10' y='6' /> <!--PBSB507_Hood (T7 United_Kingdom demoWithoutStats Battleship) -->
 
 				<ship shipid='4181637072' x='2' y='7' /> <!--PBSC108_Edinburgh (T8 United_Kingdom demoWithoutStats Cruiser) -->
-				<ship shipid='4181669840' x='0' y='7' /> <!--PBSB108_King_George_V (T8 United_Kingdom demoWithoutStats Battleship) -->
 
 				<ship shipid='4180588496' x='2' y='8' /> <!--PBSC109_Neptune (T9 United_Kingdom demoWithoutStats Cruiser) -->
-				<ship shipid='4180621264' x='0' y='8' /> <!--PBSB109_Lion (T9 United_Kingdom demoWithoutStats Battleship) -->
 
 				<ship shipid='4179539920' x='2' y='9' /> <!--PBSC110_Minotaur (T10 United_Kingdom demoWithoutStats Cruiser) --> 
-				<ship shipid='4179572688' x='0' y='9' /> <!--PBSB110_Conqueror (T10 United_Kingdom demoWithoutStats Battleship) -->
 
 		</ships>
 		<types>

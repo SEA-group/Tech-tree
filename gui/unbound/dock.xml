@@ -14793,7 +14793,7 @@
 					</block>
 				</block>
 			</block>
-			<bind name="watch" value="'isReadyBtnEnabled'; ((readyButtonDenyReasons.length == 0) || (divisionData.isReady)) ? true : false"/>
+			<bind name="watch" value="'isReadyBtnEnabled'; (readyButtonDenyReasons.length == 0) ? true : false"/>
 			<block>
 				<bind name="name" value="divisionData.isReady ? 'isReadyDivision' : 'isNotReadyDivision'"/>
 				<bind name="tooltip" value="'MultipleWarningsTooltip'; isReadyBtnEnabled ? null : {_warningsArr: readyButtonDenyReasons}"/>
@@ -33165,7 +33165,7 @@
 				<bind name="watch" value="'isFastTrainingEnabled'; 	(!(playerShipInfo.isLocked) &amp;&amp; !(selectedShipCrewRetraining.isInAdaptation))"/>
 				<bind name="watch" value="'isInAdaptation'; 			(selectedShipCrewRetraining.isInAdaptation == true)"/>
 				<bind name="watch" value="'hasMaxLevel'; 			(selectedShipCrew.level == crewsSingleton.maxLevel)"/>
-				<bind name="tooltip" value="'SimpleTooltip'; isFastTrainingEnabled ? {tooltipText: 'IDS_CREW_FAST_RETRAINING'} : {tooltipText: 'IDS_FINISHED_RETRAINING'}"/>
+				<bind name="tooltip" value="'SimpleTooltip'; isFastTrainingEnabled ? {tooltipText: 'IDS_CREW_FAST_RETRAINING'} : {tooltipText: 'IDS_CREW_SPEED_UP_RETRAINING'}"/>
 				<bind name="tooltip" value="'SimpleWarningTooltip'; playerShipInfo.isLocked	? {_text: tr('IDS_FAST_TRAINING_DISABLE_REASON_SHIP_IS_IN_BATTLE')} : null"/>
 				<style>
 					<marginLeft value="5px"/>
@@ -43841,9 +43841,6 @@
 			<bind name="visible" value="	(selectedShipCrewRetraining.isInAdaptation == true) ||
 						((selectedShipCrewRetraining.isInAdaptation != true) &amp;&amp; (selectedShipCrew.level &lt; crewsSingleton.maxLevel))"/>
 			<block>
-				<params>
-					<param name="name" value="crewExp"/>
-				</params>
 				<bind name="tooltip" value="'SimpleTooltip'; {tooltipText: 'IDS_HINT_CREWEXP'}"/>
 				<block type="text">
 					<styleClass value="$TextHeaderBigDefault"/>
@@ -44323,7 +44320,7 @@
 							</style>
 						</block>
 						<block>
-							<bind name="visible" value="!isLooted &amp;&amp; !canOpenFinalTask"/>
+							<bind name="visible" value="!isLooted"/>
 							<style>
 								<marginLeft value="6px"/>
 							</style>
@@ -45269,15 +45266,13 @@
 						<leading value="-2"/>
 					</style>
 					<bind name="timeFormat" value="missionTimeToStart; 'HIGHEST'; 'formatStartTime'; true"/>
-					<bind name="text" value="missionState == 0						? campaignNeedToken 			? 'IDS_TOOLTIP_CAMPAIGN_NEED_TOKEN' :
-																						  missionStartTime != 0 		? subst('IDS_LOCKED_MISSION_TIME_LEFT_TOOLTIP', [], {timeLeft: formatStartTime}) :
-																						  'IDS_MISSION_STATE_LOCKED' 	
-																						:
-							(missionState == 2)				?  subst('IDS_CHOOSE_TASK_DESCR', [], {count: costUnlock}, costUnlock) :
-							(	missionState == 4 &amp;&amp;
-								mainTaskState == 5) 			? 'IDS_MISSION_STATE_OPENED_BOSS' :
-							(missionState == 4)				? 'IDS_MISSION_STATE_FINAL_TASK_OPENED_NOT_COMPLETED' 
-																						: 'IDS_MISSION_STATE_COMPLETED'"/>
+					<bind name="text" value="(missionState == 0)						? campaignNeedToken 		? 'IDS_TOOLTIP_CAMPAIGN_NEED_TOKEN' :
+																							  missionStartTime != 0 	? subst('IDS_LOCKED_MISSION_TIME_LEFT_TOOLTIP', [], {timeLeft: formatStartTime}) :
+																							  'IDS_MISSION_STATE_LOCKED' :
+							(missionState == 2)					?  subst('IDS_CHOOSE_TASK_DESCR', [], {count: costUnlock}, costUnlock) :
+							(missionState == 4 &amp;&amp; mainTaskState == 5) ? 'IDS_MISSION_STATE_OPENED_BOSS' :
+							(missionState == 4)					? 'IDS_SYS_MESSAGE_HEADER_MS_ACC_CAMPAIGNS_TASK_UNLOCKED' 
+																							: 'IDS_MISSION_STATE_COMPLETED'"/>
 				</block>
 			</block>
 		</block>
@@ -51045,8 +51040,10 @@
 				</style>
 				<bind name="instance" value="'ModalWindowHeader'; { _header: browserTitle, _headerWidth: '100%', _innerCloseButton: true }"/>
 			</block>
+			<bind name="var" value="{loadFailed: false}"/>
 			<bind name="var" value="{firstRequestedPageLoaded: false}"/>
-			<bind name="watch" value="'loadFailed'; ((httpStatusCode &lt; 200) || (httpStatusCode &gt;= 400) &amp;&amp; (httpStatusCode != 403))"/>
+			<bind name="catch" value="'browser.onLoadFailed'; {loadFailed: true}"/>
+			<bind name="catch" value="'browser.onLoadEnd'; {loadFailed: false}"/>
 			<bind name="catch" value="'browser.onLoadEnd'; {firstRequestedPageLoaded: true}"/>
 			<bind name="name" value="firstRequestedPageLoaded ? 'BrowserIsLoaded' : 'BrowserIsNotLoaded'"/>
 			<block>
