@@ -178,6 +178,7 @@
 				<!--<ship shipid='4287903728' x='10' y='5' /> PASX006_Cimarron_invisible (T5 USA unavailable Auxiliary) -->
 				<!-- <ship shipid='4286560240' x='8' y='5' /> PASA008_Saipan_1943 (T6 USA disabled AirCarrier) -->
 				<!--<ship shipid='3345987568' x='8' y='5' /> PASA905_Essex_1945_Halloween (T5 USA disabled AirCarrier) -->
+				<ship shipid='3764336624' x='8' y='6' /> <!--PASB506_Arizona_1941 (T6 USA special Battleship) -->
 
 				<ship shipid='4284463088' x='0' y='6' /> <!--PASA010_Ranger_1944 (T7 USA upgradeable AirCarrier) -->
 				<ship shipid='4286527472' x='2' y='6' /> <!--PASB008_Colorado_1945 (T7 USA upgradeable Battleship) -->
@@ -187,9 +188,7 @@
 				<ship shipid='4264441840' x='10' y='6' /> <!--PASD029_Sims_1941 (T7 USA special Destroyer) -->
 				<ship shipid='3763320816' x='12' y='6' /> <!--PASA507_Saipan_1946 (T7 USA special AirCarrier) -->
 				<ship shipid='3763255280' x='14' y='6' /> <!--PASC507_Indianapolis_1945 (T7 USA special Cruiser) -->
-				<ship shipid='3764336624' x='16' y='6' /> <!--PASB506_Arizona_1941 (T7 USA special Battleship) -->
-				<ship shipid='3553540080' x='18' y='6' /> <!--PASC707_Flint (T7 USA demoWithoutStats Cruiser) -->
-				<ship shipid='3762272240' x='20' y='6' /> <!--PASA906_Ranger_1944 (T7 USA special AirCarrier) -->
+				<ship shipid='3553540080' x='16' y='6' /> <!--PASC707_Flint (T7 USA demoWithoutStats Cruiser) -->
 
 				<ship shipid='4280203248' x='4' y='7' /> <!--PASC014_New_Orlean_1944 (T8 USA upgradeable Cruiser) -->
 				<ship shipid='4282333168' x='2' y='7' /> <!--PASB012_North_Carolina_1945 (T8 USA upgradeable Battleship) -->
@@ -298,6 +297,7 @@
 				<ship shipid='4181669680' x='2' y='7' /><!--PGSB108_Bismarck (T8 Germany upgradeable Battleship) -->
 				<ship shipid='3762206512' x='10' y='7' /> <!--PGSC508_Prinz_Eugen (T8 Germany demoWithoutStats Cruiser) -->
 				<ship shipid='4181604144' x='6' y='7' /> <!--PGSD108_Z_23 (T8 Germany demoWithoutStats Destroyer) -->
+				<ship shipid='3762272048' x='12' y='7' /> <!--PGSA508_Graf_Zeppelin (T8 Germany demoWithoutStats AirCarrier) -->
 
 				<ship shipid='4180588336' x='4' y='8' /> <!--PGSC109_Roon (T9 Germany upgradeable Cruiser) -->
 				<ship shipid='4180621104' x='2' y='8' /><!--PGSB109_Friedrich_der_Grosse (T9 Germany upgradeable Battleship) -->
@@ -716,13 +716,18 @@
 
 				<ship shipid='4187928528' x='2' y='1' /> <!--PBSC102_Weymouth (T2 United_Kingdom demoWithoutStats Cruiser -->
 
+				<ship shipid='4186912720' x='0' y='2' /> <!--PBSB103_Bellerophon (T3 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='4186879952' x='2' y='2' /> <!--PBSC103_Caledon (T3 United_Kingdom demoWithoutStats Cruiser) -->
 				<ship shipid='3767416784' x='8' y='2' /> <!--PBSD503_Campbeltown_1941 (T3 United_Kingdom event Destroyer) -->
 
+				<ship shipid='4185864144' x='0' y='3' /> <!--PBSB104_Orion (T4 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='4185831376' x='2' y='3' /> <!--PBSC104_Danae (T4 United_Kingdom demoWithoutStats Cruiser) -->
 
+				<ship shipid='4184815568' x='0' y='4' /> <!--PBSB105_Iron_Duke (T5 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='4184782800' x='2' y='4' /> <!--PBSC105_Emerald (T5 United_Kingdom demoWithoutStats Cruiser) -->
+				<ship shipid='3660462032' x='8' y='4' /> <!--PBSD605_Anthony_Event (T5 United_Kingdom event Destroyers) -->
 
+				<ship shipid='4183766992' x='0' y='5' /> <!--PBSB106_Queen_Elizabeth (T6 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='4183734224' x='2' y='5' /> <!--PBSC106_Leander (T6 United_Kingdom demoWithoutStats Cruiser) -->
 				<ship shipid='4292818896' x='8' y='5' /> <!--PBSB002_Warspite_1941 (T6 United_Kingdom special Battleship) -->
 				<ship shipid='3764271056' x='10' y='5' /> <!--PBSD506_Gallant (T6 United_Kingdom event Destroyers) -->
@@ -731,6 +736,7 @@
 				<ship shipid='4182685648' x='2' y='6' /> <!--PBSC107_Fiji (T7 United_Kingdom demoWithoutStats Cruiser) -->
 				<ship shipid='3763255248' x='8' y='6' /> <!--PBSC507_Belfast_1959 (T7 United_Kingdom demoWithoutStats Cruiser) -->
 				<ship shipid='3763288016' x='10' y='6' /> <!--PBSB507_Hood (T7 United_Kingdom demoWithoutStats Battleship) -->
+				<ship shipid='4077860816' x='12' y='6' /> <!--PBSB207_King_George_V (T7 United_Kingdom demoWithoutStats Battleship) -->
 
 				<ship shipid='4181669840' x='0' y='7' /> <!--PBSB108_King_George_V (T8 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='4181637072' x='2' y='7' /> <!--PBSC108_Edinburgh (T8 United_Kingdom demoWithoutStats Cruiser) -->
@@ -791,17 +797,28 @@
 		</arrows>
 		<ships>
 				<ship shipid='4179539792' x='4' y='9' /> <!--PFSC110_Henri_IV (T10 France special Cruiser) -->
+
 				<ship shipid='4180588368' x='4' y='8' /> <!--PFSC109_Saint_Louis (T9 France special Cruiser) -->
+
 				<ship shipid='4181636944' x='4' y='7' /> <!--PFSC108_Charles_Martel (T8 France special Cruiser) -->
+
 				<ship shipid='4182685520' x='4' y='6' /> <!--PFSC107_Algerie (T7 France special Cruiser) -->
+
 				<ship shipid='4183734096' x='4' y='5' /> <!--PFSC106_La_Galissonniere (T6 France special Cruiser) -->
+				<ship shipid='3764336464' x='8' y='6' /> <!--PFSB506_Dunkerque_1940 (T6 France special Battleship) -->
+				<ship shipid='3764303696' x='10' y='5' /> <!--PFSC506_De_Grasse (T6 France special Cruiser) -->
+
 				<ship shipid='4184782672' x='4' y='4' /> <!--PFSC105_Emile_Bertin (T5 France special Cruiser) -->
+				<ship shipid='3660461904' x='8' y='4' /> <!--PFSD605_Cyclone_event (T5 France special Destroyer) -->
+
 				<ship shipid='4185831248' x='4' y='3' /> <!--PFSC104_Duguay_Trouin (T4 France special Cruiser) -->
+
 				<ship shipid='4186879824' x='4' y='2' /> <!--PFSC103_Friant (T3 France special Cruiser) -->
+
 				<ship shipid='4187928400' x='4' y='1' /> <!--PFSC102_Jurien (T2 France special Cruiser) -->
+
 				<ship shipid='4188976976' x='4' y='0' /> <!--PFSC101_Bougainville (T1 France special Cruiser) -->
-				<ship shipid='3764336464' x='8' y='2' /> <!--PFSB506_Dunkerque_1940 (T6 France special Battleship) -->
-				<ship shipid='3764303696' x='8' y='5' /> <!--PFSC506_De_Grasse (T6 France special Cruiser) -->
+
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
