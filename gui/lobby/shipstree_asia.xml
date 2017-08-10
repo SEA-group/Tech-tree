@@ -732,11 +732,11 @@
 				<ship shipid='4292818896' x='8' y='5' /> <!--PBSB002_Warspite_1941 (T6 United_Kingdom special Battleship) -->
 				<ship shipid='3764271056' x='10' y='5' /> <!--PBSD506_Gallant (T6 United_Kingdom event Destroyers) -->
 
-				<ship shipid='4182718416' x='0' y='6' /> <!--PBSB107_Nelson (T7 United_Kingdom demoWithoutStats Battleship) -->
+				<ship shipid='4182718416' x='0' y='6' /> <!--PBSB107_King_George_V (T7 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='4182685648' x='2' y='6' /> <!--PBSC107_Fiji (T7 United_Kingdom demoWithoutStats Cruiser) -->
 				<ship shipid='3763255248' x='8' y='6' /> <!--PBSC507_Belfast_1959 (T7 United_Kingdom demoWithoutStats Cruiser) -->
 				<ship shipid='3763288016' x='10' y='6' /> <!--PBSB507_Hood (T7 United_Kingdom demoWithoutStats Battleship) -->
-				<ship shipid='4077860816' x='12' y='6' /> <!--PBSB207_King_George_V (T7 United_Kingdom demoWithoutStats Battleship) -->
+				<ship shipid='3752802256' x='12' y='6' /> <!--PBSB517_Nelson (T7 United_Kingdom demoWithoutStats Battleship) -->
 
 				<ship shipid='4181669840' x='0' y='7' /> <!--PBSB108_King_George_V (T8 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='4181637072' x='2' y='7' /> <!--PBSC108_Edinburgh (T8 United_Kingdom demoWithoutStats Cruiser) -->
