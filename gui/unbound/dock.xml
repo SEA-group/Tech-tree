@@ -755,7 +755,7 @@
 								<marginTop value="-3px"/>
 							</style>
 							<block className="hotkey_holder_white_9slice" type="native">
-								<bind name="visible" value="true"/>
+								<bind name="visible" value="!_noHotkey"/>
 								<block type="text">
 									<style>
 										<marginLeft value="3px"/>
@@ -2720,7 +2720,8 @@
 						<marginTop value="-27px"/>
 						<width value="100%"/>
 					</style>
-					<bind name="instance" value="'ShipHeaderModuleTree'; {_shipName: toUpperCase(tr(shipInfo.nameIDS + '_FULL')),
+					<bind name="instance" value="'ShipHeaderModuleTree'; {
+					_shipName: toUpperCase(tr(shipInfo.nameIDS + '_FULL')),
 					_levelRome: shipInfo.levelRome,
 					_isElite: upgradableShipInfo.isElite,
 					_isPremium: shipInfo.isPremium,
@@ -2733,8 +2734,6 @@
 					_costGold: shipInfo.costGold,
 					_creditsDeficit: upgradableShipInfo.creditsDeficit,
 					_dependencyResearched: upgradableShipInfo.dependencyResearched,
-					shipBuyPrice: shipBuyPrice,
-					shipExplorePrice: shipExplorePrice,
 					_isDownloaded: shipInfoSlim.isDownloaded,
 					_unavailable: !(upgradableShipInfo.dependencyResearched || isOwned || upgradableShipInfo.isExplored || (shipInfo.isEventLike)),
 					_shipId: shipId,
@@ -2742,7 +2741,11 @@
 					_uiSpecial: shipInfo.uiSpecial,
 					_eventShips: shipInfo.isEventLike,
 					_group: shipInfo.group,
-					letterSpacing: 0.8}"/>
+					letterSpacing: 0.8,
+					_buyPrice: shipBuyPrice.prices[0],
+					_buyPriceFinal: shipBuyPrice.prices[0].finalPrice,
+					_explorePrice: shipExplorePrice.prices[0],
+					_explorePriceFinal: shipExplorePrice.prices[0].finalPrice }"/>
 					<style>
 						<flow value="horizontal"/>
 					</style>
@@ -3380,6 +3383,23 @@
 		<selectable value="false"/>
 		<textColor value="0x08222a"/>
 	</css>
+	<block className="CostOilNano">
+		<style>
+			<flow value="horizontal"/>
+		</style>
+		<styleClass value="$InfoLineBoundaries"/>
+		<block type="text">
+			<styleClass value="$MiddleVAligned"/>
+			<styleClass value="$TextSecondary"/>
+			<bind name="class" value="'$Bold'"/>
+			<bind name="class" value="_class"/>
+			<bind name="text" value="format(_costOil, -1)"/>
+		</block>
+		<block className="icon_currency" type="native">
+			<styleClass value="$MiddleVAligned"/>
+			<bind name="gotoAndStop!" value="'clan_resource'"/>
+		</block>
+	</block>
 	<block className="CostEliteXPNano">
 		<style>
 			<flow value="horizontal"/>
@@ -6249,7 +6269,9 @@
 					'NotificationPurchaseContainer';
 					'NotificationAutoPurchaseContainer';
 					'NotificationAutoOpenContainer';
-					'NotificationTransactionError';"/>
+					'NotificationTransactionError';
+					'ClanOilRecieved'
+					"/>
 		</block>
 	</block>
 	<block className="NotificationShipAndModule">
@@ -6370,7 +6392,8 @@
 		<bind name="controller" value="lesta.unbound.core.UbController"/>
 		<block>
 			<bind name="child" value="data.idInGroup; {data: data, _width: _width};
-					'ClanCommon'"/>
+					'ClanCommon';
+					'EmptyItem' "/>
 		</block>
 	</block>
 	<block className="NotificationCollection">
@@ -6488,10 +6511,10 @@
 			<bind name="text" value="'&lt;body&gt;' + data.message + '&lt;/body&gt;'"/>
 			<bind name="substitute" value="''; 5;
 							{
-								'[commander]': 'icon_clan_position_commander',
-								'[exec_officer]': 'icon_clan_position_dep_commander',
-								'[private]': 'icon_clan_position_line_officer',
-								'[recr_officer]': 'icon_clan_position_recruiter'
+								'[commander]'		: 'icon_clan_position_commander',
+								'[exec_officer]'	: 'icon_clan_position_dep_commander',
+								'[private]'			: 'icon_clan_position_line_officer',
+								'[recr_officer]'	: 'icon_clan_position_recruiter'
 							}"/>
 		</block>
 		<block>
@@ -6512,9 +6535,13 @@
 		</block>
 		<block>
 			<bind name="visible" value="data.cost != null"/>
-			<styleClass value="$InfoBlockHorizontalIndent"/>
 			<styleClass value="$InfoLineBoundaries"/>
-			<bind name="instance" value="'PriceInLine'; { priceInfo: {finalPrice: data.cost, basePrice: data.cost, currency: data.currency}, _customLabel: 'IDS_COST', _medium: true}"/>
+			<style>
+				<width value="100%"/>
+				<marginLeft value="12px"/>
+				<marginRight value="3px"/>
+			</style>
+			<bind name="instance" value="'PriceInLine'; { priceInfo: {finalPrice: data.cost, basePrice: data.cost, currency: data.currency}, _customLabel: 'IDS_COST', _small: true}"/>
 			<style>
 				<flow value="horizontal"/>
 			</style>
@@ -6529,6 +6556,42 @@
 				<height value="35px"/>
 				<backgroundImage value="symbol:icon_account_clan"/>
 			</style>
+		</block>
+	</block>
+	<block className="ClanOilRecieved">
+		<block>
+			<bind name="instance" value="'NotificationHeader'; { _header: 'IDS_SYS_MESSAGE_HEADER_MS_ACC_CLAN_RESOURCE_RECEIVED', _class: '$FontColorWhite'}"/>
+		</block>
+		<block>
+			<style>
+				<width value="100%"/>
+			</style>
+			<block className="inner_panel" type="native">
+				<styleClass value="$Fullsize"/>
+				<styleClass value="$PxHorizontalCorrection"/>
+				<style>
+					<position value="absolute"/>
+				</style>
+			</block>
+			<block>
+				<style>
+					<width value="100%"/>
+					<marginBottom value="5px"/>
+					<marginLeft value="12px"/>
+					<marginRight value="12px"/>
+				</style>
+				<block type="text">
+					<styleClass value="$TextSecondary"/>
+					<text value="IDS_COUNT"/>
+				</block>
+				<block>
+					<styleClass value="$AlignRight"/>
+					<bind name="instance" value="'CostOilNano'; { _class: '$TextSecondary', _costOil: data.count}"/>
+				</block>
+				<style>
+					<flow value="horizontal"/>
+				</style>
+			</block>
 		</block>
 	</block>
 	<block className="NotificationCollectionFullyCollected">
@@ -11765,17 +11828,18 @@
 		</block>
 		<block className="icon_issued_small" type="native">
 			<bind name="visible" value="_duplicates &gt; 0"/>
-			<style>
-				<position value="absolute"/>
-				<top value="60%"/>
-				<left value="30px"/>
-				<hitTest value="false"/>
-			</style>
-			<innerBind elementName="item.item" name="text" value="toUpperCase(tr('IDS_DUPLICATE_STAMP'))"/>
-			<bind name="gotoAndStop!" value="'issued'"/>
-			<bind name="rotation" value="-10"/>
+			<bind name="rotation" value="-3"/>
 			<bind name="scaleX" value="0.8"/>
 			<bind name="scaleY" value="0.8"/>
+			<bind name="gotoAndStop!" value="'issued'"/>
+			<innerBind elementName="item.item" name="text" value="toUpperCase(tr('IDS_DUPLICATE_STAMP'))"/>
+			<style>
+				<position value="absolute"/>
+				<top value="50%"/>
+				<left value="30px"/>
+				<alpha value="0.9"/>
+				<hitTest value="false"/>
+			</style>
 		</block>
 		<block>
 			<style>
@@ -11888,6 +11952,9 @@
 	<block className="NotificationExteriorAddOrWriteoff">
 		<bind name="primaryEntityDH" value="'exteriorEntity'; CC.exteriorConfig; data.extId"/>
 		<bind name="watchDH" value="'exteriorConfig'; []; exteriorEntity.exteriorConfig"/>
+		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; data.shipID; 'evUpdate'"/>
+		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate', 'shipEntity.ship.evCurrentSkinChanged']; shipEntity.ship"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<block>
 			<bind name="instance" value="'NotificationHeaderWithIcon'; data.operation != null  ? { _header: data.header, _class: '$FontColorUnready' } : null "/>
 		</block>
@@ -11932,7 +11999,8 @@
 							<marginBottom value="5px"/>
 							<maxWidth value="141"/>
 						</style>
-						<bind name="text" value="'IDS_' + toUpperCase(exteriorConfig.name)"/>
+						<bind name="text" value="exteriorConfig.isPermanent 	? subst('IDS_EXTERIOR_NAME_WITH_SHIP', [], {exteriorName: tr('IDS_' + toUpperCase(exteriorConfig.name)), shipName: tr(shipInfo.nameIDS + '_FULL')})
+															: tr('IDS_' + toUpperCase(exteriorConfig.name))})"/>
 					</block>
 					<block type="text">
 						<style>
@@ -17872,7 +17940,9 @@
 				</style>
 				<styleClass value="$TextSecondary"/>
 				<bind name="class" value="'$FontColorBlueish'"/>
-				<bind name="text" value="rawTimeLeft &gt; 0 ? tr('IDS_SHARE_ENDS_IN') + ' ' + timeLeft : tr('IDS_SHARE_IS_EXPIRING_WARNING')"/>
+				<bind name="text" value="priceInfo.type == 2 	? 'IDS_SHARE_FROM_CLAN_BUILDINGS_TIMING' :
+										(rawTimeLeft &gt; 0) 		? tr('IDS_SHARE_ENDS_IN') + ' ' + priceInfo.timeLeft
+																: tr('IDS_SHARE_IS_EXPIRING_WARNING')"/>
 			</block>
 			<block>
 				<bind name="visible" value="priceInfo.basePrice != 0"/>
@@ -17974,9 +18044,11 @@
 				<styleClass value="$MiddleVAligned"/>
 				<styleClass value="$TextDefaultBold"/>
 				<bind name="class" value="'$FontColorGolden'"/>
-				<bind name="text" value="(	priceInfo.discountEventName	? priceInfo.discountEventName : 
-							priceInfo.isPrivate 		? 'IDS_PERSONAL_DISCOUNT' 
-														: 'IDS_PROMO_EVENT' )"/>
+				<bind name="text" value="(	priceInfo.discountEventName				? priceInfo.discountEventName : 
+							priceInfo.type == 1	? 'IDS_EVENT_SHARE' : 
+							priceInfo.type == 2	? 'IDS_SHARE_FROM_CLAN_BUILDINGS' : 
+							priceInfo.isPrivate 					? 'IDS_PERSONAL_DISCOUNT' 
+																	: 'IDS_PROMO_EVENT' )"/>
 			</block>
 			<style>
 				<flow value="horizontal"/>
@@ -19155,7 +19227,9 @@
 		<bind name="entityDH" value="'entityClub'; clubEntityId"/>
 		<bind name="watchDH" value="'clubName';['entityClub.club.evNameChanged']; entityClub.club.name"/>
 		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
-		<bind name="watchDH" value="'selfPlayerDbId'; []; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<bind name="watchDH" value="'clanId'; ['selfPlayerEntity.club.evClanIdChanged']; selfPlayerEntity.clanman.clanId"/>
 		<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; clanId"/>
 		<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
@@ -25232,10 +25306,14 @@
 	</block>
 	<block className="SelectAccountRenderer">
 		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
-		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountLevelInfo'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'rankedBattlesStats'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'rankedBattlesSeason'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
+		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountLevelInfo'"/>
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 		<bind name="watchDH" value="'canBuyPremium';	['resourceEntity.accountResource.evChangedPrem'];	resourceEntity.accountResource.canBuyPremium"/>
 		<bind name="watchDH" value="'isSyncedWithWallet'; ['resourceEntity.accountResource.evChangedIsSyncedWithWallet']; resourceEntity.accountResource.isSyncedWithWallet"/>
@@ -25250,7 +25328,7 @@
 			<style>
 				<width value="100%"/>
 			</style>
-			<bind name="child" value="playerInfotipItem; {id: rankedBattlesStats.rank, _playerName: accountLevelInfo.playerName}; 'PlayerInfotipItemRank'; 'PlayerInfotipItemAccount'"/>
+			<bind name="child" value="playerInfotipItem; {id: rankedBattlesStats.rank, _playerName: selfPlayerName }; 'PlayerInfotipItemRank'; 'PlayerInfotipItemAccount'"/>
 		</block>
 		<block className="divider_h" type="native">
 			<style>
@@ -25307,10 +25385,11 @@
 																					: null"/>
 		</block>
 		<block>
+			<bind name="visible" value="!(realmConstants.premshopUIAvailable)"/>
+			<bind name="name" value="'buttonBuyGold'"/>
 			<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
 			<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 			<bind name="watch" value="'isOpenPremInClientBrowser'; (isSteamClient == true || realmConstants.premshopUIAvailable == true)"/>
-			<bind name="name" value="'buttonBuyGold'"/>
 			<bind name="request" value="'click'; isOpenPremInClientBrowser ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME }"/>
 			<bind name="action" value="'click'; isOpenPremInClientBrowser	? null
 															: 'gotoUrlByIdent'; {ident: URL.BUY_GOLD}"/>
@@ -25340,12 +25419,14 @@
 		</block>
 		<block>
 			<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
-			<bind name="watchDH" value="'selfPlayerDbId'; []; selfPlayerEntity.accountSimple.dbId"/>
+			<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+			<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+			<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 			<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; selfPlayerEntity.clanman.clanId"/>
 			<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
 			<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
 			<bind name="visible" value="!(selfPlayerEntity.clanman)"/>
-			<bind name="request" value="'click'; 'webBrowserClans'; {url: 'clansInGame'}"/>
+			<bind name="request" value="'click'; 'WebBrowserFull'; {url: 'clansInGame'}"/>
 			<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_CLANS', tooltipSubText: 'IDS_HINT_CLANS'}"/>
 			<block>
 				<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_CLANS')), _icon: 'clans', _external: false }"/>
@@ -25484,6 +25565,10 @@
 	</block>
 	<block className="PlayerInfotipItemAccount">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountLevelInfo'"/>
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 		<bind name="watchDH" value="'isPremiumAccount';	['resourceEntity.accountResource.evChangedPrem'];	resourceEntity.accountResource.isPremium"/>
 		<bind name="watchDH" value="'premiumAccountTimeStr';	['resourceEntity.accountResource.evChangedPrem'];	resourceEntity.accountResource.premiumTimeStr"/>
@@ -25534,7 +25619,7 @@
 							<maxWidth value="158"/>
 						</style>
 						<bind name="name" value="'playerName_tooltip'"/>
-						<bind name="text" value="accountLevelInfo.playerName"/>
+						<bind name="text" value="selfPlayerName"/>
 						<bind name="class" value="isPremiumAccount ? '$FontColorGold' : '$FontColorWhite'"/>
 						<bind name="class" value="'$Bold'"/>
 						<bind name="class" value="accountLevelInfo.abuseStatus == AbuseStatus.CONFIRMED ? '$FontColorCompareNegative' : accountLevelInfo.abuseStatus == AbuseStatus.SUSPECT ? '$FontColorTeamkiller' : '$None'"/>
@@ -25647,10 +25732,14 @@
 					</style>
 					<block className="SelectAccountRenderer">
 						<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
-						<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountLevelInfo'"/>
 						<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'rankedBattlesStats'"/>
 						<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'rankedBattlesSeason'"/>
 						<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
+						<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountLevelInfo'"/>
+						<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+						<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+						<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+						<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 						<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 						<bind name="watchDH" value="'canBuyPremium';	['resourceEntity.accountResource.evChangedPrem'];	resourceEntity.accountResource.canBuyPremium"/>
 						<bind name="watchDH" value="'isSyncedWithWallet'; ['resourceEntity.accountResource.evChangedIsSyncedWithWallet']; resourceEntity.accountResource.isSyncedWithWallet"/>
@@ -25665,7 +25754,7 @@
 							<style>
 								<width value="100%"/>
 							</style>
-							<bind name="child" value="playerInfotipItem; {id: rankedBattlesStats.rank, _playerName: accountLevelInfo.playerName}; 'PlayerInfotipItemRank'; 'PlayerInfotipItemAccount'"/>
+							<bind name="child" value="playerInfotipItem; {id: rankedBattlesStats.rank, _playerName: selfPlayerName }; 'PlayerInfotipItemRank'; 'PlayerInfotipItemAccount'"/>
 						</block>
 						<block className="divider_h" type="native">
 							<style>
@@ -25722,10 +25811,11 @@
 																					: null"/>
 						</block>
 						<block>
+							<bind name="visible" value="!(realmConstants.premshopUIAvailable)"/>
+							<bind name="name" value="'buttonBuyGold'"/>
 							<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
 							<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 							<bind name="watch" value="'isOpenPremInClientBrowser'; (isSteamClient == true || realmConstants.premshopUIAvailable == true)"/>
-							<bind name="name" value="'buttonBuyGold'"/>
 							<bind name="request" value="'click'; isOpenPremInClientBrowser ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME }"/>
 							<bind name="action" value="'click'; isOpenPremInClientBrowser	? null
 															: 'gotoUrlByIdent'; {ident: URL.BUY_GOLD}"/>
@@ -25755,12 +25845,14 @@
 						</block>
 						<block>
 							<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
-							<bind name="watchDH" value="'selfPlayerDbId'; []; selfPlayerEntity.accountSimple.dbId"/>
+							<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+							<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+							<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 							<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; selfPlayerEntity.clanman.clanId"/>
 							<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
 							<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
 							<bind name="visible" value="!(selfPlayerEntity.clanman)"/>
-							<bind name="request" value="'click'; 'webBrowserClans'; {url: 'clansInGame'}"/>
+							<bind name="request" value="'click'; 'WebBrowserFull'; {url: 'clansInGame'}"/>
 							<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_CLANS', tooltipSubText: 'IDS_HINT_CLANS'}"/>
 							<block>
 								<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_CLANS')), _icon: 'clans', _external: false }"/>
@@ -26239,9 +26331,11 @@
 		</block>
 	</block>
 	<block className="InformerRank">
-		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountLevelInfo'"/>
-		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'rankedBattlesStats'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'rankedBattlesSeason'"/>
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<block>
 			<block type="text">
 				<style>
@@ -26251,7 +26345,7 @@
 				<styleClass value="$TextLargeHeader"/>
 				<styleClass value="$MiddleAligned"/>
 				<bind name="class" value="'$Bold'"/>
-				<bind name="text" value="tr('IDS_HELLO') + ' ' + accountLevelInfo.playerName"/>
+				<bind name="text" value="tr('IDS_HELLO') + ' ' + selfPlayerName"/>
 			</block>
 			<block>
 				<bind name="visible" value="rankedBattlesSeason.denyReason &amp; RBDeny.SEASON_NOT_STARTED"/>
@@ -26305,7 +26399,10 @@
 		</block>
 	</block>
 	<block className="InformerHello">
-		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountLevelInfo'"/>
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<block>
 			<style>
 				<width value="100%"/>
@@ -26319,7 +26416,7 @@
 				<styleClass value="$MiddleAligned"/>
 				<styleClass value="$TextLargeHeader"/>
 				<bind name="class" value="'$Bold'"/>
-				<bind name="text" value="tr('IDS_HELLO') + ' ' + accountLevelInfo.playerName"/>
+				<bind name="text" value="tr('IDS_HELLO') + ' ' + selfPlayerName"/>
 			</block>
 		</block>
 	</block>
@@ -27771,8 +27868,11 @@
 		</block>
 	</block>
 	<block className="PersonalProposalWindow">
-		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountLevelInfo'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 		<bind name="watchDH" value="'accountSlotsNum';	['resourceEntity.accountResource.evChangedSlotsNum'];	resourceEntity.accountResource.slotsNum"/>
 		<bind name="watchDH" value="'accountGold';		['resourceEntity.accountResource.evChangedGold'];	resourceEntity.accountResource.gold"/>
@@ -27817,7 +27917,7 @@
 						color: #fecb66;
 					}"/>
 					</style>
-					<bind name="text" value="subst('IDS_PRMP_FOR_YOU', [], {playerName: accountLevelInfo.playerName})"/>
+					<bind name="text" value="subst('IDS_PRMP_FOR_YOU', [], {playerName: selfPlayerName })"/>
 				</block>
 				<block className="button_close" type="native">
 					<style>
@@ -29577,7 +29677,20 @@
 			</block>
 		</block>
 		<block>
-			<bind name="child" value="messageData.groupId; {data: messageData, isUserActionDone: waiting}; 'InteractiveNotificationVoteContainer' ; 'InteractiveNotificationInviteContainer'; 'PersonalProposalWindow'; 'InteractiveNotificationAbuseWarningContainer'"/>
+			<bind name="child" value="messageData.groupId; {data: messageData, isUserActionDone: waiting}; 
+			'InteractiveNotificationVoteContainer'; 
+			'InteractiveNotificationInviteContainer'; 
+			'PersonalProposalWindow'; 
+			'InteractiveNotificationAbuseWarningContainer';
+			'InteractiveNotificationContainer'
+			"/>
+		</block>
+	</block>
+	<block className="InteractiveNotificationContainer">
+		<block>
+			<bind name="child" value="data.idInGroup; {data: data, isUserActionDone: isUserActionDone};
+					'InteractiveNotificationCommon'
+					"/>
 		</block>
 	</block>
 	<block className="InteractiveNotificationInviteContainer">
@@ -29686,6 +29799,92 @@
 			</block>
 		</block>
 	</block>
+	<block className="InteractiveNotificationCommon">
+		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+		<style>
+			<width value="370px"/>
+		</style>
+		<block className="contrast_panel" type="native">
+			<styleClass value="$FullsizeAbsolute"/>
+			<bind name="visible" value="optionData.contrast"/>
+		</block>
+		<block className="notification_panel" type="native">
+			<styleClass value="$FullsizeAbsolute"/>
+		</block>
+		<block>
+			<style>
+				<width value="100%"/>
+				<marginTop value="30px"/>
+				<marginLeft value="1px"/>
+				<marginRight value="1px"/>
+			</style>
+			<block>
+				<style>
+					<width value="100%"/>
+				</style>
+				<bind name="child" value="data.idInGroup; {data: data}; 
+						'ClanBuildingAvailable'
+						"/>
+			</block>
+			<block>
+				<style>
+					<width value="100%"/>
+					<position value="absolute"/>
+					<bottom value="0"/>
+				</style>
+				<block className="HorizontalDivider">
+					<styleClass value="$PxHorizontalCorrection"/>
+					<style>
+						<width value="100%"/>
+						<height value="3px"/>
+					</style>
+					<block className="divider_h" type="native">
+						<styleClass value="$Fullsize"/>
+					</block>
+				</block>
+			</block>
+		</block>
+		<block>
+			<style>
+				<position value="absolute"/>
+				<width value="100%"/>
+				<marginLeft value="1px"/>
+				<marginRight value="1px"/>
+			</style>
+			<block>
+				<style>
+					<width value="100%"/>
+					<height value="30px"/>
+				</style>
+				<bind name="child" value="data.idInGroup; { data: data};
+						'ClanBuildingAvailableHeader'
+						"/>
+			</block>
+		</block>
+		<block>
+			<style>
+				<width value="100%"/>
+				<height value="30px"/>
+			</style>
+			<block>
+				<style>
+					<marginTop value="3px"/>
+				</style>
+				<styleClass value="$MiddleAligned"/>
+				<block className="button_default_small" type="native">
+					<style>
+						<width value="1px"/>
+					</style>
+					<bind name="style" value="'width'; data.idInGroup == 0 ? '180px' : '110px'"/>
+					<bind name="label" value=" data.idInGroup == 0 	? toUpperCase(tr('IDS_GOTO_BASE'))
+													: toUpperCase(tr('IDS_ACCEPT'))"/>
+					<bind name="dispatch" value="'mouseDown'; 'dragDisabledDown'"/>
+					<bind name="action" value="'buttonClick'; 'changeInset'; { inset: LobbyConstants.CLAN }"/>
+					<bind name="dispatch" value="'buttonClick'; 'evHideInteractiveMessage'"/>
+				</block>
+			</block>
+		</block>
+	</block>
 	<block className="InteractiveNotificationInvitation">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
 		<bind name="watch" value="'showBusyIndicator'; isUserActionDone"/>
@@ -29713,7 +29912,11 @@
 					<width value="100%"/>
 				</style>
 				<bind name="child" value="data.idInGroup; {data: data}; 
-						'InvitationContent'; 'InvitationContent'; 'ClubInvitationContent'; 'ClanInvitationContent'"/>
+						'InvitationContent'; 
+						'InvitationContent'; 
+						'ClubInvitationContent'; 
+						'ClanInvitationContent'
+						"/>
 			</block>
 			<block>
 				<style>
@@ -29752,7 +29955,11 @@
 												_league: data.clubLeague,
 												_showInVote: false,
 												_isUserActionDone: isUserActionDone};
-						'FormationNotificationHeader'; 'FormationNotificationHeader'; 'ClubInvitationHeader'; 'ClubInvitationHeader'"/>
+						'FormationNotificationHeader'; 
+						'FormationNotificationHeader'; 
+						'ClubInvitationHeader'; 
+						'ClubInvitationHeader'
+						"/>
 			</block>
 		</block>
 		<block>
@@ -29777,7 +29984,7 @@
 													: toUpperCase(tr('IDS_ACCEPT'))"/>
 					<bind name="dispatch" value="'mouseDown'; 'dragDisabledDown'"/>
 					<bind name="dispatch" value="'buttonClick'; 'clickAcceptButton'"/>
-					<bind name="request" value="'click'; data.idInGroup == 3 ? 'webBrowserClanInvites' : null; {url: URL.CLAN_INVITES, redirect_to: data.url}"/>
+					<bind name="request" value="'click'; data.idInGroup == 3 ? 'WebBrowserFull' : null; {url: URL.CLAN_INVITES, redirect_to: data.url}"/>
 					<bind name="action" value="'buttonClick'; data.actionName; data.callbackData[0]"/>
 				</block>
 			</block>
@@ -30002,6 +30209,33 @@
 			</block>
 		</block>
 	</block>
+	<block className="ClanBuildingAvailable">
+		<style>
+			<width value="100%"/>
+		</style>
+		<block className="inner_panel" type="native">
+			<style>
+				<marginLeft value="1px"/>
+				<marginRight value="1px"/>
+			</style>
+			<styleClass value="$FullsizeAbsolute"/>
+		</block>
+		<block>
+			<style>
+				<marginBottom value="12px"/>
+				<marginTop value="10px"/>
+			</style>
+			<styleClass value="$InfoBlockHorizontalIndent"/>
+			<block type="text">
+				<styleClass value="$TextHeader"/>
+				<style>
+					<width value="100%"/>
+					<textAlign value="center"/>
+				</style>
+				<bind name="text" value="'IDS_CLAN_BUILDING_AVAILABLE'"/>
+			</block>
+		</block>
+	</block>
 	<block className="ClubInvitationContent">
 		<bind name="dispatch" value="'draggingChangedEv'; 'Tooltip.Close'; null; true"/>
 		<style>
@@ -30067,13 +30301,16 @@
 		</block>
 	</block>
 	<block className="VoteContent">
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<bind name="entityDH" value="'entityPlayer'; data.playerEntityId"/>
 		<bind name="watchDH" value="'name'; ['entityPlayer.accountName.evChanged']; entityPlayer.accountName.name"/>
 		<bind name="watchDH" value="'nickName'; ['entityPlayer.accountName.evChanged']; entityPlayer.accountName.nickName"/>
 		<bind name="watchDH" value="'level'; ['entityPlayer.accountLevel.evLevelChanged']; entityPlayer.accountLevel.level"/>
 		<bind name="watchDH" value="'rank'; ['entityPlayer.accountRank.evRankChanged']; entityPlayer.accountRank.rank"/>
-		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountLevelInfo'"/>
-		<bind name="watch" value="'isAllowedToVote'; accountLevelInfo.playerName == name ? false : true"/>
+		<bind name="watch" value="'isAllowedToVote'; selfPlayerName == name ? false : true"/>
 		<bind name="entityDH" value="'entityCreator'; data.creatorEntityId"/>
 		<bind name="watchDH" value="'creatorNickName'; ['entityCreator.accountName.evChanged']; entityCreator.accountName.nickName"/>
 		<bind name="watchDH" value="'creatorAccountLevel'; ['entityCreator.accountLevel.evLevelChanged']; entityCreator.accountLevel.level"/>
@@ -30450,6 +30687,31 @@
 			<bind name="action" value="'buttonClick'; _vote ? 'cancelVote': data.actionName; _vote ? {voteId: data.voteId, category: VoteTypes.VOTE_CATEGORY_TEAM } : data.callbackData[1]"/>
 			<bind name="dispatch" value="'mouseDown'; 'dragDisabledDown'"/>
 			<bind name="tooltip" value="'SimpleTooltip'; { tooltipText: ((data.idInGroup == 3) ? 'IDS_CLOSE_UPPER_CASE' : 'IDS_REJECT')}"/>
+		</block>
+	</block>
+	<block className="ClanBuildingAvailableHeader">
+		<bind name="dispatch" value="'draggingChangedEv'; 'Tooltip.Close'; null; true"/>
+		<styleClass value="$Fullsize"/>
+		<block>
+			<styleClass value="$MiddleAligned"/>
+			<styleClass value="$MiddleVAligned"/>
+			<block type="text">
+				<style>
+					<maxWidth value="280"/>
+				</style>
+				<styleClass value="$TextHeaderBold"/>
+				<bind name="text" value="'IDS_CLAN_BUILDING_AVAILABLE_HEADER'"/>
+			</block>
+		</block>
+		<block className="button_close" type="native">
+			<style>
+				<position value="absolute"/>
+				<right value="10"/>
+				<top value="10px"/>
+			</style>
+			<bind name="dispatch" value="'buttonClick'; 'evHideInteractiveMessage'"/>
+			<bind name="dispatch" value="'mouseDown'; 'dragDisabledDown'"/>
+			<bind name="tooltip" value="'SimpleTooltip'; { tooltipText: 'IDS_CLOSE_UPPER_CASE'}"/>
 		</block>
 	</block>
 	<block className="InteractiveMessagesSwitchButton">
@@ -34537,7 +34799,10 @@
 					<bottom value="4px"/>
 					<right value="10px"/>
 				</style>
-				<bind name="instance" value="'CrewSkillPointItem'; { _skillPoints: crew.freeSkillPoints, _allSkillPoints: crew.allSkillPoints }"/>
+				<bind name="instance" value="'ScoreRatioCounter'; { 	_playerPointsCounter: crew.freeSkillPoints, 
+													_totalPointsCounter: crew.allSkillPoints,
+													_tooltipTextPlayerResult: 'IDS_CREW_PLAYAER_POINTS_COUNTER', 
+													_tooltipTextTotalResult: 'IDS_CREW_TOTAL_POINTS_COUNTER' }"/>
 			</block>
 			<block>
 				<bind name="visible" value="!(isNeedRetraining)"/>
@@ -34593,7 +34858,10 @@
 				<bottom value="2px"/>
 				<right value="15px"/>
 			</style>
-			<bind name="instance" value="'CrewSkillPointItem'; { _skillPoints: selectedShipCrew.freeSkillPoints, _allSkillPoints: selectedShipCrew.allSkillPoints }"/>
+			<bind name="instance" value="'ScoreRatioCounter'; { 	_playerPointsCounter: selectedShipCrew.freeSkillPoints, 
+												_totalPointsCounter: selectedShipCrew.allSkillPoints,
+												_tooltipTextPlayerResult: 'IDS_CREW_PLAYAER_POINTS_COUNTER', 
+												_tooltipTextTotalResult: 'IDS_CREW_TOTAL_POINTS_COUNTER' }"/>
 		</block>
 		<block>
 			<bind name="instance" value="'CommanderNameAndRankDropdown'; { 	_crew: selectedShipCrew, _nation: selectedShipCrew.nation,
@@ -37378,6 +37646,43 @@
 			</style>
 		</block>
 	</block>
+	<block className="ScoreRatioCounter">
+		<style>
+			<flow value="horizontal"/>
+		</style>
+		<block>
+			<bind name="tooltip" value="'SimpleTooltip'; { tooltipText: _tooltipTextPlayerResult }"/>
+			<bind name="style" value="'alpha'; (_playerPointsCounter == 0) ? 0.5 : 1"/>
+			<block type="text">
+				<bind name="class" value="'$TextHeaderWhiteBold'"/>
+				<bind name="text" value="_playerPointsCounter"/>
+			</block>
+		</block>
+		<block>
+			<bind name="tooltip" value="'SimpleTooltip'; { tooltipText: _tooltipTextTotalResult }"/>
+			<style>
+				<alpha value="0.7"/>
+			</style>
+			<block type="text">
+				<style>
+					<marginTop value="1px"/>
+				</style>
+				<bind name="class" value="'$TextHeaderBold'"/>
+				<bind name="text" value="'/'"/>
+			</block>
+			<block type="text">
+				<style>
+					<marginTop value="2px"/>
+					<marginLeft value="-1px"/>
+				</style>
+				<bind name="class" value="'$TextHeaderBold'"/>
+				<bind name="text" value="_totalPointsCounter"/>
+			</block>
+			<style>
+				<flow value="horizontal"/>
+			</style>
+		</block>
+	</block>
 	<block className="PlayerRanks">
 		<styleClass value="$Fullsize"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'rankedBattlesStats'"/>
@@ -37976,6 +38281,10 @@
 	<block className="PlayerAccount">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'accountLevelInfo'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'dockDefaultValues'"/>
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 		<bind name="watchDH" value="'isPremiumAccount';	['resourceEntity.accountResource.evChangedPrem'];	resourceEntity.accountResource.isPremium"/>
 		<bind name="watchDH" value="'premiumAccountTimeStr';	['resourceEntity.accountResource.evChangedPrem'];	resourceEntity.accountResource.premiumTimeStr"/>
@@ -38021,7 +38330,7 @@
 						<bind name="tooltip" value="'SimpleTooltip'; {tooltipText: 'IDS_HINT_YOUR_ACCOUNT'}"/>
 						<block type="text">
 							<styleClass value="$TextHeaderHugeWhite"/>
-							<bind name="text" value="accountLevelInfo.playerName"/>
+							<bind name="text" value="selfPlayerName"/>
 							<bind name="class" value="isPremiumAccount ? '$FontColorGold' : '$FontColorWhite'"/>
 							<bind name="class" value="'$Bold'"/>
 							<bind name="class" value="accountLevelInfo.abuseStatus == AbuseStatus.CONFIRMED ? '$FontColorCompareNegative' : accountLevelInfo.abuseStatus == AbuseStatus.SUSPECT ? '$FontColorTeamkiller' : '$None'"/>
@@ -39351,7 +39660,7 @@
 			</block>
 			<style>
 				<height value="100%"/>
-				<width value="1280:268,1920:310aw"/>
+				<width value="1280:300,1920:310aw"/>
 			</style>
 			<block>
 				<bind name="tooltip" value="'SimpleTooltip'; {tooltipText: 'IDS_STATISTICS_BY_NATIONS_TOOLTIP'}"/>
@@ -39386,7 +39695,7 @@
 			</block>
 			<style>
 				<height value="100%"/>
-				<width value="1280:268,1920:310aw"/>
+				<width value="1280:250,1920:310aw"/>
 			</style>
 			<block>
 				<bind name="tooltip" value="'SimpleTooltip'; {tooltipText: 'IDS_STATISTICS_BY_SHIP_TYPES_TOOLTIP'}"/>
@@ -39421,7 +39730,7 @@
 			</block>
 			<style>
 				<height value="100%"/>
-				<width value="1280:268,1920:310aw"/>
+				<width value="1280:280,1920:310aw"/>
 			</style>
 			<block>
 				<bind name="tooltip" value="'SimpleTooltip'; {tooltipText: 'IDS_STATISTICS_BY_SHIP_LEVELS_TOOLTIP'}"/>
@@ -40256,7 +40565,9 @@
 		<bind name="watchDH" value="'battlesCount';['entityClub.club.evRatingChanged']; entityClub.club.battlesCount"/>
 		<bind name="watchDH" value="'winRate';['entityClub.club.evRatingChanged']; entityClub.club.winRate"/>
 		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
-		<bind name="watchDH" value="'selfPlayerDbId'; []; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
 		<bind name="dispatch" value="'click'; 'curActiveClubChangedEvent'; {curActiveClubIndex: $index}"/>
 		<bind name="soundSet" value="isActiveClubCard ? '' : 'default_button'"/>
@@ -40841,7 +41152,9 @@
 		<bind name="entityDH" value="'entityClub'; _clubEntityId"/>
 		<bind name="dataRefDH" value="'club'; 'entityClub.club'"/>
 		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
-		<bind name="watchDH" value="'selfPlayerDbId'; []; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<bind name="watchDH" value="'leaderDbId';['entityClub.club.evleaderIdChanged']; entityClub.club.leaderId"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
 		<styleClass value="$DefaultMenuBehaviour"/>
@@ -41380,31 +41693,19 @@
 		<bind name="primaryEntityDH" value="'pageEntity'; CC.insetPage; LobbyConstants.PLAYER_PROFILE"/>
 		<bind name="watchDH" value="'page'; ['pageEntity.insetPage.evUpdate']; pageEntity.insetPage.page"/>
 		<bind name="watchDH" value="'pageData'; ['pageEntity.dataComponent.evDataChanged']; pageEntity.dataComponent.data"/>
+		<bind name="primaryEntityDH" value="'collectionPageDataId'; CC.collectionAlbum; pageData.collectionId"/>
 		<bind name="firstEntityDH" value="'firstCollectionEntity'; CC.collectionAlbum"/>
 		<bind name="collectionDH" value="CC.collectionAlbum; 'albumCollection'; 'sortedAlbums'"/>
-		<bind name="entityDH" value="'collectionEntity'; collectionIdVariable"/>
-		<bind name="primaryEntityDH" value="'collectionEntityFromPageData'; CC.collectionAlbum; pageData.collectionId"/>
-		<bind name="catch" value="'addedToStage'; {_collectionID: false}"/>
-		<bind name="watch" value="'collectionIdVariable'; 	_collectionID					? _collectionID :
-											collectionEntityFromPageData 	? collectionEntityFromPageData.id
-																			: albumCollection[0].id"/>
-		<bind name="watchDH" value="'id';	[]; collectionEntity.collectionAlbum.id"/>
-		<bind name="watchDH" value="'cards';	[]; collectionEntity.collectionAlbum.cards"/>
-		<bind name="appear" value="'addedToStage'; 0.15; windowAppearLag + 0 * 0.075; {alpha: 0, top: 10}; {alpha: 1, top: 0}; 1"/>
-		<bind name="appear" value="'startHide'; 0.15; 0 * 0.055; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
-		<bind name="var" value="{windowAppearLag: 0.2}"/>
-		<bind name="catch" value="'selectedAlbumChanged'"/>
+		<bind name="watch" value="'newCollectionId'; collectionPageDataId.id ? collectionPageDataId.id
+															: albumCollection[0].id"/>
+		<bind name="entityDH" value="'collectionEntity'; newCollectionId"/>
 		<styleClass value="$Fullsize"/>
 		<block>
+			<styleClass value="$MiddleAligned"/>
 			<style>
-				<width value="100%"/>
-				<marginLeft value="10sw"/>
-				<marginTop value="720:40,1080:70ah"/>
+				<marginTop value="7sh"/>
 			</style>
-			<block>
-				<styleClass value="$MiddleAligned"/>
-				<bind name="instance" value="'CollectionCarouselAndContent'; { _selectedAlbumID: id }"/>
-			</block>
+			<bind name="instance" value="'CollectionCarouselAndContent'; { _selectedAlbumID: collectionEntity.collectionAlbum.id}"/>
 		</block>
 	</block>
 	<block className="CollectionCarouselAndContent">
@@ -41419,18 +41720,18 @@
 		<bind name="watchDH" value="'inSubscription';		['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.inSubscription"/>
 		<bind name="watchDH" value="'subscriptionEnable';	['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.subscriptionEnable"/>
 		<bind name="watchDH" value="'isFull';				['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.isFull"/>
-		<bind name="watchDH" value="'cardsCollection';		[]; collectionEntity.collectionAlbum.cards"/>
-		<bind name="watchDH" value="'subAlbums';				[]; collectionEntity.collectionAlbum.subAlbums"/>
-		<bind name="watchDH" value="'albumID';			[]; subCollectionEntity.collectionSubAlbum.albumID"/>
-		<bind name="watchDH" value="'name';				[]; subCollectionEntity.collectionSubAlbum.name"/>
-		<bind name="watchDH" value="'subAlbumID';		[]; subCollectionEntity.collectionSubAlbum.subAlbumID"/>
-		<bind name="watchDH" value="'description';		[]; subCollectionEntity.collectionSubAlbum.description"/>
-		<bind name="watchDH" value="'cardsSubCollection';[]; subCollectionEntity.collectionSubAlbum.cards"/>
-		<bind name="watchDH" value="'rewards';			[]; subCollectionEntity.collectionSubAlbum.rewards"/>
+		<bind name="watchDH" value="'cardsCollection';		['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.cards"/>
+		<bind name="watchDH" value="'subAlbums';				['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.subAlbums"/>
+		<bind name="watchDH" value="'albumID';				['subCollectionEntity.collectionSubAlbum.evUpdate']; subCollectionEntity.collectionSubAlbum.albumID"/>
+		<bind name="watchDH" value="'name';					['subCollectionEntity.collectionSubAlbum.evUpdate']; subCollectionEntity.collectionSubAlbum.name"/>
+		<bind name="watchDH" value="'subAlbumID';			['subCollectionEntity.collectionSubAlbum.evUpdate']; subCollectionEntity.collectionSubAlbum.subAlbumID"/>
+		<bind name="watchDH" value="'description';			['subCollectionEntity.collectionSubAlbum.evUpdate']; subCollectionEntity.collectionSubAlbum.description"/>
+		<bind name="watchDH" value="'cardsSubCollection';	['subCollectionEntity.collectionSubAlbum.evUpdate']; subCollectionEntity.collectionSubAlbum.cards"/>
+		<bind name="watchDH" value="'rewards';				['subCollectionEntity.collectionSubAlbum.evUpdate']; subCollectionEntity.collectionSubAlbum.rewards"/>
 		<bind name="var" value="{windowAppearLag: 0.2}"/>
 		<bind name="catch" value="'selectedPageChanged'"/>
 		<style>
-			<width value="1280:1000,1920:1400aw"/>
+			<width value="1280:900,1920:1400aw"/>
 		</style>
 		<block>
 			<bind name="appear" value="'addedToStage'; 0.15; windowAppearLag + 0 * 0.075; {alpha: 0, top: 10}; {alpha: 1, top: 0}; 1"/>
@@ -41508,17 +41809,21 @@
 				<flow value="horizontal"/>
 			</style>
 		</block>
+		<bind name="watch" value="'currentCollectionCards'; (subAlbums.length &gt; 0) ? cardsSubCollection : cardsCollection"/>
+		<bind name="var" value="{ needRepeatUpdate: false }"/>
+		<bind name="dispatch" value="'_selectedAlbumID' + varChanged; 'selectedAlbumChangedEv'; null; 2"/>
+		<bind name="dispatch" value="'collectionPageID' + varChanged; 'selectedAlbumChangedEv'; null; 2"/>
+		<bind name="catch" value="'selectedAlbumChangedEv'; { needRepeatUpdate: true }"/>
+		<bind name="dispatch" value="'selectedAlbumChangedEv'; 'selectedAlbumChangedDelayed'; {}; 2; 0.1"/>
+		<bind name="catch" value="'selectedAlbumChangedDelayed'; { needRepeatUpdate: false }"/>
 		<block>
+			<bind name="appear" value="'addedToStage'; 0.15; windowAppearLag + 1 * 0.075; {alpha: 0, top: 10}; {alpha: 1, top: 0}; 1"/>
+			<bind name="appear" value="'startHide'; 0.15; 1 * 0.055; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
 			<style>
 				<width value="100%"/>
 			</style>
 			<block>
-				<style>
-					<width value="100%"/>
-					<height value="100%"/>
-					<position value="absolute"/>
-					<marginTop value="-1px"/>
-				</style>
+				<styleClass value="$FullsizeAbsolute"/>
 				<block className="BlurMapCustom">
 					<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
 					<styleClass value="$FullsizeAbsolute"/>
@@ -41534,83 +41839,65 @@
 					</block>
 				</block>
 				<block className="gradient_half_sphere" type="native">
-					<style>
-						<width value="100%"/>
-						<height value="100%"/>
-					</style>
+					<styleClass value="$Fullsize"/>
 				</block>
 			</block>
 			<block>
-				<bind name="appear" value="'addedToStage'; 0.15; windowAppearLag + 1 * 0.075; {alpha: 0, top: 10}; {alpha: 1, top: 0}; 1"/>
-				<bind name="appear" value="'startHide'; 0.15; 1 * 0.055; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
+				<bind name="watch" value="'bigCards'; currentCollectionCards.length &lt;= 4"/>
 				<style>
 					<width value="100%"/>
 				</style>
 				<block>
+					<bind name="appear" value="'addedToStage'; 0.15; windowAppearLag + 1 * 0.075; {alpha: 0, top: 10}; {alpha: 1, top: 0}; 1"/>
+					<bind name="appear" value="'startHide'; 0.15; 1 * 0.055; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
 					<style>
-						<width value="1280:700,1920:1060aw"/>
-						<height value="720:416,1000:624ah"/>
+						<width value="1280:650,1920:1060aw"/>
+						<height value="720:420,1080:700ah"/>
 					</style>
+					<bind name="appear" value="'_selectedAlbumID' + varChanged; 0.2; 0.2; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
 					<block>
-						<styleClass value="$Fullsize"/>
-						<bind name="visible" value="subAlbums.length == 0"/>
-						<bind name="appear" value="'_selectedAlbumID' + varChanged; 0.25; 0.25; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
-						<block>
-							<style>
-								<flow value="htile"/>
-								<align value="center"/>
-								<width value="100%"/>
-							</style>
-							<bind name="repeat" value="cardsCollection; 'ObjectIcon'; {}"/>
-						</block>
+						<styleClass value="$MiddleAligned"/>
+						<styleClass value="$MiddleVAligned"/>
+						<bind name="appear" value="'collectionPageID' + varChanged; 0.15; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
+						<bind name="instance" value="'CardsCollectionRepeat'; needRepeatUpdate ? null : { 	_bigCards: bigCards,
+																							_currentCollectionCards: currentCollectionCards, 
+																							_collectionPageID: collectionPageID}"/>
 					</block>
 					<block>
-						<styleClass value="$Fullsize"/>
-						<bind name="visible" value="subAlbums.length &gt;= 1"/>
-						<bind name="appear" value="'_selectedAlbumID' + varChanged; 0.15; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
-						<block>
-							<styleClass value="$Fullsize"/>
-							<bind name="appear" value="'collectionPageID' + varChanged; 0.1; 0.1; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
-							<block>
-								<styleClass value="$MiddleVAligned"/>
-								<style>
-									<flow value="htile"/>
-									<align value="center"/>
-									<width value="100%"/>
-								</style>
-								<bind name="repeat" value="cardsSubCollection; 'ObjectIcon'; { _collectionPageID: collectionPageID }"/>
-							</block>
-						</block>
-						<block>
-							<styleClass value="$Fullsize"/>
-							<block>
-								<styleClass value="$MiddleAligned"/>
-								<block>
-									<bind name="repeat" value="subAlbums; 'RadioButtonControl'; { _collectionPageID: collectionPageID }"/>
-									<style>
-										<flow value="horizontal"/>
-									</style>
-								</block>
-							</block>
-						</block>
+						<styleClass value="$MiddleAligned"/>
+						<style>
+							<position value="absolute"/>
+							<bottom value="-30px"/>
+						</style>
+						<bind name="visible" value="subAlbums.length &gt; 0"/>
+						<bind name="repeat" value="subAlbums; 'RadioButtonControl'; { _collectionPageID: collectionPageID }"/>
+						<style>
+							<flow value="horizontal"/>
+						</style>
 					</block>
 				</block>
 				<block>
+					<bind name="appear" value="'addedToStage'; 0.15; windowAppearLag + 2 * 0.075; {alpha: 0, top: 10}; {alpha: 1, top: 0}; 1"/>
+					<bind name="appear" value="'startHide'; 0.15; 2 * 0.055; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
+					<bind name="appear" value="'_selectedAlbumID' + varChanged; 0.2; 0.2; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
 					<style>
 						<position value="absolute"/>
 						<right value="0px"/>
 					</style>
-					<bind name="appear" value="'_selectedAlbumID' + varChanged; 0.15; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
 					<block>
 						<style>
-							<width value="1280:300,1920:340aw"/>
-							<height value="720:424,1000:624ah"/>
+							<width value="1280:250,1920:340aw"/>
+							<height value="720:420,1080:700ah"/>
 						</style>
 						<bind name="instance" value="'CollectionDescription'; { _collectionID: _selectedAlbumID, _collectionPageID: collectionPageID }"/>
 					</block>
 					<block>
 						<bind name="visible" value="subscriptionEnable &amp;&amp; !isFull"/>
 						<styleClass value="$MiddleAligned"/>
+						<style>
+							<position value="absolute"/>
+							<bottom value="-30px"/>
+						</style>
 						<bind name="instance" value="'SubscriptionSwitcher'; { _selectedAlbumID: _selectedAlbumID }"/>
 					</block>
 				</block>
@@ -41620,13 +41907,22 @@
 			</block>
 		</block>
 	</block>
+	<block className="CardsCollectionRepeat">
+		<style>
+			<flow value="htile"/>
+			<align value="center"/>
+		</style>
+		<bind name="style" value="'width'; (_bigCards == true) ? '1280:600,1920:700aw' : '1280:650,1920:1060aw'"/>
+		<bind name="repeat" value="_currentCollectionCards; 'CollectionCardItem'; { 	_collectionPageID: _collectionPageID,
+																	_bigCards: _bigCards }"/>
+	</block>
 	<block className="CollectionCarouselItem">
 		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
 		<bind name="dataRefDH" value="'collectionEntity'; '$dataRef.ref'"/>
-		<bind name="watchDH" value="'id';			[]; collectionEntity.collectionAlbum.id"/>
-		<bind name="watchDH" value="'name';			[]; collectionEntity.collectionAlbum.name"/>
-		<bind name="watchDH" value="'comingSoon';	['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.comingSoon"/>
-		<bind name="watchDH" value="'isSeenCards';	['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.isSeenCards"/>
+		<bind name="watchDH" value="'id';					['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.id"/>
+		<bind name="watchDH" value="'name';					['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.name"/>
+		<bind name="watchDH" value="'comingSoon';			['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.comingSoon"/>
+		<bind name="watchDH" value="'isSeenCards';			['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.isSeenCards"/>
 		<bind name="watchDH" value="'inSubscription';		['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.inSubscription"/>
 		<bind name="watchDH" value="'subscriptionEnable';	['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.subscriptionEnable"/>
 		<bind name="watchDH" value="'isFull';				['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.isFull"/>
@@ -41634,11 +41930,12 @@
 			<style>
 				<width value="150px"/>
 				<height value="120px"/>
+				<backgroundColor value="0x01000000"/>
 			</style>
 			<bind name="soundSet" value="'default_button'"/>
 			<bind name="watch" value="'collectionNameQuotes'; (tr('IDS_' +  toUpperCase(name) + '_QUOTES'))"/>
 			<bind name="tooltip" value="'SimpleTooltip'; { tooltipText: comingSoon ? 'IDS_TOOLTIP_LEVEL_COMING_SOON' : subst('IDS_COLLECTION_NAME', [], { _collectionName: collectionNameQuotes })}"/>
-			<bind name="dispatch" value="'click'; comingSoon ? null : 'selectedAlbumChanged'; { _collectionID: collectionEntity.id }"/>
+			<bind name="action" value="'click'; comingSoon ? null : 'goToReward'; {	type: 'Lootbox', subtype: name, subAlbum: -1 }"/>
 			<bind name="transition" value="(id == _selectedAlbumID); 0.1; { scaleX: 0.8, scaleY: 0.8, top: 15, left: 15 }; { scaleX: 1, scaleY: 1, top: 0, left: 0 }"/>
 			<block>
 				<styleClass value="$Fullsize"/>
@@ -41662,14 +41959,15 @@
 				<bind name="visible" value="isFull"/>
 				<style>
 					<position value="absolute"/>
-					<top value="30%"/>
+					<top value="35%"/>
 					<left value="35%"/>
+					<alpha value="0.9"/>
 					<hitTest value="false"/>
 				</style>
 				<block className="icon_issued" type="native">
 					<bind name="scaleX" value="0.8"/>
 					<bind name="scaleY" value="0.8"/>
-					<bind name="rotation" value="-10"/>
+					<bind name="rotation" value="-3"/>
 					<bind name="gotoAndStop!" value="'issued'"/>
 					<innerBind elementName="item.item" name="text" value="toUpperCase(tr('IDS_COLLECTION_FULL_STAMP'))"/>
 				</block>
@@ -41719,98 +42017,108 @@
 			<block className="scroll_arrow" type="native"/>
 		</block>
 	</block>
-	<block className="ObjectIcon">
+	<block className="CollectionCardItem">
 		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
 		<bind name="primaryEntityDH" value="'collectionCardEntity'; CC.collectionCard; $value"/>
 		<bind name="primaryEntityDH" value="'collectionEntity'; CC.collectionAlbum; collectionId"/>
 		<bind name="entityDH" value="'subCollectionEntity'; _collectionPageID"/>
-		<bind name="watchDH" value="'name';					[]; collectionCardEntity.collectionCard.name"/>
-		<bind name="watchDH" value="'collectionId';			[]; collectionCardEntity.collectionCard.collectionId"/>
-		<bind name="watchDH" value="'isOwned';				['collectionCardEntity.collectionCard.evOwn']; collectionCardEntity.collectionCard.isOwned"/>
-		<bind name="watchDH" value="'isSeen';				['collectionCardEntity.collectionCard.evUpdate']; collectionCardEntity.collectionCard.isSeen"/>
-		<bind name="watchDH" value="'isPasted';				['collectionCardEntity.collectionCard.evPasted']; collectionCardEntity.collectionCard.isPasted"/>
-		<bind name="watchDH" value="'unPastedCardIndexSubColl';	['subCollectionEntity.collectionSubAlbum.evUpdate']; subCollectionEntity.collectionSubAlbum.unPastedCardIndex"/>
+		<bind name="watchDH" value="'name';						['collectionCardEntity.collectionCard.evUpdate']; collectionCardEntity.collectionCard.name"/>
+		<bind name="watchDH" value="'collectionId';				['collectionCardEntity.collectionCard.evUpdate']; collectionCardEntity.collectionCard.collectionId"/>
+		<bind name="watchDH" value="'isSeen';					['collectionCardEntity.collectionCard.evUpdate']; collectionCardEntity.collectionCard.isSeen"/>
+		<bind name="watchDH" value="'isOwned';					['collectionCardEntity.collectionCard.evOwn']; collectionCardEntity.collectionCard.isOwned"/>
+		<bind name="watchDH" value="'isPasted';					['collectionCardEntity.collectionCard.evPasted']; collectionCardEntity.collectionCard.isPasted"/>
 		<bind name="watchDH" value="'unPastedCardIndex';			['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.unPastedCardIndex"/>
 		<bind name="watchDH" value="'congratulationShown';		['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.congratulationShown"/>
-		<bind name="dispatch" value="'unPastedCardIndex' 		+ varChanged; ($value == unPastedCardIndex) 	? 'startFlameAnimation' : null; { flameStarted: true }; 2; 0.3"/>
-		<bind name="dispatch" value="'unPastedCardIndexSubColl' 	+ varChanged; ($value == unPastedCardIndexSubColl) 	? 'startFlameAnimation' : null; { flameStarted: true }; 2; 0.3"/>
-		<bind name="name" value="isPasted ? 'card_pasted_' + name : 'card_' + name"/>
-		<bind name="soundSet" value="'default_button'"/>
+		<bind name="watchDH" value="'unPastedCardIndexSubColl';	['subCollectionEntity.collectionSubAlbum.evUpdate']; subCollectionEntity.collectionSubAlbum.unPastedCardIndex"/>
+		<bind name="watchDH" value="'cardsSubCollection';		['subCollectionEntity.collectionSubAlbum.evUpdate']; subCollectionEntity.collectionSubAlbum.cards"/>
+		<bind name="watchDH" value="'congratulationShownSubColl';['subCollectionEntity.collectionSubAlbum.evUpdate']; subCollectionEntity.collectionSubAlbum.congratulationShown"/>
+		<bind name="dispatch" value="'unPastedCardIndex' 		+ varChanged; ($value == unPastedCardIndex) 		? 'startFlameAnimation' : null; { flameStarted: true }; 2; 0.2"/>
+		<bind name="dispatch" value="'unPastedCardIndexSubColl' 	+ varChanged; ($value == unPastedCardIndexSubColl) 	? 'startFlameAnimation' : null; { flameStarted: true }; 2; 0.2"/>
 		<bind name="catch" value="'startUnglowAnimation'"/>
 		<bind name="catch" value="'startFlameAnimation'"/>
 		<bind name="var" value="{ unglowStarted: false }"/>
 		<bind name="var" value="{ flameStarted: false }"/>
+		<bind name="stageSize"/>
+		<bind name="watch" value="'smallResolution'; 	(stageWidth &lt;= 1300) || (stageHeight &lt;= 800)"/>
+		<bind name="watch" value="'mediumResolution'; 	(stageWidth &lt;= 1440) || (stageHeight &lt;= 900)"/>
+		<bind name="watch" value="'normalResolution'; 	(stageWidth &lt;= 1600) || (stageHeight &lt;= 960)"/>
+		<bind name="watch" value="'cardMargins';		smallResolution		? _bigCards 	? '20px' : '12px' :
+									mediumResolution 	? _bigCards 	? '30px' : '16px' :
+									normalResolution 	? _bigCards 	? '40px' : '18px'
+														: _bigCards 	? '50px'
+																		: '20px'"/>
+		<bind name="watch" value="'cardSizeSmall'; 	smallResolution		? '80px' :
+									mediumResolution 	? '90px' :
+									normalResolution 	? '100px'
+														: '120px'"/>
+		<bind name="watch" value="'cardSizeBig'; 	smallResolution		? '170px' :
+									mediumResolution	? '180px' :
+									normalResolution 	? '200px'
+														: '220px'"/>
+		<bind name="watch" value="'cardSize'; _bigCards ? cardSizeBig : cardSizeSmall"/>
+		<bind name="name" value="isPasted ? 'card_pasted_' + name : 'card_' + name"/>
+		<bind name="soundSet" value="'default_button'"/>
+		<bind name="tooltip" value="'CollectionCardItemTooltip'; { _objID: $value }"/>
+		<bind name="action" value="'rollOver'; isPasted 	? 'CollectionProxy.makeCardSeen' : null; { cardID: $value }"/>
+		<bind name="request" value="'click'; isOwned 	? isPasted 	? 'showPreviewWindow' 
+													: null
+										: 'buyObjectWindow'; { objID: $value }"/>
+		<bind name="style" value="'width';  cardSize"/>
+		<bind name="style" value="'height'; cardSize"/>
+		<bind name="style" value="'marginTop'; 		cardMargins"/>
+		<bind name="style" value="'marginBottom';	cardMargins"/>
+		<bind name="style" value="'marginLeft'; 		cardMargins"/>
+		<bind name="style" value="'marginRight'; 	cardMargins"/>
 		<block>
+			<styleClass value="$FullsizeAbsolute"/>
+			<style>
+				<backgroundSize value="cover"/>
+			</style>
+			<bind name="style" value="'backgroundImage'; ((isPasted || unglowStarted) &amp;&amp; isOwned) 	? 'url:../collections/object_icons/small/' + name + '.png'
+																					: 'url:../collections/object_icons/small/' + name + '_des.png'"/>
+		</block>
+		<block>
+			<styleClass value="$FullsizeAbsolute"/>
+			<style>
+				<backgroundSize value="cover"/>
+			</style>
+			<bind name="transition" value="rollOver &amp;&amp; isPasted; 0.15; {alpha: 0}; {alpha: 0.1}"/>
+			<bind name="style" value="'backgroundImage'; 'url:../collections/object_icons/small/' + name + '_over.png'"/>
+		</block>
+		<block>
+			<bind name="visible" value="flameStarted == true"/>
+			<styleClass value="$FullsizeAbsolute"/>
+			<style>
+				<backgroundSize value="cover"/>
+				<alpha value="0.7"/>
+			</style>
+			<bind name="appear" value="'addedToStage'; 0; 0; {alpha: 0.7}; {alpha: 0.7}"/>
+			<bind name="appear" value="'startUnglowAnimation'; 0.2; 0; {alpha: 0.7}; {alpha: 0}"/>
+			<bind name="style" value="'backgroundImage'; 'url:../collections/object_icons/small/' + name + '_over.png'"/>
+		</block>
+		<block>
+			<styleClass value="$MiddleAligned"/>
+			<styleClass value="$MiddleVAligned"/>
 			<style>
 				<position value="absolute"/>
 				<hitTest value="false"/>
 			</style>
-			<styleClass value="$MiddleAligned"/>
-			<styleClass value="$MiddleVAligned"/>
 			<block className="sparks_collection_animation" type="native">
-				<bind name="gotoAndPlay!" value="startFlameAnimation ? 'unpasted-pasted' : 'unpasted'"/>
+				<bind name="scaleX" value="_bigCards ? 1.6 : 1"/>
+				<bind name="scaleY" value="_bigCards ? 1.6 : 1"/>
+				<bind name="gotoAndPlay!" value="(flameStarted == true) ? 'unpasted-pasted' : 'unpasted'"/>
 			</block>
 		</block>
 		<block>
-			<style>
-				<marginTop value="720:12,1080:20ah"/>
-				<marginBottom value="720:12,1080:20ah"/>
-				<marginLeft value="1280:12,1920:20aw"/>
-				<marginRight value="1280:12,1920:20aw"/>
-			</style>
-			<bind name="stageSize"/>
-			<bind name="watch" value="'objectHeight'; objectWidth"/>
-			<bind name="watch" value="'objectWidth'; (stageWidth &lt;= 1366) || (stageHeight &lt;= 768)	? '80px' :
-									(stageWidth &lt;= 1600) || (stageHeight &lt;= 900)	? '95px' 
-																					: '120px'"/>
-			<block>
-				<bind name="tooltip" value="'ObjectItemTooltip'; { _objID: $value }"/>
-				<bind name="action" value="'rollOver'; isPasted ? 'CollectionProxy.makeCardSeen' : null; { cardID: $value }"/>
-				<bind name="request" value="'click'; isOwned 	? isPasted 	? 'showPreviewWindow' 
-															: null
-												: 'buyObjectWindow'; { objID: $value }"/>
-				<block>
-					<style>
-						<backgroundSize value="cover"/>
-					</style>
-					<bind name="style" value="'width';  objectWidth"/>
-					<bind name="style" value="'height'; objectHeight"/>
-					<bind name="style" value="'alpha'; (rollOver &amp;&amp; !(isPasted)) ? 1 : 0.8"/>
-					<bind name="style" value="'backgroundImage'; ((isPasted || unglowStarted) &amp;&amp; isOwned) 	? 'url:../collections/object_icons/small/' + name + '.png'
-																							: 'url:../collections/object_icons/small/' + name + '_des.png'"/>
-				</block>
-				<block>
-					<bind name="transition" value="rollOver &amp;&amp; isPasted; 0.15; {alpha: 0}; {alpha: 0.1}"/>
-					<style>
-						<backgroundSize value="cover"/>
-					</style>
-					<styleClass value="$FullsizeAbsolute"/>
-					<bind name="style" value="'width';  objectWidth"/>
-					<bind name="style" value="'height'; objectHeight"/>
-					<bind name="style" value="'backgroundImage'; 'url:../collections/object_icons/small/' + name + '_over.png'"/>
-				</block>
-				<block>
-					<bind name="visible" value="flameStarted"/>
-					<styleClass value="$FullsizeAbsolute"/>
-					<style>
-						<backgroundSize value="cover"/>
-						<alpha value="0.3"/>
-					</style>
-					<bind name="style" value="'width';  objectWidth"/>
-					<bind name="style" value="'height'; objectHeight"/>
-					<bind name="appear" value="'startUnglowAnimation'; 0.2; 0; {alpha: 0.8}; {alpha: 0}"/>
-					<bind name="style" value="'backgroundImage'; 'url:../collections/object_icons/small/' + name + '_over.png'"/>
-				</block>
-			</block>
-		</block>
-		<block>
+			<styleClass value="$MiddleAligned"/>
+			<styleClass value="$MiddleVAligned"/>
 			<style>
 				<position value="absolute"/>
 				<hitTest value="false"/>
 			</style>
-			<styleClass value="$MiddleAligned"/>
-			<styleClass value="$MiddleVAligned"/>
 			<block className="flame_collection_animation" type="native">
+				<bind name="scaleX" value=" _bigCards ? 1.6 : 1"/>
+				<bind name="scaleY" value=" _bigCards ? 1.6 : 1"/>
 				<bind name="dispatch" value="'startUnglowAnimationTL'; 'startUnglowAnimation'; { unglowStarted: true }; 2"/>
 				<bind name="action" value="'pasteCardAnimationFinishedTL'; 'CollectionProxy.pasteCard'; { cardID: $value }"/>
 				<bind name="catch" value="'pasteCardAnimationFinishedTL'; { flameStarted: false, unglowStarted: false }"/>
@@ -41820,8 +42128,8 @@
 		<block>
 			<style>
 				<position value="absolute"/>
-				<top value="20px"/>
-				<left value="20px"/>
+				<top value="10px"/>
+				<left value="10px"/>
 			</style>
 			<block className="icon_sticker_new" type="native">
 				<bind name="fade" value="isPasted &amp;&amp; !isSeen; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
@@ -41831,9 +42139,11 @@
 			</block>
 		</block>
 		<bind name="handleEventDH" value="'collectionEntity.collectionAlbum.evFull'; 'haveAllCards'"/>
-		<bind name="request" value="'haveAllCards'; (congratulationShown == true) ? null : 'openModalCongratulationWindow'; { collectionID: collectionId }"/>
+		<bind name="request" value="'haveAllCards'; (congratulationShown == true) ? null : 'openCongratulationWindowCollection'; { collectionID: collectionId }"/>
+		<bind name="handleEventDH" value="'subCollectionEntity.collectionSubAlbum.evFull'; 'haveAllCardsSub'"/>
+		<bind name="request" value="'haveAllCardsSub'; (congratulationShownSubColl == true) ? null : 'openCongratulationWindowSubAlbum'; { collectionID: collectionId, collectionPageID: _collectionPageID }"/>
 	</block>
-	<block className="ObjectItemTooltip">
+	<block className="CollectionCardItemTooltip">
 		<bind name="primaryEntityDH" value="'collectionCardEntity'; CC.collectionCard; _objID"/>
 		<bind name="watchDH" value="'name';			[]; collectionCardEntity.collectionCard.name"/>
 		<bind name="watchDH" value="'collectionId';	[]; collectionCardEntity.collectionCard.collectionId"/>
@@ -42026,30 +42336,27 @@
 			<bind name="instance" value="'CollectionRewardAndProgress'; { _collectionID: _collectionID }"/>
 		</block>
 		<block>
-			<bind name="watch" value="'textHeight'; 	(stageHeight &lt;= 768) 	? (subAlbums.length &gt;= 1)	? '180px'
-																						: '250px' :
-									(stageHeight &lt;= 850)	? '250px'
-									(stageHeight &lt;= 900)	: '320px'"/>
 			<style>
 				<width value="100%"/>
 			</style>
 			<styleClass value="$CollectionMarginTop"/>
-			<bind name="style" value="'height'; textHeight"/>
 			<block>
-				<styleClass value="$Fullsize"/>
 				<styleClass value="$DefaultScrollBar"/>
 				<style>
 					<overflow value="scroll"/>
+					<width value="100%"/>
 				</style>
+				<bind name="style" value="'height'; (subAlbums.length &gt; 0) ? '720:170,1080:370ah' : '720:280,1080:460ah'"/>
 				<block type="text">
-					<bind name="style" value="'maxWidth'; (stageWidth &gt;= 1600) ? '330' : '290'"/>
+					<bind name="style" value="'maxWidth'; (stageWidth &gt;= 1600) ? '330' : '240'"/>
 					<bind name="class" value="(stageWidth &gt;= 1600) ? '$TextHeaderBigDefault' : '$TextDefault'"/>
 					<bind name="text" value="description"/>
 				</block>
 			</block>
 		</block>
 		<block>
-			<bind name="visible" value="subAlbums.length &gt;= 1"/>
+			<bind name="appear" value="'_collectionPageID' + varChanged; 0.15; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
+			<bind name="visible" value="subAlbums.length &gt; 0"/>
 			<styleClass value="$CollectionMarginTop"/>
 			<style>
 				<width value="100%"/>
@@ -42096,7 +42403,7 @@
 	</block>
 	<block className="CollectionRewardAndProgress">
 		<bind name="primaryEntityDH" value="'collectionEntity'; CC.collectionAlbum; _collectionID"/>
-		<bind name="watchDH" value="'rewards';		[]; collectionEntity.collectionAlbum.rewards"/>
+		<bind name="watchDH" value="'rewards';		['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.rewards"/>
 		<bind name="watchDH" value="'duplicates';	['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.duplicates"/>
 		<bind name="watchDH" value="'ownCards';		['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.ownCards"/>
 		<bind name="watchDH" value="'cards';			['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.cards"/>
@@ -42115,7 +42422,10 @@
 				</style>
 				<bind name="text" value="'IDS_COLLECTION_CARDS_AMOUNT'"/>
 			</block>
-			<bind name="instance" value="'ScoreRatioCounter'; { _playerPointsCounter: ownCards.length, _totalPointsCounter: cards.length }"/>
+			<bind name="instance" value="'ScoreRatioCounter'; { 	_playerPointsCounter: ownCards.length, 
+												_totalPointsCounter: cards.length,
+												_tooltipTextPlayerResult: 'IDS_COLLECTION_PLAYAER_POINTS_COUNTER',
+												_tooltipTextTotalResult: 'IDS_COLLECTION_TOTAL_POINTS_COUNTER' }"/>
 			<style>
 				<flow value="horizontal"/>
 			</style>
@@ -42157,9 +42467,10 @@
 				<marginTop value="-6px"/>
 				<position value="absolute"/>
 			</style>
-			<bind name="scaleX" value="0.7"/>
-			<bind name="scaleY" value="0.7"/>
-			<block className="icon_giftbox" type="native"/>
+			<block className="icon_giftbox" type="native">
+				<bind name="scaleY" value="0.7"/>
+				<bind name="scaleX" value="0.7"/>
+			</block>
 			<block>
 				<bind name="visible" value="ownCards.length == cards.length"/>
 				<style>
@@ -42188,7 +42499,7 @@
 		</style>
 		<block type="text">
 			<style>
-				<maxWidth value="300"/>
+				<maxWidth value="200"/>
 			</style>
 			<styleClass value="$TextLargeHeaderBold"/>
 			<bind name="text" value="name"/>
@@ -42206,7 +42517,10 @@
 				<bind name="text" value="'IDS_COLLECTION_CARDS_AMOUNT'"/>
 			</block>
 			<block>
-				<bind name="instance" value="'ScoreRatioCounter'; { _playerPointsCounter: ownCards.length, _totalPointsCounter: cards.length }"/>
+				<bind name="instance" value="'ScoreRatioCounter'; { 	_playerPointsCounter: ownCards.length, 
+													_totalPointsCounter: cards.length,
+													_tooltipTextPlayerResult: 'IDS_COLLECTION_PLAYAER_POINTS_COUNTER',
+													_tooltipTextTotalResult: 'IDS_COLLECTION_TOTAL_POINTS_COUNTER' }"/>
 			</block>
 			<style>
 				<flow value="horizontal"/>
@@ -42215,7 +42529,7 @@
 		<block>
 			<bind name="tooltip" value="'RewardContainerTooltip'; { _rewards: rewards, _tooltipHeader: 'IDS_REWARD_FOR_SUBCOLLECTION', _isDH20: true}"/>
 			<style>
-				<right value="30px"/>
+				<right value="0px"/>
 				<position value="absolute"/>
 			</style>
 			<styleClass value="$MiddleVAligned"/>
@@ -42236,41 +42550,6 @@
 					<bind name="gotoAndStop!" value="'issued'"/>
 				</block>
 			</block>
-		</block>
-	</block>
-	<block className="ScoreRatioCounter">
-		<style>
-			<flow value="horizontal"/>
-		</style>
-		<block>
-			<bind name="style" value="'alpha'; (_playerPointsCounter == 0) ? 0.5 : 1"/>
-			<block type="text">
-				<bind name="class" value="'$TextHeaderWhiteBold'"/>
-				<bind name="text" value="_playerPointsCounter"/>
-			</block>
-		</block>
-		<block>
-			<style>
-				<alpha value="0.7"/>
-			</style>
-			<block type="text">
-				<style>
-					<marginTop value="1px"/>
-				</style>
-				<bind name="class" value="'$TextHeaderBold'"/>
-				<bind name="text" value="'/'"/>
-			</block>
-			<block type="text">
-				<style>
-					<marginTop value="2px"/>
-					<marginLeft value="-1px"/>
-				</style>
-				<bind name="class" value="'$TextHeaderBold'"/>
-				<bind name="text" value="_totalPointsCounter"/>
-			</block>
-			<style>
-				<flow value="horizontal"/>
-			</style>
 		</block>
 	</block>
 	<block className="SubscriptionSwitcher">
@@ -42360,7 +42639,10 @@
 		<bind name="dataRefDH" value="'collectionPageButtonID'; '$dataRef.ref'"/>
 		<bind name="entityDH" value="'subCollectionEntity'; collectionPageButtonID"/>
 		<bind name="watchDH" value="'isSeenCards'; ['subCollectionEntity.collectionSubAlbum.evUpdate']; subCollectionEntity.collectionSubAlbum.isSeenCards"/>
-		<bind name="dispatch" value="'click'; 'selectedPageChanged'; { pageID: collectionPageButtonID }"/>
+		<bind name="watchDH" value="'albumId'; ['subCollectionEntity.collectionSubAlbum.evUpdate']; subCollectionEntity.collectionSubAlbum.albumID"/>
+		<bind name="primaryEntityDH" value="'collectionEntity'; CC.collectionAlbum; albumId"/>
+		<bind name="watchDH" value="'albumName'; ['collectionEntity.collectionAlbum.evUpdate']; collectionEntity.collectionAlbum.name"/>
+		<bind name="action" value="'click'; 'goToReward'; {type: 'Lootbox', subtype: albumName, subAlbum: $index}"/>
 		<style>
 			<marginLeft value="12px"/>
 			<marginRight value="12px"/>
@@ -42681,10 +42963,10 @@
 		</block>
 	</block>
 	<block className="ShipHeaderModuleTree">
+		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 		<bind name="watchDH" value="'accountFreeXP';		['resourceEntity.accountResource.evChangedFreeXP'];	resourceEntity.accountResource.freeXP"/>
 		<bind name="watchDH" value="'accountGold';		['resourceEntity.accountResource.evChangedGold'];	resourceEntity.accountResource.gold"/>
-		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
 		<style>
 			<flow value="horizontal"/>
 			<width value="100%"/>
@@ -42835,24 +43117,24 @@
 		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate', 'shipEntity.ship.evCurrentSkinChanged']; shipEntity.ship"/>
 		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
 		<bind name="watch" value="'defaultButtonCostSmallData'; _isOwned 	? null
-																: !(_dependencyResearched || _isExplored) ? null
-																: !(_isExplored) &amp;&amp; (_expDeficit &lt;= 0) &amp;&amp; (_group == 'upgradeable' || _group == 'upgradeableExclusive') ? { _label: toUpperCase(tr('IDS_DO_RESEARCH')), priceInfo: (_totalCostXP == $parent.shipExplorePrice.prices[0].finalPrice ? $parent.shipExplorePrice.prices[0] : { finalPrice: _totalCostXP, currency: 'exp' }), _action: (isLazyLogin &amp;&amp; (shipInfo.level &gt; realmConstants.lazyAccountMaxShipTier)) ? null : 'researchShip', _actionParams: { shipId: _shipId }, _enabled: true, _showDiscountTag:true }
-																: (_isExplored) &amp;&amp; (_creditsDeficit &lt;= 0) &amp;&amp; !(_isPremium) ? { _label: toUpperCase(tr('IDS_DO_PURCHASE')), priceInfo: $parent.shipBuyPrice.prices[0], _action: (isLazyLogin &amp;&amp; (shipInfo.level &gt; realmConstants.lazyAccountMaxShipTier)) ? null : 'purchaseShip', _actionParams: { shipId: _shipId }, _enabled: (_creditsDeficit &lt;= 0), _showDiscountTag:true }
-																: _isExplored &amp;&amp; _isPremium  &amp;&amp; (accountGold - $parent.shipBuyPrice.prices[0].finalPrice) &gt;= 0 ? { _label: toUpperCase(tr('IDS_DO_PURCHASE')), priceInfo: $parent.shipBuyPrice.prices[0], _action: (isLazyLogin &amp;&amp; (shipInfo.level &gt; realmConstants.lazyAccountMaxShipTier)) ? null : 'purchaseShip', _actionParams: { shipId: _shipId }, _enabled: ((accountGold - _costGold) &gt;= 0), _showDiscountTag:true }
-																: null "/>
-		<bind name="watch" value="'priceTagWithLabelData'; _isOwned ? null
+															: !(_dependencyResearched || _isExplored) ? null
+															: !(_isExplored) &amp;&amp; (_expDeficit &lt;= 0) &amp;&amp; (_group == 'upgradeable' || _group == 'upgradeableExclusive') ? { _label: toUpperCase(tr('IDS_DO_RESEARCH')), priceInfo: (_totalCostXP == _explorePriceFinal ? _explorePrice : { finalPrice: _totalCostXP, currency: 'exp' }), _action: (isLazyLogin &amp;&amp; (shipInfo.level &gt; realmConstants.lazyAccountMaxShipTier)) ? null : 'researchShip', _actionParams: { shipId: _shipId }, _enabled: true, _showDiscountTag:true }
+															: (_isExplored) &amp;&amp; (_creditsDeficit &lt;= 0) &amp;&amp; !(_isPremium) ? { _label: toUpperCase(tr('IDS_DO_PURCHASE')), priceInfo: _buyPrice, _action: (isLazyLogin &amp;&amp; (shipInfo.level &gt; realmConstants.lazyAccountMaxShipTier)) ? null : 'purchaseShip', _actionParams: { shipId: _shipId }, _enabled: (_creditsDeficit &lt;= 0), _showDiscountTag:true }
+															: _isExplored &amp;&amp; _isPremium  &amp;&amp; (accountGold - _buyPriceFinal) &gt;= 0 ? { _label: toUpperCase(tr('IDS_DO_PURCHASE')), priceInfo: _buyPrice, _action: (isLazyLogin &amp;&amp; (shipInfo.level &gt; realmConstants.lazyAccountMaxShipTier)) ? null : 'purchaseShip', _actionParams: { shipId: _shipId }, _enabled: ((accountGold - _costGold) &gt;= 0), _showDiscountTag:true }
+															: null "/>
+		<bind name="watch" value="'priceTagWithLabelData'; _isOwned 	? null
 													: (!(_isExplored) &amp;&amp; !(_dependencyResearched)) || (!(_isExplored) &amp;&amp; _expDeficit &gt; 0)? { priceInfo: { finalPrice: _totalCostXP, currency: 'exp' }, _label: 'IDS_RESEARCH_COST', _small : true}
-													: _isExplored &amp;&amp; _creditsDeficit &gt; 0 &amp;&amp; !(_isPremium) ? { priceInfo: $parent.shipBuyPrice.prices[0], _label: 'IDS_PURCHASE_COST', _small : true}
-													: _isExplored &amp;&amp; _isPremium &amp;&amp; (accountGold - $parent.shipBuyPrice.prices[0].finalPrice) &lt; 0 ? {priceInfo: $parent.shipBuyPrice.prices[0], _label: 'IDS_PURCHASE_COST', _small : true }
+													: _isExplored &amp;&amp; _creditsDeficit &gt; 0 &amp;&amp; !(_isPremium) ? { priceInfo: _buyPrice, _label: 'IDS_PURCHASE_COST', _small : true}
+													: _isExplored &amp;&amp; _isPremium &amp;&amp; (accountGold - _buyPriceFinal) &lt; 0 ? {priceInfo: _buyPrice, _label: 'IDS_PURCHASE_COST', _small : true }
 													: null"/>
-		<bind name="watch" value="'statusLineWithIconData'; _dependencyResearched || _isExplored ? null
-											: { _text: 'IDS_RESEARCH_PREVIOUS_SHIPS', _positive: false, _small: true, _maxWidth: 300}"/>
-		<bind name="watch" value="'priceDeficitData'; _isOwned ? null
-											: !(_dependencyResearched) ? null
-											: !(_isExplored) &amp;&amp; _expDeficit &gt; 0 ? { priceInfo: { finalPrice: _totalCostXP, currency: 'exp' }, _small : true, _tooltipText: 'IDS_TOOLTIP_NO_XP', _deficit: _expDeficit}
-											: _isExplored &amp;&amp; _creditsDeficit &gt; 0 &amp;&amp; !(_isPremium) ? { priceInfo: $parent.shipBuyPrice.prices[0], _label: 'IDS_PURCHASE_COST', _small : true, _tooltipText: 'IDS_TOOLTIP_NO_CREDITS', _deficit: _creditsDeficit}
-											: _isExplored &amp;&amp; _isPremium &amp;&amp; (accountGold - $parent.shipBuyPrice.prices[0].finalPrice) &lt; 0 ? {priceInfo: $parent.shipBuyPrice.prices[0], _label: 'IDS_PURCHASE_COST', _deficit: -(accountGold - $parent.shipBuyPrice.prices[0].finalPrice), _tooltipText: 'IDS_TOOLTIP_NO_GOLD', _small : true }
-											: null"/>
+		<bind name="watch" value="'priceDeficitData'; _isOwned 	? null
+												: !(_dependencyResearched) ? null
+												: !(_isExplored) &amp;&amp; _expDeficit &gt; 0 ? { priceInfo: { finalPrice: _totalCostXP, currency: 'exp' }, _small : true, _tooltipText: 'IDS_TOOLTIP_NO_XP', _deficit: _expDeficit}
+												: _isExplored &amp;&amp; _creditsDeficit &gt; 0 &amp;&amp; !(_isPremium) ? { priceInfo: _buyPrice, _label: 'IDS_PURCHASE_COST', _small : true, _tooltipText: 'IDS_TOOLTIP_NO_CREDITS', _deficit: _creditsDeficit}
+												: _isExplored &amp;&amp; _isPremium &amp;&amp; (accountGold - _buyPriceFinal) &lt; 0 ? {priceInfo: _buyPrice, _label: 'IDS_PURCHASE_COST', _deficit: -(accountGold - _buyPriceFinal), _tooltipText: 'IDS_TOOLTIP_NO_GOLD', _small : true }
+												: null"/>
+		<bind name="watch" value="'statusLineWithIconData'; (_dependencyResearched || _isExplored) 	? null
+																					: { _text: 'IDS_RESEARCH_PREVIOUS_SHIPS', _positive: false, _small: true, _maxWidth: 300}"/>
 		<block>
 			<bind name="visible" value="true"/>
 			<style>
@@ -42895,12 +43177,7 @@
 						<right value="0px"/>
 						<marginTop value="-5px"/>
 					</style>
-					<bind name="instance" value="'PriceDeficit'; _isOwned 	? null
-															: !(_dependencyResearched) ? null
-															: !(_isExplored) &amp;&amp; _expDeficit &gt; 0 ? { priceInfo: { finalPrice: _totalCostXP, currency: 'exp' }, _small : true, _tooltipText: 'IDS_TOOLTIP_NO_XP', _deficit: _expDeficit}
-															: _isExplored &amp;&amp; _creditsDeficit &gt; 0 &amp;&amp; !(_isPremium) ? { priceInfo: $parent.shipBuyPrice.prices[0], _label: 'IDS_PURCHASE_COST', _small : true, _tooltipText: 'IDS_TOOLTIP_NO_CREDITS', _deficit: _creditsDeficit}
-															: _isExplored &amp;&amp; _isPremium &amp;&amp; (accountGold - $parent.shipBuyPrice.prices[0].finalPrice)  &lt; 0 ? {priceInfo: $parent.shipBuyPrice.prices[0], _label: 'IDS_PURCHASE_COST', _deficit: -(accountGold - $parent.shipBuyPrice.prices[0].finalPrice), _tooltipText: 'IDS_TOOLTIP_NO_GOLD', _small : true }
-															: null"/>
+					<bind name="instance" value="'PriceDeficit'; !!priceDeficitData ? priceDeficitData : null"/>
 				</block>
 			</block>
 		</block>
@@ -44162,10 +44439,8 @@
 		<bind name="watchDH" value="'thisShipInfo' + 'Slim'; ['ShipEntity.slimClientComponent.evUpdate']; ShipEntity.slimClientComponent"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'crewsSingleton'; ['dockEntity.crewData.evUpdate']; dockEntity.crewData"/>
-		<bind name="watch" value="'isCrewCompatibleShipBySpecialList'; (crew.shipsToSeat.indexOf(targetShipInfo.fullName) &gt; -1)"/>
 		<bind name="watch" value="'hasSpaceToAssignCrew'; !(targetPlayerShipInfo.crewId) || !(crew.shipID) || crewsSingleton.canDisassignCrew"/>
-		<bind name="watch" value="'crewActionEnabled';	!(thisPlayerShipInfo.isLocked) &amp;&amp; !(targetPlayerShipInfo.isLocked) &amp;&amp; (hasSpaceToAssignCrew) &amp;&amp;
-										(crew.dismissDelay == 0) &amp;&amp; ((crew.nation == targetShipInfo.country) || isCrewCompatibleShipBySpecialList)"/>
+		<bind name="watch" value="'crewActionEnabled'; !(thisPlayerShipInfo.isLocked) &amp;&amp; !(targetPlayerShipInfo.isLocked) &amp;&amp; (hasSpaceToAssignCrew) &amp;&amp; (crew.dismissDelay == 0) &amp;&amp; ((crew.nation == targetShipInfo.country) || crew.hasManyNations)"/>
 		<style>
 			<width value="100%"/>
 			<height value="75px"/>
@@ -44178,9 +44453,7 @@
 			<bind name="style" value="'hitTest'; crewActionEnabled"/>
 			<bind name="menu" value="'CrewListMenu'; { crewID: crew.id, shipId: _selectedShipId }"/>
 			<bind name="request" value="'buttonClick'; 'assignCrewToShip'; { crewID:crew.id, shipId: _selectedShipId }"/>
-			<bind name="tooltip" value="'CrewTooltip'; { _crewId: crew.id,
-										_checkPenalty: (_selectedShipId != crew.specializationID &amp;&amp; !(targetShipInfo.isWithoutCrewPenalty)),
-										targetShipId: _selectedShipId }"/>
+			<bind name="tooltip" value="'CrewTooltip'; { _crewId: crew.id, _checkPenalty: (_selectedShipId != crew.specializationID &amp;&amp; !(targetShipInfo.isWithoutCrewPenalty)), targetShipId: _selectedShipId }"/>
 			<bind name="name" value="'CrewList_' + crew.id"/>
 		</block>
 		<block>
@@ -44194,9 +44467,7 @@
 		<block>
 			<styleClass value="$Fullsize"/>
 			<styleClass value="$InfoBlockHorizontalIndent"/>
-			<bind name="style" value="'alpha';	!((crew.nation == targetShipInfo.country) || (isCrewCompatibleShipBySpecialList)) ||
-								(crew.dismissDelay &gt; 0) ||
-								(targetPlayerShipInfo.isLocked) ? 0.3 : 1"/>
+			<bind name="style" value="'alpha'; ((crew.nation != targetShipInfo.country) &amp;&amp; (crew.hasManyNations == false)) || (crew.dismissDelay &gt; 0) || (targetPlayerShipInfo.isLocked) ? 0.3 : 1"/>
 			<bind name="class" value="!(thisPlayerShipInfo.isLocked) &amp;&amp; !(targetPlayerShipInfo.isLocked) ? '$TextMouseDisable' : '$MouseEnable'"/>
 			<style>
 				<backgroundColor value="0x01000000"/>
@@ -44246,7 +44517,10 @@
 					<bottom value="1px"/>
 					<right value="15px"/>
 				</style>
-				<bind name="instance" value="'CrewSkillPointItem'; { _skillPoints: crew.freeSkillPoints, _allSkillPoints: crew.allSkillPoints }"/>
+				<bind name="instance" value="'ScoreRatioCounter'; { 	_playerPointsCounter: crew.freeSkillPoints, 
+													_totalPointsCounter: crew.allSkillPoints,
+													_tooltipTextPlayerResult: 'IDS_CREW_PLAYAER_POINTS_COUNTER', 
+													_tooltipTextTotalResult: 'IDS_CREW_TOTAL_POINTS_COUNTER' }"/>
 			</block>
 			<block>
 				<bind name="visible" value="(crewRetraining.isInAdaptation == true)"/>
@@ -44296,10 +44570,8 @@
 			<style>
 				<backgroundColor value="0x01000000"/>
 			</style>
-			<bind name="tooltip" value="'CrewTooltip'; { _crewId: crew.id, _checkPenalty: (_selectedShipId != crew.specializationID &amp;&amp; !(targetShipInfo.isWithoutCrewPenalty)),
-										_cantMove: !(!(thisPlayerShipInfo.isLocked) &amp;&amp; !(targetPlayerShipInfo.isLocked) &amp;&amp; hasSpaceToAssignCrew),
-										crewsSingleton: crewsSingleton, targetShipId: _selectedShipId }"/>
-			<bind name="menu" value="'CrewListMenu'; (crew.dismissDelay == 0) ? { crewID: crew.id} : null"/>
+			<bind name="tooltip" value="'CrewTooltip'; { _crewId: crew.id, _checkPenalty: (_selectedShipId != crew.specializationID &amp;&amp; !(targetShipInfo.isWithoutCrewPenalty)), _cantMove: !(!(thisPlayerShipInfo.isLocked) &amp;&amp; !(targetPlayerShipInfo.isLocked) &amp;&amp; hasSpaceToAssignCrew), crewsSingleton: crewsSingleton, targetShipId: _selectedShipId }"/>
+			<bind name="menu" value="'CrewListMenu'; (crew.dismissDelay == 0) ? { crewID: crew.id, shipId: crew.hasManyNations ? _selectedShipId : $parent.playerShipInfo.id }: null"/>
 		</block>
 		<block>
 			<style>
@@ -44447,7 +44719,7 @@
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
 		<styleClass value="$DefaultMenuBehaviour"/>
 		<style>
-			<width value="230px"/>
+			<width value="220px"/>
 		</style>
 		<block className="DeclareBlurLayer">
 			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
@@ -44496,9 +44768,8 @@
 				<text value="IDS_CREW_GO_TO_PROFILE"/>
 			</block>
 		</block>
-		<bind name="watch" value="'isCrewCompatibleShipBySpecialList'; (crew.shipsToSeat.indexOf(targetShipInfo.fullName) &gt; -1)"/>
 		<block>
-			<bind name="visible" value="((targetShipInfo.country == crew.nation) || isCrewCompatibleShipBySpecialList)"/>
+			<bind name="visible" value="(targetShipInfo.country == crew.nation) || (crew.hasManyNations)"/>
 			<styleClass value="$ContextMenuListItem"/>
 			<block className="dock_submenu_item" type="native">
 				<style>
@@ -45199,7 +45470,7 @@
 			<bind name="enabled" value="hasSpaceToAssignCrew &amp;&amp; !(targetPlayerShipInfo.isLocked)"/>
 			<bind name="style" value="'hitTest'; hasSpaceToAssignCrew &amp;&amp; !(targetPlayerShipInfo.isLocked) ? true : false"/>
 			<bind name="style" value="'alpha'; hasSpaceToAssignCrew &amp;&amp; !(targetPlayerShipInfo.isLocked) ? 1 : 0.6"/>
-			<bind name="request" value="'buttonClick'; isOwned ? 'assignCrewToShip' : null; { crewID: _crewId, shipId: shipEntity.ship.id }"/>
+			<bind name="request" value="'buttonClick'; isOwned ? 'assignCrewToShip' : null; { crewID: _crewId, shipId: $dataRef.ref.ship.id }"/>
 			<block>
 				<styleClass value="$MouseDisable"/>
 				<style>
@@ -45227,7 +45498,6 @@
 		<bind name="watchDH" value="'targetShipInfo' + 'Slim'; ['shipTargetEntity.slimClientComponent.evUpdate']; shipTargetEntity.slimClientComponent"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'crewsSingleton'; ['dockEntity.crewData.evUpdate']; dockEntity.crewData"/>
-		<bind name="watch" value="'isCrewCompatibleShipBySpecialList'; (crew.shipsToSeat.indexOf(targetShipInfo.fullName) &gt; -1)"/>
 		<styleClass value="$DefaultTooltipBehaviour"/>
 		<params>
 			<param name="name" value="crew_tooltip"/>
@@ -45405,9 +45675,7 @@
 			<bind name="instance" value="'EmptyStatusParagraph'; crew.learnedSkillIDs.length &gt; 0 ? null : {_text: 'IDS_CREW_HAS_NO_LEARNED_SKILLS'}"/>
 		</block>
 		<block>
-			<bind name="visible" value="	(targetShipInfo &amp;&amp;
-						(crew.nation != targetShipInfo.country) &amp;&amp;
-						!(isCrewCompatibleShipBySpecialList))"/>
+			<bind name="visible" value="(targetShipInfo) &amp;&amp; ((crew.nation != targetShipInfo.country) &amp;&amp; (crew.hasManyNations == false))"/>
 			<style>
 				<width value="100%"/>
 			</style>
@@ -45491,7 +45759,7 @@
 				<style>
 					<marginBottom value="6px"/>
 				</style>
-				<bind name="visible" value="!(_cantMove) &amp;&amp; ((targetShipInfo.country == crew.nation) || isCrewCompatibleShipBySpecialList)"/>
+				<bind name="visible" value="!(_cantMove) &amp;&amp; (targetShipInfo.country == crew.nation)"/>
 				<bind name="instance" value="'MouseInstruction'; {_type: 'left', _instructionText: (_fromPort ? 'IDS_HINT_LEFT_CLICK_FOR_CREW_WINDOW' : 'IDS_HINT_ASSIGN_CREW_TO_THIS_SHIP'), _maxWidth: 280}"/>
 			</block>
 			<block>
@@ -46117,45 +46385,6 @@
 					<bind name="text" value="(selectedShipCrewRetraining.isInAdaptation 	? format(selectedShipCrewRetraining.adaptationExperiencePenalty) 
 																		: format(selectedShipCrew.experienceToRichNextLevel))"/>
 				</block>
-			</block>
-			<style>
-				<flow value="horizontal"/>
-			</style>
-		</block>
-	</block>
-	<block className="CrewSkillPointItem">
-		<block>
-			<block>
-				<bind name="tooltip" value="'SimpleTooltip';{tooltipText: 'IDS_HINT_SKILLPOINTS_FREE'}"/>
-				<bind name="style" value="'alpha'; (_skillPoints == 0) ? 0.5 : 1"/>
-				<block type="text">
-					<bind name="class" value="'$TextHeaderWhiteBold'"/>
-					<bind name="text" value="_skillPoints"/>
-				</block>
-			</block>
-			<block>
-				<bind name="tooltip" value="'SimpleTooltip';{tooltipText: 'IDS_HINT_SKILLPOINTS_COMMON'}"/>
-				<style>
-					<alpha value="0.7"/>
-				</style>
-				<block type="text">
-					<style>
-						<marginTop value="1px"/>
-					</style>
-					<bind name="class" value="'$TextHeaderBold'"/>
-					<bind name="text" value="'/'"/>
-				</block>
-				<block type="text">
-					<style>
-						<marginTop value="2px"/>
-						<marginLeft value="-1px"/>
-					</style>
-					<bind name="class" value="'$TextHeaderBold'"/>
-					<bind name="text" value="_allSkillPoints"/>
-				</block>
-				<style>
-					<flow value="horizontal"/>
-				</style>
 			</block>
 			<style>
 				<flow value="horizontal"/>
@@ -48401,6 +48630,7 @@
 					<top value="8px"/>
 					<position value="absolute"/>
 				</style>
+				<bind name="name" value="'UpdateSeekersList'"/>
 				<block className="button_update" type="native">
 					<bind name="enabled" value="!($parent.seekersListUpdateInProgress)"/>
 					<bind name="event" value="'buttonClick'; requestUpdateSeekersList"/>
@@ -48970,7 +49200,9 @@
 		<bind name="firstEntityDH" value="'dockStateEntity'; CC.dockState"/>
 		<bind name="watchDH" value="'dockStateName'; ['dockStateEntity.dockState.evUpdate']; dockStateEntity.dockState.stateName"/>
 		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
-		<bind name="watchDH" value="'selfPlayerDbId'; []; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<bind name="entityDH" value="'entityAccount'; _entityAccountId"/>
 		<bind name="watchDH" value="'accountOnline'; ['entityAccount.accountStatus.evOnlineChanged']; entityAccount.accountStatus.online"/>
 		<bind name="watchDH" value="'accountLevel'; ['entityAccount.accountLevel.evLevelChanged']; entityAccount.accountLevel.level"/>
@@ -49323,7 +49555,7 @@
 		<bind name="watchDH" value="'accountLevel'; ['entityAccount.accountLevel.evLevelChanged']; entityAccount.accountLevel.level"/>
 		<bind name="watchDH" value="'rank'; ['entityAccount.accountRank.evRankChanged']; entityAccount.accountRank.rank"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
-		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'playersInDivision'; 'pureName'; entityAccount.accountName.name; 'playerInDivision'"/>
+		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'playersInDivision'; 'pureName'; pureName; 'playerInDivision'"/>
 		<bind name="watchDH" value="'isSelf'; []; entityAccount.accountSimple.isSelfPlayer"/>
 		<bind name="watch" value="'isInDivision'; ((divisionEntranceData.divisionType == 'division') &amp;&amp; (playerInDivision.length &gt; 0)) ? true : false"/>
 		<bind name="watch" value="'isInParty'; ((divisionEntranceData.divisionType == 'party') &amp;&amp; (playerInDivision.length &gt; 0)) ? true : false"/>
@@ -49474,6 +49706,7 @@
 		<bind name="watchDH" value="'accountLevel'; ['entityAccount.accountLevel.evLevelChanged']; entityAccount.accountLevel.level"/>
 		<bind name="watchDH" value="'rank'; ['entityAccount.accountRank.evRankChanged']; entityAccount.accountRank.rank"/>
 		<bind name="watchDH" value="'pureName'; ['entityAccount.accountName.evChanged']; entityAccount.accountName.name"/>
+		<bind name="watchDH" value="'nickName'; ['entityAccount.accountName.evChanged']; entityAccount.accountName.nickName"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'rankedBattlesSeason'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'playersInDivision'; 'pureName'; entityAccount.accountName.name; 'playerInDivision'"/>
@@ -49555,7 +49788,7 @@
 			<style>
 				<width value="100%"/>
 			</style>
-			<bind name="child" value="playerTooltipItem; {_rank: rank, _title: rankedBattlesSeason.title, _nickName: entityAccount.accountName.nickName,
+			<bind name="child" value="playerTooltipItem; {_rank: rank, _title: rankedBattlesSeason.title, _nickName: nickName,
 										 _accountLevel: accountLevel, _isSelf: isSelf, _isWardog: _isWardog}; 'ContactInfoTooltipAccountHeader'; 'ContactInfoTooltipRankHeader'"/>
 		</block>
 		<block>
@@ -50017,7 +50250,9 @@
 		<bind name="firstEntityDH" value="'dockStateEntity'; CC.dockState"/>
 		<bind name="watchDH" value="'dockStateName'; ['dockStateEntity.dockState.evUpdate']; dockStateEntity.dockState.stateName"/>
 		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
-		<bind name="watchDH" value="'selfPlayerDbId'; []; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
 		<bind name="watchDH" value="'isSelfPlayerCommander'; ['selfPlayerEntity.preBattlePlayerSimple.evIsCommanderChanged']; selfPlayerEntity.preBattlePlayerSimple.isCommander"/>
 		<bind name="entityDH" value="'entityAccount'; _entityAccountId"/>
@@ -50773,7 +51008,9 @@
 		<bind name="contains" value="clubMembers; ($item == _entityAccountId); 'isClubMember'"/>
 		<bind name="contains" value="invitedPlayers; ($item.accountEntityId == _entityAccountId); 'isInvitedToClub'"/>
 		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
-		<bind name="watchDH" value="'selfPlayerDbId'; []; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<bind name="levelToFeature" value="accountLevel; 19; 'clubBattleFeatureUnLocked'"/>
 		<bind name="watch" value="'isVoteInCurClub';	(clubsVoted[0] == entityClub.club.id) ||
 									(clubsVoted[1] == entityClub.club.id) ||
@@ -51397,11 +51634,11 @@
 																							: (type == 'Resource' || type == 'ResourceCoeff')	? -2
 																																				: 0"/>
 				<bind name="scaleX" value="(type == 'Ship')	? 1.3
-											: (type == 'Resource' || type == 'ResourceCoeff')	? 1.05
-																								: 0.85"/>
+											: (type == 'Resource' || type == 'ResourceCoeff' || type == 'Collection')	? 1.05
+																														: 0.85"/>
 				<bind name="scaleY" value="(type == 'Ship')	? 1.3
-											: (type == 'Resource' || type == 'ResourceCoeff')	? 1.05
-																								: 0.85"/>
+											: (type == 'Resource' || type == 'ResourceCoeff' || type == 'Collection')	? 1.05
+																														: 0.85"/>
 				<innerBind elementName="item.item" name="text" value="'IDS_ISSUED_STAMP'"/>
 				<bind name="gotoAndStop!" value="'issued'"/>
 			</block>
@@ -51993,7 +52230,7 @@
 																Token: 'TokenReward',
 																Exchange: 'RewardPersonalExchangeRatesTooltip',
 																Lootbox: 'LootboxReward',
-																Collection: 'CollectionObjectItemTooltip',
+																Collection: 'RewardCollectionCardItemTooltip',
 																Unlock: 'RewardCollectionCrewItemTooltip'}"/>
 	</block>
 	<block className="UnsupportedReward">
@@ -52330,7 +52567,7 @@
 			</block>
 		</block>
 	</block>
-	<block className="CollectionObjectItemTooltip">
+	<block className="RewardCollectionCardItemTooltip">
 		<style>
 			<flow value="horizontal"/>
 		</style>
@@ -52394,7 +52631,8 @@
 		<bind name="var" value="{isClicked: false}"/>
 		<bind name="catch" value="'click'; {isClicked: true}"/>
 		<bind name="action" value="'click'; 'moveFromBarge'"/>
-		<bind name="action" value="'removedFromStage'; isClicked ? 'goToReward' : null; { type: 'Lootbox', subtype: _rewardItem.params.collectionName, subAlbum:_rewardItem.params.subAlbum }"/>
+		<bind name="action" value="'removedFromStage'; isClicked ? 'goToReward' : null; { type: 'Lootbox', subtype: _rewardItem.params.collectionName,
+																		 subAlbum: _rewardItem.params.subAlbum }"/>
 		<block>
 			<style>
 				<width value="90px"/>
@@ -52407,11 +52645,12 @@
 			<bind name="visible" value="_isDuplicate == true"/>
 			<bind name="scaleX" value="0.6"/>
 			<bind name="scaleY" value="0.6"/>
-			<bind name="rotation" value="-5"/>
+			<bind name="rotation" value="-3"/>
 			<style>
 				<position value="absolute"/>
-				<top value="60%"/>
+				<top value="50%"/>
 				<left value="50%"/>
+				<alpha value="0.9"/>
 				<hitTest value="false"/>
 			</style>
 			<innerBind elementName="item.item" name="text" value="toUpperCase(tr('IDS_DUPLICATE_STAMP'))"/>
@@ -53545,7 +53784,7 @@
 				<style>
 					<width value="100%"/>
 				</style>
-				<bind name="instance" value="'ModalWindowHeader'; { _header: browserTitle, _headerWidth: '100%', _innerCloseButton: true }"/>
+				<bind name="instance" value="'ModalWindowHeader'; { _header: browserTitle, _headerWidth: '100%', _innerCloseButton: true, _noHotkey: $root.fullInput}"/>
 			</block>
 			<bind name="var" value="{firstRequestedPageLoaded: false}"/>
 			<bind name="watch" value="'loadFailed'; ((httpStatusCode &lt; 200) || (httpStatusCode &gt;= 400) &amp;&amp; (httpStatusCode != 403))"/>
@@ -57315,7 +57554,9 @@
 							</block>
 						</block>
 						<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
-						<bind name="watchDH" value="'selfPlayerDbId'; []; selfPlayerEntity.accountSimple.dbId"/>
+						<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+						<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+						<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 						<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; selfPlayerEntity.clanman.clanId"/>
 						<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
 						<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
@@ -57439,8 +57680,11 @@
 								<bind name="instance" value="'ButtonAccount'; {}"/>
 							</block>
 							<bind name="feature" value="23; ''"/>
-							<bind name="watch" value="'showSticker'; ((currentUserTaskFlag &amp; UserTasksFlags.CONTROL_SEEN_PLAYTOGETHER) == 0 &amp;&amp; accountLevelInfo.accountLevel &gt;= 3 &amp;&amp; !(isLazyLogin)) ||
-												feature_23 == 'new' || (unreadNewsCount &gt; 0 &amp;&amp; realmConstants.newsUIAvailable == true)"/>
+							<bind name="watch" value="'haveUnreadNews'; (realmConstants.newsUIAvailable == true) &amp;&amp; (unreadNewsCount &gt; 0)"/>
+							<bind name="watch" value="'isInviteFriendStickerNotSeen'; ((currentUserTaskFlag &amp; UserTasksFlags.CONTROL_SEEN_PLAYTOGETHER) == 0 &amp;&amp; (accountLevelInfo.accountLevel &gt;= 3) &amp;&amp; !(isLazyLogin))"/>
+							<bind name="watch" value="'showSticker'; haveUnreadNews ||
+												feature_23 == 'new' ||
+												isInviteFriendStickerNotSeen"/>
 							<block className="icon_sticker_new_no_pulse" type="native">
 								<bind name="fade" value="showSticker; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
 								<style>
@@ -57634,6 +57878,10 @@
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'rankedBattlesSeason'"/>
 		<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
 		<bind name="watchDH" value="'isLazyLogin'; ['loginEntity.loginData.evUpdate']; (loginEntity.loginData.currentLoginType == 'DEMO')"/>
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 		<bind name="watchDH" value="'isPremiumAccount';	['resourceEntity.accountResource.evChangedPrem'];	resourceEntity.accountResource.isPremium"/>
 		<bind name="watchDH" value="'premiumAccountTimeStr';	['resourceEntity.accountResource.evChangedPrem'];	resourceEntity.accountResource.premiumTimeStr"/>
@@ -57692,7 +57940,7 @@
 						<maxWidth value="130"/>
 						<multiline value="false"/>
 					</style>
-					<bind name="text" value="accountLevelInfo.playerName"/>
+					<bind name="text" value="selfPlayerName"/>
 					<bind name="class" value="isPremiumAccount ? '$FontColorGold' : '$None'"/>
 					<bind name="class" value="accountLevelInfo.abuseStatus == AbuseStatus.CONFIRMED ? '$FontColorCompareNegative' : accountLevelInfo.abuseStatus == AbuseStatus.SUSPECT ? '$FontColorTeamkiller' : '$None'"/>
 					<bind name="name" value="'playerName_button_account'"/>
