@@ -14748,8 +14748,7 @@
 			</block>
 			<bind name="dataRefDH" value="'chat'; 'dataHub.chat.ref.chat'"/>
 			<bind name="watchDH" value="'isChatServerAvailable'; ['chat.evConnected', 'chat.evDisConnected']; chat.isConnected"/>
-			<bind name="watch" value="'isServerAvailable'; isChatServerAvailable"/>
-			<bind name="watch" value="'showFormationPlayers'; isServerAvailable"/>
+			<bind name="watch" value="'showFormationPlayers'; isChatServerAvailable"/>
 			<block>
 				<style>
 					<width value="100%"/>
@@ -19852,10 +19851,7 @@
 			<style>
 				<width value="100%"/>
 			</style>
-			<bind name="collectionDH" value="CC.clubsCommon; 'clubsCommonCollection'"/>
-			<bind name="entityDH" value="'clubsCommonEntity'; clubsCommonCollection[0].id"/>
-			<bind name="watchDH" value="'clubsCount'; ['clubsCommonEntity.clubsCommon.evClubsCountChanged']; clubsCommonEntity.clubsCommon.clubsCount"/>
-			<bind name="watch" value="'isAnyClubExisted'; clubsCount &gt; 0"/>
+			<bind name="watch" value="'isAnyClubExisted'; false"/>
 			<bind name="watch" value="'tabWidth'; isAnyClubExisted ? 98 : 150"/>
 			<bind name="collectionDH" value="CC.userPrefs; 'userPrefsCollection'"/>
 			<bind name="entityDH" value="'userPrefsEntity'; userPrefsCollection[0].id"/>
@@ -19890,25 +19886,6 @@
 						</block>
 					</block>
 					<block>
-						<bind name="visible" value="isAnyClubExisted"/>
-						<block>
-							<bind name="instance" value="'MainTabSmallInstance'; {	_width: (tabWidth + 3), _selected: (inset == 2),
-																	_event: 'changeContactListInset', _eventParams: {inset: 2, _searchState: 0}, _label: 'IDS_CLUBS', _tooltipIDS: 'IDS_TOOLTIP_TAB_CLUBS',
-																	_name: 'clubs'}"/>
-						</block>
-						<block>
-							<block className="divider_v" type="native">
-								<style>
-									<height value="21px"/>
-									<marginTop value="2px"/>
-								</style>
-							</block>
-						</block>
-						<style>
-							<flow value="horizontal"/>
-						</style>
-					</block>
-					<block>
 						<bind name="instance" value="'MainTabSmallInstance'; {	_width: tabWidth, _selected: (inset == 1),
 																_event: 'changeContactListInset', _eventParams: {inset: 1, _searchState: 0}, _label: 'IDS_CHANNELS', _tooltipIDS: 'IDS_TOOLTIP_TAB_CHANNELS',
 																_name: 'channels'}"/>
@@ -19937,7 +19914,7 @@
 		</block>
 		<block>
 			<styleClass value="$Fullsize"/>
-			<bind name="child" value="_isFromDockChatBtn ? inset : 0; {_searchState: _searchState, _searchRequests: _searchRequests, _resultsDisplay: _resultsDisplay, _playerContext: _playerContext, _isFromDockChatBtn: _isFromDockChatBtn}; 'Contacts'; 'Channels'; 'Clubs'"/>
+			<bind name="child" value="_isFromDockChatBtn ? inset : 0; {_searchState: _searchState, _searchRequests: _searchRequests, _resultsDisplay: _resultsDisplay, _playerContext: _playerContext, _isFromDockChatBtn: _isFromDockChatBtn}; 'Contacts'; 'Channels'; 'Contacts'"/>
 		</block>
 	</block>
 	<block className="Contacts">
@@ -44264,7 +44241,7 @@
 		<style>
 			<flow value="horizontal"/>
 		</style>
-		<block>
+ 		<block>
 			<bind name="visible" value="showOwnShip || _isSelf"/>
 			<style>
 				<marginRight value="3px"/>
@@ -44439,8 +44416,10 @@
 		<bind name="watchDH" value="'thisShipInfo' + 'Slim'; ['ShipEntity.slimClientComponent.evUpdate']; ShipEntity.slimClientComponent"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'crewsSingleton'; ['dockEntity.crewData.evUpdate']; dockEntity.crewData"/>
+		<bind name="watch" value="'isCrewCompatibleShipBySpecialList'; (crew.shipsToSeat.indexOf(targetShipInfo.fullName) &gt; -1)"/>
 		<bind name="watch" value="'hasSpaceToAssignCrew'; !(targetPlayerShipInfo.crewId) || !(crew.shipID) || crewsSingleton.canDisassignCrew"/>
-		<bind name="watch" value="'crewActionEnabled'; !(thisPlayerShipInfo.isLocked) &amp;&amp; !(targetPlayerShipInfo.isLocked) &amp;&amp; (hasSpaceToAssignCrew) &amp;&amp; (crew.dismissDelay == 0) &amp;&amp; ((crew.nation == targetShipInfo.country) || crew.hasManyNations)"/>
+		<bind name="watch" value="'crewActionEnabled';	!(thisPlayerShipInfo.isLocked) &amp;&amp; !(targetPlayerShipInfo.isLocked) &amp;&amp; (hasSpaceToAssignCrew) &amp;&amp;
+										(crew.dismissDelay == 0) &amp;&amp; ((crew.nation == targetShipInfo.country) || isCrewCompatibleShipBySpecialList)"/>
 		<style>
 			<width value="100%"/>
 			<height value="75px"/>
@@ -44453,7 +44432,9 @@
 			<bind name="style" value="'hitTest'; crewActionEnabled"/>
 			<bind name="menu" value="'CrewListMenu'; { crewID: crew.id, shipId: _selectedShipId }"/>
 			<bind name="request" value="'buttonClick'; 'assignCrewToShip'; { crewID:crew.id, shipId: _selectedShipId }"/>
-			<bind name="tooltip" value="'CrewTooltip'; { _crewId: crew.id, _checkPenalty: (_selectedShipId != crew.specializationID &amp;&amp; !(targetShipInfo.isWithoutCrewPenalty)), targetShipId: _selectedShipId }"/>
+			<bind name="tooltip" value="'CrewTooltip'; { _crewId: crew.id,
+										_checkPenalty: (_selectedShipId != crew.specializationID &amp;&amp; !(targetShipInfo.isWithoutCrewPenalty)),
+										targetShipId: _selectedShipId }"/>
 			<bind name="name" value="'CrewList_' + crew.id"/>
 		</block>
 		<block>
@@ -44467,7 +44448,9 @@
 		<block>
 			<styleClass value="$Fullsize"/>
 			<styleClass value="$InfoBlockHorizontalIndent"/>
-			<bind name="style" value="'alpha'; ((crew.nation != targetShipInfo.country) &amp;&amp; (crew.hasManyNations == false)) || (crew.dismissDelay &gt; 0) || (targetPlayerShipInfo.isLocked) ? 0.3 : 1"/>
+			<bind name="style" value="'alpha';	!((crew.nation == targetShipInfo.country) || (isCrewCompatibleShipBySpecialList)) ||
+								(crew.dismissDelay &gt; 0) ||
+								(targetPlayerShipInfo.isLocked) ? 0.3 : 1"/>
 			<bind name="class" value="!(thisPlayerShipInfo.isLocked) &amp;&amp; !(targetPlayerShipInfo.isLocked) ? '$TextMouseDisable' : '$MouseEnable'"/>
 			<style>
 				<backgroundColor value="0x01000000"/>
@@ -44570,8 +44553,10 @@
 			<style>
 				<backgroundColor value="0x01000000"/>
 			</style>
-			<bind name="tooltip" value="'CrewTooltip'; { _crewId: crew.id, _checkPenalty: (_selectedShipId != crew.specializationID &amp;&amp; !(targetShipInfo.isWithoutCrewPenalty)), _cantMove: !(!(thisPlayerShipInfo.isLocked) &amp;&amp; !(targetPlayerShipInfo.isLocked) &amp;&amp; hasSpaceToAssignCrew), crewsSingleton: crewsSingleton, targetShipId: _selectedShipId }"/>
-			<bind name="menu" value="'CrewListMenu'; (crew.dismissDelay == 0) ? { crewID: crew.id, shipId: crew.hasManyNations ? _selectedShipId : $parent.playerShipInfo.id }: null"/>
+			<bind name="tooltip" value="'CrewTooltip'; { _crewId: crew.id, _checkPenalty: (_selectedShipId != crew.specializationID &amp;&amp; !(targetShipInfo.isWithoutCrewPenalty)),
+										_cantMove: !(!(thisPlayerShipInfo.isLocked) &amp;&amp; !(targetPlayerShipInfo.isLocked) &amp;&amp; hasSpaceToAssignCrew),
+										crewsSingleton: crewsSingleton, targetShipId: _selectedShipId }"/>
+			<bind name="menu" value="'CrewListMenu'; (crew.dismissDelay == 0) ? { crewID: crew.id} : null"/>
 		</block>
 		<block>
 			<style>
@@ -44719,7 +44704,7 @@
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'divisionEntranceData'"/>
 		<styleClass value="$DefaultMenuBehaviour"/>
 		<style>
-			<width value="220px"/>
+			<width value="230px"/>
 		</style>
 		<block className="DeclareBlurLayer">
 			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
@@ -44768,8 +44753,9 @@
 				<text value="IDS_CREW_GO_TO_PROFILE"/>
 			</block>
 		</block>
+		<bind name="watch" value="'isCrewCompatibleShipBySpecialList'; (crew.shipsToSeat.indexOf(targetShipInfo.fullName) &gt; -1)"/>
 		<block>
-			<bind name="visible" value="(targetShipInfo.country == crew.nation) || (crew.hasManyNations)"/>
+			<bind name="visible" value="((targetShipInfo.country == crew.nation) || isCrewCompatibleShipBySpecialList)"/>
 			<styleClass value="$ContextMenuListItem"/>
 			<block className="dock_submenu_item" type="native">
 				<style>
@@ -45470,7 +45456,7 @@
 			<bind name="enabled" value="hasSpaceToAssignCrew &amp;&amp; !(targetPlayerShipInfo.isLocked)"/>
 			<bind name="style" value="'hitTest'; hasSpaceToAssignCrew &amp;&amp; !(targetPlayerShipInfo.isLocked) ? true : false"/>
 			<bind name="style" value="'alpha'; hasSpaceToAssignCrew &amp;&amp; !(targetPlayerShipInfo.isLocked) ? 1 : 0.6"/>
-			<bind name="request" value="'buttonClick'; isOwned ? 'assignCrewToShip' : null; { crewID: _crewId, shipId: $dataRef.ref.ship.id }"/>
+			<bind name="request" value="'buttonClick'; isOwned ? 'assignCrewToShip' : null; { crewID: _crewId, shipId: shipEntity.ship.id }"/>
 			<block>
 				<styleClass value="$MouseDisable"/>
 				<style>
@@ -45498,6 +45484,7 @@
 		<bind name="watchDH" value="'targetShipInfo' + 'Slim'; ['shipTargetEntity.slimClientComponent.evUpdate']; shipTargetEntity.slimClientComponent"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'crewsSingleton'; ['dockEntity.crewData.evUpdate']; dockEntity.crewData"/>
+		<bind name="watch" value="'isCrewCompatibleShipBySpecialList'; (crew.shipsToSeat.indexOf(targetShipInfo.fullName) &gt; -1)"/>
 		<styleClass value="$DefaultTooltipBehaviour"/>
 		<params>
 			<param name="name" value="crew_tooltip"/>
@@ -45675,7 +45662,9 @@
 			<bind name="instance" value="'EmptyStatusParagraph'; crew.learnedSkillIDs.length &gt; 0 ? null : {_text: 'IDS_CREW_HAS_NO_LEARNED_SKILLS'}"/>
 		</block>
 		<block>
-			<bind name="visible" value="(targetShipInfo) &amp;&amp; ((crew.nation != targetShipInfo.country) &amp;&amp; (crew.hasManyNations == false))"/>
+			<bind name="visible" value="	(targetShipInfo &amp;&amp;
+						(crew.nation != targetShipInfo.country) &amp;&amp;
+						!(isCrewCompatibleShipBySpecialList))"/>
 			<style>
 				<width value="100%"/>
 			</style>
@@ -45759,7 +45748,7 @@
 				<style>
 					<marginBottom value="6px"/>
 				</style>
-				<bind name="visible" value="!(_cantMove) &amp;&amp; (targetShipInfo.country == crew.nation)"/>
+				<bind name="visible" value="!(_cantMove) &amp;&amp; ((targetShipInfo.country == crew.nation) || isCrewCompatibleShipBySpecialList)"/>
 				<bind name="instance" value="'MouseInstruction'; {_type: 'left', _instructionText: (_fromPort ? 'IDS_HINT_LEFT_CLICK_FOR_CREW_WINDOW' : 'IDS_HINT_ASSIGN_CREW_TO_THIS_SHIP'), _maxWidth: 280}"/>
 			</block>
 			<block>
@@ -46592,6 +46581,8 @@
 		<bind name="collectionDH" value="CC.campaignTaskPlayer; 'choosenTasks'; 'active'"/>
 		<bind name="watch" value="'haveFreeSlot'; 		(choosenTasks.length &lt; availableSlots)"/>
 		<bind name="watchDH" value="'missionStartTime';[]; mission.campaignMissionParams.startTime"/>
+		<bind name="serverTime" value="'serverTime'"/>
+		<bind name="watch" value="'missionTimeToStart'; missionStartTime - serverTime"/>
 		<style>
 			<width value="230px"/>
 			<height value="80px"/>
@@ -46751,7 +46742,7 @@
 				<bind name="tooltip" value="'TaskItemTooltip'; {	_taskID: campaignTaskEntity.campaignTaskParams.id}"/>
 				<bind name="tooltip" value="'TaskItemInfotip'; {	_taskID: campaignTaskEntity.campaignTaskParams.id}; TooltipBehaviour.infotip"/>
 				<bind name="action" value="'doubleClick';  (taskProgress &gt; 0) &amp;&amp; (taskProgress &lt; max) 													? null :
-										  ((state == 1) &amp;&amp; haveFreeSlot &amp;&amp; (missionStartTime == 0))				? 'CampaignsProxy.activateTask' :
+										  ((state == 1) &amp;&amp; haveFreeSlot &amp;&amp; (missionTimeToStart &lt;= 0))				? 'CampaignsProxy.activateTask' :
 										  ((state == 2) &amp;&amp; ((taskProgress == 0) || (taskProgress == null)))	? 'CampaignsProxy.deactivateTask'
 																																		: null ; { taskID: campaignTaskEntity.campaignTaskParams.id}"/>
 				<bind name="request" value="'doubleClick'; ((taskProgress &gt; 0) &amp;&amp; (taskProgress &lt; max)) 	? 'CampaignsProxy.deactivateTask'
@@ -46836,8 +46827,8 @@
 							<width value="100%"/>
 						</style>
 						<bind name="focus" value="0; true"/>
-						<bind name="label" value=" 	(state == 3) &amp;&amp; !(isLooted)	? toUpperCase(tr('IDS_TAKE_REWARD')) :
-									(state == 3) &amp;&amp; (isLooted) 	? toUpperCase(tr('IDS_TAKE_STARS'))  :
+						<bind name="label" value=" 	(state == 3) &amp;&amp; !(isLooted)		? toUpperCase(tr('IDS_TAKE_REWARD')) :
+									(state == 3) &amp;&amp; (isLooted) 		? toUpperCase(tr('IDS_TAKE_STARS'))  :
 									(canOpenFinalTask) 									? toUpperCase(tr('IDS_OPEN_FINAL_TASK'))
 																						: null"/>
 						<bind name="action" value="'buttonClick';  	(state == 3) 	? 'CampaignsProxy.takeReward' :
@@ -46969,11 +46960,13 @@
 		<bind name="watchDH" value="'stars';['mission.campaignMissionPlayer.evUpdate']; mission.campaignMissionPlayer.stars"/>
 		<bind name="watchDH" value="'common'; []; slotsEntity.constantsCampaignSlots.common"/>
 		<bind name="watchDH" value="'premium'; []; slotsEntity.constantsCampaignSlots.premium"/>
-		<bind name="watchDH" value="'missionStartTime';[]; mission.campaignMissionParams.startTime"/>
 		<bind name="watch" value="'canOpenFinalTask'; 	(isMainTask) &amp;&amp; (stars &gt;= costUnlock) &amp;&amp; (state == 0)"/>
 		<bind name="watch" value="'availableSlots'; 		(isPremiumAccount ? (common + premium) : common)"/>
 		<bind name="watch" value="'taskWithoutProgress'; (taskProgress == 0) || (taskProgress == null)"/>
 		<bind name="watch" value="'haveFreeSlot'; 		(choosenTasks.length &lt; availableSlots)"/>
+		<bind name="watchDH" value="'missionStartTime';[]; mission.campaignMissionParams.startTime"/>
+		<bind name="serverTime" value="'serverTime'"/>
+		<bind name="watch" value="'missionTimeToStart'; missionStartTime - serverTime"/>
 		<styleClass value="$DefaultTooltipBehaviour"/>
 		<style>
 			<width value="350px"/>
@@ -47195,7 +47188,7 @@
 				<marginTop value="-6px"/>
 			</style>
 			<bind name="visible" value="	!_isInPostbattle &amp;&amp;
-						((state == 1) &amp;&amp; haveFreeSlot &amp;&amp; missionStartTime == 0) || (state == 2)"/>
+						((state == 1) &amp;&amp; haveFreeSlot &amp;&amp; missionTimeToStart &lt;= 0) || (state == 2)"/>
 			<bind name="instance" value="'MouseInstruction'; { 	_type: 'double_left', 
 												_instructionText: 	(state == 1) 	  						  ? 'IDS_TASK_ACTIVATE' :
 																	(state == 2 &amp;&amp; !taskWithoutProgress) ? 'IDS_TASK_CANCEL_WITH_PROGRESS' :
@@ -47242,7 +47235,7 @@
 		<bind name="watch" value="'canOpenFinalTask'; 	(isMainTask) &amp;&amp; (stars &gt;= costUnlock) &amp;&amp; (state == 0)"/>
 		<bind name="watch" value="'availableSlots'; 		(isPremiumAccount ? (common + premium) : common)"/>
 		<bind name="watch" value="'haveFreeSlot'; 		(choosenTasks.length &lt; availableSlots)"/>
-		<bind name="watchDH" value="'missionStartTime';[]; mission.campaignMissionParams.startTime"/>
+		<bind name="watchDH" value="'missionStartTime'; []; mission.campaignMissionParams.startTime"/>
 		<bind name="serverTime" value="'serverTime'"/>
 		<bind name="watch" value="'missionTimeToStart'; missionStartTime - serverTime"/>
 		<style>
@@ -47437,7 +47430,7 @@
 		</block>
 		<block>
 			<bind name="visible" value="(state == 2) || (state == 3) || canOpenFinalTask ||
-					   ((state == 1) &amp;&amp; haveFreeSlot &amp;&amp; (missionStartTime == 0))"/>
+						((state == 1) &amp;&amp; haveFreeSlot &amp;&amp; (missionTimeToStart &lt;= 0))"/>
 			<styleClass value="$HugeMargins"/>
 			<block className="button_default" type="native">
 				<params>
@@ -47449,11 +47442,11 @@
 				<styleClass value="$MiddleAligned"/>
 				<bind name="focus" value="1; true"/>
 				<bind name="label" value=" 	(state == 1) 			 	? toUpperCase(tr('IDS_TASK_ACTIVATE'))  :
-							(state == 2) 			 	? toUpperCase(tr('IDS_TASK_CANCEL'))  :
+							(state == 2) 			? toUpperCase(tr('IDS_TASK_CANCEL'))  :
 							(state == 3) &amp;&amp; !(isLooted)	? toUpperCase(tr('IDS_TAKE_REWARD')) :
 							(state == 3) &amp;&amp; (isLooted) 	? toUpperCase(tr('IDS_TAKE_STARS'))  :
-							(canOpenFinalTask) 									? toUpperCase(tr('IDS_OPEN_FINAL_TASK'))
-																				: null"/>
+							(canOpenFinalTask) 								? toUpperCase(tr('IDS_OPEN_FINAL_TASK'))
+																			: null"/>
 				<bind name="action" value="'buttonClick';  ((taskProgress &gt; 0) &amp;&amp; (taskProgress &lt; max)) 	? null 
 																						: (state == 1) 		? 'CampaignsProxy.activateTask'
 																						: (state == 2) 	? 'CampaignsProxy.deactivateTask'
@@ -47467,7 +47460,7 @@
 		</block>
 		<block>
 			<bind name="visible" value="	(state == 5) || (state == 0) || ((state == 1) &amp;&amp; !(haveFreeSlot))
-						|| ((state == 1) &amp;&amp; (missionStartTime != 0))"/>
+						|| ((state == 1) &amp;&amp; (missionTimeToStart &gt; 0))"/>
 			<styleClass value="$HugeMargins"/>
 			<block type="text">
 				<style>
@@ -47476,12 +47469,13 @@
 				<styleClass value="$TextDefault"/>
 				<bind name="class" value="'$FontColorUnready'"/>
 				<bind name="timeFormat" value="missionTimeToStart; 'HIGHEST'; 'formatStartTime'; true"/>
-				<bind name="text" value="(state == 5) 						? 'IDS_IMPOSSIBLE_TO_CHOOSE_TASK':
-						((state == 1) &amp;&amp; !(haveFreeSlot)) 	? 'IDS_TOOLTIP_NEED_FREE_SLOT':
-						(state == 0) &amp;&amp; (isMainTask) &amp;&amp; (missionState != 0)	? 'IDS_TOOLTIP_FINAL_TASK_LOCKED':
-						(state == 0)							? campaignNeedToken 	? 'IDS_TOOLTIP_CAMPAIGN_NEED_TOKEN' :
-																					  missionStartTime != 0 ? subst('IDS_LOCKED_MISSION_TIME_LEFT_TASK_TOOLTIP', [], {timeLeft: formatStartTime}) :
-																					 'IDS_TOOLTIP_TASK_LOCKED' : ''"/>
+				<bind name="text" value="(state == 5) 															? 'IDS_IMPOSSIBLE_TO_CHOOSE_TASK' :
+						((state == 1) &amp;&amp; !(haveFreeSlot)) 										? 'IDS_TOOLTIP_NEED_FREE_SLOT' :
+						(state == 0) &amp;&amp; (isMainTask) &amp;&amp; (missionState != 0)	? 'IDS_TOOLTIP_FINAL_TASK_LOCKED' :
+						(state == 0)																? campaignNeedToken 	? 'IDS_TOOLTIP_CAMPAIGN_NEED_TOKEN'
+																																				: (missionTimeToStart &gt; 0)	? subst('IDS_LOCKED_MISSION_TIME_LEFT_TASK_TOOLTIP', [], {timeLeft: formatStartTime})
+																																											: 'IDS_TOOLTIP_TASK_LOCKED'
+																														: ''"/>
 			</block>
 		</block>
 		<block className="dock_panel_pin_h" type="native">
@@ -47719,13 +47713,13 @@
 		<bind name="watchDH" value="'campaignCountLootedTasks'; ['campaign.campaignPlayer.evUpdate']; campaign.campaignPlayer.countLootedTasks"/>
 		<bind name="primaryEntityDH" value="'mission'; CC.campaignMissionParams; _curMissionId"/>
 		<bind name="primaryEntityDH" value="'missionMainTaskEntity'; CC.campaignTaskParams; mission.campaignMissionParams.mainTask"/>
-		<bind name="watch" value="'missionTimeToStart'; missionStartTime - serverTime"/>
-		<bind name="serverTime" value="'serverTime'"/>
 		<bind name="watchDH" value="'missionState';['mission.campaignMissionPlayer.evUpdate']; mission.campaignMissionPlayer.state"/>
 		<bind name="watchDH" value="'mainTaskState';['missionMainTaskEntity.campaignTaskPlayer.evUpdate']; missionMainTaskEntity.campaignTaskPlayer.state"/>
 		<bind name="watchDH" value="'costUnlock';[]; missionMainTaskEntity.campaignTaskParams.costUnlock"/>
 		<bind name="watchDH" value="'mainTask';[]; mission.campaignMissionParams.mainTask"/>
 		<bind name="watchDH" value="'missionStartTime';[]; mission.campaignMissionParams.startTime"/>
+		<bind name="watch" value="'missionTimeToStart'; missionStartTime - serverTime"/>
+		<bind name="serverTime" value="'serverTime'"/>
 		<style>
 			<flow value="horizontal"/>
 		</style>
@@ -47746,16 +47740,15 @@
 				</style>
 				<block type="text">
 					<styleClass value="$TextHeaderWhite"/>
-					<bind name="class" value="campaignNeedToken || missionStartTime != 0 ? '$FontColorUnready' : '$FontColorBlueish'"/>
+					<bind name="class" value="campaignNeedToken || missionTimeToStart &gt; 0 ? '$FontColorUnready' : '$FontColorBlueish'"/>
 					<style>
 						<maxWidth value="500"/>
 						<leading value="-2"/>
 					</style>
 					<bind name="timeFormat" value="missionTimeToStart; 'HIGHEST'; 'formatStartTime'; true"/>
-					<bind name="text" value="missionState == 0						? campaignNeedToken 			? 'IDS_TOOLTIP_CAMPAIGN_NEED_TOKEN' :
-																						  missionStartTime != 0 		? subst('IDS_LOCKED_MISSION_TIME_LEFT_TOOLTIP', [], {timeLeft: formatStartTime}) :
-																						  'IDS_MISSION_STATE_LOCKED' 	
-																						:
+					<bind name="text" value="missionState == 0						? campaignNeedToken 			? 'IDS_TOOLTIP_CAMPAIGN_NEED_TOKEN'
+																						  								: missionTimeToStart &gt; 0	? subst('IDS_LOCKED_MISSION_TIME_LEFT_TOOLTIP', [], {timeLeft: formatStartTime})
+																																					: 'IDS_MISSION_STATE_LOCKED' :
 							(missionState == 2)				?  subst('IDS_CHOOSE_TASK_DESCR', [], {count: costUnlock}, costUnlock) :
 							(	missionState == 4 &amp;&amp;
 								mainTaskState == 5) 			? 'IDS_MISSION_STATE_OPENED_BOSS' :
@@ -48382,7 +48375,7 @@
 		<bind name="dataRefDH" value="'chat'; 'dataHub.chat.ref.chat'"/>
 		<bind name="watchDH" value="'isChatServerAvailable'; ['chat.evConnected', 'chat.evDisConnected']; chat.isConnected"/>
 		<bind name="watchDH" value="'isClubServiceAvailable'; ['clubsCommonEntity.clubsCommon.evIsActiveChanged']; clubsCommonEntity.clubsCommon.isActive"/>
-		<bind name="watch" value="'isServicesAvailable'; isChatServerAvailable &amp;&amp; isClubServiceAvailable"/>
+		<bind name="watch" value="'isServicesAvailable'; isChatServerAvailable"/>
 		<bind name="watch" value="'isDivisionAvailable'; isChatServerAvailable &amp;&amp; (divisionEntranceData.divisionType == 'division')"/>
 		<block>
 			<bind name="visible" value="isServicesAvailable || isDivisionAvailable"/>
@@ -50727,7 +50720,7 @@
 		</block>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
 		<block>
-			<bind name="visible" value="realmConstants.showProfileInBrowser"/>
+			<bind name="visible" value="realmConstants.showProfileInBrowser &amp;&amp; (dockStateName != 'balancer')"/>
 			<styleClass value="$ContextMenuListItem"/>
 			<block className="MenuItem">
 				<styleClass value="$Fullsize"/>
@@ -52628,11 +52621,15 @@
 		</block>
 	</block>
 	<block className="RewardCollectionItem">
+		<bind name="firstEntityDH" value="'dockStateEntity'; CC.dockState"/>
+		<bind name="watchDH" value="'dockStateName'; ['dockStateEntity.dockState.evUpdate']; dockStateEntity.dockState.stateName"/>
 		<bind name="var" value="{isClicked: false}"/>
-		<bind name="catch" value="'click'; {isClicked: true}"/>
-		<bind name="action" value="'click'; 'moveFromBarge'"/>
-		<bind name="action" value="'removedFromStage'; isClicked ? 'goToReward' : null; { type: 'Lootbox', subtype: _rewardItem.params.collectionName,
-																		 subAlbum: _rewardItem.params.subAlbum }"/>
+		<bind name="catch" value="'click'; {isClicked: (dockStateName == 'barge' ? true : false)}"/>
+		<bind name="action" value="'click';  (dockStateName == 'barge' ? 'moveFromBarge' : null)"/>
+		<bind name="action" value="'removedFromStage'; (isClicked ? 'goToReward' : null); { type: 'Lootbox', subtype: _rewardItem.params.collectionName,
+																										subAlbum: _rewardItem.params.subAlbum }"/>
+		<bind name="action" value="'click'; (dockStateName == 'dock' &amp;&amp; !(isClicked)) ? 'goToReward' : null; { type: 'Lootbox', subtype: _rewardItem.params.collectionName,
+																								subAlbum: _rewardItem.params.subAlbum }"/>
 		<block>
 			<style>
 				<width value="90px"/>
@@ -53122,7 +53119,7 @@
 						<marginTop value="12px"/>
 						<marginBottom value="5px"/>
 					</style>
-					<bind name="instance" value="'MouseInstruction'; {_type: 'right', _instructionText: 'IDS_GO_TO_COLLECTION_SCREEN', _maxWidth: 300}"/>
+					<bind name="instance" value="'MouseInstruction'; {_type: 'left', _instructionText: 'IDS_GO_TO_COLLECTION_SCREEN', _maxWidth: 300}"/>
 				</block>
 			</block>
 		</block>
