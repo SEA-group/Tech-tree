@@ -864,6 +864,7 @@
 
 				<ship shipid='4183700688' x='6' y='5' /> <!-- PZSD106_Fu_Shun (T6 Pan_Asia upgradeable Destroyer) -->
 				<ship shipid='3764270288' x='8' y='5' /> <!-- PZSD506_Anshan (T6 Pan_Asia special Destroyer) -->
+				<ship shipid='3764303056' x='10' y='5' /> <!-- PZSC506_Huang_he (T6 Pan_Asia special Cruiser) -->
 
 				<ship shipid='4182652112' x='6' y='6' /> <!-- PZSD107_Gadjah_Mada (T7 Pan_Asia upgradeable Destroyer) -->
 
@@ -887,6 +888,8 @@
 		<arrows>
 		</arrows>
 		<ships>
+				<ship shipid='3765384944' x='8' y='4' /> <!-- PISB505_Giulio_Cesare (T5 Italy demoWithoutStats Battleship) -->
+
 				<ship shipid='3764303600' x='8' y='5' /> <!-- PISC506_DucadAosta (T6 Italy demoWithoutStats Cruiser) -->
 		</ships>
 		<types>
