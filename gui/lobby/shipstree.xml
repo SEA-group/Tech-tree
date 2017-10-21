@@ -1,37 +1,37 @@
 <ship_tree>
 	<nation name='USA'>
 		<arrows>
+			<arrow item0='4259264496' item1='4286527472'>
+				<cell x='2' y='5'/>
+				<cell x='2' y='6'/>
+			</arrow>
 			<arrow item0='4266538992' item1='4274927600'>
 				<cell x='6' y='2'/>
 				<cell x='6' y='3'/>
 			</arrow>
-			<arrow item0='4276041712' item1='4277090288'>
-				<cell x='2' y='8'/>
-				<cell x='2' y='9'/>
-			</arrow>
-			<arrow item0='4274927600' item1='4280170480'>
-				<cell x='6' y='3'/>
-				<cell x='6' y='4'/>
-			</arrow>
-			<arrow item0='4277057520' item1='4273911792'>
-				<cell x='4' y='8'/>
-				<cell x='4' y='9'/>
+			<arrow item0='4269717488' item1='4289640432'>
+				<cell x='4' y='3'/>
+				<cell x='4' y='4'/>
 			</arrow>
 			<arrow item0='4272830448' item1='4281219056'>
 				<cell x='6' y='8'/>
 				<cell x='6' y='9'/>
 			</arrow>
-			<arrow item0='4259264496' item1='4286527472'>
-				<cell x='2' y='5'/>
-				<cell x='2' y='6'/>
+			<arrow item0='4274927600' item1='4280170480'>
+				<cell x='6' y='3'/>
+				<cell x='6' y='4'/>
+			</arrow>
+			<arrow item0='4276041712' item1='4277090288'>
+				<cell x='2' y='8'/>
+				<cell x='2' y='9'/>
+			</arrow>
+			<arrow item0='4277057520' item1='4273911792'>
+				<cell x='4' y='8'/>
+				<cell x='4' y='9'/>
 			</arrow>
 			<arrow item0='4280170480' item1='4289607664'>
 				<cell x='6' y='4'/>
 				<cell x='6' y='5'/>
-			</arrow>
-			<arrow item0='4288624624' item1='4259264496'>
-				<cell x='2' y='4'/>
-				<cell x='2' y='5'/>
 			</arrow>
 			<arrow item0='4280203248' item1='4277057520'>
 				<cell x='4' y='7'/>
@@ -45,10 +45,6 @@
 				<cell x='4' y='6'/>
 				<cell x='4' y='7'/>
 			</arrow>
-			<arrow item0='4286461936' item1='4272830448'>
-				<cell x='6' y='7'/>
-				<cell x='6' y='8'/>
-			</arrow>
 			<arrow item0='4282333168' item1='4276041712'>
 				<cell x='2' y='7'/>
 				<cell x='2' y='8'/>
@@ -57,25 +53,29 @@
 				<cell x='0' y='7'/>
 				<cell x='0' y='8'/>
 			</arrow>
-			<arrow item0='4287543280' item1='4282300400'>
-				<cell x='4' y='5'/>
-				<cell x='4' y='6'/>
-			</arrow>
-			<arrow item0='4290689008' item1='4269717488'>
-				<cell x='4' y='2'/>
-				<cell x='4' y='3'/>
-			</arrow>
 			<arrow item0='4284463088' item1='4282365936'>
 				<cell x='0' y='6'/>
 				<cell x='0' y='7'/>
+			</arrow>
+			<arrow item0='4286461936' item1='4272830448'>
+				<cell x='6' y='7'/>
+				<cell x='6' y='8'/>
 			</arrow>
 			<arrow item0='4286527472' item1='4282333168'>
 				<cell x='2' y='6'/>
 				<cell x='2' y='7'/>
 			</arrow>
+			<arrow item0='4287543280' item1='4282300400'>
+				<cell x='4' y='5'/>
+				<cell x='4' y='6'/>
+			</arrow>
 			<arrow item0='4288559088' item1='4286461936'>
 				<cell x='6' y='6'/>
 				<cell x='6' y='7'/>
+			</arrow>
+			<arrow item0='4288624624' item1='4259264496'>
+				<cell x='2' y='4'/>
+				<cell x='2' y='5'/>
 			</arrow>
 			<arrow item0='4288657392' item1='4284463088'>
 				<cell x='0' y='5'/>
@@ -89,49 +89,49 @@
 				<cell x='4' y='4'/>
 				<cell x='4' y='5'/>
 			</arrow>
-			<arrow item0='4290721776' item1='4288624624'>
-				<cell x='2' y='3'/>
-				<cell x='2' y='4'/>
-			</arrow>
-			<arrow item0='4292753392' item1='4266538992'>
-				<cell x='6' y='1'/>
-				<cell x='6' y='2'/>
-			</arrow>
-			<arrow item0='4292851696' item1='4288657392'>
-				<cell x='0' y='4'/>
-				<cell x='0' y='5'/>
-			</arrow>
-			<arrow item0='4269717488' item1='4289640432'>
-				<cell x='4' y='3'/>
-				<cell x='4' y='4'/>
-			</arrow>
-			<arrow item0='4290721776' item1='4290754544'>
-				<cell x='2' y='3'/>
-				<cell x='0' y='3'/>
-			</arrow>
-			<arrow item0='4292786160' item1='4290689008'>
-				<cell x='4' y='1'/>
+			<arrow item0='4290689008' item1='4269717488'>
 				<cell x='4' y='2'/>
-			</arrow>
-			<arrow item0='4293867504' item1='4290721776'>
-				<cell x='2' y='2'/>
-				<cell x='2' y='3'/>
-			</arrow>
-			<arrow item0='4292786160' item1='4292753392'>
-				<cell x='4' y='1'/>
-				<cell x='6' y='1'/>
-			</arrow>
-			<arrow item0='4290754544' item1='4292851696'>
-				<cell x='0' y='3'/>
-				<cell x='0' y='4'/>
+				<cell x='4' y='3'/>
 			</arrow>
 			<arrow item0='4290689008' item1='4293867504'>
 				<cell x='4' y='2'/>
 				<cell x='2' y='2'/>
 			</arrow>
+			<arrow item0='4290721776' item1='4288624624'>
+				<cell x='2' y='3'/>
+				<cell x='2' y='4'/>
+			</arrow>
+			<arrow item0='4290721776' item1='4290754544'>
+				<cell x='2' y='3'/>
+				<cell x='0' y='3'/>
+			</arrow>
+			<arrow item0='4290754544' item1='4292851696'>
+				<cell x='0' y='3'/>
+				<cell x='0' y='4'/>
+			</arrow>
+			<arrow item0='4292753392' item1='4266538992'>
+				<cell x='6' y='1'/>
+				<cell x='6' y='2'/>
+			</arrow>
+			<arrow item0='4292786160' item1='4290689008'>
+				<cell x='4' y='1'/>
+				<cell x='4' y='2'/>
+			</arrow>
+			<arrow item0='4292786160' item1='4292753392'>
+				<cell x='4' y='1'/>
+				<cell x='6' y='1'/>
+			</arrow>
+			<arrow item0='4292851696' item1='4288657392'>
+				<cell x='0' y='4'/>
+				<cell x='0' y='5'/>
+			</arrow>
 			<arrow item0='4293834736' item1='4292786160'>
 				<cell x='4' y='0'/>
 				<cell x='4' y='1'/>
+			</arrow>
+			<arrow item0='4293867504' item1='4290721776'>
+				<cell x='2' y='2'/>
+				<cell x='2' y='3'/>
 			</arrow>
 		</arrows>
 		<ships>
@@ -198,6 +198,7 @@
 				<ship shipid='3762239472' x='10' y='7' /> <!--PASB508_Alabama (T8 USA demoWithoutStats Battleship) -->
 				<ship shipid='3762173936' x='12' y='7' /> <!--PASD508_Kidd (T8 USA demoWithoutStats Destroyer) -->
 				<ship shipid='3762272240' x='14' y='7' /> <!--PASA508_Enterprise (T8 USA special AirCarrier) -->
+				<ship shipid='3751753712' x='16' y='7' /> <!--PASB518_Massachusetts (T8 USA special Battleship) -->
 
 				<ship shipid='4272830448' x='6' y='8' /> <!--PASD021_Fletcher_1943 (T9 USA upgradeable Destroyer) -->
 				<ship shipid='4276041712' x='2' y='8' /> <!--PASB018_Iowa_1944 (T9 USA upgradeable Battleship) -->
@@ -213,48 +214,119 @@
 				<ship shipid='4274960368' x='8' y='9' /> <!--PASC019_Burlington_1944 (T10 USA disabled Cruiser)-->
 				<ship shipid='4278106096' x='10' y='9' /> <!--PASC016_Worcester_1948 (T10 USA disabled Cruiser) -->
 
+				<ship shipid='3333371888' x='2' y='10' /> <!--PASB917_Montana_1945 (T10 USA upgradeable Battleship) -->
+				<ship shipid='3335501808' x='0' y='10' /> <!--PASA915_Midway_1945 (T10 USA upgradeable AirCarrier) -->
+				<ship shipid='3337500656' x='6' y='10' /> <!--PASD913_Gearing_1945 (T10 USA upgradeable Destroyer) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
 				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
 				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
 				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
-				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
 		</types>
 	</nation>
 	<nation name='Germany'>
 		<arrows>
+			<arrow item0='4180555568' item1='4179506992'>
+				<cell x='6' y='8'/>
+				<cell x='6' y='9'/>
+			</arrow>
 			<arrow item0='4180588336' item1='4179539760'>
 				<cell x='4' y='8'/>
 				<cell x='4' y='9'/>
+			</arrow>
+			<arrow item0='4180621104' item1='4179572528'>
+				<cell x='2' y='8'/>
+				<cell x='2' y='9'/>
+			</arrow>
+			<arrow item0='4181604144' item1='4180555568'>
+				<cell x='6' y='7'/>
+				<cell x='6' y='8'/>
 			</arrow>
 			<arrow item0='4181636912' item1='4180588336'>
 				<cell x='4' y='7'/>
 				<cell x='4' y='8'/>
 			</arrow>
+			<arrow item0='4181669680' item1='4180621104'>
+				<cell x='2' y='7'/>
+				<cell x='2' y='8'/>
+			</arrow>
+			<arrow item0='4182652720' item1='4181604144'>
+				<cell x='6' y='6'/>
+				<cell x='6' y='7'/>
+			</arrow>
 			<arrow item0='4182685488' item1='4181636912'>
 				<cell x='4' y='6'/>
 				<cell x='4' y='7'/>
+			</arrow>
+			<arrow item0='4182718256' item1='4181669680'>
+				<cell x='2' y='6'/>
+				<cell x='2' y='7'/>
+			</arrow>
+			<arrow item0='4183701296' item1='4182652720'>
+				<cell x='6' y='5'/>
+				<cell x='6' y='6'/>
 			</arrow>
 			<arrow item0='4183734064' item1='4182685488'>
 				<cell x='4' y='5'/>
 				<cell x='4' y='6'/>
 			</arrow>
+			<arrow item0='4183766832' item1='4182718256'>
+				<cell x='2' y='5'/>
+				<cell x='2' y='6'/>
+			</arrow>
+			<arrow item0='4184749872' item1='4183701296'>
+				<cell x='6' y='4'/>
+				<cell x='6' y='5'/>
+			</arrow>
 			<arrow item0='4184782640' item1='4183734064'>
 				<cell x='4' y='4'/>
 				<cell x='4' y='5'/>
+			</arrow>
+			<arrow item0='4184815408' item1='4183766832'>
+				<cell x='2' y='4'/>
+				<cell x='2' y='5'/>
+			</arrow>
+			<arrow item0='4185798448' item1='4184749872'>
+				<cell x='6' y='3'/>
+				<cell x='6' y='4'/>
 			</arrow>
 			<arrow item0='4185831216' item1='4184782640'>
 				<cell x='4' y='3'/>
 				<cell x='4' y='4'/>
 			</arrow>
+			<arrow item0='4185863984' item1='4184815408'>
+				<cell x='2' y='3'/>
+				<cell x='2' y='4'/>
+			</arrow>
+			<arrow item0='4186847024' item1='4185798448'>
+				<cell x='6' y='2'/>
+				<cell x='6' y='3'/>
+			</arrow>
 			<arrow item0='4186879792' item1='4185831216'>
 				<cell x='4' y='2'/>
 				<cell x='4' y='3'/>
 			</arrow>
+			<arrow item0='4186879792' item1='4186912560'>
+				<cell x='4' y='2'/>
+				<cell x='2' y='2'/>
+			</arrow>
+			<arrow item0='4186912560' item1='4185863984'>
+				<cell x='2' y='2'/>
+				<cell x='2' y='3'/>
+			</arrow>
+			<arrow item0='4187895600' item1='4186847024'>
+				<cell x='6' y='1'/>
+				<cell x='6' y='2'/>
+			</arrow>
 			<arrow item0='4292785968' item1='4186879792'>
 				<cell x='4' y='1'/>
 				<cell x='4' y='2'/>
+			</arrow>
+			<arrow item0='4292785968' item1='4187895600'>
+				<cell x='4' y='1'/>
+				<cell x='6' y='1'/>
 			</arrow>
 			<arrow item0='4293834544' item1='4292785968'>
 				<cell x='4' y='0'/>
@@ -305,18 +377,49 @@
 
 				<ship shipid='4179539760' x='4' y='9' /> <!--PGSC110_Hindenburg (T10 Germany upgradeable Cruiser) -->
 				<ship shipid='4179572528' x='2' y='9' /><!--PGSB110_Grossdeutschland (T10 Germany upgradeable Battleship) -->
-				<ship shipid='4179506992' x='6' y='9' /> <!--PGSD110_Z_52 (T10 Germany demoWithoutStats Destroyer) -->				
+				<ship shipid='4179506992' x='6' y='9' /> <!--PGSD110_Z_52 (T10 Germany demoWithoutStats Destroyer) -->		
+
+				<ship shipid='3340678960' x='4' y='10' /> <!--PGSC910_Hindenburg (T10 Germany upgradeable Cruiser) -->
+				<ship shipid='3340711728' x='2' y='10' /><!--PGSB910_Grossdeutschland (T10 Germany upgradeable Battleship) -->	
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
 				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
 				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
 				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
-				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
 		</types>
 	</nation>
 	<nation name='Japan'>
 		<arrows>
+			<arrow item0='4075697872' item1='4282267344'>
+				<cell x='6' y='8'/>
+				<cell x='6' y='9'/>
+			</arrow>
+			<arrow item0='4076746448' item1='4075697872'>
+				<cell x='6' y='7'/>
+				<cell x='6' y='8'/>
+			</arrow>
+			<arrow item0='4077795024' item1='4181604048'>
+				<cell x='8' y='6'/>
+				<cell x='8' y='7'/>
+			</arrow>
+			<arrow item0='4078843600' item1='4077795024'>
+				<cell x='8' y='5'/>
+				<cell x='8' y='6'/>
+			</arrow>
+			<arrow item0='4182652624' item1='4076746448'>
+				<cell x='6' y='6'/>
+				<cell x='6' y='7'/>
+			</arrow>
+			<arrow item0='4183701200' item1='4182652624'>
+				<cell x='6' y='5'/>
+				<cell x='6' y='6'/>
+			</arrow>
+			<arrow item0='4184749776' item1='4183701200'>
+				<cell x='6' y='4'/>
+				<cell x='6' y='5'/>
+			</arrow>
 			<arrow item0='4256085712' item1='4258182864'>
 				<cell x='4' y='0'/>
 				<cell x='4' y='1'/>
@@ -324,6 +427,14 @@
 			<arrow item0='4258182864' item1='4279154384'>
 				<cell x='4' y='1'/>
 				<cell x='4' y='2'/>
+			</arrow>
+			<arrow item0='4258182864' item1='4292753104'>
+				<cell x='4' y='1'/>
+				<cell x='6' y='1'/>
+			</arrow>
+			<arrow item0='4269684432' item1='4291704528'>
+				<cell x='6' y='2'/>
+				<cell x='6' y='3'/>
 			</arrow>
 			<arrow item0='4272895696' item1='4276041424'>
 				<cell x='2' y='8'/>
@@ -333,6 +444,10 @@
 				<cell x='4' y='2'/>
 				<cell x='4' y='3'/>
 			</arrow>
+			<arrow item0='4279154384' item1='4293867216'>
+				<cell x='4' y='2'/>
+				<cell x='2' y='2'/>
+			</arrow>
 			<arrow item0='4279219920' item1='4277122768'>
 				<cell x='0' y='8'/>
 				<cell x='0' y='9'/>
@@ -341,13 +456,13 @@
 				<cell x='4' y='3'/>
 				<cell x='4' y='4'/>
 			</arrow>
-			<arrow item0='4282300112' item1='4259231440'>
-				<cell x='4' y='8'/>
-				<cell x='4' y='9'/>
-			</arrow>
 			<arrow item0='4281284304' item1='4272895696'>
 				<cell x='2' y='7'/>
 				<cell x='2' y='8'/>
+			</arrow>
+			<arrow item0='4282300112' item1='4259231440'>
+				<cell x='4' y='8'/>
+				<cell x='4' y='9'/>
 			</arrow>
 			<arrow item0='4282365648' item1='4279219920'>
 				<cell x='0' y='7'/>
@@ -356,22 +471,6 @@
 			<arrow item0='4283414224' item1='4282365648'>
 				<cell x='0' y='6'/>
 				<cell x='0' y='7'/>
-			</arrow>
-			<arrow item0='4269684432' item1='4291704528'>
-				<cell x='6' y='2'/>
-				<cell x='6' y='3'/>
-			</arrow>
-			<arrow item0='4258182864' item1='4292753104'>
-				<cell x='4' y='1'/>
-				<cell x='6' y='1'/>
-			</arrow>
-			<arrow item0='4279154384' item1='4293867216'>
-				<cell x='4' y='2'/>
-				<cell x='2' y='2'/>
-			</arrow>
-			<arrow item0='4284364496' item1='4282267344'>
-				<cell x='6' y='8'/>
-				<cell x='6' y='9'/>
 			</arrow>
 			<arrow item0='4284430032' item1='4281284304'>
 				<cell x='2' y='6'/>
@@ -389,9 +488,13 @@
 				<cell x='4' y='6'/>
 				<cell x='4' y='7'/>
 			</arrow>
-			<arrow item0='4287510224' item1='4284364496'>
-				<cell x='6' y='7'/>
-				<cell x='6' y='8'/>
+			<arrow item0='4287542992' item1='4286494416'>
+				<cell x='4' y='5'/>
+				<cell x='4' y='6'/>
+			</arrow>
+			<arrow item0='4287575760' item1='4288624336'>
+				<cell x='2' y='4'/>
+				<cell x='2' y='5'/>
 			</arrow>
 			<arrow item0='4288624336' item1='4284430032'>
 				<cell x='2' y='5'/>
@@ -401,53 +504,42 @@
 				<cell x='0' y='4'/>
 				<cell x='0' y='5'/>
 			</arrow>
-			<arrow item0='4287542992' item1='4286494416'>
-				<cell x='4' y='5'/>
-				<cell x='4' y='6'/>
-			</arrow>
-			<arrow item0='4288558800' item1='4287510224'>
-				<cell x='6' y='6'/>
-				<cell x='6' y='7'/>
-			</arrow>
 			<arrow item0='4289640144' item1='4287542992'>
 				<cell x='4' y='4'/>
 				<cell x='4' y='5'/>
+			</arrow>
+			<arrow item0='4290655952' item1='4078843600'>
+				<cell x='8' y='4'/>
+				<cell x='8' y='5'/>
+			</arrow>
+			<arrow item0='4291704528' item1='4184749776'>
+				<cell x='6' y='3'/>
+				<cell x='6' y='4'/>
+			</arrow>
+			<arrow item0='4291704528' item1='4290655952'>
+				<cell x='6' y='3'/>
+				<cell x='8' y='3'/>
+				<cell x='8' y='4'/>
 			</arrow>
 			<arrow item0='4291770064' item1='4287575760'>
 				<cell x='2' y='3'/>
 				<cell x='2' y='4'/>
 			</arrow>
+			<arrow item0='4291770064' item1='4292851408'>
+				<cell x='2' y='3'/>
+				<cell x='0' y='3'/>
+			</arrow>
 			<arrow item0='4292753104' item1='4269684432'>
 				<cell x='6' y='1'/>
 				<cell x='6' y='2'/>
-			</arrow>
-			<arrow item0='4287575760' item1='4288624336'>
-				<cell x='2' y='4'/>
-				<cell x='2' y='5'/>
-			</arrow>
-			<arrow item0='4289607376' item1='4288558800'>
-				<cell x='6' y='5'/>
-				<cell x='6' y='6'/>
 			</arrow>
 			<arrow item0='4292851408' item1='4288657104'>
 				<cell x='0' y='3'/>
 				<cell x='0' y='4'/>
 			</arrow>
-			<arrow item0='4290655952' item1='4289607376'>
-				<cell x='6' y='4'/>
-				<cell x='6' y='5'/>
-			</arrow>
-			<arrow item0='4291704528' item1='4290655952'>
-				<cell x='6' y='3'/>
-				<cell x='6' y='4'/>
-			</arrow>
 			<arrow item0='4293867216' item1='4291770064'>
 				<cell x='2' y='2'/>
 				<cell x='2' y='3'/>
-			</arrow>
-			<arrow item0='4291770064' item1='4292851408'>
-				<cell x='2' y='3'/>
-				<cell x='0' y='3'/>
 			</arrow>
 		</arrows>
 		<ships>
@@ -520,10 +612,13 @@
 				<ship shipid='4259231440' x='4' y='9' /> <!--PJSC034_Zao_1944 (T10 Japan upgradeable Cruiser) -->
 				<ship shipid='4276041424' x='2' y='9' /> <!--PJSB018_Yamato_1944 (T10 Japan upgradeable Battleship) -->
 				<ship shipid='4277122768' x='0' y='9' /> <!--PJSA017_Hakuryu_1942 (T10 Japan upgradeable AirCarrier) -->
-				<ship shipid='3247355600' x='10' y='9' />  <!--PJSC999_Yubari_Special (T10 Japan event Cruiser) -->
 				<ship shipid='4282267344' x='6' y='9' /> <!--PJSD012_Shimakaze_1943 (T10 Japan upgradeable Destroyer) -->
+				<!-- <ship shipid='3247355600' x='10' y='9' /> PJSC999_Yubari_Special (T10 Japan event Cruiser) -->
 				<!-- <ship shipid='3452843728' x='10' y='9' />  PJSD803_False_Isokaze_1917 (T4 Japan unavailable Destroyer) -->
 
+				<ship shipid='3315513040' x='4' y='10' /> <!--PJSC934_Zao_1944 (T10 Japan upgradeable Cruiser) -->
+				<ship shipid='3333404368' x='0' y='10' /> <!--PJSA917_Hakuryu_1942 (T10 Japan upgradeable AirCarrier) -->
+				<ship shipid='3338548944' x='6' y='10' /> <!--PJSD912_Shimakaze_1943 (T10 Japan upgradeable Destroyer) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
@@ -568,148 +663,171 @@
 		<arrows>
 		</arrows>
 		<ships>
-				<ship shipid='3764303216' x='0' y='5' /> <!--PUSC506_Perth_1942 (T6 Commonwealth special Cruiser) -->
+				<ship shipid='3767416176' x='6' y='2' /> <!--PUSD503_Vampire (T3 Commonwealth special Destroyer) -->
+
+				<ship shipid='3764303216' x='4' y='5' /> <!--PUSC506_Perth_1942 (T6 Commonwealth special Cruiser) -->
 		</ships>
 		<types>
-				<type id='4' nameIDS='Commonwealth' x='3' y='-1' />
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
 		</types>
 	</nation>
 	<nation name='Russia'>
 		<arrows>
-			<arrow item0='4182652368' item1='4179506640'>
+			<arrow item0='3865982416' item1='4179506640'>
+				<cell x='6' y='8'/>
+				<cell x='6' y='9'/>
+			</arrow>
+			<arrow item0='3971888592' item1='3865982416'>
+				<cell x='6' y='7'/>
+				<cell x='6' y='8'/>
+			</arrow>
+			<arrow item0='4076746192' item1='4182652368'>
+				<cell x='8' y='7'/>
+				<cell x='8' y='8'/>
+			</arrow>
+			<arrow item0='4077794768' item1='3971888592'>
+				<cell x='6' y='6'/>
+				<cell x='6' y='7'/>
+			</arrow>
+			<arrow item0='4077794768' item1='4076746192'>
+				<cell x='6' y='6'/>
+				<cell x='8' y='6'/>
+				<cell x='8' y='7'/>
+			</arrow>
+			<arrow item0='4078843344' item1='4077794768'>
+				<cell x='6' y='5'/>
+				<cell x='6' y='6'/>
+			</arrow>
+			<arrow item0='4079891920' item1='4078843344'>
+				<cell x='6' y='4'/>
+				<cell x='6' y='5'/>
+			</arrow>
+			<arrow item0='4180587984' item1='4179539408'>
 				<cell x='4' y='8'/>
 				<cell x='4' y='9'/>
 			</arrow>
-			<arrow item0='4183700944' item1='4180555216'>
-				<cell x='4' y='5'/>
-				<cell x='4' y='6'/>
-			</arrow>
-			<arrow item0='4180555216' item1='4181603792'>
-				<cell x='4' y='6'/>
-				<cell x='4' y='7'/>
-			</arrow>
-			<arrow item0='4181603792' item1='4182652368'>
+			<arrow item0='4181636560' item1='4180587984'>
 				<cell x='4' y='7'/>
 				<cell x='4' y='8'/>
 			</arrow>
-			<arrow item0='4184749520' item1='4183700944'>
+			<arrow item0='4182652368' item1='4074649040'>
+				<cell x='8' y='8'/>
+				<cell x='8' y='9'/>
+			</arrow>
+			<arrow item0='4182685136' item1='4181636560'>
+				<cell x='4' y='6'/>
+				<cell x='4' y='7'/>
+			</arrow>
+			<arrow item0='4183733712' item1='4182685136'>
+				<cell x='4' y='5'/>
+				<cell x='4' y='6'/>
+			</arrow>
+			<arrow item0='4184782288' item1='4183733712'>
 				<cell x='4' y='4'/>
 				<cell x='4' y='5'/>
 			</arrow>
-			<arrow item0='4185798096' item1='4184749520'>
+			<arrow item0='4185798096' item1='4079891920'>
+				<cell x='6' y='3'/>
+				<cell x='6' y='4'/>
+			</arrow>
+			<arrow item0='4185830864' item1='4184782288'>
 				<cell x='4' y='3'/>
 				<cell x='4' y='4'/>
 			</arrow>
 			<arrow item0='4186846672' item1='4185798096'>
+				<cell x='6' y='2'/>
+				<cell x='6' y='3'/>
+			</arrow>
+			<arrow item0='4186879440' item1='4185830864'>
 				<cell x='4' y='2'/>
 				<cell x='4' y='3'/>
 			</arrow>
 			<arrow item0='4187895248' item1='4186846672'>
+				<cell x='6' y='1'/>
+				<cell x='6' y='2'/>
+			</arrow>
+			<arrow item0='4187928016' item1='4186879440'>
 				<cell x='4' y='1'/>
 				<cell x='4' y='2'/>
 			</arrow>
 			<arrow item0='4187928016' item1='4187895248'>
-				<cell x='2' y='1'/>
 				<cell x='4' y='1'/>
+				<cell x='6' y='1'/>
 			</arrow>
 			<arrow item0='4188976592' item1='4187928016'>
-				<cell x='2' y='0'/>
-				<cell x='2' y='1'/>
-			</arrow>
-			<arrow item0='4187928016' item1='4186879440'>
-				<cell x='2' y='1'/>
-				<cell x='2' y='2'/>
-			</arrow>
-			<arrow item0='4186879440' item1='4185830864'>
-				<cell x='2' y='2'/>
-				<cell x='2' y='3'/>
-			</arrow>
-			<arrow item0='4185830864' item1='4184782288'>
-				<cell x='2' y='3'/>
-				<cell x='2' y='4'/>
-			</arrow>
-			<arrow item0='4184782288' item1='4183733712'>
-				<cell x='2' y='4'/>
-				<cell x='2' y='5'/>
-			</arrow>
-			<arrow item0='4183733712' item1='4182685136'>
-				<cell x='2' y='5'/>
-				<cell x='2' y='6'/>
-			</arrow>
-			<arrow item0='4182685136' item1='4181636560'>
-				<cell x='2' y='6'/>
-				<cell x='2' y='7'/>
-			</arrow>
-			<arrow item0='4181636560' item1='4180587984'>
-				<cell x='2' y='7'/>
-				<cell x='2' y='8'/>
-			</arrow>
-			<arrow item0='4180587984' item1='4179539408'>
-				<cell x='2' y='8'/>
-				<cell x='2' y='9'/>
+				<cell x='4' y='0'/>
+				<cell x='4' y='1'/>
 			</arrow>
 		</arrows>
 		<ships>
-				<ship shipid='4188976592' x='2' y='0' /> <!--PRSC101 PRSC101_Orlan (T1 Russia start Cruiser) -->
+				<ship shipid='4188976592' x='4' y='0' /> <!--PRSC101 PRSC101_Orlan (T1 Russia start Cruiser) -->
 
-				<!--<ship shipid='4187895248' x='4' y='1' /> PRSD102_SM_Storojevoy (T2 Russia upgradeable Destroyer) -->
-				<ship shipid='4187928016' x='2' y='1' /> <!--PRSC102_Novik (T2 Russia event Cruiser -->
-				<ship shipid='4187895248' x='4' y='1' /> <!--PRSD102_SM_Storojevoy (T2 Russia upgradeable Destroyer) -->
-				<ship shipid='4292785616' x='8' y='1' /> <!--PRSC002_Diana_1905 (T2 Russia special Cruiser) -->
-				<ship shipid='4284397008' x='10' y='1' /> <!--PRSC010_Diana_1905_Asus (T2 Russia special Cruiser) -->
+				<!--<ship shipid='4187895248' x='6' y='1' /> PRSD102_SM_Storojevoy (T2 Russia upgradeable Destroyer) -->
+				<ship shipid='4187928016' x='4' y='1' /> <!--PRSC102_Novik (T2 Russia event Cruiser -->
+				<ship shipid='4187895248' x='6' y='1' /> <!--PRSD102_SM_Storojevoy (T2 Russia upgradeable Destroyer) -->
+				<ship shipid='4292785616' x='10' y='1' /> <!--PRSC002_Diana_1905 (T2 Russia special Cruiser) -->
+				<ship shipid='4284397008' x='12' y='1' /> <!--PRSC010_Diana_1905_Asus (T2 Russia special Cruiser) -->
 
-				<!--<ship shipid='4186846672' x='4' y='2' /> PRSD103_Derzky (T3 Russia upgradeable Destroyer) -->
-				<ship shipid='4186879440' x='2' y='2' /> <!--PRSC103_Bogatyr (T3 Russia event Cruiser) -->
-				<ship shipid='4186846672' x='4' y='2' /> <!--PRSD103_Derzky (T3 Russia upgradeable Destroyer) -->
-				<ship shipid='4293834192' x='8' y='2' /> <!--PRSC001_Avrora_1917 (T3 Russia premium Cruiser) -->
-				<ship shipid='3767449040' x='10' y='2' /> <!--PRSC503_Oleg (T3 Russia demoWithoutStats Cruiser) -->
+				<!--<ship shipid='4186846672' x='6' y='2' /> PRSD103_Derzky (T3 Russia upgradeable Destroyer) -->
+				<ship shipid='4186879440' x='4' y='2' /> <!--PRSC103_Bogatyr (T3 Russia event Cruiser) -->
+				<ship shipid='4186846672' x='6' y='2' /> <!--PRSD103_Derzky (T3 Russia upgradeable Destroyer) -->
+				<ship shipid='4293834192' x='10' y='2' /> <!--PRSC001_Avrora_1917 (T3 Russia premium Cruiser) -->
+				<ship shipid='3767449040' x='12' y='2' /> <!--PRSC503_Oleg (T3 Russia demoWithoutStats Cruiser) -->
 
-				<!--<ship shipid='4185798096' x='4' y='3' /> PRSD104_Izyaslav (T4 Russia upgradeable Destroyer) -->
-				<ship shipid='4185830864' x='2' y='3' /> <!--PRSC104_Svetlana (T4 Russia event Cruiser) -->
-				<ship shipid='4185798096' x='4' y='3' /> <!--PRSD104_Izyaslav (T4 Russia upgradeable Destroyer) -->
-				<ship shipid='4293866960' x='8' y='3' /> <!--PRSB001_Nikolay_I (T4 Russia special Battleship) -->
+				<!--<ship shipid='4185798096' x='6' y='3' /> PRSD104_Izyaslav (T4 Russia upgradeable Destroyer) -->
+				<ship shipid='4185830864' x='4' y='3' /> <!--PRSC104_Svetlana (T4 Russia event Cruiser) -->
+				<ship shipid='4185798096' x='6' y='3' /> <!--PRSD104_Izyaslav (T4 Russia upgradeable Destroyer) -->
+				<ship shipid='4293866960' x='10' y='3' /> <!--PRSB001_Nikolay_I (T4 Russia special Battleship) -->
 
-				<!--<ship shipid='4184749520' x='4' y='4' /> PRSD105_Pr_7_Gnevny (T5 Russia upgradeable Destroyer) -->
-				<ship shipid='4184782288' x='2' y='4' /> <!--PRSC105_Kirov (T5 Russia event Cruiser) -->
-				<ship shipid='4079891920' x='4' y='4' /> <!--PRSD205_Podvoisky_pr_1929 (T5 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='4291737040' x='8' y='4' /> <!--PRSC003_Murmansk_1944 (T5 Russia premium Cruiser) -->
-				<ship shipid='4293801424' x='10' y='4' /> <!--PRSD001_Gremyashchy_1942 (T5 Russia special Destroyer) -->
-				<!--<ship shipid='3765351888' x='10' y='4' /> PRSC505_Profintern (T5 Russia disabled Cruiser) -->
-				<ship shipid='3765351888' x='12' y='4' /> <!--PRSC505_KrasniKrym (T5 Russia demoWithoutStats Cruiser) -->
-				<ship shipid='3765319120' x='14' y='4' /> <!--PRSD505_Okhotnik_1917 (T5 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='3765384656' x='16' y='4' /> <!--PRSB505_Oktyabrskaya_Revolutsiya (T5 Russia demoWithoutStats Battleship) -->
+				<!--<ship shipid='4184749520' x='6' y='4' /> PRSD105_Pr_7_Gnevny (T5 Russia upgradeable Destroyer) -->
+				<ship shipid='4184782288' x='4' y='4' /> <!--PRSC105_Kirov (T5 Russia event Cruiser) -->
+				<ship shipid='4079891920' x='6' y='4' /> <!--PRSD205_Podvoisky_pr_1929 (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4291737040' x='10' y='4' /> <!--PRSC003_Murmansk_1944 (T5 Russia premium Cruiser) -->
+				<ship shipid='4293801424' x='12' y='4' /> <!--PRSD001_Gremyashchy_1942 (T5 Russia special Destroyer) -->
+				<!--<ship shipid='3765351888' x='12' y='4' /> PRSC505_Profintern (T5 Russia disabled Cruiser) -->
+				<ship shipid='3765351888' x='14' y='4' /> <!--PRSC505_KrasniKrym (T5 Russia demoWithoutStats Cruiser) -->
+				<ship shipid='3765319120' x='16' y='4' /> <!--PRSD505_Okhotnik_1917 (T5 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3765384656' x='18' y='4' /> <!--PRSB505_Oktyabrskaya_Revolutsiya (T5 Russia demoWithoutStats Battleship) -->
 
-				<!--<ship shipid='4183700944' x='4' y='5' /> PRSD106_Pr_30_Ognevoy (T6 Russia upgradeable Destroyer) -->
-				<ship shipid='4183733712' x='2' y='5' /> <!--PRSC106_Pr_94_Budeny (T6 Russia event Cruiser) -->
-				<ship shipid='4078843344' x='4' y='5' /> <!--PRSD206_Pr_7 (T6 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='3764303312' x='8' y='5' /> <!--PRSC506_Molotov_1943 (T6 Russia event Cruiser) -->
-				<ship shipid='3659445712' x='10' y='5' /> <!--PRSC606_Admiral_Makarov (T6 Russia event Cruiser) -->
+				<!--<ship shipid='4183700944' x='6' y='5' /> PRSD106_Pr_30_Ognevoy (T6 Russia upgradeable Destroyer) -->
+				<ship shipid='4183733712' x='4' y='5' /> <!--PRSC106_Pr_94_Budeny (T6 Russia event Cruiser) -->
+				<ship shipid='4078843344' x='6' y='5' /> <!--PRSD206_Pr_7 (T6 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3764303312' x='10' y='5' /> <!--PRSC506_Molotov_1943 (T6 Russia event Cruiser) -->
+				<ship shipid='3659445712' x='12' y='5' /> <!--PRSC606_Admiral_Makarov (T6 Russia event Cruiser) -->
 
-				<!--<ship shipid='4180555216' x='4' y='6' /> PRSD109_Pr_48_Kiev (T7 Russia upgradeable Destroyer) -->
-				<ship shipid='4182685136' x='2' y='6' /> <!--PRSC107_Schors (T7 Russia event Cruiser) -->
-				<ship shipid='4077794768' x='4' y='6' /> <!--PRSD207_Minsk (T7 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='3763221968' x='8' y='6' /> <!--PRSD507_Leningrad_1944 (T7 Russia demoWithoutStats Destroyer) -->
+				<!--<ship shipid='4180555216' x='6' y='6' /> PRSD109_Pr_48_Kiev (T7 Russia upgradeable Destroyer) -->
+				<ship shipid='4182685136' x='4' y='6' /> <!--PRSC107_Schors (T7 Russia event Cruiser) -->
+				<ship shipid='4077794768' x='6' y='6' /> <!--PRSD207_Minsk (T7 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3763221968' x='10' y='6' /> <!--PRSD507_Leningrad_1944 (T7 Russia demoWithoutStats Destroyer) -->
 
-				<!--<ship shipid='4181603792' x='4' y='7' /> PRSD108_Pr_20i_Tashkent (T8 Russia upgradeable Destroyer) -->
-				<ship shipid='4181636560' x='2' y='7' /> <!--PRSC108_Pr_68_Chapaev (T8 Russia event Cruiser) -->
-				<ship shipid='3971888592' x='4' y='7' /> <!--PRSD308_Pr_48 (T8 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='4076746192' x='6' y='7' /> <!--PRSD208_Pr_30 (T8 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='3762206160' x='8' y='7' /> <!--PRSC508_Kutuzov_1952 (T8 Russia special Cruiser) -->
+				<!--<ship shipid='4181603792' x='6' y='7' /> PRSD108_Pr_20i_Tashkent (T8 Russia upgradeable Destroyer) -->
+				<ship shipid='4181636560' x='4' y='7' /> <!--PRSC108_Pr_68_Chapaev (T8 Russia event Cruiser) -->
+				<ship shipid='3971888592' x='6' y='7' /> <!--PRSD308_Pr_48 (T8 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4076746192' x='8' y='7' /> <!--PRSD208_Pr_30 (T8 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3762206160' x='10' y='7' /> <!--PRSC508_Kutuzov_1952 (T8 Russia special Cruiser) -->
 
-				<!--<ship shipid='4182652368' x='4' y='8' /> PRSD107_Pr_35_Udaloy (T9 Russia upgradeable Destroyer) -->
-				<ship shipid='4180587984' x='2' y='8' /> <!--PRSC109_Dmitry_Donskoy (T9 Russia event Cruiser) -->
-				<ship shipid='3865982416' x='4' y='8' /> <!--PRSD409_Pr_20i_Tashkent (T9 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='4182652368' x='6' y='8' /> <!--PRSD107_Pr_35_Udaloy (T9 Russia demoWithoutStats Destroyer) -->
+				<!--<ship shipid='4182652368' x='6' y='8' /> PRSD107_Pr_35_Udaloy (T9 Russia upgradeable Destroyer) -->
+				<ship shipid='4180587984' x='4' y='8' /> <!--PRSC109_Dmitry_Donskoy (T9 Russia event Cruiser) -->
+				<ship shipid='3865982416' x='6' y='8' /> <!--PRSD409_Pr_20i_Tashkent (T9 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4182652368' x='8' y='8' /> <!--PRSD107_Pr_35_Udaloy (T9 Russia demoWithoutStats Destroyer) -->
 
-				<!--<ship shipid='4179506640' x='4' y='9' /> PRSD110_Pr_24_Khabarovsk (T10 Russia upgradeable Destroyer) -->
-				<ship shipid='4179539408' x='2' y='9' /> <!--PPRSC110_Pr_66_Moskva (T10 Russia event Cruiser) --> 
-				<ship shipid='4179506640' x='4' y='9' /> <!--PRSD110_Pr_24_Khabarovsk (T10 Russia demoWithoutStats Destroyer) -->
-				<ship shipid='4074649040' x='6' y='9' /> <!--PRSD210_Grozovoy_pr_40N (T10 Russia demoWithoutStats Destroyer) -->
+				<!--<ship shipid='4179506640' x='6' y='9' /> PRSD110_Pr_24_Khabarovsk (T10 Russia upgradeable Destroyer) -->
+				<ship shipid='4179539408' x='4' y='9' /> <!--PRSC110_Pr_66_Moskva (T10 Russia event Cruiser) --> 
+				<ship shipid='4179506640' x='6' y='9' /> <!--PRSD110_Pr_24_Khabarovsk (T10 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='4074649040' x='8' y='9' /> <!--PRSD210_Grozovoy_pr_40N (T10 Russia demoWithoutStats Destroyer) -->
+
+				<ship shipid='3340678608' x='4' y='10' /> <!--PRSC910_Pr_66_Moskva (T10 Russia event Cruiser) --> 
+				<ship shipid='3340645840' x='8' y='10' /> <!--PRSD910_Grozovoy_pr_40N (T10 Russia demoWithoutStats Destroyer) -->
 		</ships>
 		<types>
-				<type id='0' nameIDS='IDS_DESTROYER' x='5' y='-1' />
-				<type id='1' nameIDS='IDS_CRUISER' x='2' y='-1' />
-				<type id='2' nameIDS='IDS_BATTLESHIP' x='0' y='-1' />
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
 				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
 		</types>
 	</nation>
@@ -753,53 +871,18 @@
 				<ship shipid='4179572688' x='0' y='9' /> <!--PBSB110_Conqueror (T10 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='4179539920' x='2' y='9' /> <!--PBSC110_Minotaur (T10 United_Kingdom demoWithoutStats Cruiser) --> 
 
+				<ship shipid='3340711888' x='0' y='10' /> <!--PBSB910_Conqueror (T10 United_Kingdom demoWithoutStats Battleship) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
 				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
 				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
 				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
-				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
 		</types>
 	</nation>
 	<nation name='France'>
 		<arrows>
-			<arrow item0='4180588368' item1='4179539792'>
-				<cell x='0' y='8'/>
-				<cell x='0' y='9'/>
-			</arrow>
-			<arrow item0='4181636944' item1='4180588368'>
-				<cell x='0' y='7'/>
-				<cell x='0' y='8'/>
-			</arrow>
-			<arrow item0='4182685520' item1='4181636944'>
-				<cell x='0' y='6'/>
-				<cell x='0' y='7'/>
-			</arrow>
-			<arrow item0='4183734096' item1='4182685520'>
-				<cell x='0' y='5'/>
-				<cell x='0' y='6'/>
-			</arrow>
-			<arrow item0='4184782672' item1='4183734096'>
-				<cell x='0' y='4'/>
-				<cell x='0' y='5'/>
-			</arrow>
-			<arrow item0='4185831248' item1='4184782672'>
-				<cell x='0' y='3'/>
-				<cell x='0' y='4'/>
-			</arrow>
-			<arrow item0='4186879824' item1='4185831248'>
-				<cell x='0' y='2'/>
-				<cell x='0' y='3'/>
-			</arrow>
-			<arrow item0='4187928400' item1='4186879824'>
-				<cell x='0' y='1'/>
-				<cell x='0' y='2'/>
-			</arrow>
-			<arrow item0='4188976976' item1='4187928400'>
-				<cell x='0' y='0'/>
-				<cell x='0' y='1'/>
-			</arrow>
 		</arrows>
 		<ships>
 				<ship shipid='4179539792' x='4' y='9' /> <!--PFSC110_Henri_IV (T10 France special Cruiser) -->
@@ -831,7 +914,7 @@
 				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
 				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
 				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
-				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
 		</types>
 	</nation>
 	<nation name='Poland'>
@@ -845,7 +928,7 @@
 				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
 				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
 				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
-				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
 		</types>
 	</nation>
 	<nation name='Pan_Asia'>
@@ -881,7 +964,7 @@
 				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
 				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
 				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
-				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
 		</types>
 	</nation>
 	<nation name='Italy'>
@@ -897,25 +980,42 @@
 				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
 				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
 				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
-				<type id='4' nameIDS='IDS_PREMIUM' x='8' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
 		</types>
 	</nation>
 	<nation name='Events'>	
 		<arrows>
 		</arrows>
 		<ships>
-			<ship shipid='4293866768' x='0' y='0' /> <!--PXSB001_Mr_Hyde (T11 Events event Battleship)-->
-			<ship shipid='4292818192' x='0' y='1' /> <!--PXSB002_Rasputin (T4 Events unavailable Battleship)-->
-			<ship shipid='4291769616' x='0' y='2' /> <!--PXSB003_Zeekasa (T2 Events unavailable Battleship)-->
-			<ship shipid='4293801232' x='0' y='3' /> <!--PXSD001_VanHellsink (T11 Events event Destroyer)-->
-			<ship shipid='4293834000' x='0' y='4' /> <!--PXSC001_Dr_Frankenship (T11 Events event Cruiser)-->
-			<ship shipid='4293145872' x='0' y='5' /> <!--PXSX001_Transylvania (T5 Events unavailable Auxiliary)-->
-	        <ship shipid='4278465808' x='2' y='5' /> <!--PXSX015_Schuka (T11 Events event Auxiliary)-->
+			<ship shipid='4293866768' x='2' y='0' /> <!--PXSB001_Mr_Hyde (T11 Events event Battleship)-->
+			<ship shipid='4292818192' x='2' y='1' /> <!--PXSB002_Rasputin (T4 Events unavailable Battleship)-->
+			<ship shipid='4291769616' x='2' y='2' /> <!--PXSB003_Zeekasa (T2 Events unavailable Battleship)-->
+			<ship shipid='4290721040' x='2' y='3' /> <!--PXSB004_Tirpiz_1942_H2017 (T8 Events unavailable Battleship)-->
+			<ship shipid='4289672464' x='2' y='4' /> <!--PXSB005_Bismarck_H2017 (T8 Events unavailable Battleship)-->
+
+			<ship shipid='4293801232' x='6' y='0' /> <!--PXSD001_VanHellsink (T11 Events event Destroyer)-->
+			<ship shipid='4292752656' x='6' y='1' /> <!--PXSD002_Benson_1945_H2017 (T8 Events event Destroyer)-->
+			<ship shipid='4291704080' x='6' y='2' /> <!--PXSD003_Kagero_H2017 (T8 Events event Destroyer)-->
+			<!--<ship shipid='4287509776' x='6' y='6' /> PXSD007_Scnellboot_S38 (T8 Events event Destroyer)-->
+
+			<ship shipid='4293834000' x='4' y='0' /> <!--PXSC001_Dr_Frankenship (T11 Events event Cruiser)-->
+			<ship shipid='4292785424' x='4' y='1' /> <!--PXSC002_Charles_Martel_H2017 (T8 Events event Cruiser)-->
+			<ship shipid='4291736848' x='4' y='2' /> <!--PXSC003_Pr_68_Chapaev_H2017 (T8 Events event Cruiser)-->
+
+			<ship shipid='4293145872' x='8' y='0' /> <!--PXSX001_Transylvania (T5 Events unavailable Auxiliary)-->
+	        <!--<ship shipid='4278465808' x='2' y='5' /> PXSX015_Schuka (T11 Events event Auxiliary)-->
+
+			<ship shipid='4293899536' x='0' y='0' /> <!--PXSA001_Invisible_Air_Enemy_1 (T4 Events event AirCarrier)-->
+			<ship shipid='4292850960' x='0' y='1' /> <!--PXSA002_Invisible_Air_Ally_1 (T4 Events event AirCarrier)-->
+			<ship shipid='4291802384' x='0' y='2' /> <!--PXSA003_Lexington_1944_H2017 (T8 Events event AirCarrier)-->
+			<ship shipid='4290753808' x='0' y='3' /> <!--PXSA004_Zuikaku_1944_H2017 (T8 Events event AirCarrier)-->
 		</ships>
-		<types>	
-		        <type id='0' nameIDS='2016 Halloween' x='0' y='-1' />
-				<type id='1' nameIDS='2017 April' x='2' y='-1' />
-				
+		<types>
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
 		</types>
 	</nation>
 	<nation name='High_School_Fleet'>
@@ -929,5 +1029,6 @@
 				<type id='4' nameIDS='HSF' x='3' y='-1' />
 		</types>
 	</nation>
+
 </ship_tree>
 <!--SEA group-->

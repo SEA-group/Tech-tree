@@ -783,6 +783,8 @@
 		<block>
 			<style>
 				<width value="100%"/>
+				<position value="absolute"/>
+				<bottom value="-3"/>
 			</style>
 			<block className="HorizontalDivider">
 				<styleClass value="$PxHorizontalCorrection"/>
@@ -1250,6 +1252,15 @@
 	<block className="EmptyItem">
 		<bind name="visible" value="false"/>
 	</block>
+	<block className="DottedLine">
+		<style>
+			<backgroundImage value="symbol:dotted_line"/>
+			<backgroundRepeatX value="true"/>
+			<width value="100%"/>
+			<height value="1px"/>
+			<alpha value="0.5"/>
+		</style>
+	</block>
 	<css name="$DockPanelVisibleArea">
 		<marginBottom value="18px"/>
 		<marginTop value="7px"/>
@@ -1306,11 +1317,20 @@
 													playerShipInfo.isInFormation 													? { _texts: [{_paragraphText: tr('IDS_SHIP_IN_DIVISION_MESSAGE_NOT_COMMANDER_0')}, {_paragraphText: tr('IDS_SHIP_IN_FORMATION_MESSAGE_1') }] } :
 													playerShipInfo.isLocked 														? { _texts: [{_paragraphText: tr('IDS_SHIP_IN_BATTLE_MESSAGE') }] } :
 													!(shipInfoSlim.isDownloaded)													? { _texts: [{_paragraphText: tr('IDS_NOT_AVAILABLE_MESSAGE') }] } :
-													(selectedBattle.type == BattleTypes.CLAN_BATTLE &amp;&amp; !divisionData.divisionExist)	? { _texts: [{_paragraphText: tr('IDS_NOT_IN_DIVISION_FOR_CLAN_BATTLE_WITH_TRANSFER') }] }
+													(clanBattleType &amp;&amp; !canCreate &amp;&amp; !divisionData.divisionExist)					? { _texts: [{_paragraphText: tr('IDS_CLAN_BATTLES_ROLE_NOT_ALLOWED_TO_START_CLAN_BATTLE') }] } :
+													(clanBattleType &amp;&amp; !divisionData.divisionExist)									? { _texts: [{_paragraphText: tr('IDS_NOT_IN_DIVISION_FOR_CLAN_BATTLE_WITH_TRANSFER') }] }
 																																	: null"/>
 			</block>
+			<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; clanId"/>
+			<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
+			<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
+			<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+			<bind name="watchDH" value="'clanId'; ['selfPlayerEntity.clanman.evClanIdChanged']; selfPlayerEntity.clanman.clanId"/>
+			<bind name="watchDH" value="'role'; 	 ['selfPlayerEntity.clanman.evRoleChanged']; selfPlayerEntity.clanman.role"/>
+			<bind name="watch" value="'clanBattleType'; 	selectedBattle.type == BattleTypes.CLAN_BATTLE"/>
+			<bind name="watch" value="'canCreate'; 		(role == 'executive_officer' || role == 'recruitment_officer' || role == 'commander')"/>
 			<block>
-				<bind name="visible" value="(selectedBattle.type == BattleTypes.CLAN_BATTLE &amp;&amp; !divisionData.divisionExist)"/>
+				<bind name="visible" value="	clanBattleType &amp;&amp; canCreate &amp;&amp; !(divisionData.divisionExist)"/>
 				<styleClass value="$MiddleAligned"/>
 				<block className="button_default" type="native">
 					<style>
@@ -1542,14 +1562,16 @@
 																					 _maxWidth: 250 }"/>
 				</block>
 				<block>
-					<bind name="visible" value="realmConstants.premshopUIAvailable"/>
+					<bind name="visible" value="realmConstants.premshopUIAvailable || isSteamClient"/>
+					<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
+					<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 					<bind name="appear" value="'addedToStage'; 0.3; 0.2; {alpha: 0, top: 5}; {alpha: 1, top: 0}"/>
 					<bind name="appear" value="'beforeClose'; 0.3; 0.2; {alpha: 1, top: 0}; {alpha: 0, top: 5}"/>
 					<style>
 						<marginBottom value="10px"/>
 						<marginRight value="10px"/>
 					</style>
-					<bind name="instance" value="'PremshopBanner'; realmConstants.premshopUIAvailable ? {} : null"/>
+					<bind name="instance" value="'PremshopBanner'; realmConstants.premshopUIAvailable || isSteamClient ? {} : null"/>
 				</block>
 				<block>
 					<bind name="feature" value="9; 'rollOver'"/>
@@ -3791,22 +3813,25 @@
 				<bind name="class" value="'$FontColorGrey'"/>
 				<text value="IDS_REGISTRATION_DATE"/>
 			</block>
-			<block type="text">
-				<bind name="timeFormat" value="statData.basicStats.timeLastBattle; 'hh:mm  dd.MM.yyyy'; 'timeLastBattleFormatted'; true"/>
-				<style>
-					<marginLeft value="0px"/>
-				</style>
-				<styleClass value="$TextSecondary"/>
-				<bind name="text" value="timeLastBattleFormatted"/>
-			</block>
-			<block type="text">
-				<style>
-					<marginTop value="-6px"/>
-					<marginLeft value="0px"/>
-				</style>
-				<styleClass value="$TextSecondary"/>
-				<bind name="class" value="'$FontColorGrey'"/>
-				<bind name="text" value="toLowerCase(tr('IDS_LAST_BATTLE'))"/>
+			<block>
+				<bind name="visible" value="statData.basicStats.timeLastBattle &gt; 0"/>
+				<block type="text">
+					<bind name="timeFormat" value="statData.basicStats.timeLastBattle; 'hh:mm  dd.MM.yyyy'; 'timeLastBattleFormatted'; true"/>
+					<style>
+						<marginLeft value="0px"/>
+					</style>
+					<styleClass value="$TextSecondary"/>
+					<bind name="text" value="timeLastBattleFormatted"/>
+				</block>
+				<block type="text">
+					<style>
+						<marginTop value="-6px"/>
+						<marginLeft value="0px"/>
+					</style>
+					<styleClass value="$TextSecondary"/>
+					<bind name="class" value="'$FontColorGrey'"/>
+					<bind name="text" value="toLowerCase(tr('IDS_LAST_BATTLE'))"/>
+				</block>
 			</block>
 		</block>
 		<block>
@@ -4790,7 +4815,7 @@
 					<maxWidth value="200"/>
 				</style>
 				<styleClass value="$TextDefault"/>
-				<bind name="text" value="moduleInfo.typeIDS"/>
+				<bind name="text" value="moduleInfo.subTypeIDS != '' ? moduleInfo.subTypeIDS : moduleInfo.typeIDS"/>
 			</block>
 		</block>
 	</block>
@@ -4897,6 +4922,31 @@
 							<marginTop value="1px"/>
 						</style>
 					</block>
+					<block>
+						<bind name="watch" value="'deepWaterTorpedoes'; 		moduleInfo.params.torpedoes.isDeepWater"/>
+						<bind name="watch" value="'deepWaterTorpedoBombers'; moduleInfo.params.torpedoIsDeepWater"/>
+						<styleClass value="$InfoBlockIndent"/>
+						<bind name="visible" value="(deepWaterTorpedoes == true) || (deepWaterTorpedoBombers == true)"/>
+						<bind name="instance" value="'TorpedoAffectedShipsParamRow'; (deepWaterTorpedoes == true) || (deepWaterTorpedoBombers == true) 	? { _torpedoId: moduleInfo.params.ammoNameRaw, 
+																																			_isTooltip: true }
+																																		: null"/>
+					</block>
+					<block>
+						<bind name="visible" value="(deepWaterTorpedoes == true) || (deepWaterTorpedoBombers == true)"/>
+						<style>
+							<width value="100%"/>
+						</style>
+						<block className="HorizontalDivider">
+							<styleClass value="$PxHorizontalCorrection"/>
+							<style>
+								<width value="100%"/>
+								<height value="3px"/>
+							</style>
+							<block className="divider_h" type="native">
+								<styleClass value="$Fullsize"/>
+							</block>
+						</block>
+					</block>
 					<bind name="instance" value="'ShipParamsTooltipList'; { typeList: 'tooltipModuleParams' + moduleInfo.type, params: moduleInfo.params, testParams: _testModuleParams, testObjectIsBaseForView: 0, testObjectIsBaseForCompare: 0, showCompareWithZero: 1}"/>
 				</block>
 				<block>
@@ -4904,9 +4954,9 @@
 					<style>
 						<width value="100%"/>
 					</style>
-					<bind name="instance" value="'ParamsAfterMount'; !(moduleInfo.count.Installed) &amp;&amp; viewParams.hasDiff ? { 	_viewParams: viewParams,
-																									_title: 'IDS_AFTER_MOUNT'}
-																								: null"/>
+					<bind name="instance" value="'ParamsAfterMount'; !(moduleInfo.count.Installed) &amp;&amp; viewParams.hasDiff ? { _viewParams: viewParams,
+																											_title: 'IDS_AFTER_MOUNT'}
+																										: null"/>
 				</block>
 				<block>
 					<style>
@@ -5122,6 +5172,31 @@
 							<marginBottom value="1px"/>
 							<marginTop value="1px"/>
 						</style>
+					</block>
+					<block>
+						<bind name="watch" value="'deepWaterTorpedoes'; 		moduleInfo.params.torpedoes.isDeepWater"/>
+						<bind name="watch" value="'deepWaterTorpedoBombers'; moduleInfo.params.torpedoIsDeepWater"/>
+						<styleClass value="$InfoBlockIndent"/>
+						<bind name="visible" value="(deepWaterTorpedoes == true) || (deepWaterTorpedoBombers == true)"/>
+						<bind name="instance" value="'TorpedoAffectedShipsParamRow'; (deepWaterTorpedoes == true) || (deepWaterTorpedoBombers == true) 	? { _torpedoId: moduleInfo.params.ammoNameRaw, 
+																																		 	_isTooltip: true }
+																																		: null"/>
+					</block>
+					<block>
+						<bind name="visible" value="(deepWaterTorpedoes == true) || (deepWaterTorpedoBombers == true)"/>
+						<style>
+							<width value="100%"/>
+						</style>
+						<block className="HorizontalDivider">
+							<styleClass value="$PxHorizontalCorrection"/>
+							<style>
+								<width value="100%"/>
+								<height value="3px"/>
+							</style>
+							<block className="divider_h" type="native">
+								<styleClass value="$Fullsize"/>
+							</block>
+						</block>
 					</block>
 					<bind name="instance" value="'ShipParamsTooltipList'; { typeList: 'tooltipModuleParams' + moduleInfo.type, params: moduleInfo.params, testParams: _testModuleParams, testObjectIsBaseForView: 0, testObjectIsBaseForCompare: 0, showCompareWithZero: 1}"/>
 				</block>
@@ -6430,7 +6505,8 @@
 		<block>
 			<bind name="child" value="data.idInGroup; {data: data, _width: _width};
 					'ClanCommon';
-					'EmptyItem' "/>
+					'ClanInvitation';
+					'ClanPlayerAlreadyInvited'"/>
 		</block>
 	</block>
 	<block className="NotificationCollection">
@@ -6582,6 +6658,80 @@
 			<style>
 				<flow value="horizontal"/>
 			</style>
+		</block>
+		<block>
+			<style>
+				<alpha value="0.6"/>
+				<right value="5px"/>
+				<top value="3px"/>
+				<position value="absolute"/>
+				<width value="35px"/>
+				<height value="35px"/>
+				<backgroundImage value="symbol:icon_account_clan"/>
+			</style>
+		</block>
+	</block>
+	<block className="ClanInvitation">
+		<bind name="watch" value="'_clanTag'; '[' + data.clanTag + ']'"/>
+		<bind name="style" value="'width'; _width"/>
+		<style>
+			<width value="1px"/>
+			<minHeight value="40"/>
+		</style>
+		<block>
+			<style>
+				<width value="100%"/>
+			</style>
+			<bind name="instance" value="'NotificationHeader'; { _header: data.header, _class: '$TextHeaderBold'}"/>
+		</block>
+		<block>
+			<styleClass value="$InfoBlockHorizontalIndent"/>
+			<style>
+				<marginBottom value="6px"/>
+				<marginTop value="2px"/>
+			</style>
+			<block type="text">
+				<styleClass value="$TextHeaderBigDefault"/>
+				<bind name="style" value="'maxWidth'; _width - 55"/>
+				<bind name="text" value="subst('IDS_SYS_MESSAGE_INVITATION_TO_CLAN_SEND', [], { clanTag: _clanTag })}"/>
+			</block>
+		</block>
+		<block>
+			<style>
+				<alpha value="0.6"/>
+				<right value="5px"/>
+				<top value="3px"/>
+				<position value="absolute"/>
+				<width value="35px"/>
+				<height value="35px"/>
+				<backgroundImage value="symbol:icon_account_clan"/>
+			</style>
+		</block>
+	</block>
+	<block className="ClanPlayerAlreadyInvited">
+		<bind name="watch" value="'_clanTag'; '[' + data.clanTag + ']'"/>
+		<bind name="style" value="'width'; _width"/>
+		<style>
+			<width value="1px"/>
+			<minHeight value="40"/>
+		</style>
+		<block>
+			<style>
+				<width value="100%"/>
+			</style>
+			<bind name="instance" value="'NotificationHeader'; { _header: data.header, _class: '$TextHeaderBold'}"/>
+		</block>
+		<block>
+			<styleClass value="$InfoBlockHorizontalIndent"/>
+			<style>
+				<marginBottom value="6px"/>
+				<marginTop value="2px"/>
+			</style>
+			<block type="text">
+				<styleClass value="$TextHeaderBigDefault"/>
+				<bind name="style" value="'maxWidth'; _width - 55"/>
+				<bind name="text" value="subst('IDS_SYS_MESSAGE_PLAYER_ALREADY_INVITED', [], { clanTag: _clanTag })}"/>
+			</block>
 		</block>
 		<block>
 			<style>
@@ -10842,7 +10992,23 @@
 					</block>
 					<block>
 						<styleClass value="$AlignRight"/>
-						<bind name="instance" value="'CostCRNano'; { _costCR: data.costShipCR}"/>
+						<block>
+							<bind name="visible" value="(data.costShipCR != 0)"/>
+							<bind name="instance" value="'PriceTag'; { priceInfo: { finalPrice: data.costShipCR, currency: 'credits' }, _small: true}"/>
+						</block>
+						<block type="text">
+							<bind name="visible" value="((data.costShipCR != 0) &amp;&amp; (data.costShipGL != 0))"/>
+							<styleClass value="$TextSecondary"/>
+							<styleClass value="$MiddleVAligned"/>
+							<text value="IDS_AND"/>
+						</block>
+						<block>
+							<bind name="visible" value="(data.costShipGL != 0)"/>
+							<bind name="instance" value="'PriceTag'; { priceInfo: { finalPrice: data.costShipGL, currency: 'gold' }, _small: true}"/>
+						</block>
+						<style>
+							<flow value="horizontal"/>
+						</style>
 					</block>
 					<style>
 						<flow value="horizontal"/>
@@ -14101,8 +14267,9 @@
 																																		: 'showUnavailableExtendedSystemLog')
 																			: null;
 							{_systemLogMessageEntityId: $dataRef.ref.id}"/>
-		<bind name="watch" value="'systemLogMessage'; $dataRef.ref.dataComponent.data"/>
 		<bind name="primaryEntityDH" value="'battleResultsEntity'; CC.battleResultsComponent; systemLogMessage.data.arenaUniqueID"/>
+		<bind name="dataRefDH" value="'systemLogMessageEntity'; '$dataRef.ref'"/>
+		<bind name="watchDH" value="'systemLogMessage'; ['systemLogMessageEntity.dataComponent.evDataChanged']; systemLogMessageEntity.dataComponent.data"/>
 		<bind name="request" value="'click'; systemLogMessage.extendedData.game_data.battle_mode_id == 6 || systemLogMessage.extendedData.game_data.battle_mode_id == 7 ? 'pveBattlesShowStats' : null; {common: battleResultsEntity.dataComponent.data.common, 'private': battleResultsEntity.dataComponent.data.privateData}"/>
 		<bind name="request" value="'click'; systemLogMessage.extendedData.game_data.battle_mode_id == 8 ? 'clanBattlesShowResults' : null; {arenaId: systemLogMessage.data.arenaUniqueID}"/>
 	</block>
@@ -14117,7 +14284,8 @@
 																																		: 'showUnavailableExtendedSystemLog')
 																			: null;
 							{_systemLogMessageEntityId: $dataRef.ref.id}"/>
-		<bind name="watch" value="'systemLogMessage'; $dataRef.ref.dataComponent.data"/>
+		<bind name="dataRefDH" value="'systemLogMessageEntity'; '$dataRef.ref'"/>
+		<bind name="watchDH" value="'systemLogMessage'; ['systemLogMessageEntity.dataComponent.evDataChanged']; systemLogMessageEntity.dataComponent.data"/>
 		<bind name="primaryEntityDH" value="'battleResultsEntity'; CC.battleResultsComponent; systemLogMessage.data.arenaUniqueID"/>
 		<bind name="request" value="'click'; systemLogMessage.extendedData.game_data.battle_mode_id == 6 || systemLogMessage.extendedData.game_data.battle_mode_id == 7 ? 'pveBattlesShowStats' : null; {common: battleResultsEntity.dataComponent.data.common, 'private': battleResultsEntity.dataComponent.data.privateData}"/>
 		<bind name="request" value="'click'; systemLogMessage.extendedData.game_data.battle_mode_id == 8 ? 'clanBattlesShowResults' : null; {arenaId: systemLogMessage.data.arenaUniqueID}"/>
@@ -14748,7 +14916,7 @@
 		</style>
 		<block className="icon_ship" type="native">
 			<styleClass value="$MiddleVAligned"/>
-			<bind name="gotoAndStop!" value="shipInfo.isPremium ? shipInfo.subtype + '_P' : shipInfo.subtype"/>
+			<bind name="gotoAndStop!" value="shipInfo.subtype"/>
 		</block>
 		<block type="text">
 			<bind name="style" value="'width'; _textfieldsWidth ? _textfieldsWidth : '100px'"/>
@@ -16470,7 +16638,7 @@
 								<marginBottom value="2px"/>
 							</style>
 							<bind name="gotoAndStop!" value="_fromCrew 	? (isOwned ? ((shipInfo.isPremium || shipInfo.uiSpecial) ? shipInfo.subtype + '_P' : shipInfo.subtype) : shipInfo.subtype + '_U')
-														: inSideCompare &amp;&amp; _isNotMyShip ? shipInfo.subtype
+														: _inSideCompare &amp;&amp; _isNotMyShip ? shipInfo.subtype
 														: ((shipInfo.isPremium || shipInfo.uiSpecial) ? shipInfo.subtype + '_P' : shipInfo.subtype)"/>
 						</block>
 					</block>
@@ -16555,161 +16723,199 @@
 	</block>
 	<block className="ShipInfoTabRow">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'dockDefaultValues'; 'dockInitData,dockUpdateData'"/>
-		<bind name="watch" value="'id'; id"/>
 		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
+		<bind name="watch" value="'id'; id"/>
 		<bind name="name" value="'param_' + id"/>
 		<bind name="dispatch" value="'click'; dockDefaultValues.armourVisibility &amp;&amp; !(excursionOff) ? null : 'onParamRowClicked'; index"/>
-		<bind name="tooltip" value="'ShipParamTooltip';{	id: id, meta:meta, secondLevel:secondLevel, tooltipIDS:tooltipIDS, nameIDS:nameIDS,
-										_hasExcursion: (!excursionOff &amp;&amp; !(dockDefaultValues.armourVisibility)),
-										_isArmour: id == 'armour', _armourOff: _armourOff}"/>
 		<bind name="action" value="'click'; (id == 'armour') &amp;&amp; (_armourOff != true) ? (dockDefaultValues.armourVisibility ? 'hideArmour' : 'showArmour') : null"/>
 		<bind name="fade" value="!empty &amp;&amp; (state &amp;&amp; isRoot || (!(parent.empty) &amp;&amp; parent.state.active)); 0.15; {alpha: 0, ubScaleY: 0.0}; {alpha: 1, ubScaleY: 1.0}"/>
 		<style>
 			<width value="100%"/>
 		</style>
-		<block className="inner_panel" type="native">
-			<styleClass value="$Fullsize"/>
-			<styleClass value="$PxHorizontalCorrection"/>
-			<styleClass value="$MouseDisable"/>
-			<style>
-				<position value="absolute"/>
-			</style>
-			<bind name="visible" value="!(isRoot)"/>
-		</block>
-		<block className="dock_submenu_item" type="native">
-			<styleClass value="$Fullsize"/>
-			<styleClass value="$PxHorizontalCorrection"/>
-			<style>
-				<position value="absolute"/>
-			</style>
-			<bind name="style" value="'alpha'; (!(isRoot) &amp;&amp; !(excursionOff) &amp;&amp; !(dockDefaultValues.armourVisibility)) || ((id == 'armour') &amp;&amp; (_armourOff != true)) ? 1 : 0"/>
-			<bind name="selected" value="state.selected"/>
-		</block>
-		<block>
-			<styleClass value="$Fullsize"/>
-			<styleClass value="$MouseDisable"/>
-			<style>
-				<position value="absolute"/>
-				<left value="1px"/>
-			</style>
-			<bind name="instance" value="'StatValueBar'; meta ? {_width: 310,	 						_hasDiff: root.hasDiff,
-												_currentValue: root.values[0], 			_diffValue: root.diffData[0].value,
-												_isGood: root.diffData[0].isGood, 		_expand: state.active,
-												_invert: ident == 'visibility',			rollOver: rollOver,
-												viewParams: viewParams} : null"/>
-		</block>
 		<block>
 			<style>
 				<width value="100%"/>
-				<position value="absolute"/>
-				<bottom value="-1px"/>
 			</style>
-			<styleClass value="$MouseDisable"/>
-			<bind name="visible" value="meta"/>
-			<block className="HorizontalDivider">
+			<bind name="tooltip" value="'ShipParamTooltip';{	id: id, meta: meta, secondLevel: secondLevel, tooltipIDS: tooltipIDS, nameIDS: nameIDS,
+											_hasExcursion: (!excursionOff &amp;&amp; !(dockDefaultValues.armourVisibility)),
+											_isArmour: id == 'armour', _armourOff: _armourOff, _torpedoId: aviations.params.ammoNameRaw, 
+											_deepWaterTorpedoBombers: deepWaterTorpedoBombers }"/>
+			<block className="inner_panel" type="native">
+				<styleClass value="$Fullsize"/>
+				<styleClass value="$PxHorizontalCorrection"/>
+				<styleClass value="$MouseDisable"/>
+				<style>
+					<position value="absolute"/>
+				</style>
+				<bind name="visible" value="!(isRoot)"/>
+			</block>
+			<block className="dock_submenu_item" type="native">
+				<styleClass value="$Fullsize"/>
 				<styleClass value="$PxHorizontalCorrection"/>
 				<style>
-					<width value="100%"/>
-					<height value="3px"/>
+					<position value="absolute"/>
 				</style>
-				<block className="divider_h" type="native">
-					<styleClass value="$Fullsize"/>
-				</block>
+				<bind name="style" value="'alpha'; (!(isRoot) &amp;&amp; !(excursionOff) &amp;&amp; !(dockDefaultValues.armourVisibility)) || ((id == 'armour') &amp;&amp; (_armourOff != true)) ? 1 : 0"/>
+				<bind name="selected" value="state.selected"/>
 			</block>
-		</block>
-		<block>
-			<styleClass value="$MouseDisable"/>
-			<style>
-				<width value="100%"/>
-				<marginLeft value="26px"/>
-				<marginRight value="12px"/>
-				<marginTop value="1px"/>
-				<marginBottom value="3px"/>
-			</style>
-			<bind name="style" value="'marginLeft'; secondLevelTooltip ? '12px' : '20px'"/>
-			<bind name="style" value="'marginTop'; (viewParams.list[$index - 1].meta || viewParams.list[$index - 1] == null) &amp;&amp; !(meta) ? '5px' : '1px'"/>
-			<bind name="style" value="'marginBottom'; viewParams.list[$index + 1].meta || viewParams.list[$index + 1] == null ? '8px' : '3px'"/>
+			<block>
+				<styleClass value="$Fullsize"/>
+				<styleClass value="$MouseDisable"/>
+				<style>
+					<position value="absolute"/>
+					<left value="1px"/>
+				</style>
+				<bind name="instance" value="'StatValueBar'; meta ? {_width: 310,	 						_hasDiff: root.hasDiff,
+													_currentValue: root.values[0], 			_diffValue: root.diffData[0].value,
+													_isGood: root.diffData[0].isGood, 		_expand: state.active,
+													_invert: ident == 'visibility',			rollOver: rollOver,
+													viewParams: viewParams} : null"/>
+			</block>
 			<block>
 				<style>
 					<width value="100%"/>
+					<position value="absolute"/>
+					<bottom value="-1px"/>
 				</style>
-				<bind name="instance" value="'TitleDefaultMockup';(title == null || titleMockup == 0) ? {meta:meta, isRoot:isRoot, nameIDS:nameIDS,title:title} : null"/>
-				<bind name="instance" value="'TitleVertMockup';(title != null &amp;&amp; titleMockup == 1) ? {meta:meta, isRoot:isRoot, nameIDS:nameIDS,title:title} : null"/>
+				<styleClass value="$MouseDisable"/>
+				<bind name="visible" value="meta"/>
+				<block className="HorizontalDivider">
+					<styleClass value="$PxHorizontalCorrection"/>
+					<style>
+						<width value="100%"/>
+						<height value="3px"/>
+					</style>
+					<block className="divider_h" type="native">
+						<styleClass value="$Fullsize"/>
+					</block>
+				</block>
 			</block>
 			<block>
+				<styleClass value="$MouseDisable"/>
+				<style>
+					<width value="100%"/>
+					<marginLeft value="26px"/>
+					<marginRight value="12px"/>
+					<marginTop value="1px"/>
+					<marginBottom value="3px"/>
+				</style>
+				<bind name="style" value="'marginLeft'; secondLevelTooltip ? '12px' : '20px'"/>
+				<bind name="style" value="'marginTop'; (viewParams.list[$index - 1].meta || viewParams.list[$index - 1] == null) &amp;&amp; !(meta) ? '5px' : '1px'"/>
+				<bind name="style" value="'marginBottom'; viewParams.list[$index + 1].meta || viewParams.list[$index + 1] == null ? '8px' : '3px'"/>
 				<block>
 					<style>
-						<right value="0"/>
-						<position value="absolute"/>
+						<width value="100%"/>
 					</style>
+					<bind name="instance" value="'TitleDefaultMockup';(title == null || titleMockup == 0) ? { meta: meta, isRoot: isRoot, nameIDS: nameIDS, title: title } : null"/>
+					<bind name="instance" value="'TitleVertMockup'; (title != null &amp;&amp; titleMockup == 1) ? { meta: meta, isRoot: isRoot, nameIDS: nameIDS, title: title } : null"/>
+				</block>
+				<block>
 					<block>
-						<bind name="visible" value="secondLevel.hasDiff ? true : false"/>
-						<block type="text">
-							<styleClass value="$TextParams"/>
+						<style>
+							<right value="0"/>
+							<position value="absolute"/>
+						</style>
+						<block>
+							<bind name="visible" value="secondLevel.hasDiff ? true : false"/>
+							<block type="text">
+								<styleClass value="$TextParams"/>
+								<style>
+									<marginTop value="-1px"/>
+									<alpha value="0.55"/>
+								</style>
+								<text value="("/>
+							</block>
+							<block className="icon_warning_orange" type="native">
+								<styleClass value="$MiddleVAligned"/>
+								<style>
+									<marginLeft value="-2px"/>
+									<marginRight value="-2px"/>
+								</style>
+							</block>
+							<block type="text">
+								<styleClass value="$TextParams_tight_left"/>
+								<style>
+									<marginTop value="-1"/>
+								</style>
+								<text value=")"/>
+							</block>
 							<style>
-								<marginTop value="-1px"/>
-								<alpha value="0.55"/>
-							</style>
-							<text value="("/>
-						</block>
-						<block className="icon_warning_orange" type="native">
-							<styleClass value="$MiddleVAligned"/>
-							<style>
-								<marginLeft value="-2px"/>
-								<marginRight value="-2px"/>
+								<flow value="horizontal"/>
 							</style>
 						</block>
-						<block type="text">
-							<styleClass value="$TextParams_tight_left"/>
-							<style>
-								<marginTop value="-1"/>
-							</style>
-							<text value=")"/>
-						</block>
+						<bind name="instance" value="'ParamElement'; value"/>
 						<style>
 							<flow value="horizontal"/>
 						</style>
 					</block>
-					<bind name="instance" value="'ParamElement'; value"/>
-					<style>
-						<flow value="horizontal"/>
-					</style>
 				</block>
-			</block>
-			<block>
-				<bind name="fade" value="!(isRoot) &amp;&amp; !(excursionOff) &amp;&amp; !(dockDefaultValues.armourVisibility); 0.3; {alpha: 0}; {alpha: 1}"/>
-				<style>
-					<position value="absolute"/>
-					<left value="-15px"/>
-					<top value="7px"/>
-				</style>
-				<block className="icon_camera_off" type="native">
+				<block>
+					<bind name="fade" value="!(isRoot) &amp;&amp; !(excursionOff) &amp;&amp; !(dockDefaultValues.armourVisibility); 0.3; {alpha: 0}; {alpha: 1}"/>
 					<style>
 						<position value="absolute"/>
+						<left value="-15px"/>
+						<top value="7px"/>
 					</style>
-					<bind name="fade" value="!(state.selected); 0.3; {alpha: 0}; {alpha: 1}"/>
+					<block className="icon_camera_off" type="native">
+						<style>
+							<position value="absolute"/>
+						</style>
+						<bind name="fade" value="!(state.selected); 0.3; {alpha: 0}; {alpha: 1}"/>
+					</block>
+					<block className="icon_camera_on" type="native">
+						<style>
+							<position value="absolute"/>
+						</style>
+						<bind name="fade" value="state.selected; 0.3; {alpha: 0}; {alpha: 1}"/>
+					</block>
 				</block>
-				<block className="icon_camera_on" type="native">
+				<block>
+					<bind name="visible" value="((id == 'armour') &amp;&amp; (_armourOff != true))"/>
 					<style>
 						<position value="absolute"/>
+						<left value="-17px"/>
+						<top value="6px"/>
 					</style>
-					<bind name="fade" value="state.selected; 0.3; {alpha: 0}; {alpha: 1}"/>
+					<block className="button_armour_switcher_small" type="native">
+						<bind name="selected" value="dockDefaultValues.armourVisibility"/>
+					</block>
 				</block>
-			</block>
-			<block>
-				<bind name="visible" value="((id == 'armour') &amp;&amp; (_armourOff != true))"/>
 				<style>
-					<position value="absolute"/>
-					<left value="-17px"/>
-					<top value="6px"/>
+					<flow value="horizontal"/>
 				</style>
-				<block className="button_armour_switcher_small" type="native">
-					<bind name="selected" value="dockDefaultValues.armourVisibility"/>
-				</block>
 			</block>
+		</block>
+		<block>
+			<bind name="controller" value="lesta.dialogs.dock.controllers.ControllerModernizations"/>
+			<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'weaponsInfo'; deepWaterTorpedoRow ? torpedoSlotsList[0].itemsInSlot[0].id : null; 'torpedoes'"/>
+			<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'weaponsInfo'; deepWaterBomberRow  ? planesSlotsList[2].itemsInSlot[0].id : null;  'aviations'"/>
+			<bind name="watch" value="'deepWaterTorpedoRow'; (parent.nameIDS == 'IDS_SHIP_PARAM_TORPEDY') &amp;&amp; (id == 'listTorpedoes0')"/>
+			<bind name="watch" value="'deepWaterBomberRow'; 	(parent.nameIDS == 'IDS_SHIP_PARAM_AVIATION') &amp;&amp; (id == 'tbomber_squadrons')"/>
+			<bind name="watch" value="'deepWaterTorpedoes'; 		(parent.nameIDS == 'IDS_SHIP_PARAM_TORPEDY') &amp;&amp; (id == 'listTorpedoes0') &amp;&amp; (torpedoes.params.torpedoes.isDeepWater == true)"/>
+			<bind name="watch" value="'deepWaterTorpedoBombers'; (parent.nameIDS == 'IDS_SHIP_PARAM_AVIATION') &amp;&amp; (id == 'tbomber_squadrons') &amp;&amp; (aviations.params.torpedoIsDeepWater == true)"/>
+			<bind name="visible" value="deepWaterTorpedoes == true"/>
 			<style>
-				<flow value="horizontal"/>
+				<width value="100%"/>
 			</style>
+			<block className="inner_panel" type="native">
+				<styleClass value="$Fullsize"/>
+				<styleClass value="$MouseDisable"/>
+				<styleClass value="$PxHorizontalCorrection"/>
+				<style>
+					<position value="absolute"/>
+				</style>
+				<bind name="visible" value="!(isRoot)"/>
+			</block>
+			<block>
+				<style>
+					<width value="100%"/>
+					<marginLeft value="20px"/>
+					<marginRight value="12px"/>
+					<marginTop value="1px"/>
+					<marginBottom value="3px"/>
+				</style>
+				<bind name="instance" value="'TorpedoAffectedShipsParamRow'; (deepWaterTorpedoes == true) ? { _torpedoId: torpedoes.params.torpedoes.ammoName, _isTooltip: true } : null"/>
+			</block>
 		</block>
 		<block className="button_expand" type="native">
 			<bind name="selected" value="state.active"/>
@@ -18751,7 +18957,7 @@
 						<param name="actAsButton" value="true"/>
 						<param name="maxChars" value="180"/>
 					</params>
-					<bind name="action" value="'textInputEnter'; 'DockProxy.setClanMessageOfTheDay'; { message: txtMessage }"/>
+					<bind name="action" value="'textInputEnter'; 'ClanProxy.setMessageOfTheDay'; { message: txtMessage }"/>
 					<bind name="dispatch" value="'textInputEnter';'changeFieldVisibility'; {InputFieldVisibility: false}"/>
 					<bind name="text" value="messageOfTheDay"/>
 					<bind name="focus" value="0; InputFieldVisibility"/>
@@ -18762,7 +18968,7 @@
 						<bind name="tooltip" value="'SimpleTooltip'; (txtMessage.length &lt;= maxChars) ? {tooltipText: 'IDS_HINT_ADD_SEEKER_STATUS'} : null"/>
 						<block className="button_dock" type="native">
 							<styleClass value="$FullsizeAbsolute"/>
-							<bind name="action" value="'click'; 'DockProxy.setClanMessageOfTheDay'; { message: txtMessage }"/>
+							<bind name="action" value="'click'; 'ClanProxy.setMessageOfTheDay'; { message: txtMessage }"/>
 							<bind name="dispatch" value="'buttonClick';'changeFieldVisibility'; {InputFieldVisibility: false}"/>
 							<bind name="style" value="'hitTest'; (divisionEntranceData.commentStatus == 'submitted') &amp;&amp; (txtMessage.length &lt;= maxChars) ? false : true"/>
 							<bind name="enabled" value="(txtMessage.length &lt;= maxChars)"/>
@@ -19427,6 +19633,7 @@
 						<bind name="text" value="battleResultText"/>
 					</block>
 					<block type="text">
+						<bind name="visible" value="ratingDeltaStr != 0"/>
 						<style>
 							<width value="100%f"/>
 							<marginRight value="4px"/>
@@ -23947,7 +24154,7 @@
 					<bind name="visible" value="!(isLeague)"/>
 					<style>
 						<maxWidth value="274"/>
-						<marginTop value="6px"/>
+						<marginTop value="16px"/>
 					</style>
 					<styleClass value="$TextDefault"/>
 					<bind name="text" value="'IDS_' + toUpperCase(name) + '_EXTRA_DESCRIPTION'"/>
@@ -25298,7 +25505,7 @@
 		<bind name="watch" value="'showWGWalletWarning'; ((isSyncedWithWallet == false) || (walletAvailable == false))"/>
 		<bind name="watch" value="'playerInfotipItem'; rankedBattlesStats.participated &amp;&amp; !(rankedBattlesSeason.denyReason &amp; RBDeny.NO_SEASON) ? 0 : 1"/>
 		<style>
-			<width value="240px"/>
+			<width value="250px"/>
 			<marginLeft value="15px"/>
 		</style>
 		<block>
@@ -25312,6 +25519,30 @@
 				<width value="100%"/>
 				<height value="3px"/>
 			</style>
+		</block>
+		<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
+		<bind name="firstEntityDH" value="'steamLoginEntity'; CC.steamLoginData"/>
+		<bind name="watchDH" value="'isSteamClient'; 	['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
+		<bind name="watchDH" value="'isWinstoreClient'; 	['loginEntity.loginData.evUpdate']; loginEntity.loginData.isWinstore"/>
+		<bind name="watchDH" value="'accountCompleted'; 	['steamLoginEntity.steamLoginData.evUpdate']; steamLoginEntity.steamLoginData.emailBind"/>
+		<bind name="watch" value="'isExternalPlatformClient'; isSteamClient || isWinstoreClient"/>
+		<bind name="watch" value="'externalFeaturesEnabled'; (isSteamClient 		&amp;&amp; realmConstants.accountCompletion.steam) ||
+  											(isWinstoreClient 	&amp;&amp; realmConstants.accountCompletion.live)"/>
+		<bind name="watch" value="'featuresEnabled'; 	!(isExternalPlatformClient) || externalFeaturesEnabled"/>
+		<block>
+			<bind name="visible" value="externalFeaturesEnabled &amp;&amp; !(accountCompleted)"/>
+			<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_ACCOUNT_COMPLETION_TOOLTIP_TEXT', tooltipSubText: 'IDS_ACCOUNT_COMPLETION_TOOLTIP_SUBTEXT' }"/>
+			<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_ACCOUNT_COMPLETION')), _icon: 'wg_account', _external: false}"/>
+			<bind name="name" value="'buttonAccountCompletion'"/>
+			<bind name="input"/>
+			<block className="icon_sticker_new" type="native">
+				<style>
+					<hitTest value="false"/>
+					<position value="absolute"/>
+					<marginTop value="3px"/>
+					<right value="0px"/>
+				</style>
+			</block>
 		</block>
 		<block>
 			<block>
@@ -25355,17 +25586,17 @@
 			<bind name="instance" value="'AccountInfotipItem'; { _text: 'IDS_CONVERT_EXP', _icon: 'convert_gold', _external: false}"/>
 		</block>
 		<block>
-			<bind name="visible" value="realmConstants.premshopUIAvailable"/>
+			<bind name="visible" value="realmConstants.premshopUIAvailable || isSteamClient"/>
+			<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
+			<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 			<bind name="request" value="'click'; 'webBrowser'; {url: URL.SHOP_IN_GAME}"/>
 			<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_PREMSHOP', tooltipSubText: 'IDS_TOOLTIP_PREMSHOP'}"/>
-			<bind name="instance" value="'AccountInfotipItem'; realmConstants.premshopUIAvailable 	? { _text: toUpperCase(tr('IDS_PREMSHOP')), _icon: 'premshop', _external: false } 
-																					: null"/>
+			<bind name="instance" value="'AccountInfotipItem'; realmConstants.premshopUIAvailable || isSteamClient	? { _text: toUpperCase(tr('IDS_PREMSHOP')), _icon: 'premshop', _external: false } 
+																									: null"/>
 		</block>
 		<block>
 			<bind name="visible" value="!(realmConstants.premshopUIAvailable)"/>
 			<bind name="name" value="'buttonBuyGold'"/>
-			<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
-			<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 			<bind name="watch" value="'isOpenPremInClientBrowser'; (isSteamClient == true || realmConstants.premshopUIAvailable == true)"/>
 			<bind name="request" value="'click'; isOpenPremInClientBrowser ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME }"/>
 			<bind name="action" value="'click'; isOpenPremInClientBrowser	? null
@@ -25374,7 +25605,7 @@
 			<bind name="instance" value="'AccountInfotipItem'; { _text: 'IDS_BUY_GOLD', _icon: 'buy_gold', _external: !(isOpenPremInClientBrowser)}"/>
 		</block>
 		<block>
-			<bind name="visible" value="accountLevelInfo.accountLevel &gt;= 3"/>
+			<bind name="visible" value="featuresEnabled &amp;&amp; (accountLevelInfo.accountLevel &gt;= 3)"/>
 			<bind name="name" value="'buttonPlaytogether'"/>
 			<bind name="request" value="'click'; 'webBrowser'; {url: URL.PLAYTOGETHER_WEBSITE}"/>
 			<bind name="collectionDH" value="CC.userTask; 'userTaskCollection'"/>
@@ -25395,6 +25626,7 @@
 			</block>
 		</block>
 		<block>
+			<bind name="feature" value="27; ''"/>
 			<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
 			<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
 			<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
@@ -25402,7 +25634,7 @@
 			<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; selfPlayerEntity.clanman.clanId"/>
 			<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
 			<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
-			<bind name="visible" value="!(selfPlayerEntity.clanman)"/>
+			<bind name="visible" value="!(selfPlayerEntity.clanman) &amp;&amp; (feature_27 == 'locked')"/>
 			<bind name="request" value="'click'; 'WebBrowserFull'; {url: 'clansInGame'}"/>
 			<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_CLANS', tooltipSubText: 'IDS_HINT_CLANS'}"/>
 			<block>
@@ -25428,7 +25660,7 @@
 			</block>
 		</block>
 		<block>
-			<bind name="visible" value="realmConstants.newsUIAvailable"/>
+			<bind name="visible" value="realmConstants.newsUIAvailable &amp;&amp; featuresEnabled"/>
 			<bind name="name" value="buttonNewsBrowser"/>
 			<bind name="instance" value="'AccountButtonNewsBrowser'; realmConstants.newsUIAvailable ? {} : null"/>
 		</block>
@@ -25692,7 +25924,7 @@
 		<block>
 			<block className="dock_panel" type="native">
 				<style>
-					<width value="270px"/>
+					<width value="280px"/>
 				</style>
 				<block className="dock_panel_pin" type="native">
 					<style>
@@ -25724,7 +25956,7 @@
 						<bind name="watch" value="'showWGWalletWarning'; ((isSyncedWithWallet == false) || (walletAvailable == false))"/>
 						<bind name="watch" value="'playerInfotipItem'; rankedBattlesStats.participated &amp;&amp; !(rankedBattlesSeason.denyReason &amp; RBDeny.NO_SEASON) ? 0 : 1"/>
 						<style>
-							<width value="240px"/>
+							<width value="250px"/>
 							<marginLeft value="15px"/>
 						</style>
 						<block>
@@ -25738,6 +25970,30 @@
 								<width value="100%"/>
 								<height value="3px"/>
 							</style>
+						</block>
+						<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
+						<bind name="firstEntityDH" value="'steamLoginEntity'; CC.steamLoginData"/>
+						<bind name="watchDH" value="'isSteamClient'; 	['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
+						<bind name="watchDH" value="'isWinstoreClient'; 	['loginEntity.loginData.evUpdate']; loginEntity.loginData.isWinstore"/>
+						<bind name="watchDH" value="'accountCompleted'; 	['steamLoginEntity.steamLoginData.evUpdate']; steamLoginEntity.steamLoginData.emailBind"/>
+						<bind name="watch" value="'isExternalPlatformClient'; isSteamClient || isWinstoreClient"/>
+						<bind name="watch" value="'externalFeaturesEnabled'; (isSteamClient 		&amp;&amp; realmConstants.accountCompletion.steam) ||
+  											(isWinstoreClient 	&amp;&amp; realmConstants.accountCompletion.live)"/>
+						<bind name="watch" value="'featuresEnabled'; 	!(isExternalPlatformClient) || externalFeaturesEnabled"/>
+						<block>
+							<bind name="visible" value="externalFeaturesEnabled &amp;&amp; !(accountCompleted)"/>
+							<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_ACCOUNT_COMPLETION_TOOLTIP_TEXT', tooltipSubText: 'IDS_ACCOUNT_COMPLETION_TOOLTIP_SUBTEXT' }"/>
+							<bind name="instance" value="'AccountInfotipItem'; { _text: toUpperCase(tr('IDS_ACCOUNT_COMPLETION')), _icon: 'wg_account', _external: false}"/>
+							<bind name="name" value="'buttonAccountCompletion'"/>
+							<bind name="input"/>
+							<block className="icon_sticker_new" type="native">
+								<style>
+									<hitTest value="false"/>
+									<position value="absolute"/>
+									<marginTop value="3px"/>
+									<right value="0px"/>
+								</style>
+							</block>
 						</block>
 						<block>
 							<block>
@@ -25781,17 +26037,17 @@
 							<bind name="instance" value="'AccountInfotipItem'; { _text: 'IDS_CONVERT_EXP', _icon: 'convert_gold', _external: false}"/>
 						</block>
 						<block>
-							<bind name="visible" value="realmConstants.premshopUIAvailable"/>
+							<bind name="visible" value="realmConstants.premshopUIAvailable || isSteamClient"/>
+							<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
+							<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 							<bind name="request" value="'click'; 'webBrowser'; {url: URL.SHOP_IN_GAME}"/>
 							<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_PREMSHOP', tooltipSubText: 'IDS_TOOLTIP_PREMSHOP'}"/>
-							<bind name="instance" value="'AccountInfotipItem'; realmConstants.premshopUIAvailable 	? { _text: toUpperCase(tr('IDS_PREMSHOP')), _icon: 'premshop', _external: false } 
-																					: null"/>
+							<bind name="instance" value="'AccountInfotipItem'; realmConstants.premshopUIAvailable || isSteamClient	? { _text: toUpperCase(tr('IDS_PREMSHOP')), _icon: 'premshop', _external: false } 
+																									: null"/>
 						</block>
 						<block>
 							<bind name="visible" value="!(realmConstants.premshopUIAvailable)"/>
 							<bind name="name" value="'buttonBuyGold'"/>
-							<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
-							<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 							<bind name="watch" value="'isOpenPremInClientBrowser'; (isSteamClient == true || realmConstants.premshopUIAvailable == true)"/>
 							<bind name="request" value="'click'; isOpenPremInClientBrowser ? 'webBrowser' : null; {url: URL.BUY_GOLD_IN_GAME }"/>
 							<bind name="action" value="'click'; isOpenPremInClientBrowser	? null
@@ -25800,7 +26056,7 @@
 							<bind name="instance" value="'AccountInfotipItem'; { _text: 'IDS_BUY_GOLD', _icon: 'buy_gold', _external: !(isOpenPremInClientBrowser)}"/>
 						</block>
 						<block>
-							<bind name="visible" value="accountLevelInfo.accountLevel &gt;= 3"/>
+							<bind name="visible" value="featuresEnabled &amp;&amp; (accountLevelInfo.accountLevel &gt;= 3)"/>
 							<bind name="name" value="'buttonPlaytogether'"/>
 							<bind name="request" value="'click'; 'webBrowser'; {url: URL.PLAYTOGETHER_WEBSITE}"/>
 							<bind name="collectionDH" value="CC.userTask; 'userTaskCollection'"/>
@@ -25821,6 +26077,7 @@
 							</block>
 						</block>
 						<block>
+							<bind name="feature" value="27; ''"/>
 							<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
 							<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
 							<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
@@ -25828,7 +26085,7 @@
 							<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; selfPlayerEntity.clanman.clanId"/>
 							<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
 							<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
-							<bind name="visible" value="!(selfPlayerEntity.clanman)"/>
+							<bind name="visible" value="!(selfPlayerEntity.clanman) &amp;&amp; (feature_27 == 'locked')"/>
 							<bind name="request" value="'click'; 'WebBrowserFull'; {url: 'clansInGame'}"/>
 							<bind name="tooltip" value="'SubTextTooltip'; {tooltipText: 'IDS_CLANS', tooltipSubText: 'IDS_HINT_CLANS'}"/>
 							<block>
@@ -25854,7 +26111,7 @@
 							</block>
 						</block>
 						<block>
-							<bind name="visible" value="realmConstants.newsUIAvailable"/>
+							<bind name="visible" value="realmConstants.newsUIAvailable &amp;&amp; featuresEnabled"/>
 							<bind name="name" value="buttonNewsBrowser"/>
 							<bind name="instance" value="'AccountButtonNewsBrowser'; realmConstants.newsUIAvailable ? {} : null"/>
 						</block>
@@ -26468,7 +26725,7 @@
 			</block>
 		</block>
 		<block>
-			<bind name="child" value="data.idInGroup; {data: data}; 'InformerClubBattlesPrimetime'; 'InformerClanBattlesPrimetime'; 'InformerServerRestart'"/>
+			<bind name="child" value="data.idInGroup; {data: data}; 'InformerClanBattlesPrimetime'; 'InformerServerRestart'; 'InformerClubBattlesPrimetime'"/>
 		</block>
 	</block>
 	<block className="InformerClanBattlesPrimetime">
@@ -28549,14 +28806,17 @@
 		<bind name="firstEntityDH" value="'enterBattleEntity'; CC.enterBattle"/>
 		<bind name="watchDH" value="'selectedBattle'; ['enterBattleEntity.enterBattle.evBattleTypesUpdated']; enterBattleEntity.enterBattle.selectedBattle"/>
 		<bind name="primaryEntityDH" value="'battleTypeEntity'; CC.battleType; selectedBattle.type"/>
-		<bind name="watchDH" value="'selected'; ['battleTypeEntity.battleType.evSelectionChanged']; battleTypeEntity.battleType.selected"/>
-		<bind name="watchDH" value="'status'; ['battleTypeEntity.battleType.evStatusChanged']; battleTypeEntity.battleType.status"/>
-		<bind name="watchDH" value="'description'; []; battleTypeEntity.battleType.description"/>
-		<bind name="watchDH" value="'type'; []; battleTypeEntity.battleType.type"/>
-		<bind name="watchDH" value="'label'; []; battleTypeEntity.battleType.label"/>
+		<bind name="watchDH" value="'selected'; 	['battleTypeEntity.battleType.evSelectionChanged']; battleTypeEntity.battleType.selected"/>
+		<bind name="watchDH" value="'status'; 	['battleTypeEntity.battleType.evStatusChanged']; 	battleTypeEntity.battleType.status"/>
+		<bind name="watchDH" value="'description';	[]; battleTypeEntity.battleType.description"/>
+		<bind name="watchDH" value="'type'; 			[]; battleTypeEntity.battleType.type"/>
+		<bind name="watchDH" value="'label'; 		[]; battleTypeEntity.battleType.label"/>
 		<bind name="feature" value="3; ''"/>
 		<bind name="feature" value="1; ''"/>
 		<bind name="watch" value="'btnChooserEnable'; divisionData.isCommander || !(divisionData.divisionExist)"/>
+		<bind name="tooltip" value="'BattletypeTooltip'; 	btnChooserEnable 	? {_battleType: type, _description: type == BattleTypes.INTRO_MISSION 
+																? dockDefaultValues.introMissionDescription : description} 
+																: null"/>
 		<bind name="tooltip" value="'ClanBattleTypeTooltip'; btnChooserEnable &amp;&amp; type == 'ClanBattle'	? {} : null"/>
 		<bind name="tooltip" value="'BattletypeTooltip'; btnChooserEnable &amp;&amp; type != 'ClanBattle'	? {_battleType: type, _description: type == BattleTypes.INTRO_MISSION ? dockDefaultValues.introMissionDescription : description} 
 																					: null"/>
@@ -28595,11 +28855,13 @@
 				</style>
 				<bind name="gotoAndStop!" value="type == BattleTypes.RANKED_BATTLE	?	(status == 0)				?	'RankedBattle'	:
 																		(status == 2)				?	'RankedBattle_disabled'
-																														:	'RankedBattle_inactive'
+																														: 	'RankedBattle_inactive'
 								: type == BattleTypes.CLAN_BATTLE	? 	(status == 0)				?	'ClanBattle'		:
 																		(status == 2)				?	'ClanBattle_disabled'
 																														: 	'ClanBattle_inactive'
-								: type == BattleTypes.PVE_BATTLE	?	(status == 2)				?	'PVEBattle_disabled' :
+								: type == BattleTypes.PVE_BATTLE	?	(operationType == 'event')		?	'PVEBattle_event' :
+
+																		(status == 2)				?	'PVEBattle_disabled' :
 																		(chosenDifficulty == 'hard')		?	'PVEBattle_hard'
 																														:	'PVEBattle'
 																	: type"/>
@@ -28615,8 +28877,9 @@
 				<bind name="watchDH" value="'chosenOperationId'; ['pveStateEntity.pveState.evStateUpdated']; pveStateEntity.pveState.chosenOperation"/>
 				<bind name="watchDH" value="'activeOperationId'; ['pveStateEntity.pveState.evStateUpdated']; pveStateEntity.pveState.activeOperation"/>
 				<bind name="watchDH" value="'chosenDifficulty';	['pveStateEntity.pveState.evStateUpdated']; pveStateEntity.pveState.chosenDifficulty"/>
-				<bind name="watch" value="'isChosenOperationOfTheWeek'; ((chosenOperationId == activeOperationId) &amp;&amp; (chosenDifficulty == 'normal'))"/>
 				<bind name="primaryEntityDH" value="'operationEntity'; CC.operation; chosenOperationId"/>
+				<bind name="watchDH" value="'operationType';	['operationEntity.operation.evStatusChanged']; operationEntity.operation.type"/>
+				<bind name="watch" value="'isChosenOperationOfTheWeek'; ((chosenOperationId == activeOperationId) &amp;&amp; (chosenDifficulty == 'normal'))"/>
 				<bind name="watch" value="'pveBattleButtonText';  (chosenOperationId == '')	? tr('IDS_PVE_OPERATION_IS_NOT_SELECTED')
 																			: tr('IDS_' + toUpperCase(operationEntity.operation.gpName) + '_NAME')"/>
 				<bind name="watch" value="'pveBattleButtonSubText';  (chosenOperationId == '')					? '' :
@@ -28968,6 +29231,7 @@
 	</block>
 	<block className="LootBoxes">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
 		<bind name="stageSize"/>
 		<bind name="watch" value="'leftOffset'; ((20 + (stageWidth - 1280)/14))"/>
 		<styleClass value="$FullsizeAbsolute"/>
@@ -29105,6 +29369,15 @@
 								{_paragraphText: 'IDS_LOOTBOX_HINT_1'}]; 'RepeatParagraphItem'; {	_maxWidth: 300, _marginBottom: '3px',
 																									_middleAligned: false, _class: '$TextHeaderBigDefault',
 																									_textAlign: 'left', _leading: -2}"/>
+				</block>
+				<block>
+					<bind name="firstEntityDH" value="'pveStateEntity'; CC.pveState"/>
+					<bind name="watchDH" value="'activeOperationId'; ['pveStateEntity.pveState.evStateUpdated']; pveStateEntity.pveState.activeOperation"/>
+					<bind name="primaryEntityDH" value="'operationEntity'; CC.operation; activeOperationId"/>
+					<style>
+						<marginTop value="32px"/>
+					</style>
+					<bind name="instance" value="'EventLootboxBanner'; realmConstants.eventLootboxUIAvailable &amp;&amp; (operationEntity.operation.gpName == 'PCVO006_EV_HL_17_e02_Halloween_2017') ? {} : null"/>
 				</block>
 			</block>
 			<bind name="firstEntityDH" value="'lootboxEntity'; CC.lootboxConfigComponent"/>
@@ -29283,8 +29556,12 @@
 							<width value="200px"/>
 						</style>
 						<bind name="watch" value="'isGetBtnEnabled'; (canBuyLootbox &amp;&amp; !(allBoxesBought) &amp;&amp; !(activeAnimation))"/>
-						<bind name="instance" value="'DefaultButton'; {	_width: '200px', _enabled: isGetBtnEnabled, _isTransactionBtn: false,
-														_action: 'openPurchaseLootboxWindow', _actionParams: {}, _label: toUpperCase(tr('IDS_PURCHASE_LOOTBOX_C'))}"/>
+						<bind name="instance" value="'DefaultButton'; {	_width: 			'200px', 
+														_enabled: 			isGetBtnEnabled, 
+														_isTransactionBtn: 	false,
+														_action: 			'openPurchaseLootboxWindow', 
+														_actionParams: 		{}, 
+														_label: 			toUpperCase(tr('IDS_PURCHASE_LOOTBOX_C'))}"/>
 					</block>
 					<block>
 						<bind name="fade" value="!(canBuyLootbox) &amp;&amp; !(allBoxesBought); 0.15; {alpha: 0, top: 5}; {alpha: 1, top: 0}; {alpha: 0, top: -5}; 1; 0.15"/>
@@ -29622,7 +29899,53 @@
 			<bind name="instance" value="'RewardItem'; rewardEntity.rewardComponent"/>
 		</block>
 	</block>
+	<block className="EventLootboxBanner">
+		<style>
+			<width value="339px"/>
+			<height value="176px"/>
+		</style>
+		<block>
+			<styleClass value="$Fullsize"/>
+			<bind name="style" value="'backgroundImage'; 'url:../service_kit/event_lootbox_hint_header/hw2017_lootboxes.png'"/>
+		</block>
+		<block>
+			<style>
+				<position value="absolute"/>
+				<left value="190px"/>
+				<top value="-20px"/>
+				<width value="175px"/>
+				<height value="175px"/>
+			</style>
+			<block className="lesta.controls.video.VideoResourcePlayer" type="native">
+				<styleClass value="$FullsizeAbsolute"/>
+				<params>
+					<param name="keepAspectRatio" value="false"/>
+				</params>
+				<bind name="play!" value="'./gui/video/sparks_001.usm'"/>
+			</block>
+		</block>
+		<block type="text">
+			<styleClass value="$TextDefaultBold19NM"/>
+			<style>
+				<position value="absolute"/>
+				<marginTop value="24px"/>
+				<marginLeft value="24px"/>
+			</style>
+			<bind name="text" value="toUpperCase(tr('IDS_PURCHASE_EVENT_LOOTBOX_MODAL_HEADER'))"/>
+		</block>
+		<block>
+			<styleClass value="$FullsizeAbsolute"/>
+			<block className="white_panel_gradient" type="native">
+				<bind name="controller" value="lesta.unbound.controls.UbInteractiveController; null; 'event_banner_'"/>
+				<styleClass value="$FullsizeAbsolute"/>
+				<bind name="transition" value="event_banner_rollOver; 0.15; {alpha: 0}; {alpha: 0.3}"/>
+				<bind name="request" value="'click'; 'webBrowser'; {url: URL.EVENT_LOOTBOX_INFO_IN_GAME}"/>
+			</block>
+		</block>
+		<bind name="tooltip" value="'MouseInstructionTooltip'; {_mouseInstructions: [{_type: 'left', _instructionText: 'IDS_EVENT_LOOTBOX_TOOLTIP'}], _maxWidth: 230}"/>
+	</block>
 	<block className="ClanInset">
+		<bind name="name" value="'ClansHomePage'"/>
 		<styleClass value="$Fullsize"/>
 		<bind name="action" value="'addedToStage'; 'openClansWindow'; {'url': URL.CLANS_IN_GAME}"/>
 		<bind name="action" value="'removedFromStage'; 'closeClansWindow'; {}"/>
@@ -31769,6 +32092,19 @@
 				<bind name="visible" value="playerShipInfo.isPrimary"/>
 				<block className="icon_primary_ribbon" type="native"/>
 			</block>
+			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
+			<bind name="var" value="{cvcShipsChangeTime: {RU: 1510106400, NA: 1510135200, ASIA: 1510174800, EU: 1510203600, PT: 1510106400, ST: 1510106400}}"/>
+			<bind name="watch" value="'isCvcChangeTimerVisible'; (cvcShipsChangeTime[realmConstants.currentRealm] != null &amp;&amp;
+												shipInfo.group == 'clan')									 ? true : false"/>
+			<block>
+				<bind name="visible" value="(isCvcChangeTimerVisible)"/>
+				<style>
+					<position value="absolute"/>
+					<right value="3px"/>
+					<top value="3px"/>
+				</style>
+				<bind name="instance" value="'CvcRentTimer'; isCvcChangeTimerVisible ? {_timeRent: cvcShipsChangeTime[realmConstants.currentRealm], _rollOver: _rollOver} : null"/>
+			</block>
 			<block>
 				<bind name="visible" value="(playerShipInfo.timeRent &gt; 0)"/>
 				<bind name="name" value="'timeRent_' + shipInfo.fullName"/>
@@ -32069,6 +32405,19 @@
 				</style>
 				<bind name="visible" value="playerShipInfo.isPrimary"/>
 				<block className="icon_primary_ribbon" type="native"/>
+			</block>
+			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
+			<bind name="var" value="{cvcShipsChangeTime: {RU: 1510106400, NA: 1510135200, ASIA: 1510174800, EU: 1510203600, PT: 1510106400, ST: 1510106400}}"/>
+			<bind name="watch" value="'isCvcChangeTimerVisible'; (cvcShipsChangeTime[realmConstants.currentRealm] != null &amp;&amp;
+												shipInfo.group == 'clan')									 ? true : false"/>
+			<block>
+				<bind name="visible" value="(isCvcChangeTimerVisible)"/>
+				<style>
+					<position value="absolute"/>
+					<right value="3px"/>
+					<top value="3px"/>
+				</style>
+				<bind name="instance" value="'CvcRentTimer'; isCvcChangeTimerVisible ? {_timeRent: cvcShipsChangeTime[realmConstants.currentRealm], _rollOver: _rollOver} : null"/>
 			</block>
 			<block>
 				<bind name="visible" value="(playerShipInfo.timeRent &gt; 0)"/>
@@ -32535,6 +32884,175 @@
 				<marginBottom value="-3px"/>
 			</style>
 			<bind name="instance" value="'PriceDeficit'; priceDeficit &gt; 0 ? { priceInfo: _prices[priceIndex], _deficit: priceDeficit} : null"/>
+		</block>
+	</block>
+	<block className="CvcRentTimerTooltip">
+		<styleClass value="$DefaultTooltipBehaviour"/>
+		<style>
+			<width value="300px"/>
+		</style>
+		<block className="DeclareBlurLayer">
+			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+			<bind name="visible" value="optionData.blurEnabled"/>
+			<block className="transparentPixel" type="native">
+				<bind name="blurLayer" value="0"/>
+			</block>
+			<style>
+				<position value="absolute"/>
+			</style>
+		</block>
+		<block className="BlurMap">
+			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+			<style>
+				<position value="absolute"/>
+				<width value="100%"/>
+				<height value="100%"/>
+				<hitTest value="false"/>
+			</style>
+			<bind name="visible" value="optionData.blurEnabled"/>
+			<block className="mc_blurmap5" type="native">
+				<bind name="appear" value="'startShow'; 0.3; 0; {alpha: 0}; {alpha: 1}"/>
+				<bind name="appear" value="'startHide'; 0.15; 0; {alpha: 1}; {alpha: 0}"/>
+				<style>
+					<width value="100%"/>
+					<height value="100%"/>
+				</style>
+				<bind name="blurMap" value="0"/>
+			</block>
+		</block>
+		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+		<block className="contrast_panel" type="native">
+			<styleClass value="$FullsizeAbsolute"/>
+			<bind name="visible" value="optionData.contrast"/>
+		</block>
+		<block className="hint_panel" type="native">
+			<styleClass value="$Fullsize"/>
+			<style>
+				<position value="absolute"/>
+			</style>
+		</block>
+		<bind name="timeFormat" value="_timeRent; 'hh:mm dd.MM.yyyy'; 'formattedRentTime'; true"/>
+		<block type="text">
+			<style>
+				<width value="100%"/>
+				<marginTop value="16px"/>
+				<marginBottom value="16px"/>
+				<marginLeft value="16px"/>
+				<marginRight value="16px"/>
+				<leading value="-1"/>
+			</style>
+			<styleClass value="$TextDefaultBold17NM"/>
+			<bind name="text" value="'IDS_TOOLTIP_CVC_RENT_SHIP'"/>
+		</block>
+		<block className="HorizontalDivider">
+			<styleClass value="$PxHorizontalCorrection"/>
+			<style>
+				<width value="100%"/>
+				<height value="3px"/>
+			</style>
+			<block className="divider_h" type="native">
+				<styleClass value="$Fullsize"/>
+			</block>
+		</block>
+		<block type="text">
+			<style>
+				<width value="100%"/>
+				<marginTop value="12px"/>
+				<marginLeft value="16px"/>
+				<marginRight value="16px"/>
+				<marginBottom value="16px"/>
+				<leading value="1"/>
+			</style>
+			<styleClass value="$TextDefault17NM"/>
+			<bind name="text" value="_isRentOver ? 'IDS_TOOLTIP_CVC_RENT_SHIP_CHANGE_SOON'
+								: subst('IDS_TOOLTIP_CVC_RENT_SHIP_TIME_CHANGE', [], {time_date: formattedRentTime})"/>
+		</block>
+	</block>
+	<block className="CvcRentTimer">
+		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
+		<bind name="appear" value="'addedToStage'; 0.1; 0.1; {alpha: 0}; {alpha: 1}; 0"/>
+		<bind name="serverTime" value="'serverTime'"/>
+		<bind name="watch" value="'isRentOver'; (serverTime &gt; _timeRent)"/>
+		<bind name="watch" value="'daysTimeRent'; 	(((_timeRent - serverTime) / 86400) &gt;= 1)	? (((_timeRent - serverTime) - ((_timeRent - serverTime) % 86400)) / 86400)
+																				: 0"/>
+		<bind name="watch" value="'secondsToHours';	((_timeRent - serverTime) % 86400)"/>
+		<bind name="watch" value="'hoursTimeRent'; 	((secondsToHours / 3600) &gt; 1)	? ((secondsToHours - (secondsToHours % 3600)) / 3600) :
+									((secondsToHours / 3600) &gt; 0)	? 1
+																	: 0"/>
+		<bind name="countdown" value="_timeRent; 'fullTimeRent'; 'hh:mm:ss'"/>
+		<bind name="tooltip" value="'CvcRentTimerTooltip'; {_timeRent: _timeRent, _hoursTimeRent: hoursTimeRent, _daysTimeRent: daysTimeRent, _isRentOver: isRentOver}"/>
+		<style>
+			<flow value="horizontal"/>
+			<backgroundColor value="0x01000000"/>
+		</style>
+		<block>
+			<bind name="visible" value="!(isRentOver)"/>
+			<bind name="transition" value="_rollOver || (daysTimeRent == 0); 0.07; {alpha: 0, left: 20}; {alpha: 1, left: 0}; {alpha: 0, left: 20}"/>
+			<block>
+				<bind name="visible" value="(daysTimeRent != 0)"/>
+				<style>
+					<marginRight value="2px"/>
+					<marginTop value="-2px"/>
+				</style>
+				<block type="text">
+					<styleClass value="$TextDefaultBold"/>
+					<bind name="text" value="daysTimeRent"/>
+				</block>
+				<block type="text">
+					<style>
+						<marginLeft value="-2px"/>
+					</style>
+					<styleClass value="$TextDefaultBold"/>
+					<bind name="pluralText" value="'IDS_PL_DAY_FULL_ACC'; daysTimeRent"/>
+				</block>
+				<style>
+					<flow value="horizontal"/>
+				</style>
+			</block>
+			<block>
+				<bind name="visible" value="((daysTimeRent &lt; 2) &amp;&amp; (daysTimeRent != 0) &amp;&amp; (hoursTimeRent != 0))"/>
+				<style>
+					<marginRight value="2px"/>
+					<marginLeft value="-2px"/>
+					<marginTop value="-2px"/>
+				</style>
+				<block type="text">
+					<styleClass value="$TextDefaultBold"/>
+					<bind name="text" value="hoursTimeRent"/>
+				</block>
+				<block type="text">
+					<style>
+						<marginLeft value="-2px"/>
+					</style>
+					<styleClass value="$TextDefaultBold"/>
+					<bind name="pluralText" value="'IDS_PL_HOUR_FULL_ACC'; hoursTimeRent"/>
+				</block>
+				<style>
+					<flow value="horizontal"/>
+				</style>
+			</block>
+			<block type="text">
+				<bind name="visible" value="(daysTimeRent == 0)"/>
+				<style>
+					<width value="58px"/>
+					<marginRight value="-2px"/>
+					<marginTop value="-2px"/>
+				</style>
+				<styleClass value="$TextDefaultBold"/>
+				<styleClass value="$FontColorUnready"/>
+				<bind name="text" value="fullTimeRent"/>
+			</block>
+			<style>
+				<flow value="horizontal"/>
+			</style>
+		</block>
+		<block>
+			<style>
+				<width value="21px"/>
+				<height value="21px"/>
+			</style>
+			<bind name="style" value="'backgroundImage'; (daysTimeRent == 0) ? 'url:../service_kit/icons/icon_rent_orange.png'
+															: 'url:../service_kit/icons/icon_rent.png'"/>
 		</block>
 	</block>
 	<css name="$TextMetaHeader">
@@ -33560,10 +34078,10 @@
 								</style>
 								<bind name="style" value="'width'; (8 * iconSize) + (7 * iconHorizontalPadding) + 3 * iconHorizontalPadding * groupPaddingCoeff)"/>
 								<bind name="style" value="'height'; (4 * (iconSize + iconVerticalPadding) - iconVerticalPadding)"/>
-								<bind name="repeat" value="selectedShipCrew.skillSet; 'CrewFileSkillItem'; {	_crewId: crewId,
-																						_iconHorizontalPadding: iconHorizontalPadding,
-																						_groupPaddingCoeff: groupPaddingCoeff,
-																						_iconVerticalPadding: iconVerticalPadding}"/>
+								<bind name="repeat" value="crewId ? selectedShipCrew.skillSet : 0; 'CrewFileSkillItem'; {	_crewId: crewId,
+																										_iconHorizontalPadding: iconHorizontalPadding,
+																										_groupPaddingCoeff: groupPaddingCoeff,
+																										_iconVerticalPadding: iconVerticalPadding}"/>
 							</block>
 							<style>
 								<flow value="horizontal"/>
@@ -33579,18 +34097,20 @@
 																	: null"/>
 					</block>
 				</block>
+				<bind name="watch" value="'isCrewPanelVisible'; ((selectedShipCrew != null) || (fromCrewSelect == true))"/>
 				<block>
-					<bind name="visible" value="(selectedShipCrew != null) || fromCrewSelect"/>
+					<bind name="visible" value="(isCrewPanelVisible == true)"/>
 					<bind name="appear" value="'addedToStage'; 0.15; windowAppearLag + 2 * 0.075; {alpha: 0, top: 10}; {alpha: 1, top: 0}; 1"/>
 					<bind name="appear" value="'startHide'; 0.15; 2 * 0.055; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
 					<style>
 						<width value="312px"/>
 						<height value="100%"/>
 					</style>
-					<bind name="instance" value="'CrewRightPanelBlock'; {_shipId: shipId, _crewId: crewId, _fromCrewSelect: fromCrewSelect}"/>
+					<bind name="instance" value="'CrewRightPanelBlock'; isCrewPanelVisible	? {_shipId: shipId, _crewId: crewId, _fromCrewSelect: fromCrewSelect}
+																		: null"/>
 				</block>
 				<block>
-					<bind name="visible" value="selectedShipCrew == null &amp;&amp; !(fromCrewSelect)"/>
+					<bind name="visible" value="(isCrewPanelVisible == false)"/>
 					<bind name="appear" value="'addedToStage'; 0.15; windowAppearLag + 2 * 0.075; {alpha: 0, top: 10}; {alpha: 1, top: 0}; 1"/>
 					<bind name="appear" value="'startHide'; 0.15; 2 * 0.055; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
 					<style>
@@ -33850,10 +34370,10 @@
 							</style>
 							<bind name="style" value="'width'; (8 * iconSize) + (7 * iconHorizontalPadding) + 3 * iconHorizontalPadding * groupPaddingCoeff)"/>
 							<bind name="style" value="'height'; (4 * (iconSize + iconVerticalPadding) - iconVerticalPadding)"/>
-							<bind name="repeat" value="selectedShipCrew.skillSet; 'CrewFileSkillItem'; {	_crewId: crewId,
-																						_iconHorizontalPadding: iconHorizontalPadding,
-																						_groupPaddingCoeff: groupPaddingCoeff,
-																						_iconVerticalPadding: iconVerticalPadding}"/>
+							<bind name="repeat" value="crewId ? selectedShipCrew.skillSet : 0; 'CrewFileSkillItem'; {	_crewId: crewId,
+																										_iconHorizontalPadding: iconHorizontalPadding,
+																										_groupPaddingCoeff: groupPaddingCoeff,
+																										_iconVerticalPadding: iconVerticalPadding}"/>
 						</block>
 						<style>
 							<flow value="horizontal"/>
@@ -33869,18 +34389,20 @@
 																	: null"/>
 				</block>
 			</block>
+			<bind name="watch" value="'isCrewPanelVisible'; ((selectedShipCrew != null) || (fromCrewSelect == true))"/>
 			<block>
-				<bind name="visible" value="(selectedShipCrew != null) || fromCrewSelect"/>
+				<bind name="visible" value="(isCrewPanelVisible == true)"/>
 				<bind name="appear" value="'addedToStage'; 0.15; windowAppearLag + 2 * 0.075; {alpha: 0, top: 10}; {alpha: 1, top: 0}; 1"/>
 				<bind name="appear" value="'startHide'; 0.15; 2 * 0.055; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
 				<style>
 					<width value="312px"/>
 					<height value="100%"/>
 				</style>
-				<bind name="instance" value="'CrewRightPanelBlock'; {_shipId: shipId, _crewId: crewId, _fromCrewSelect: fromCrewSelect}"/>
+				<bind name="instance" value="'CrewRightPanelBlock'; isCrewPanelVisible	? {_shipId: shipId, _crewId: crewId, _fromCrewSelect: fromCrewSelect}
+																		: null"/>
 			</block>
 			<block>
-				<bind name="visible" value="selectedShipCrew == null &amp;&amp; !(fromCrewSelect)"/>
+				<bind name="visible" value="(isCrewPanelVisible == false)"/>
 				<bind name="appear" value="'addedToStage'; 0.15; windowAppearLag + 2 * 0.075; {alpha: 0, top: 10}; {alpha: 1, top: 0}; 1"/>
 				<bind name="appear" value="'startHide'; 0.15; 2 * 0.055; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
 				<style>
@@ -35726,14 +36248,15 @@
 			<marginLeft value="3px"/>
 		</style>
 		<bind name="watch" value="'isWeapon'; (installedItem.weaponType || (installedItem.weaponType==0) ? true : false)"/>
+		<bind name="watch" value="'isAviation'; 	(installedItem.weaponType != null) &amp;&amp; (installedItem.weaponType == 3)"/>
 		<block>
 			<style>
 				<width value="54px"/>
 				<height value="54px"/>
 			</style>
 			<bind name="dispatch" value="'consumableInfotipItem.clicked'; 'Tooltip.Close'"/>
-			<bind name="tooltip" value="'ConsumableTooltip';{_id: installedItem.id, _hasAlternatives: ((itemsInSlot.length &gt; 1) ? true : false),
-											_isWeapon: isWeapon, _isSlotTooltip: true}; TooltipBehaviour.simple"/>
+			<bind name="tooltip" value="'ConsumableTooltip';{ _id: installedItem.id, _hasAlternatives: ((itemsInSlot.length &gt; 1) ? true : false),
+											_isWeapon: isWeapon, _isSlotTooltip: true, _isAviation: isAviation }; TooltipBehaviour.simple"/>
 			<bind name="tooltip" value="'ConsumablesInfotip'; (itemsInSlot.length &gt; 1) 	? { _itemsInSlot: itemsInSlot}
 																		: null; TooltipBehaviour.verticalInfotip; null; 'consumablesInfotipIsVIsible'"/>
 			<block>
@@ -35917,7 +36440,9 @@
 							<width value="100%"/>
 							<marginTop value="-4px"/>
 						</style>
-						<bind name="text" value="(_isWeapon	? 'IDS_AMMUNITION' : 'IDS_CONSUMABLES')"/>
+						<bind name="text" value="(	_isAviation ? 'IDS_AVIATION':
+									_isWeapon	? 'IDS_AMMUNITION'
+												: 'IDS_CONSUMABLES')"/>
 					</block>
 				</block>
 				<block>
@@ -36086,8 +36611,38 @@
 						<marginBottom value="1px"/>
 					</style>
 				</block>
-				<bind name="controller" value="lesta.dialogs.dock.controllers.ControllerParams; 0; null; 'tooltipModuleParams' + consumable.paramsDescriptor; consumable.params"/>
-				<bind name="instance" value="'ShipParamsListView'; _isWeapon ? { viewParams:viewParams, secondLevelTooltip: true } : null"/>
+				<block>
+					<bind name="watch" value="'deepWaterTorpedoes'; 		consumable.params.torpedoes.isDeepWater"/>
+					<bind name="watch" value="'deepWaterTorpedoBombers'; consumable.params.torpedoIsDeepWater"/>
+					<styleClass value="$InfoBlockIndent"/>
+					<bind name="visible" value="(deepWaterTorpedoes == true) || (deepWaterTorpedoBombers == true)"/>
+					<bind name="instance" value="'TorpedoAffectedShipsParamRow'; (deepWaterTorpedoes == true) || (deepWaterTorpedoBombers == true) 	? { _torpedoId: consumable.params.ammoNameRaw, 
+																																		_isTooltip: true }
+																																	: null"/>
+				</block>
+				<block>
+					<bind name="visible" value="(deepWaterTorpedoes == true) || (deepWaterTorpedoBombers == true)"/>
+					<style>
+						<width value="100%"/>
+					</style>
+					<block className="HorizontalDivider">
+						<styleClass value="$PxHorizontalCorrection"/>
+						<style>
+							<width value="100%"/>
+							<height value="3px"/>
+						</style>
+						<block className="divider_h" type="native">
+							<styleClass value="$Fullsize"/>
+						</block>
+					</block>
+				</block>
+				<block>
+					<style>
+						<width value="100%"/>
+					</style>
+					<bind name="controller" value="lesta.dialogs.dock.controllers.ControllerParams; 0; null; 'tooltipModuleParams' + consumable.paramsDescriptor; consumable.params"/>
+					<bind name="instance" value="'ShipParamsListView'; _isWeapon ? { viewParams:viewParams, secondLevelTooltip: true } : null"/>
+				</block>
 				<block>
 					<bind name="visible" value="!(_isWeapon)"/>
 					<styleClass value="$InfoBlockIndent"/>
@@ -36144,6 +36699,242 @@
 					<flow value="horizontal"/>
 				</style>
 			</block>
+		</block>
+	</block>
+	<block className="TorpedoAffectedShipsParamRow">
+		<bind name="primaryEntityDH" value="'torpedoEntity'; CC.torpedoParams; _torpedoId"/>
+		<bind name="style" value="'marginTop'; _isTooltip ? '0px' : '-3px'"/>
+		<style>
+			<width value="100%"/>
+			<backgroundColor value="0x01000000"/>
+		</style>
+		<bind name="tooltip" value="'TorpedoAffectedShipsTooltip'; { _torpedoId: _torpedoId }"/>
+		<block>
+			<style>
+				<width value="100%"/>
+			</style>
+			<block type="text">
+				<style>
+					<alpha value="0.7"/>
+				</style>
+				<styleClass value="$TextParams"/>
+				<bind name="text" value="'IDS_SHIP_PARAM_TORPEDOES_AFFECTED_SHIPS'"/>
+			</block>
+			<block>
+				<styleClass value="$AlignRight"/>
+				<styleClass value="$MiddleVAligned"/>
+				<block>
+					<bind name="visible" value="	(torpedoEntity.torpedoParams.includedShipIds.length &gt; 0) || (torpedoEntity.torpedoParams.excludedShipIds.length &gt; 0)"/>
+					<bind name="instance" value="'IconWarning'; { _showOrangeIcon: torpedoEntity.torpedoParams.excludedShipIds.length &gt; 0,
+												 _showGreyIcon: torpedoEntity.torpedoParams.includedShipIds.length &gt; 0 }"/>
+				</block>
+				<bind name="repeat" value="torpedoEntity.torpedoParams.classList; 'ShipTypeIconSimple'"/>
+				<style>
+					<flow value="horizontal"/>
+				</style>
+			</block>
+			<style>
+				<flow value="horizontal"/>
+			</style>
+		</block>
+	</block>
+	<block className="TorpedoAffectedShipsTooltip">
+		<bind name="primaryEntityDH" value="'torpedoEntity'; CC.torpedoParams; _torpedoId"/>
+		<styleClass value="$DefaultTooltipBehaviour"/>
+		<style>
+			<width value="300px"/>
+			<hitTest value="false"/>
+		</style>
+		<block className="DeclareBlurLayer">
+			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+			<bind name="visible" value="optionData.blurEnabled"/>
+			<block className="transparentPixel" type="native">
+				<bind name="blurLayer" value="0"/>
+			</block>
+			<style>
+				<position value="absolute"/>
+			</style>
+		</block>
+		<block className="BlurMap">
+			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+			<style>
+				<position value="absolute"/>
+				<width value="100%"/>
+				<height value="100%"/>
+				<hitTest value="false"/>
+			</style>
+			<bind name="visible" value="optionData.blurEnabled"/>
+			<block className="mc_blurmap5" type="native">
+				<bind name="appear" value="'startShow'; 0.3; 0; {alpha: 0}; {alpha: 1}"/>
+				<bind name="appear" value="'startHide'; 0.15; 0; {alpha: 1}; {alpha: 0}"/>
+				<style>
+					<width value="100%"/>
+					<height value="100%"/>
+				</style>
+				<bind name="blurMap" value="0"/>
+			</block>
+		</block>
+		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+		<block className="contrast_panel" type="native">
+			<styleClass value="$FullsizeAbsolute"/>
+			<bind name="visible" value="optionData.contrast"/>
+		</block>
+		<block className="hint_panel" type="native">
+			<styleClass value="$FullsizeAbsolute"/>
+		</block>
+		<block>
+			<styleClass value="$InfoBlockIndent"/>
+			<block type="text">
+				<styleClass value="$TextDefaultBold17NM"/>
+				<style>
+					<maxWidth value="280"/>
+					<marginTop value="1px"/>
+				</style>
+				<bind name="text" value="'IDS_SHIP_PARAM_TORPEDOES_AFFECTED_SHIPS'"/>
+			</block>
+			<block type="text">
+				<styleClass value="$TextDefault17NM"/>
+				<style>
+					<maxWidth value="280"/>
+					<marginTop value="7px"/>
+				</style>
+				<bind name="text" value="torpedoEntity.torpedoParams.classesIDS"/>
+			</block>
+		</block>
+		<block className="HorizontalDivider">
+			<styleClass value="$PxHorizontalCorrection"/>
+			<style>
+				<width value="100%"/>
+				<height value="3px"/>
+			</style>
+			<block className="divider_h" type="native">
+				<styleClass value="$Fullsize"/>
+			</block>
+		</block>
+		<block>
+			<bind name="visible" value="torpedoEntity.torpedoParams.excludedShipIds.length &gt; 0"/>
+			<styleClass value="$InfoBlockIndent"/>
+			<block>
+				<style>
+					<marginBottom value="10px"/>
+				</style>
+				<block>
+					<style>
+						<marginTop value="-1px"/>
+					</style>
+					<block className="icon_warning_orange" type="native"/>
+				</block>
+				<block type="text">
+					<styleClass value="$TextDefaultNM"/>
+					<style>
+						<maxWidth value="280"/>
+						<marginLeft value="2px"/>
+					</style>
+					<bind name="class" value="'$FontColorUnready'"/>
+					<bind name="text" value="'IDS_TOOLTIP_EXCLUDED_SHIPS'"/>
+				</block>
+				<style>
+					<flow value="horizontal"/>
+				</style>
+			</block>
+			<bind name="repeat" value="torpedoEntity.torpedoParams.excludedShipIds; 'ShipLineItemNoAttributes'; {}"/>
+		</block>
+		<block>
+			<bind name="visible" value="torpedoEntity.torpedoParams.excludedShipIds.length &gt; 0"/>
+			<style>
+				<width value="100%"/>
+			</style>
+			<block className="HorizontalDivider">
+				<styleClass value="$PxHorizontalCorrection"/>
+				<style>
+					<width value="100%"/>
+					<height value="3px"/>
+				</style>
+				<block className="divider_h" type="native">
+					<styleClass value="$Fullsize"/>
+				</block>
+			</block>
+		</block>
+		<block>
+			<bind name="visible" value="torpedoEntity.torpedoParams.includedShipIds.length &gt; 0"/>
+			<styleClass value="$InfoBlockIndent"/>
+			<block>
+				<style>
+					<marginBottom value="10px"/>
+				</style>
+				<block>
+					<style>
+						<marginTop value="-1px"/>
+					</style>
+					<block className="icon_warning_grey" type="native"/>
+				</block>
+				<block type="text">
+					<styleClass value="$TextDefaultNM"/>
+					<style>
+						<maxWidth value="280"/>
+						<marginLeft value="2px"/>
+						<alpha value="0.8"/>
+					</style>
+					<bind name="class" value="'$FontColorBlueish'"/>
+					<bind name="text" value="'IDS_TOOLTIP_INCLUDED_SHIPS'"/>
+				</block>
+				<style>
+					<flow value="horizontal"/>
+				</style>
+			</block>
+			<bind name="repeat" value="torpedoEntity.torpedoParams.includedShipIds; 'ShipLineItemNoAttributes'; {}"/>
+		</block>
+	</block>
+	<block className="ShipLineItemNoAttributes">
+		<bind name="watchDH" value="'upgradableShipInfo'; ['shipEntity.upgradableShipInfo.evUpdate']; shipEntity.upgradableShipInfo"/>
+		<bind name="primaryEntityDH" value="'shipEntity'; CC.ship; $value; 'evUpdate'"/>
+		<bind name="watchDH" value="'shipInfo'; ['shipEntity.ship.evUpdate', 'shipEntity.ship.evCurrentSkinChanged']; shipEntity.ship"/>
+		<bind name="watchDH" value="'shipInfo' + 'Slim'; ['shipEntity.slimClientComponent.evUpdate']; shipEntity.slimClientComponent"/>
+		<style>
+			<flow value="horizontal"/>
+			<marginTop value="1px"/>
+			<marginBottom value="1px"/>
+		</style>
+		<block className="icon_ship" type="native">
+			<style>
+				<marginTop value="1px"/>
+			</style>
+			<bind name="gotoAndStop!" value="shipInfo.subtype"/>
+		</block>
+		<block>
+			<style>
+				<marginTop value="-5px"/>
+				<marginLeft value="3px"/>
+			</style>
+			<block type="text">
+				<style>
+					<maxWidth value="200"/>
+				</style>
+				<styleClass value="$TextDefaultBold"/>
+				<bind name="class" value="'$LetterSpacingSmall'"/>
+				<bind name="text" value="shipInfo.levelRome + ' ' + toUpperCase(tr(shipInfo.nameIDS))"/>
+			</block>
+		</block>
+	</block>
+	<block className="ShipTypeIconSimple">
+		<block>
+			<style>
+				<marginLeft value="4px"/>
+			</style>
+			<block className="icon_ship" type="native">
+				<bind name="gotoAndStop!" value="$dataRef.ref"/>
+			</block>
+		</block>
+	</block>
+	<block className="IconWarning">
+		<style>
+			<marginTop value="-1px"/>
+		</style>
+		<block className="icon_warning_orange" type="native">
+			<bind name="visible" value="(_showGreyIcon &amp;&amp; _showOrangeIcon) || _showOrangeIcon"/>
+		</block>
+		<block className="icon_warning_grey" type="native">
+			<bind name="visible" value="(_showGreyIcon &amp;&amp; !_showOrangeIcon)"/>
 		</block>
 	</block>
 	<block className="ConsumablesInfotip">
@@ -36283,10 +37074,12 @@
 		<style>
 			<width value="100%"/>
 		</style>
+		<bind name="watch" value="'isWeapon'; 	(weaponType || weaponType==0) ? true : false"/>
+		<bind name="watch" value="'isAviation'; 	(weaponType != null) &amp;&amp; (weaponType == 3)"/>
 		<block className="dock_submenu_item" type="native">
 			<bind name="request" value="'click'; !(playerShipInfo.isLocked) ? 'consumableClicked' : null; {name: name, slotId:slotId, useGold: (priceInfoSet.prices[validSelectedPriceIndex].currency == 'gold'), selectedPriceIndex: validSelectedPriceIndex}"/>
 			<bind name="dispatch" value="'click'; 'consumableInfotipItem.clicked'"/>
-			<bind name="tooltip" value="'ConsumableTooltip'; { _id: id, _isWeapon: ((weaponType || weaponType==0) ? true : false) }; 0"/>
+			<bind name="tooltip" value="'ConsumableTooltip'; { _id: id, _isWeapon: isWeapon, _isAviation: isAviation }; 0"/>
 			<bind name="selected" value="installed"/>
 			<styleClass value="$FullsizeAbsolute"/>
 			<params>
@@ -44123,6 +44916,16 @@
 				<styleClass value="$FullsizeAbsolute"/>
 				<styleClass value="$PxHorizontalCorrection"/>
 			</block>
+			<block>
+				<bind name="visible" value="_deepWaterTorpedoBombers == true"/>
+				<style>
+					<width value="100%"/>
+				</style>
+				<block>
+					<styleClass value="$InfoBlockIndent"/>
+					<bind name="instance" value="'TorpedoAffectedShipsParamRow'; (_deepWaterTorpedoBombers == true) ? { _torpedoId: _torpedoId, _isTooltip: true } : null"/>
+				</block>
+			</block>
 			<bind name="instance" value="'ShipParamsListView'; { viewParams: $parent.secondLevel, secondLevelTooltip: true }"/>
 		</block>
 	</block>
@@ -44172,7 +44975,7 @@
 		</block>
 		<block>
 			<bind name="class" value="(secondLevel == null || secondLevel.length == 0) ? '$None' : '$FullWidth'"/>
-			<bind name="child" value="(secondLevel == null || secondLevel.length == 0) ? 0 : 1;'SimpleShipParamTooltip';'SecondLevelShipParamTooltip'"/>
+			<bind name="child" value="(secondLevel == null || secondLevel.length == 0) ? 0 : 1; { _torpedoId: _torpedoId, _deepWaterTorpedoBombers: _deepWaterTorpedoBombers }; 'SimpleShipParamTooltip'; 'SecondLevelShipParamTooltip'"/>
 		</block>
 		<block>
 			<style>
@@ -44469,7 +45272,7 @@
 		<bind name="watchDH" value="'thisShipInfo' + 'Slim'; ['ShipEntity.slimClientComponent.evUpdate']; ShipEntity.slimClientComponent"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'crewsSingleton'; ['dockEntity.crewData.evUpdate']; dockEntity.crewData"/>
-		<bind name="watch" value="'isCrewCompatibleShipBySpecialList'; (crew.shipsToSeat.indexOf(targetShipInfo.fullName) &gt; -1)"/>
+		<bind name="watch" value="'isCrewCompatibleShipBySpecialList'; (crew &amp;&amp; crew.shipsToSeat.indexOf(targetShipInfo.fullName) &gt; -1)"/>
 		<bind name="watch" value="'hasSpaceToAssignCrew'; !(targetPlayerShipInfo.crewId) || !(crew.shipID) || crewsSingleton.canDisassignCrew"/>
 		<bind name="watch" value="'crewActionEnabled';	!(thisPlayerShipInfo.isLocked) &amp;&amp; !(targetPlayerShipInfo.isLocked) &amp;&amp; (hasSpaceToAssignCrew) &amp;&amp;
 										(crew.dismissDelay == 0) &amp;&amp; ((crew.nation == targetShipInfo.country) || isCrewCompatibleShipBySpecialList)"/>
@@ -44806,7 +45609,7 @@
 				<text value="IDS_CREW_GO_TO_PROFILE"/>
 			</block>
 		</block>
-		<bind name="watch" value="'isCrewCompatibleShipBySpecialList'; (crew.shipsToSeat.indexOf(targetShipInfo.fullName) &gt; -1)"/>
+		<bind name="watch" value="'isCrewCompatibleShipBySpecialList'; (crew &amp;&amp; crew.shipsToSeat.indexOf(targetShipInfo.fullName) &gt; -1)"/>
 		<block>
 			<bind name="visible" value="((targetShipInfo.country == crew.nation) || isCrewCompatibleShipBySpecialList)"/>
 			<styleClass value="$ContextMenuListItem"/>
@@ -45355,7 +46158,7 @@
 		<bind name="watchDH" value="'crewInfo'; ['crewEntity.crew.evBasketChanged', 'crewEntity.crew.evLevelUp', 'crewEntity.crew.evExpChanged', 'crewEntity.crew.evShipChanged', 'crewEntity.crew.evSkillsChanged', 'crewEntity.crew.evResetCostChanged', 'crewEntity.crew.evAdaptationUpdated', 'crewEntity.crew.evChanged', 'crewEntity.crew.evRecentnessUpdated']; crewEntity.crew"/>
 		<bind name="watchDH" value="'crewInfo'+'Retraining'; ['crewEntity.crew.evRetrainingUpdated']; crewEntity.retraining"/>
 		<bind name="collectionDesign" value="DES_suitableShipsRoot; 'suitableShips';
-        			{	'filter': ($entity.ship.subtype == $value) &amp;&amp; ($entity.ship.country == _country) &amp;&amp; ((crewInfo.shipsToSeat.indexOf($entity.ship.fullName) &gt; -1) || ($entity.ownShip != null)),
+        			{	'filter': ($entity.ship.subtype == $value) &amp;&amp; ($entity.ship.country == _country) &amp;&amp; ((crewInfo.shipsToSeat &amp;&amp; crewInfo.shipsToSeat.indexOf($entity.ship.fullName) &gt; -1) || ($entity.ownShip != null)),
         				'sort':['ownShip', 'ship.isPremium', 'ship.level'],
         				'sortOrder' : [2, 2, 0]
         			}"/>
@@ -45537,7 +46340,7 @@
 		<bind name="watchDH" value="'targetShipInfo' + 'Slim'; ['shipTargetEntity.slimClientComponent.evUpdate']; shipTargetEntity.slimClientComponent"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'crewsSingleton'; ['dockEntity.crewData.evUpdate']; dockEntity.crewData"/>
-		<bind name="watch" value="'isCrewCompatibleShipBySpecialList'; (crew.shipsToSeat.indexOf(targetShipInfo.fullName) &gt; -1)"/>
+		<bind name="watch" value="'isCrewCompatibleShipBySpecialList'; (crew &amp;&amp; crew.shipsToSeat.indexOf(targetShipInfo.fullName) &gt; -1)"/>
 		<styleClass value="$DefaultTooltipBehaviour"/>
 		<params>
 			<param name="name" value="crew_tooltip"/>
@@ -47892,7 +48695,7 @@
 			<bind name="class" value="_isFromDockFormationBtn ? '$Fullsize' : '$DefaultFormationWidgetSize'"/>
 			<bind name="var" value="{searchState: 0}"/>
 			<bind name="catch" value="'Tooltip.selfClosed'; {searchState : 0}"/>
-			<bind name="action" value="'Tooltip.selfOpened'; 'DockProxy.getClanTeams'; {}"/>
+			<bind name="action" value="'Tooltip.selfOpened'; 'ClanProxy.getClanTeams'; {}"/>
 			<bind name="catch" value="'changeSearchState'"/>
 			<bind name="catch" value="'TextInputWithCancel.searchCancelled'; {searchState : 0}"/>
 			<block>
@@ -48056,7 +48859,7 @@
 		<bind name="class" value="_isFromDockFormationBtn ? '$Fullsize' : '$DefaultFormationWidgetSize'"/>
 		<bind name="var" value="{searchState: 0}"/>
 		<bind name="catch" value="'Tooltip.selfClosed'; {searchState : 0}"/>
-		<bind name="action" value="'Tooltip.selfOpened'; 'DockProxy.getClanTeams'; {}"/>
+		<bind name="action" value="'Tooltip.selfOpened'; 'ClanProxy.getClanTeams'; {}"/>
 		<bind name="catch" value="'changeSearchState'"/>
 		<bind name="catch" value="'TextInputWithCancel.searchCancelled'; {searchState : 0}"/>
 		<block>
@@ -48746,7 +49549,7 @@
 				<position value="absolute"/>
 			</style>
 			<block className="button_update" type="native">
-				<bind name="action" value="'buttonClick'; 'DockProxy.getClanTeams'; {}"/>
+				<bind name="action" value="'buttonClick'; 'ClanProxy.getClanTeams'; {}"/>
 				<bind name="tooltip" value="'SimpleTooltip'; {tooltipText: 'IDS_HINT_UPDATE_CLAN_DIVISIONS_LIST'}"/>
 			</block>
 		</block>
@@ -50507,6 +51310,49 @@
 				</block>
 			</block>
 		</block>
+		<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; selfPlayerEntity.clanman.clanId"/>
+		<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
+		<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="firstEntityDH" value="'clanInviteeEntity'; CC.clanInvitee"/>
+		<bind name="watchDH" value="'role'; ['selfPlayerEntity.clanman.evRoleChanged']; selfPlayerEntity.clanman.role"/>
+		<bind name="watchDH" value="'isFull'; ['clanEntity.clanExtended.evIsFullChanged']; clanEntity.clanExtended.isFull"/>
+		<bind name="watch" value="'haveOwnClan'; 			clanEntity != null"/>
+		<bind name="watch" value="'canInvite'; 				(role == 'executive_officer' || role == 'recruitment_officer' || role == 'commander')"/>
+		<bind name="watch" value="'notInBalancer'; 			(dockStateName != 'balancer')"/>
+		<bind name="watch" value="'alreadyInYourClan'; 		(entityAccount.clanman != null) &amp;&amp; (entityAccount.clanman.clanId == selfPlayerEntity.clanman.clanId)"/>
+		<bind name="watch" value="'alreadyInAnotherClan'; 	(entityAccount.clanman != null) &amp;&amp; (entityAccount.clanman.clanId != selfPlayerEntity.clanman.clanId)"/>
+		<bind name="watch" value="'noFreePlacesInClan'; 		isFull"/>
+		<block>
+			<bind name="visible" value="(haveOwnClan &amp;&amp; canInvite &amp;&amp; notInBalancer &amp;&amp; !alreadyInYourClan)"/>
+			<bind name="action" value="'click'; 'ClanProxy.sendInvite'; { playerDBID: accountDbId }"/>
+			<bind name="style" value="'alpha'; (alreadyInAnotherClan || noFreePlacesInClan) ? 0.5 : 1"/>
+			<bind name="tooltip" value="'SimpleWarningTooltip'; (alreadyInAnotherClan || noFreePlacesInClan) ? { _text: 	noFreePlacesInClan 		? 'IDS_CLAN_INVITATION_DENY_REASON_CLAN_IS_FULL':
+																										alreadyInAnotherClan 	? 'IDS_CLAN_INVITATION_DENY_REASON_PLAYER_ALREADY_IN_CLAN'
+																																: ''}
+																							: null"/>
+			<style>
+				<width value="100%"/>
+				<backgroundColor value="0x01000000"/>
+			</style>
+			<styleClass value="$ContextMenuListItem"/>
+			<block>
+				<styleClass value="$Fullsize"/>
+				<bind name="style" value="'hitTest'; (alreadyInAnotherClan || noFreePlacesInClan) ? false : true"/>
+				<block className="MenuItem">
+					<styleClass value="$Fullsize"/>
+					<block className="dock_submenu_item" type="native">
+						<styleClass value="$FullsizeAbsolute"/>
+					</block>
+					<block type="text">
+						<styleClass value="$TextDefault"/>
+						<styleClass value="$MiddleVAligned"/>
+						<styleClass value="$ContextMenuListItemContent"/>
+						<bind name="text" value="'IDS_INVITATION_TO_CLAN'"/>
+					</block>
+				</block>
+			</block>
+		</block>
 		<block>
 			<style>
 				<width value="100%"/>
@@ -51509,11 +52355,12 @@
 						<style>
 							<position value="absolute"/>
 						</style>
-						<bind name="gotoAndStop!" value="rankedBattleStatus == RankedBattleStatus.ACCEPTED	?	'RankedBattle' :
-										queueTypeIdent == 'RANDOM'							?	'RandomBattle' :
-										queueTypeIdent == 'PVE_BATTLE'						?	'PVEBattle' :
-										queueTypeIdent == 'CLAN_BATTLE'						?	'ClanBattle'
-																							:	'CooperativeBattle'"/>
+						<bind name="gotoAndStop!" value="rankedBattleStatus == RankedBattleStatus.ACCEPTED								?	'RankedBattle' :
+										queueTypeIdent == 'RANDOM'														?	'RandomBattle' :
+										(queueTypeIdent == 'PVE_BATTLE') &amp;&amp; (operationType == 'event')	?	'PVEBattle_event' :
+										queueTypeIdent == 'PVE_BATTLE'													?	'PVEBattle' :
+										queueTypeIdent == 'CLAN_BATTLE'													?	'ClanBattle'
+																														:	'CooperativeBattle'"/>
 					</block>
 				</block>
 				<block type="text">
@@ -51531,6 +52378,7 @@
 				<bind name="watchDH" value="'chosenDifficulty';	['pveStateEntity.pveState.evStateUpdated']; pveStateEntity.pveState.chosenDifficulty"/>
 				<bind name="watchDH" value="'activeOperationId'; ['pveStateEntity.pveState.evStateUpdated']; pveStateEntity.pveState.activeOperation"/>
 				<bind name="watch" value="'isChosenOperationOfTheWeek'; ((chosenOperationId == activeOperationId) &amp;&amp; (chosenDifficulty == 'normal'))"/>
+				<bind name="watchDH" value="'operationType';	['operationEntity.operation.evStatusChanged']; operationEntity.operation.type"/>
 				<bind name="primaryEntityDH" value="'operationEntity'; CC.operation; chosenOperationId"/>
 				<block type="text">
 					<styleClass value="$TextHeader"/>
@@ -54862,18 +55710,14 @@
 			<bind name="style" value="'paddingTop'; paddingTop"/>
 			<bind name="appear" value="'startShow'; 0.15; 0.3; {alpha: 0}; {alpha: 1}"/>
 			<bind name="appear" value="'startHide'; 0.15; 0.3; {alpha: 1}; {alpha: 0}"/>
-			<style>
-				<width value="100sw"/>
-				<height value="99sh"/>
-			</style>
-			<styleClass value="$MiddleAligned"/>
-			<styleClass value="$MiddleVAligned"/>
+			<styleClass value="$Fullsize"/>
 			<block>
 				<bind name="visible" value="!hideHeader"/>
 				<bind name="appear" value="'startShow'; 0.15; 0.15; {alpha: 0, top: 5}; {alpha: 1, top: 0}"/>
 				<bind name="appear" value="'startHide'; 0.15; 0; {alpha: 1, top: 0}; {alpha: 0, top: -10}"/>
 				<style>
 					<width value="100%"/>
+					<marginTop value="8px"/>
 				</style>
 				<bind name="instance" value="'ModalWindowHeader'; { _header: browserTitle, _headerWidth: '100%', _innerCloseButton: true, _noHotkey: $root.fullInput}"/>
 			</block>
@@ -54948,29 +55792,6 @@
 						<hitTest value="false"/>
 					</style>
 					<bind name="text" value="toUpperCase(tr('IDS_WAITING_SCREEN_AUTHORIZATION'))"/>
-				</block>
-			</block>
-			<block>
-				<bind name="appear" value="'startShow'; 0.15; 0.3; {alpha: 0}; {alpha: 1}"/>
-				<bind name="appear" value="'startHide'; 0.15; 0.3; {alpha: 1}; {alpha: 0}"/>
-				<style>
-					<width value="100%"/>
-				</style>
-				<block>
-					<style>
-						<width value="100%"/>
-						<marginTop value="1px"/>
-					</style>
-					<block className="HorizontalDivider">
-						<styleClass value="$PxHorizontalCorrection"/>
-						<style>
-							<width value="100%"/>
-							<height value="3px"/>
-						</style>
-						<block className="divider_h" type="native">
-							<styleClass value="$Fullsize"/>
-						</block>
-					</block>
 				</block>
 			</block>
 		</block>
@@ -58756,6 +59577,8 @@
 					</style>
 				</block>
 				<block>
+					<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
+					<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 					<styleClass value="$MiddleVAligned"/>
 					<style>
 						<marginLeft value="10px"/>
@@ -58789,11 +59612,23 @@
 								<bind name="instance" value="'ButtonAccount'; {}"/>
 							</block>
 							<bind name="feature" value="23; ''"/>
-							<bind name="watch" value="'haveUnreadNews'; (realmConstants.newsUIAvailable == true) &amp;&amp; (unreadNewsCount &gt; 0)"/>
-							<bind name="watch" value="'isInviteFriendStickerNotSeen'; ((currentUserTaskFlag &amp; UserTasksFlags.CONTROL_SEEN_PLAYTOGETHER) == 0 &amp;&amp; (accountLevelInfo.accountLevel &gt;= 3) &amp;&amp; !(isLazyLogin))"/>
-							<bind name="watch" value="'showSticker'; haveUnreadNews ||
+							<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
+							<bind name="firstEntityDH" value="'steamLoginEntity'; CC.steamLoginData"/>
+							<bind name="watchDH" value="'isSteamClient'; 	['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
+							<bind name="watchDH" value="'isWinstoreClient'; 	['loginEntity.loginData.evUpdate']; loginEntity.loginData.isWinstore"/>
+							<bind name="watchDH" value="'accountCompleted'; 	['steamLoginEntity.steamLoginData.evUpdate']; steamLoginEntity.steamLoginData.emailBind"/>
+							<bind name="watch" value="'showAccountComplition'; externalFeaturesEnabled &amp;&amp; !(accountCompleted)"/>
+							<bind name="watch" value="'isInviteFriendStickerNotSeen'; ((currentUserTaskFlag &amp; UserTasksFlags.CONTROL_SEEN_PLAYTOGETHER) == 0 &amp;&amp; (accountLevelInfo.accountLevel &gt;= 3) &amp;&amp; !(isLazyLogin) &amp;&amp; featuresEnabled)"/>
+							<bind name="watch" value="'haveUnreadNews'; (realmConstants.newsUIAvailable == true) &amp;&amp; (unreadNewsCount &gt; 0) &amp;&amp; featuresEnabled"/>
+							<bind name="watch" value="'isExternalPlatformClient'; isSteamClient || isWinstoreClient"/>
+							<bind name="watch" value="'externalFeaturesEnabled'; (isSteamClient 		&amp;&amp; realmConstants.accountCompletion.steam) ||
+				  											(isWinstoreClient 	&amp;&amp; realmConstants.accountCompletion.live)"/>
+							<bind name="watch" value="'featuresEnabled'; 	!(isExternalPlatformClient) ||
+				  										externalFeaturesEnabled"/>
+							<bind name="watch" value="'showSticker'; showAccountComplition ||
+												isInviteFriendStickerNotSeen ||
 												feature_23 == 'new' ||
-												isInviteFriendStickerNotSeen"/>
+												haveUnreadNews"/>
 							<block className="icon_sticker_new_no_pulse" type="native">
 								<bind name="fade" value="showSticker; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
 								<style>
@@ -58863,8 +59698,6 @@
 							<bind name="watchDH" value="'walletAvailable'; ['resourceEntity.accountResource.evChangedWalletStatus']; resourceEntity.accountResource.walletStatus"/>
 							<bind name="watchDH" value="'splitGold'; ['resourceEntity.accountResource.evUpdateSplitCurrency']; resourceEntity.accountResource.splitGold"/>
 							<bind name="watch" value="'showWGWalletWarning'; (!(isLazyLogin) &amp;&amp; ((isSyncedWithWallet == false) || (walletAvailable == false)))"/>
-							<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
-							<bind name="watchDH" value="'isSteamClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isSteam"/>
 							<block>
 								<style>
 									<backgroundColor value="0x01000000"/>
@@ -59253,7 +60086,7 @@
 	<block className="AccountInfotipItem">
 		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
 		<style>
-			<width value="240px"/>
+			<width value="250px"/>
 			<height value="46px"/>
 		</style>
 		<block className="dock_submenu_item" type="native">
@@ -59287,7 +60120,7 @@
 				<block type="text">
 					<bind name="transition" value="rollOver &amp;&amp; !mouseDown; 0.15; {alpha: 0.6}; {alpha: 1}; {alpha: 0.6}; 2"/>
 					<style>
-						<width value="144px"/>
+						<width value="154px"/>
 					</style>
 					<styleClass value="$MiddleVAligned"/>
 					<styleClass value="$TextDefaultBold"/>
