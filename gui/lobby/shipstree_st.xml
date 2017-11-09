@@ -357,6 +357,7 @@
 				<ship shipid='4183766832' x='2' y='5' /><!--PGSB106_Bayern (T6 Germany upgradeable Battleship) -->
 				<ship shipid='3764303664' x='8' y='5' /> <!--PGSC506_Admiral_Graf_Spee (T6 Germany demoWithoutStats Cruiser) -->
 				<ship shipid='4183701296' x='6' y='5' /> <!--PGSD106_Ernst_Gaede (T6 Germany demoWithoutStats Destroyer) -->
+				<ship shipid='3764270896' x='10' y='5' /> <!--PGSD506_T_61 (T6 Germany special Destroyer) -->
 
 				<ship shipid='4182685488' x='4' y='6' /> <!--PGSC107_Yorck (T7 Germany upgradeable Cruiser) -->
 				<ship shipid='3763287856' x='8' y='6' /> <!--PGSB507_Scharnhorst (T7 Germany special Battleship) -->
@@ -594,6 +595,7 @@
 				<ship shipid='4182652624' x='6' y='6' /> <!--PJSD107_Akatsuki (T7 Japan upgradeable Destroyer) -->
 				<ship shipid='4077795024' x='8' y='6' /> <!--PJSD207_Shiratsuyu (T7 Japan upgradeable Destroyer) -->
 				<ship shipid='3763320528' x='12' y='6' /> <!-- PJSA507_Kaga (T7 Japan special AirCarrier) -->
+				<ship shipid='3763287760' x='14' y='6' /> <!-- PJSB507_Ashitaka (T7 Japan special Battleship) -->
 
 				<ship shipid='4281284304' x='2' y='7' /> <!--PJSB013_Amagi_1942 (T8 Japan upgradeable Battleship) -->
 				<ship shipid='4282365648' x='0' y='7' /> <!--PJSA012_Zuikaku_1944 (T8 Japan upgradeable AirCarrier) -->
@@ -608,6 +610,7 @@
 				<ship shipid='4279219920' x='0' y='8' /> <!--PJSA015_Taiho_1944 (T9 Japan upgradeable AirCarrier) -->
 				<ship shipid='4282300112' x='4' y='8' /> <!--PJSC012_Ibuki_1944 (T9 Japan upgradeable Cruiser) -->
 				<ship shipid='4075697872' x='6' y='8' /> <!--PJSD209_Yugumo (T9 Japan upgradeable Destroyer) -->
+				<ship shipid='3761190608' x='8' y='8' /> <!--PJSB509_Musashi (T9 Japan premium Battleship) -->
 
 				<ship shipid='4259231440' x='4' y='9' /> <!--PJSC034_Zao_1944 (T10 Japan upgradeable Cruiser) -->
 				<ship shipid='4276041424' x='2' y='9' /> <!--PJSB018_Yamato_1944 (T10 Japan upgradeable Battleship) -->
@@ -619,6 +622,7 @@
 				<ship shipid='3315513040' x='4' y='10' /> <!--PJSC934_Zao_1944 (T10 Japan upgradeable Cruiser) -->
 				<ship shipid='3333404368' x='0' y='10' /> <!--PJSA917_Hakuryu_1942 (T10 Japan upgradeable AirCarrier) -->
 				<ship shipid='3338548944' x='6' y='10' /> <!--PJSD912_Shimakaze_1943 (T10 Japan upgradeable Destroyer) -->
+				<ship shipid='3332323024' x='2' y='10' /> <!--PJSB918_Yamato_1944 (T10 Japan upgradeable Battleship) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
@@ -894,8 +898,9 @@
 				<ship shipid='4182685520' x='4' y='6' /> <!--PFSC107_Algerie (T7 France special Cruiser) -->
 
 				<ship shipid='4183734096' x='4' y='5' /> <!--PFSC106_La_Galissonniere (T6 France special Cruiser) -->
-				<ship shipid='3764336464' x='8' y='6' /> <!--PFSB506_Dunkerque_1940 (T6 France special Battleship) -->
+				<ship shipid='3764336464' x='8' y='5' /> <!--PFSB506_Dunkerque_1940 (T6 France special Battleship) -->
 				<ship shipid='3764303696' x='10' y='5' /> <!--PFSC506_De_Grasse (T6 France special Cruiser) -->
+				<ship shipid='3764270928' x='12' y='5' /> <!--PFSD506_Aigle (T6 France special Destroyer) -->
 
 				<ship shipid='4184782672' x='4' y='4' /> <!--PFSC105_Emile_Bertin (T5 France special Cruiser) -->
 				<ship shipid='3660461904' x='8' y='4' /> <!--PFSD605_Cyclone_event (T5 France special Destroyer) -->
@@ -974,6 +979,8 @@
 				<ship shipid='3765384944' x='8' y='4' /> <!-- PISB505_Giulio_Cesare (T5 Italy demoWithoutStats Battleship) -->
 
 				<ship shipid='3764303600' x='8' y='5' /> <!-- PISC506_DucadAosta (T6 Italy demoWithoutStats Cruiser) -->
+
+				<ship shipid='3763255024' x='8' y='6' /> <!-- PISC507_Duca_degli_Abruzzi (T7 Italy demoWithoutStats Cruiser) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
@@ -1004,6 +1011,7 @@
 
 			<ship shipid='4293145872' x='8' y='0' /> <!--PXSX001_Transylvania (T5 Events unavailable Auxiliary)-->
 	        <!--<ship shipid='4278465808' x='2' y='5' /> PXSX015_Schuka (T11 Events event Auxiliary)-->
+			<ship shipid='3515102480' x='8' y='1' /> <!--PXSX743_Hall_Medway_Queen (T11 Events unavailable Auxiliary)-->
 
 			<ship shipid='4293899536' x='0' y='0' /> <!--PXSA001_Invisible_Air_Enemy_1 (T4 Events event AirCarrier)-->
 			<ship shipid='4292850960' x='0' y='1' /> <!--PXSA002_Invisible_Air_Ally_1 (T4 Events event AirCarrier)-->
