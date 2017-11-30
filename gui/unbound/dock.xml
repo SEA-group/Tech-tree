@@ -148,7 +148,7 @@
 			<style>
 				<textAlign value="center"/>
 				<textColor value="0xffffffff"/>
-				<width value="1280:130,1920:200ah"/>
+				<width value="1280:150,1920:220ah"/>
 			</style>
 			<bind name="text" value="text"/>
 		</block>
@@ -1542,6 +1542,7 @@
 							<style>
 								<position value="absolute"/>
 								<left value="8px"/>
+								<hitTest value="false"/>
 							</style>
 						</block>
 					</block>
@@ -1613,6 +1614,7 @@
 							<style>
 								<position value="absolute"/>
 								<left value="8px"/>
+								<hitTest value="false"/>
 							</style>
 						</block>
 					</block>
@@ -2377,6 +2379,7 @@
 							<bind name="gotoAndStop!" value="'normal'"/>
 						</block>
 						<block>
+							<bind name="visible" value="!shipInfo.isEventLike"/>
 							<style>
 								<right value="1px"/>
 							</style>
@@ -11135,7 +11138,7 @@
 					<block>
 						<styleClass value="$AlignRight"/>
 						<block>
-							<bind name="visible" value="(data.costShipCR != 0)"/>
+							<bind name="visible" value="(data.costShipCR != 0) || (data.costShipGL == 0)"/>
 							<bind name="instance" value="'PriceTag'; { priceInfo: { finalPrice: data.costShipCR, currency: 'credits' }, _small: true}"/>
 						</block>
 						<block type="text">
@@ -27252,16 +27255,16 @@
 						<bind name="feature" value="'17'; 'rollOver'"/>
 						<block className="MainTab">
 							<block className="tab_bar_item" type="native">
-								<bind name="name" value="'DockSubMenuItem' + 3"/>
+								<bind name="name" value="'DockSubMenuItem' + LobbyConstants.SHIP_MODULES"/>
 								<style>
 									<width value="143px"/>
 									<height value="29px"/>
 								</style>
-								<bind name="selected" value="inset == 3 &amp;&amp; crewInset != 1"/>
+								<bind name="selected" value="inset == LobbyConstants.SHIP_MODULES &amp;&amp; crewInset != 1"/>
 								<bind name="dispatch" value="'buttonClick'; 'hideCrew'"/>
-								<bind name="action" value="'buttonClick'; 'changeInset'; {inset: 3}"/>
+								<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.SHIP_MODULES, page: null, pageData: null}"/>
 								<bind name="label" value="toUpperCase(tr('IDS_MODULES'))"/>
-								<bind name="soundSet" value="'main_tab_' + 3"/>
+								<bind name="soundSet" value="'main_tab_' + LobbyConstants.SHIP_MODULES"/>
 							</block>
 							<bind name="tooltip" value="'SimpleTooltip';{tooltipText: 'IDS_TOOLTIP_TAB_MODULES'}"/>
 						</block>
@@ -27809,7 +27812,7 @@
 							</style>
 							<bind name="selected" value="inset == 'none' &amp;&amp; crewInset != 1"/>
 							<bind name="dispatch" value="'buttonClick'; 'hideCrew'"/>
-							<bind name="action" value="'buttonClick'; 'changeInset'; {inset: 'none'}"/>
+							<bind name="action" value="'buttonClick'; 'changeInset'; {inset: 'none', page: null, pageData: null}"/>
 							<bind name="label" value="toUpperCase(tr('IDS_EXTERIOR'))"/>
 							<bind name="soundSet" value="'main_tab_' + 'none'"/>
 						</block>
@@ -28698,6 +28701,7 @@
 				<style>
 					<position value="absolute"/>
 					<left value="8px"/>
+					<hitTest value="false"/>
 				</style>
 			</block>
 		</block>
@@ -30091,7 +30095,14 @@
 	<block className="ClanInset">
 		<bind name="name" value="'ClansHomePage'"/>
 		<styleClass value="$Fullsize"/>
-		<bind name="action" value="'addedToStage'; 'openClansWindow'; {'url': URL.CLANS_IN_GAME}"/>
+		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
+		<bind name="watchDH" value="'inset'; ['dockEntity.insetComponent.evUpdate']; dockEntity.insetComponent.inset"/>
+		<bind name="primaryEntityDH" value="'pageEntity'; CC.insetPage; LobbyConstants.CLAN"/>
+		<bind name="watchDH" value="'page'; ['pageEntity.insetPage.evUpdate']; pageEntity.insetPage.page"/>
+		<bind name="watchDH" value="'pageData'; ['pageEntity.dataComponent.evDataChanged']; pageEntity.dataComponent.data"/>
+		<bind name="changeDispatch" value="pageData; 'evPageDataChanged'"/>
+		<bind name="action" value="'addedToStage'; 'openClansWindow'; pageData"/>
+		<bind name="action" value="'evPageDataChanged'; 'navigateClansWindow' : ''; { 'urlParams': pageData}"/>
 		<bind name="action" value="'removedFromStage'; 'closeClansWindow'; {}"/>
 	</block>
 	<block className="InteractiveNotifications">
@@ -30386,7 +30397,7 @@
 					<bind name="label" value=" data.idInGroup == 0 	? toUpperCase(tr('IDS_GOTO_BASE'))
 													: toUpperCase(tr('IDS_ACCEPT'))"/>
 					<bind name="dispatch" value="'mouseDown'; 'dragDisabledDown'"/>
-					<bind name="action" value="'buttonClick'; 'changeInset'; { inset: LobbyConstants.CLAN }"/>
+					<bind name="action" value="'buttonClick'; 'changeInset'; { inset: LobbyConstants.CLAN, pageData: {'url': URL.CLAN_BASE_IN_GAME, 'redirect_to': '' } }"/>
 					<bind name="dispatch" value="'buttonClick'; 'evHideInteractiveMessage'"/>
 				</block>
 			</block>
@@ -30397,6 +30408,15 @@
 		<bind name="watch" value="'showBusyIndicator'; isUserActionDone"/>
 		<bind name="var" value="{inviteAccepted: false}"/>
 		<bind name="catch" value="'clickAcceptButton'; { inviteAccepted: true }"/>
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
+		<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; selfPlayerEntity.clanman.clanId"/>
+		<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
+		<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
+		<bind name="feature" value="'27'; ''"/>
+		<bind name="watch" value="'isClanTabVisible'; (selfPlayerEntity.clanman) || (feature_27 != 'locked')"/>
 		<style>
 			<width value="370px"/>
 		</style>
@@ -30491,7 +30511,8 @@
 													: toUpperCase(tr('IDS_ACCEPT'))"/>
 					<bind name="dispatch" value="'mouseDown'; 'dragDisabledDown'"/>
 					<bind name="dispatch" value="'buttonClick'; 'clickAcceptButton'"/>
-					<bind name="request" value="'click'; data.idInGroup == 3 ? 'WebBrowserFull' : null; {url: URL.CLAN_INVITES, redirect_to: data.url}"/>
+					<bind name="request" value="'click'; data.idInGroup == 3 &amp;&amp; !isClanTabVisible ? 'WebBrowserFull' : null; {url: URL.CLAN_INVITES, redirect_to: data.url}"/>
+					<bind name="action" value="'click'; (data.idInGroup == 3) &amp;&amp; isClanTabVisible ? 'changeInset' : null; {inset: LobbyConstants.CLAN, pageData: {'url': URL.CLAN_INVITES, 'redirect_to': data.url}}"/>
 					<bind name="action" value="'buttonClick'; data.actionName; data.callbackData[0]"/>
 				</block>
 			</block>
@@ -31512,9 +31533,12 @@
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 		<bind name="watchDH" value="'accountSlotsNum'; ['resourceEntity.accountResource.evChangedSlotsNum']; resourceEntity.accountResource.slotsNum"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'slimClientData'"/>
+		<bind name="var" value="{delayedShowCarousel: false}"/>
+		<bind name="dispatch" value="'addedToStage'; 'delayedAddedToStage'; null; 2; 1.5"/>
+		<bind name="catch" value="'delayedAddedToStage'; {delayedShowCarousel: true}"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'carouselVisibility'; ['dockEntity.dockData.evUpdate']; dockEntity.dockData.carouselVisibility"/>
-		<bind name="fade" value="carouselVisibility; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}; {alpha: 0, top: 10}; 1; (true &amp;&amp; dockDefaultValues.carouselVisibility) ? 0.25 : 0"/>
+		<bind name="fade" value="carouselVisibility &amp;&amp; delayedShowCarousel; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}; {alpha: 0, top: 10}; 1; (true &amp;&amp; dockDefaultValues.carouselVisibility) ? 0.25 : 0"/>
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'dockDefaultValues'"/>
 		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
 		<bind name="feature" value="'17'; ''"/>
@@ -32237,9 +32261,9 @@
 				<block className="icon_primary_ribbon" type="native"/>
 			</block>
 			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
-			<bind name="var" value="{cvcShipsChangeTime: {RU: 1510106400, NA: 1510135200, ASIA: 1510174800, EU: 1510203600, PT: 1510106400, ST: 1510106400}}"/>
+			<bind name="var" value="{cvcShipsChangeTime: {RU: 1513735200, NA: 1513764000, ASIA: 1513803600, EU: 1513836000, CN: 1514246400, PT: 1513735200, ST: 1513735200}}"/>
 			<bind name="watch" value="'isCvcChangeTimerVisible'; (cvcShipsChangeTime[realmConstants.currentRealm] != null &amp;&amp;
-												shipInfo.group == 'clan')									 ? true : false"/>
+											shipInfo.group == 'clan')									 ? true : false"/>
 			<block>
 				<bind name="visible" value="(isCvcChangeTimerVisible)"/>
 				<style>
@@ -32551,9 +32575,9 @@
 				<block className="icon_primary_ribbon" type="native"/>
 			</block>
 			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
-			<bind name="var" value="{cvcShipsChangeTime: {RU: 1510106400, NA: 1510135200, ASIA: 1510174800, EU: 1510203600, PT: 1510106400, ST: 1510106400}}"/>
+			<bind name="var" value="{cvcShipsChangeTime: {RU: 1513735200, NA: 1513764000, ASIA: 1513803600, EU: 1513836000, CN: 1514246400, PT: 1513735200, ST: 1513735200}}"/>
 			<bind name="watch" value="'isCvcChangeTimerVisible'; (cvcShipsChangeTime[realmConstants.currentRealm] != null &amp;&amp;
-												shipInfo.group == 'clan')									 ? true : false"/>
+											shipInfo.group == 'clan')									 ? true : false"/>
 			<block>
 				<bind name="visible" value="(isCvcChangeTimerVisible)"/>
 				<style>
@@ -38710,6 +38734,19 @@
 		<style>
 			<hitTest value="false"/>
 		</style>
+		<bind name="watch" value="'haveClanTag'; (_clanTag != null) &amp;&amp; (_clanTag != '') &amp;&amp; (_clanTag != 'undefined')"/>
+		<bind name="watch" value="'isColoredClanTag'; haveClanTag &amp;&amp; (_color != null &amp;&amp; _color != '' &amp;&amp; _color != 'undefined' &amp;&amp; _color != '0xffundefined')"/>
+		<bind name="watch" value="'playerName'; 	isColoredClanTag 	?	_playerName :
+								haveClanTag			?	('[' + _clanTag + ']' + _playerName)
+													: 	_playerName"/>
+		<bind name="watch" value="'fontColor'; 	_isSelf 	? 	_ttkStatus 			? '$FontColorTTK' :
+												_tkStatus 			? '$FontColorTeamkiller'
+																	: '$FontColorGolden':
+								_isAlive 	?  	_ttkStatus 			? '$FontColorTTK' :
+												_tkStatus 			? '$FontColorTeamkiller':
+												_isInSameDivision 	? '$FontColorGolden' 
+																	: '$FontColorWhite'
+											: '$FontColorAlmostBlack'"/>
 		<block>
 			<styleClass value="$MiddleVAligned"/>
 			<style>
@@ -38717,7 +38754,7 @@
 			</style>
 			<bind name="style" value="'right'; _right"/>
 			<block>
-				<bind name="visible" value="(_clanTag != null) &amp;&amp; (_clanTag != '')"/>
+				<bind name="visible" value="(isColoredClanTag == true)"/>
 				<block type="text">
 					<styleClass value="$TextDefaultNM"/>
 					<bind name="style" value="'fontSize'; _fontSize ? _fontSize : 15"/>
@@ -38736,15 +38773,8 @@
 				<bind name="style" value="'fontSize'; _fontSize ? _fontSize : 15"/>
 				<bind name="class" value="_isSelf 	? '$Bold' : '$None'"/>
 				<bind name="class" value="(!(_isAlive) &amp;&amp; !(_isSelf)) ? '$FontDropShadowWhite' : '$None'"/>
-				<bind name="class" value="	_isSelf		? 	_ttkStatus 			? '$FontColorTTK' :
-											_tkStatus 			? '$FontColorTeamkiller'
-																: '$FontColorGolden' :
-							_isAlive	?	_ttkStatus 			? '$FontColorTTK' :
-											_tkStatus 			? '$FontColorTeamkiller' :
-											_isInSameDivision	? '$FontColorGolden'
-																: '$FontColorWhite'
-										: '$FontColorAlmostBlack'"/>
-				<bind name="text" value="_playerName"/>
+				<bind name="class" value="fontColor"/>
+				<bind name="text" value="playerName"/>
 			</block>
 			<style>
 				<flow value="horizontal"/>
@@ -55995,7 +56025,7 @@
 				<bind name="visible" value="!authorizing"/>
 				<bind name="var" value="{browserTextureName: $root.browserTextureName}"/>
 				<bind name="controller" value="lesta.unbound.controls.UbWebBrowserController; browserTextureName"/>
-				<bind name="event" value="'browser.onInitializationComplete'; navigate; $root.url; $root.isPrmp; $root.authorization"/>
+				<bind name="event" value="'browser.onInitializationComplete'; readyToNavigate"/>
 				<block className="BrowserRender">
 					<bind name="visible" value="!(loadFailed)"/>
 					<styleClass value="$Fullsize"/>
@@ -59297,9 +59327,12 @@
 				<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 				<bind name="watchDH" value="'accountSlotsNum'; ['resourceEntity.accountResource.evChangedSlotsNum']; resourceEntity.accountResource.slotsNum"/>
 				<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'slimClientData'"/>
+				<bind name="var" value="{delayedShowCarousel: false}"/>
+				<bind name="dispatch" value="'addedToStage'; 'delayedAddedToStage'; null; 2; 1.5"/>
+				<bind name="catch" value="'delayedAddedToStage'; {delayedShowCarousel: true}"/>
 				<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 				<bind name="watchDH" value="'carouselVisibility'; ['dockEntity.dockData.evUpdate']; dockEntity.dockData.carouselVisibility"/>
-				<bind name="fade" value="carouselVisibility; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}; {alpha: 0, top: 10}; 1; (true &amp;&amp; dockDefaultValues.carouselVisibility) ? 0.25 : 0"/>
+				<bind name="fade" value="carouselVisibility &amp;&amp; delayedShowCarousel; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}; {alpha: 0, top: 10}; 1; (true &amp;&amp; dockDefaultValues.carouselVisibility) ? 0.25 : 0"/>
 				<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'dockDefaultValues'"/>
 				<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
 				<bind name="feature" value="'17'; ''"/>
@@ -59530,7 +59563,7 @@
 								</style>
 								<bind name="selected" value="inset == LobbyConstants.DOCK &amp;&amp; crewInset != 1"/>
 								<bind name="dispatch" value="'buttonClick'; 'hideCrew'"/>
-								<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.DOCK}"/>
+								<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.DOCK, page: null, pageData: null}"/>
 								<bind name="label" value="toUpperCase(tr('IDS_DOCK'))"/>
 								<bind name="soundSet" value="'main_tab_' + LobbyConstants.DOCK"/>
 							</block>
@@ -59559,7 +59592,7 @@
 									</style>
 									<bind name="selected" value="inset == LobbyConstants.SHIP_MODULES &amp;&amp; crewInset != 1"/>
 									<bind name="dispatch" value="'buttonClick'; 'hideCrew'"/>
-									<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.SHIP_MODULES}"/>
+									<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.SHIP_MODULES, page: null, pageData: null}"/>
 									<bind name="label" value="toUpperCase(tr('IDS_MODULES'))"/>
 									<bind name="soundSet" value="'main_tab_' + LobbyConstants.SHIP_MODULES"/>
 								</block>
@@ -59614,7 +59647,7 @@
 									</style>
 									<bind name="selected" value="inset == LobbyConstants.SHIP_EXTERIOR &amp;&amp; crewInset != 1"/>
 									<bind name="dispatch" value="'buttonClick'; 'hideCrew'"/>
-									<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.SHIP_EXTERIOR}"/>
+									<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.SHIP_EXTERIOR, page: null, pageData: null}"/>
 									<bind name="label" value="toUpperCase(tr('IDS_EXTERIOR'))"/>
 									<bind name="soundSet" value="'main_tab_' + LobbyConstants.SHIP_EXTERIOR"/>
 								</block>
@@ -59660,7 +59693,7 @@
 									</style>
 									<bind name="selected" value="inset == LobbyConstants.SHIP_RESEARCH_TREE &amp;&amp; crewInset != 1"/>
 									<bind name="dispatch" value="'buttonClick'; 'hideCrew'"/>
-									<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.SHIP_RESEARCH_TREE}"/>
+									<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.SHIP_RESEARCH_TREE, page: null, pageData: null}"/>
 									<bind name="label" value="toUpperCase(tr('IDS_RESEARCH'))"/>
 									<bind name="soundSet" value="'main_tab_' + LobbyConstants.SHIP_RESEARCH_TREE"/>
 								</block>
@@ -59703,7 +59736,7 @@
 									</style>
 									<bind name="selected" value="inset == LobbyConstants.PLAYER_PROFILE &amp;&amp; crewInset != 1"/>
 									<bind name="dispatch" value="'buttonClick'; 'hideCrew'"/>
-									<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.PLAYER_PROFILE}"/>
+									<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.PLAYER_PROFILE, page: null, pageData: null}"/>
 									<bind name="label" value="toUpperCase(tr('IDS_PROFILE'))"/>
 									<bind name="soundSet" value="'main_tab_' + LobbyConstants.PLAYER_PROFILE"/>
 								</block>
@@ -59757,7 +59790,7 @@
 									</style>
 									<bind name="selected" value="inset == LobbyConstants.CLAN &amp;&amp; crewInset != 1"/>
 									<bind name="dispatch" value="'buttonClick'; 'hideCrew'"/>
-									<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.CLAN}"/>
+									<bind name="action" value="'buttonClick'; 'changeInset'; {inset: LobbyConstants.CLAN, page: null, pageData: {'url': URL.CLANS_IN_GAME}}"/>
 									<bind name="label" value="clanLabel"/>
 									<bind name="soundSet" value="'main_tab_' + LobbyConstants.CLAN"/>
 								</block>
@@ -59834,6 +59867,11 @@
 				<block>
 					<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
 					<bind name="watchDH" value="'isExternalPlatformClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isExternalPlatformClient"/>
+					<bind name="collectionDH" value="CC.userTask; 'userTaskCollection'"/>
+					<bind name="entityDH" value="'userTaskEntity'; userTaskCollection[0].id"/>
+					<bind name="watchDH" value="'currentUserTaskFlag'; ['userTaskEntity.userTask.evFlagChanged']; userTaskEntity.userTask.flag"/>
+					<bind name="watch" value="'userDoNotWatchTutorial'; ((currentUserTaskFlag &amp; UserTasksFlags.KNOWS_ABOUT_TUTORIAL) == 0)"/>
+					<bind name="watch" value="'showTutorial'; userDoNotWatchTutorial &amp;&amp; (accountLevelInfo.accountLevel &gt;= 4)"/>
 					<styleClass value="$MiddleVAligned"/>
 					<style>
 						<marginLeft value="10px"/>
@@ -59849,13 +59887,20 @@
 							<params>
 								<param name="name" value="ButtonSettings"/>
 							</params>
-							<bind name="event" value="'click'; onButtonMenuClick"/>
+							<bind name="action" value="'click'; 'openMenu'; {showCoach: showTutorial}"/>
 							<bind name="tooltip" value="'SimpleTooltip'; {tooltipText: 'IDS_TOOLTIP_MENU'}"/>
 						</block>
 						<block>
-							<bind name="collectionDH" value="CC.userTask; 'userTaskCollection'"/>
-							<bind name="entityDH" value="'userTaskEntity'; userTaskCollection[0].id"/>
-							<bind name="watchDH" value="'currentUserTaskFlag'; ['userTaskEntity.userTask.evFlagChanged']; userTaskEntity.userTask.flag"/>
+							<style>
+								<position value="absolute"/>
+								<marginLeft value="15px"/>
+								<marginTop value="2px"/>
+								<hitTest value="false"/>
+							</style>
+							<bind name="fade" value="showTutorial; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
+							<block className="icon_sticker_new" type="native"/>
+						</block>
+						<block>
 							<bind name="firstEntityDH" value="'ingamePortalEntity'; CC.ingamePortal"/>
 							<bind name="watchDH" value="'unreadNewsCount'; ['ingamePortalEntity.ingamePortal.evUpdate']; ingamePortalEntity.ingamePortal.unreadNewsCount"/>
 							<block>

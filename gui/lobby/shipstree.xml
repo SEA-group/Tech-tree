@@ -213,10 +213,11 @@
 				<ship shipid='4281219056' x='6' y='9' /> <!--PASD013_Gearing_1945 (T10 USA upgradeable Destroyer) -->
 				<ship shipid='4274960368' x='8' y='9' /> <!--PASC019_Burlington_1944 (T10 USA disabled Cruiser)-->
 				<ship shipid='4278106096' x='10' y='9' /> <!--PASC016_Worcester_1948 (T10 USA disabled Cruiser) -->
+				<ship shipid='3550394352' x='12' y='9' /> <!--PASC710_Salem (T10 USA disabled Cruiser) -->
 
-				<ship shipid='3333371888' x='2' y='10' /> <!--PASB917_Montana_1945 (T10 USA upgradeable Battleship) -->
-				<ship shipid='3335501808' x='0' y='10' /> <!--PASA915_Midway_1945 (T10 USA upgradeable AirCarrier) -->
-				<ship shipid='3337500656' x='6' y='10' /> <!--PASD913_Gearing_1945 (T10 USA upgradeable Destroyer) -->
+				<!--<ship shipid='3333371888' x='2' y='10' /> PASB917_Montana_1945 (T10 USA upgradeable Battleship) -->
+				<!--<ship shipid='3335501808' x='0' y='10' /> PASA915_Midway_1945 (T10 USA upgradeable AirCarrier) -->
+				<!--<ship shipid='3337500656' x='6' y='10' /> PASD913_Gearing_1945 (T10 USA upgradeable Destroyer) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
@@ -865,6 +866,7 @@
 				<ship shipid='3763255248' x='8' y='6' /> <!--PBSC507_Belfast_1959 (T7 United_Kingdom demoWithoutStats Cruiser) -->
 				<ship shipid='3763288016' x='10' y='6' /> <!--PBSB507_Hood (T7 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='3752802256' x='12' y='6' /> <!--PBSB517_Nelson (T7 United_Kingdom demoWithoutStats Battleship) -->
+				<ship shipid='3742316496' x='14' y='6' /> <!--PBSB527_Duke_of_York (T7 United_Kingdom demoWithoutStats Battleship) -->
 
 				<ship shipid='4181669840' x='0' y='7' /> <!--PBSB108_King_George_V (T8 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='4181637072' x='2' y='7' /> <!--PBSC108_Edinburgh (T8 United_Kingdom demoWithoutStats Cruiser) -->
@@ -889,29 +891,33 @@
 		<arrows>
 		</arrows>
 		<ships>
-				<ship shipid='4179539792' x='4' y='9' /> <!--PFSC110_Henri_IV (T10 France special Cruiser) -->
+				<ship shipid='4179539792' x='4' y='9' /> <!--PFSC110_Henri_IV (T10 France upgradeable Cruiser) -->
 
-				<ship shipid='4180588368' x='4' y='8' /> <!--PFSC109_Saint_Louis (T9 France special Cruiser) -->
+				<ship shipid='4180588368' x='4' y='8' /> <!--PFSC109_Saint_Louis (T9 France upgradeable Cruiser) -->
 
-				<ship shipid='4181636944' x='4' y='7' /> <!--PFSC108_Charles_Martel (T8 France special Cruiser) -->
+				<ship shipid='4181669712' x='2' y='7' /> <!--PFSB108_Richelieu (T8 France upgradeable Battleship) -->
+				<ship shipid='4181636944' x='4' y='7' /> <!--PFSC108_Charles_Martel (T8 France upgradeable Cruiser) -->
 
-				<ship shipid='4182685520' x='4' y='6' /> <!--PFSC107_Algerie (T7 France special Cruiser) -->
+				<ship shipid='4182718288' x='2' y='6' /> <!--PFSB107_Lyon (T7 France upgradeable Battleship) -->
+				<ship shipid='4182685520' x='4' y='6' /> <!--PFSC107_Algerie (T7 France upgradeable Cruiser) -->
 
-				<ship shipid='4183734096' x='4' y='5' /> <!--PFSC106_La_Galissonniere (T6 France special Cruiser) -->
+				<ship shipid='4183766864' x='2' y='5' /> <!--PFSB106_Normandie (T6 France upgradeable Battleship) -->
+				<ship shipid='4183734096' x='4' y='5' /> <!--PFSC106_La_Galissonniere (T6 France upgradeable Cruiser) -->
 				<ship shipid='3764336464' x='8' y='5' /> <!--PFSB506_Dunkerque_1940 (T6 France special Battleship) -->
 				<ship shipid='3764303696' x='10' y='5' /> <!--PFSC506_De_Grasse (T6 France special Cruiser) -->
 				<ship shipid='3764270928' x='12' y='5' /> <!--PFSD506_Aigle (T6 France special Destroyer) -->
 
-				<ship shipid='4184782672' x='4' y='4' /> <!--PFSC105_Emile_Bertin (T5 France special Cruiser) -->
+				<ship shipid='4184815440' x='2' y='4' /> <!--PFSB105_Bretagne (T5 France upgradeable Battleship) -->
+				<ship shipid='4184782672' x='4' y='4' /> <!--PFSC105_Emile_Bertin (T5 France upgradeable Cruiser) -->
 				<ship shipid='3660461904' x='8' y='4' /> <!--PFSD605_Cyclone_event (T5 France special Destroyer) -->
 
-				<ship shipid='4185831248' x='4' y='3' /> <!--PFSC104_Duguay_Trouin (T4 France special Cruiser) -->
+				<ship shipid='4185831248' x='4' y='3' /> <!--PFSC104_Duguay_Trouin (T4 France upgradeable Cruiser) -->
 
-				<ship shipid='4186879824' x='4' y='2' /> <!--PFSC103_Friant (T3 France special Cruiser) -->
+				<ship shipid='4186879824' x='4' y='2' /> <!--PFSC103_Friant (T3 France upgradeable Cruiser) -->
 
-				<ship shipid='4187928400' x='4' y='1' /> <!--PFSC102_Jurien (T2 France special Cruiser) -->
+				<ship shipid='4187928400' x='4' y='1' /> <!--PFSC102_Jurien (T2 France upgradeable Cruiser) -->
 
-				<ship shipid='4188976976' x='4' y='0' /> <!--PFSC101_Bougainville (T1 France special Cruiser) -->
+				<ship shipid='4188976976' x='4' y='0' /> <!--PFSC101_Bougainville (T1 France upgradeable Cruiser) -->
 
 		</ships>
 		<types>
@@ -981,6 +987,8 @@
 				<ship shipid='3764303600' x='8' y='5' /> <!-- PISC506_DucadAosta (T6 Italy demoWithoutStats Cruiser) -->
 
 				<ship shipid='3763255024' x='8' y='6' /> <!-- PISC507_Duca_degli_Abruzzi (T7 Italy demoWithoutStats Cruiser) -->
+
+				<ship shipid='3762239216' x='8' y='7' /> <!-- PISB508_Roma (T8 Italy demoWithoutStats Battleship) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
@@ -1012,6 +1020,9 @@
 			<ship shipid='4293145872' x='8' y='0' /> <!--PXSX001_Transylvania (T5 Events unavailable Auxiliary)-->
 	        <!--<ship shipid='4278465808' x='2' y='5' /> PXSX015_Schuka (T11 Events event Auxiliary)-->
 			<ship shipid='3515102480' x='8' y='1' /> <!--PXSX743_Hall_Medway_Queen (T11 Events unavailable Auxiliary)-->
+			<ship shipid='4248057104' x='8' y='2' /> <!--PXSX044_Cimarron (T5 Events unavailable Auxiliary)-->
+			<ship shipid='4247008528' x='8' y='3' /> <!--PXSX045_Liberty (T5 Events unavailable Auxiliary)-->
+
 
 			<ship shipid='4293899536' x='0' y='0' /> <!--PXSA001_Invisible_Air_Enemy_1 (T4 Events event AirCarrier)-->
 			<ship shipid='4292850960' x='0' y='1' /> <!--PXSA002_Invisible_Air_Ally_1 (T4 Events event AirCarrier)-->
