@@ -14179,10 +14179,10 @@
 		<bind name="timeFormat" value="data.rentTime; 'hh:mm dd:MM:yyyy'; 'formattedRentTime'; true"/>
 		<bind name="watch" value="'rentTimeDeltaMod'; ((data.rentTimeDelta &gt;= 0)	? data.rentTimeDelta
 																: -(data.rentTimeDelta))"/>
-		<bind name="watch" value="'deltaDays'; ((rentTimeDeltaMod / 86400) &gt;= 1) ? ((rentTimeDeltaMod - (rentTimeDeltaMod % 86400)) / 86400)
-																: 0"/>
-		<bind name="watch" value="'deltaHours'; (deltaDays &gt;= 1)	? 0
-												: ((rentTimeDeltaMod - (rentTimeDeltaMod % 3600)) / 3600)"/>
+		<bind name="watch" value="'deltaDays'; ((rentTimeDeltaMod / 86400) &gt;= 1) 	? ((rentTimeDeltaMod - (rentTimeDeltaMod % 86400)) / 86400)
+																	: 0"/>
+		<bind name="watch" value="'deltaHours'; (((rentTimeDeltaMod - (deltaDays * 86400)) - (rentTimeDeltaMod % 3600)) / 3600)"/>
+		<bind name="watch" value="'deltaMinutes'; (((rentTimeDeltaMod - (deltaDays * 86400) - (deltaHours * 3600)) - (rentTimeDeltaMod % 60)) / 60)"/>
 		<block>
 			<style>
 				<marginTop value="2px"/>
@@ -14264,15 +14264,13 @@
 								(data.headerIDS == 'LONGED')	? (tr('IDS_RENT_PERIOD_LONGED_ON') + tr('IDS_COLON'))
 																: (tr('IDS_RENT_PERIOD') + tr('IDS_COLON'))"/>
 					</block>
-					<block type="text">
-						<bind name="visible" value="(data.headerIDS == 'STARTED')"/>
-						<styleClass value="$AlignRight"/>
-						<styleClass value="$TextSecondary"/>
-						<bind name="text" value="formattedRentTime"/>
-					</block>
 					<block>
-						<bind name="visible" value="(data.headerIDS != 'STARTED')"/>
 						<styleClass value="$AlignRight"/>
+						<block type="text">
+							<bind name="visible" value="(data.headerIDS == 'STARTED')"/>
+							<styleClass value="$TextSecondary"/>
+							<bind name="text" value="formattedRentTime"/>
+						</block>
 						<block>
 							<bind name="visible" value="(deltaDays != 0)"/>
 							<block type="text">
@@ -14307,6 +14305,26 @@
 								<flow value="horizontal"/>
 							</style>
 						</block>
+						<block>
+							<bind name="visible" value="(deltaMinutes != 0) &amp;&amp; (deltaDays == 0)"/>
+							<block type="text">
+								<styleClass value="$TextSecondary"/>
+								<bind name="text" value="deltaMinutes"/>
+							</block>
+							<block type="text">
+								<style>
+									<marginLeft value="-2px"/>
+								</style>
+								<styleClass value="$TextSecondary"/>
+								<bind name="pluralText" value="'IDS_PL_MINUTE_FULL_ACC'; deltaMinutes"/>
+							</block>
+							<style>
+								<flow value="horizontal"/>
+							</style>
+						</block>
+						<style>
+							<flow value="horizontal"/>
+						</style>
 					</block>
 					<style>
 						<flow value="horizontal"/>
@@ -26402,8 +26420,8 @@
 		<block type="text">
 			<style>
 				<marginLeft value="-3px"/>
+				<marginTop value="5px"/>
 			</style>
-			<styleClass value="$MiddleVAligned"/>
 			<styleClass value="$TextSecondaryBold"/>
 			<bind name="class" value="'$FontSizeNano'"/>
 			<bind name="text" value="_rankId &gt; 1 ? _rankId - 1 : ''"/>
@@ -29519,13 +29537,39 @@
 																									_textAlign: 'left', _leading: -2}"/>
 				</block>
 				<block>
+					<bind name="visible" value="showHalloweenBanner == true"/>
 					<bind name="firstEntityDH" value="'pveStateEntity'; CC.pveState"/>
 					<bind name="watchDH" value="'activeOperationId'; ['pveStateEntity.pveState.evStateUpdated']; pveStateEntity.pveState.activeOperation"/>
 					<bind name="primaryEntityDH" value="'operationEntity'; CC.operation; activeOperationId"/>
+					<bind name="watch" value="'showHalloweenBanner'; realmConstants.eventLootboxUIAvailable &amp;&amp; (operationEntity.operation.gpName == 'PCVO006_EV_HL_17_e02_Halloween_2017')"/>
 					<style>
 						<marginTop value="32px"/>
 					</style>
-					<bind name="instance" value="'EventLootboxBanner'; realmConstants.eventLootboxUIAvailable &amp;&amp; (operationEntity.operation.gpName == 'PCVO006_EV_HL_17_e02_Halloween_2017') ? {} : null"/>
+					<bind name="instance" value="'EventLootboxBanner'; showHalloweenBanner 	? 	{ 	_backgroundImage	: 'url:../service_kit/event_lootbox_hint_header/hw2017_lootboxes.png',
+																					_showAnimation		: true,
+																					_bannerText			: 'IDS_PURCHASE_EVENT_LOOTBOX_MODAL_HEADER',
+																					_request 			: 'webBrowser',
+																					_requestParams 		: { url: URL.EVENT_LOOTBOX_INFO_IN_GAME },
+																					_instructionText 	: 'IDS_EVENT_LOOTBOX_TOOLTIP'
+																				} : null"/>
+				</block>
+				<block>
+					<bind name="visible" value="showNYBanner == true"/>
+					<bind name="primaryEntityDH" value="'webEventEntity'; CC.webEvent; 'SantaEvent'"/>
+					<bind name="watchDH" value="'endTS'; ['webEventEntity.webEvent.evUpdate']; webEventEntity.webEvent.endTS"/>
+					<bind name="countdown" value="endTS; 'eventEndTime'; 'hh:mm:ss'; 'timeoutEvent'"/>
+					<bind name="watch" value="'showNYBanner'; true"/>
+					<bind name="catch" value="'timeoutEvent'; { showNYBanner: false }"/>
+					<style>
+						<marginTop value="32px"/>
+					</style>
+					<bind name="instance" value="'EventLootboxBanner'; 	showNYBanner 	?  {	_backgroundImage	: 'url:../service_kit/event_lootbox_hint_header/ny2018_lootboxes.png',
+																				_showAnimation		: true,
+																				_bannerText			: 'IDS_NEW_YEAR_LOOTBOX_BANNER',
+																				_request 			: 'webBrowser',
+																				_requestParams 		: { url: URL.EVENT_NY2018_INFO_IN_GAME },
+																				_instructionText 	: 'IDS_EVENT_LOOTBOX_TOOLTIP'
+																			} : null"/>
 				</block>
 			</block>
 			<bind name="firstEntityDH" value="'lootboxEntity'; CC.lootboxConfigComponent"/>
@@ -30052,11 +30096,13 @@
 			<width value="339px"/>
 			<height value="176px"/>
 		</style>
+		<bind name="tooltip" value="'MouseInstructionTooltip'; { _mouseInstructions: [{_type: 'left', _instructionText: _instructionText}], _maxWidth: 230}"/>
 		<block>
 			<styleClass value="$Fullsize"/>
-			<bind name="style" value="'backgroundImage'; 'url:../service_kit/event_lootbox_hint_header/hw2017_lootboxes.png'"/>
+			<bind name="style" value="'backgroundImage'; _backgroundImage"/>
 		</block>
 		<block>
+			<bind name="visible" value="_showAnimation == true"/>
 			<style>
 				<position value="absolute"/>
 				<left value="190px"/>
@@ -30073,24 +30119,25 @@
 			</block>
 		</block>
 		<block type="text">
-			<styleClass value="$TextDefaultBold19NM"/>
+			<styleClass value="$TextDefaultBold21NM"/>
+			<bind name="class" value="'$FontColorDefault'"/>
 			<style>
 				<position value="absolute"/>
 				<marginTop value="24px"/>
 				<marginLeft value="24px"/>
+				<leading value="-4"/>
 			</style>
-			<bind name="text" value="toUpperCase(tr('IDS_PURCHASE_EVENT_LOOTBOX_MODAL_HEADER'))"/>
+			<bind name="text" value="toUpperCase(tr(_bannerText))"/>
 		</block>
 		<block>
 			<styleClass value="$FullsizeAbsolute"/>
 			<block className="white_panel_gradient" type="native">
-				<bind name="controller" value="lesta.unbound.controls.UbInteractiveController; null; 'event_banner_'"/>
 				<styleClass value="$FullsizeAbsolute"/>
 				<bind name="transition" value="event_banner_rollOver; 0.15; {alpha: 0}; {alpha: 0.3}"/>
-				<bind name="request" value="'click'; 'webBrowser'; {url: URL.EVENT_LOOTBOX_INFO_IN_GAME}"/>
+				<bind name="controller" value="lesta.unbound.controls.UbInteractiveController; null; 'event_banner_'"/>
+				<bind name="request" value="'click'; _request ? _request : null; _requestParams ? _requestParams : {}"/>
 			</block>
 		</block>
-		<bind name="tooltip" value="'MouseInstructionTooltip'; {_mouseInstructions: [{_type: 'left', _instructionText: 'IDS_EVENT_LOOTBOX_TOOLTIP'}], _maxWidth: 230}"/>
 	</block>
 	<block className="ClanInset">
 		<bind name="name" value="'ClansHomePage'"/>
@@ -30389,7 +30436,11 @@
 					<marginTop value="3px"/>
 				</style>
 				<styleClass value="$MiddleAligned"/>
+				<bind name="firstEntityDH" value="'lootboxEntity'; CC.lootboxConfigComponent"/>
+				<bind name="watchDH" value="'activeAnimationLootbox';	['lootboxEntity.lootboxAnimationState.evUpdate']; lootboxEntity.lootboxAnimationState.active"/>
+				<bind name="style" value="'hitTest'; activeAnimationLootbox ? false : true"/>
 				<block className="button_default_small" type="native">
+					<bind name="style" value="'colorMatrixFilter'; activeAnimationLootbox ? '0 -80 0 -20' : '0 0 0 0'"/>
 					<style>
 						<width value="1px"/>
 					</style>
@@ -30495,10 +30546,13 @@
 				<height value="30px"/>
 			</style>
 			<block>
+				<bind name="firstEntityDH" value="'lootboxEntity'; CC.lootboxConfigComponent"/>
+				<bind name="watchDH" value="'activeAnimationLootbox';	['lootboxEntity.lootboxAnimationState.evUpdate']; lootboxEntity.lootboxAnimationState.active"/>
 				<style>
 					<marginTop value="3px"/>
 				</style>
 				<styleClass value="$MiddleAligned"/>
+				<bind name="style" value="'hitTest'; activeAnimationLootbox ? false : true"/>
 				<bind name="transition" value="isUserActionDone; 0.15; {alpha: 1}; {alpha: 0}"/>
 				<block className="button_default_small" type="native">
 					<bind name="name" value="'acceptInvitation'"/>
@@ -30507,6 +30561,7 @@
 						<width value="1px"/>
 					</style>
 					<bind name="style" value="'width'; data.idInGroup == 3 ? '180px' : '110px'"/>
+					<bind name="style" value="'colorMatrixFilter'; activeAnimationLootbox ? '0 -80 0 -20' : '0 0 0 0'"/>
 					<bind name="label" value="data.idInGroup == 3 	? toUpperCase(tr('IDS_GOTO_INVITATIONS'))
 													: toUpperCase(tr('IDS_ACCEPT'))"/>
 					<bind name="dispatch" value="'mouseDown'; 'dragDisabledDown'"/>
@@ -34350,7 +34405,7 @@
 			<bind name="watch" value="'carouselRows';		(userPrefs.curRowCountIndex == null)	? 0 : userPrefs.curRowCountIndex"/>
 			<bind name="watch" value="'isSmallCarouselView';	(userPrefs.isSmallCarouselView == null) ? false : userPrefs.isSmallCarouselView"/>
 			<bind name="style" value="'height'; isSmallCarouselView	?	(carouselRows == 1) ? '266px' :
-														(carouselRows == 2) ? '329px'
+														(carouselRows == 2) ? '295px'
 																			: '203px'
 													: '203px'"/>
 		</block>
@@ -36173,7 +36228,7 @@
 																: 'url:../campaigns/banner/banner_bg_new.png'"/>
 		</block>
 		<block className="white_panel_gradient" type="native">
-			<bind name="transition" value="rollOver &amp;&amp; !(mouseDown); 0.15; {alpha: 0}; {alpha: 0.7}"/>
+			<bind name="transition" value="rollOver &amp;&amp; !(mouseDown); 0.15; {alpha: 0}; {alpha: 0.5}"/>
 			<styleClass value="$FullsizeAbsolute"/>
 		</block>
 		<block className="quest_thumb_title" type="native">
@@ -38729,56 +38784,52 @@
 		</block>
 	</block>
 	<block className="PlayerNameAndClanTag">
-		<bind name="style" value="'width'; 	_blockWidth 	? _blockWidth 	: '100%'"/>
-		<bind name="style" value="'height'; 	_blockHeight 	? _blockHeight 	: '28px'"/>
-		<style>
-			<hitTest value="false"/>
-		</style>
-		<bind name="watch" value="'haveClanTag'; (_clanTag != null) &amp;&amp; (_clanTag != '') &amp;&amp; (_clanTag != 'undefined')"/>
-		<bind name="watch" value="'isColoredClanTag'; haveClanTag &amp;&amp; (_color != null &amp;&amp; _color != '' &amp;&amp; _color != 'undefined' &amp;&amp; _color != '0xffundefined')"/>
+		<bind name="watch" value="'clanTagColor'; ('0xff' + _clanTagColor)"/>
+		<bind name="watch" value="'haveClanTag'; _clanTag != null &amp;&amp;
+								_clanTag != ''"/>
+		<bind name="watch" value="'isColoredClanTag'; (haveClanTag &amp;&amp; !_noClanTagColor &amp;&amp; _clanTagColor != null)"/>
 		<bind name="watch" value="'playerName'; 	isColoredClanTag 	?	_playerName :
 								haveClanTag			?	('[' + _clanTag + ']' + _playerName)
-													: 	_playerName"/>
+													: _playerName"/>
 		<bind name="watch" value="'fontColor'; 	_isSelf 	? 	_ttkStatus 			? '$FontColorTTK' :
 												_tkStatus 			? '$FontColorTeamkiller'
 																	: '$FontColorGolden':
-								_isAlive 	?  	_ttkStatus 			? '$FontColorTTK' :
+								!_isDead 	?  	_ttkStatus 			? '$FontColorTTK' :
 												_tkStatus 			? '$FontColorTeamkiller':
 												_isInSameDivision 	? '$FontColorGolden' 
 																	: '$FontColorWhite'
 											: '$FontColorAlmostBlack'"/>
-		<block>
-			<styleClass value="$MiddleVAligned"/>
+		<style>
+			<hitTest value="false"/>
+			<flow value="horizontal"/>
+			<width value="100%f"/>
+		</style>
+		<block type="text">
 			<style>
-				<position value="absolute"/>
+				<marginLeft value="3px"/>
 			</style>
-			<bind name="style" value="'right'; _right"/>
-			<block>
-				<bind name="visible" value="(isColoredClanTag == true)"/>
-				<block type="text">
-					<styleClass value="$TextDefaultNM"/>
-					<bind name="style" value="'fontSize'; _fontSize ? _fontSize : 15"/>
-					<bind name="class" value="_isSelf ? '$Bold' : '$None'"/>
-					<bind name="style" value="'textColor'; _color"/>
-					<bind name="text" value="tr('[' + _clanTag + ']')"/>
-				</block>
-			</block>
-			<block type="text">
-				<style>
-					<multiline value="false"/>
-					<marginLeft value="3px"/>
-				</style>
-				<bind name="style" value="'maxWidth'; _playerNameMaxWidth ? _playerNameMaxWidth : 200"/>
-				<styleClass value="$TextDefaultNM"/>
-				<bind name="style" value="'fontSize'; _fontSize ? _fontSize : 15"/>
-				<bind name="class" value="_isSelf 	? '$Bold' : '$None'"/>
-				<bind name="class" value="(!(_isAlive) &amp;&amp; !(_isSelf)) ? '$FontDropShadowWhite' : '$None'"/>
-				<bind name="class" value="fontColor"/>
-				<bind name="text" value="playerName"/>
-			</block>
+			<bind name="visible" value="isColoredClanTag == true"/>
 			<style>
-				<flow value="horizontal"/>
+				<multiline value="false"/>
 			</style>
+			<styleClass value="$TextDefaultNM"/>
+			<bind name="style" value="'fontSize'; _fontSize ? _fontSize : 15"/>
+			<bind name="class" value="_isSelf ? '$Bold' : '$None'"/>
+			<bind name="style" value="'textColor'; clanTagColor"/>
+			<bind name="text" value="tr('[' + _clanTag + ']')"/>
+		</block>
+		<block type="text">
+			<style>
+				<marginLeft value="3px"/>
+				<multiline value="false"/>
+				<width value="100%f"/>
+			</style>
+			<styleClass value="$TextDefaultNM"/>
+			<bind name="style" value="'fontSize'; _fontSize ? _fontSize : 15"/>
+			<bind name="class" value="_isSelf 	? '$Bold' : '$None'"/>
+			<bind name="class" value="(_isDead &amp;&amp; !_isSelf ? '$FontDropShadowWhite' : '$None')"/>
+			<bind name="class" value="fontColor"/>
+			<bind name="text" value="playerName"/>
 		</block>
 	</block>
 	<block className="PlayerRanks">

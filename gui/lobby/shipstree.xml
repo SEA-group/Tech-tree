@@ -891,12 +891,16 @@
 		<arrows>
 		</arrows>
 		<ships>
+
+				<ship shipid='4179572560' x='2' y='9' /> <!--PFSB110_France (T10 France upgradeable Battleship) -->
 				<ship shipid='4179539792' x='4' y='9' /> <!--PFSC110_Henri_IV (T10 France upgradeable Cruiser) -->
 
+				<ship shipid='4180621136' x='2' y='8' /> <!--PFSB109_Alsace (T9 France upgradeable Battleship) -->
 				<ship shipid='4180588368' x='4' y='8' /> <!--PFSC109_Saint_Louis (T9 France upgradeable Cruiser) -->
 
 				<ship shipid='4181669712' x='2' y='7' /> <!--PFSB108_Richelieu (T8 France upgradeable Battleship) -->
 				<ship shipid='4181636944' x='4' y='7' /> <!--PFSC108_Charles_Martel (T8 France upgradeable Cruiser) -->
+				<ship shipid='3762239312' x='8' y='7' /> <!--PFSB508_Gascogne (T8 France special Battleship) -->
 
 				<ship shipid='4182718288' x='2' y='6' /> <!--PFSB107_Lyon (T7 France upgradeable Battleship) -->
 				<ship shipid='4182685520' x='4' y='6' /> <!--PFSC107_Algerie (T7 France upgradeable Cruiser) -->
@@ -911,8 +915,10 @@
 				<ship shipid='4184782672' x='4' y='4' /> <!--PFSC105_Emile_Bertin (T5 France upgradeable Cruiser) -->
 				<ship shipid='3660461904' x='8' y='4' /> <!--PFSD605_Cyclone_event (T5 France special Destroyer) -->
 
+				<ship shipid='4185864016' x='2' y='3' /> <!--PFSB104_Courbet (T4 France upgradeable Battleship) -->
 				<ship shipid='4185831248' x='4' y='3' /> <!--PFSC104_Duguay_Trouin (T4 France upgradeable Cruiser) -->
 
+				<ship shipid='4186912592' x='2' y='2' /> <!--PFSB103_Turenne (T3 France upgradeable Battleship) -->
 				<ship shipid='4186879824' x='4' y='2' /> <!--PFSC103_Friant (T3 France upgradeable Cruiser) -->
 
 				<ship shipid='4187928400' x='4' y='1' /> <!--PFSC102_Jurien (T2 France upgradeable Cruiser) -->
