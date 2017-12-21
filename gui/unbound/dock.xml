@@ -29554,12 +29554,17 @@
 																				} : null"/>
 				</block>
 				<block>
-					<bind name="visible" value="showNYBanner == true"/>
+					<bind name="visible" value="showNYBanner"/>
+					<bind name="watch" value="'showNYBanner'; (startShowBanner == true) &amp;&amp; (endShowBanner == false)"/>
 					<bind name="primaryEntityDH" value="'webEventEntity'; CC.webEvent; 'SantaEvent'"/>
+					<bind name="watchDH" value="'startTS'; ['webEventEntity.webEvent.evUpdate']; webEventEntity.webEvent.startTS"/>
 					<bind name="watchDH" value="'endTS'; ['webEventEntity.webEvent.evUpdate']; webEventEntity.webEvent.endTS"/>
-					<bind name="countdown" value="endTS; 'eventEndTime'; 'hh:mm:ss'; 'timeoutEvent'"/>
-					<bind name="watch" value="'showNYBanner'; true"/>
-					<bind name="catch" value="'timeoutEvent'; { showNYBanner: false }"/>
+					<bind name="var" value="{startShowBanner: false}"/>
+					<bind name="var" value="{endShowBanner: false}"/>
+					<bind name="countdown" value="startTS; 'startTime'; 'hh:mm:ss'; 'startShowBannerEvent'"/>
+					<bind name="catch" value="'startShowBannerEvent'; { startShowBanner: true }"/>
+					<bind name="countdown" value="endTS; 'endTime'; 'hh:mm:ss'; 'endShowBannerEvent'"/>
+					<bind name="catch" value="'endShowBannerEvent'; { endShowBanner: true }"/>
 					<style>
 						<marginTop value="32px"/>
 					</style>
