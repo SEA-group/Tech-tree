@@ -179,6 +179,7 @@
 				<!-- <ship shipid='4286560240' x='8' y='5' /> PASA008_Saipan_1943 (T6 USA disabled AirCarrier) -->
 				<!--<ship shipid='3345987568' x='8' y='5' /> PASA905_Essex_1945_Halloween (T5 USA disabled AirCarrier) -->
 				<ship shipid='3764336624' x='8' y='6' /> <!--PASB506_Arizona_1941 (T6 USA special Battleship) -->
+				<ship shipid='3764271088' x='10' y='6' /> <!--PASD506_Monaghan (T6 USA special Destroyer) -->
 
 				<ship shipid='4284463088' x='0' y='6' /> <!--PASA010_Ranger_1944 (T7 USA upgradeable AirCarrier) -->
 				<ship shipid='4286527472' x='2' y='6' /> <!--PASB008_Colorado_1945 (T7 USA upgradeable Battleship) -->
@@ -601,7 +602,9 @@
 				<ship shipid='4281284304' x='2' y='7' /> <!--PJSB013_Amagi_1942 (T8 Japan upgradeable Battleship) -->
 				<ship shipid='4282365648' x='0' y='7' /> <!--PJSA012_Zuikaku_1944 (T8 Japan upgradeable AirCarrier) -->
 				<ship shipid='4285445840' x='4' y='7' /> <!--PJSC009_Mogami_1935 (T8 Japan upgradeable Cruiser) -->
-				<ship shipid='4255037136' x='10' y='7' /> <!--PJSC038_Atago_1944 (T8 Japan premium Cruiser) -->				
+				<ship shipid='4255037136' x='10' y='7' /> <!--PJSC038_Atago_1944 (T8 Japan premium Cruiser) -->
+				<ship shipid='3751687888' x='10' y='7' /> <!--PJSD518_Asashio (T8 Japan premium Destroyer) -->
+						
 				<ship shipid='4280202960' x='12' y='7' /> <!-- PJSC014_Kitakami_1945 (T8 Japan disabled Cruiser) -->
 				<ship shipid='4076746448' x='6' y='7' /> <!--PJSD208_Kagero (T8 Japan upgradeable Destroyer) -->
 				<ship shipid='4181604048' x='8' y='7' /> <!--PJSD108_Akizuki (T8 Japan upgradeable Destroyer) -->
@@ -867,6 +870,7 @@
 				<ship shipid='3763288016' x='10' y='6' /> <!--PBSB507_Hood (T7 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='3752802256' x='12' y='6' /> <!--PBSB517_Nelson (T7 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='3742316496' x='14' y='6' /> <!--PBSB527_Duke_of_York (T7 United_Kingdom demoWithoutStats Battleship) -->
+				<ship shipid='3763222480' x='16' y='6' /> <!--PBSD507_Cossack (T7 United_Kingdom demoWithoutStats Destroyer) -->
 
 				<ship shipid='4181669840' x='0' y='7' /> <!--PBSB108_King_George_V (T8 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='4181637072' x='2' y='7' /> <!--PBSC108_Edinburgh (T8 United_Kingdom demoWithoutStats Cruiser) -->
