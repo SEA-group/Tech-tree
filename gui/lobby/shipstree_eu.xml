@@ -603,12 +603,11 @@
 				<ship shipid='4282365648' x='0' y='7' /> <!--PJSA012_Zuikaku_1944 (T8 Japan upgradeable AirCarrier) -->
 				<ship shipid='4285445840' x='4' y='7' /> <!--PJSC009_Mogami_1935 (T8 Japan upgradeable Cruiser) -->
 				<ship shipid='4255037136' x='10' y='7' /> <!--PJSC038_Atago_1944 (T8 Japan premium Cruiser) -->
-				<ship shipid='3751687888' x='10' y='7' /> <!--PJSD518_Asashio (T8 Japan premium Destroyer) -->
-						
 				<ship shipid='4280202960' x='12' y='7' /> <!-- PJSC014_Kitakami_1945 (T8 Japan disabled Cruiser) -->
 				<ship shipid='4076746448' x='6' y='7' /> <!--PJSD208_Kagero (T8 Japan upgradeable Destroyer) -->
 				<ship shipid='4181604048' x='8' y='7' /> <!--PJSD108_Akizuki (T8 Japan upgradeable Destroyer) -->
 				<ship shipid='3762239184' x='14' y='7' /> <!--PJSB508_Kii (T8 Japan demoWithoutStats Battleship) -->
+				<ship shipid='3751687888' x='16' y='7' /> <!--PJSD518_Asashio (T8 Japan premium Destroyer) -->
 
 				<ship shipid='4272895696' x='2' y='8' /> <!--PJSB021_Izumo_1938 (T9 Japan upgradeable Battleship) -->
 				<ship shipid='4279219920' x='0' y='8' /> <!--PJSA015_Taiho_1944 (T9 Japan upgradeable AirCarrier) -->
