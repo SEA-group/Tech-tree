@@ -178,8 +178,8 @@
 				<!--<ship shipid='4287903728' x='10' y='5' /> PASX006_Cimarron_invisible (T5 USA unavailable Auxiliary) -->
 				<!-- <ship shipid='4286560240' x='8' y='5' /> PASA008_Saipan_1943 (T6 USA disabled AirCarrier) -->
 				<!--<ship shipid='3345987568' x='8' y='5' /> PASA905_Essex_1945_Halloween (T5 USA disabled AirCarrier) -->
-				<ship shipid='3764336624' x='8' y='6' /> <!--PASB506_Arizona_1941 (T6 USA special Battleship) -->
-				<ship shipid='3764271088' x='10' y='6' /> <!--PASD506_Monaghan (T6 USA special Destroyer) -->
+				<ship shipid='3764336624' x='8' y='5' /> <!--PASB506_Arizona_1941 (T6 USA special Battleship) -->
+				<ship shipid='3764271088' x='10' y='5' /> <!--PASD506_Monaghan (T6 USA special Destroyer) -->
 
 				<ship shipid='4284463088' x='0' y='6' /> <!--PASA010_Ranger_1944 (T7 USA upgradeable AirCarrier) -->
 				<ship shipid='4286527472' x='2' y='6' /> <!--PASB008_Colorado_1945 (T7 USA upgradeable Battleship) -->
