@@ -18984,6 +18984,20 @@
 		<bind name="actionIsDisplay" value="'setChannelChatBoxIsDisplay'; {entityId: channelEntityId}"/>
 		<bind name="draggableWindow" value="'chatBoxDragZone'; 'chatBoxPosition'; channelEntity.channel.channelId"/>
 		<bind name="appear" value="'addedToStage'; 0.3; 0; {alpha: 0}; {alpha: 1}"/>
+		<bind name="collectionDH" value="CC.userPrefs; 'userPrefsCollection'"/>
+		<bind name="entityDH" value="'userPrefsEntity'; userPrefsCollection[0].id"/>
+		<bind name="watchDH" value="'userPrefs'; ['userPrefsEntity.userPrefs.evUserPrefsChanged']; userPrefsEntity.userPrefs.userPrefs"/>
+		<bind name="stageSize"/>
+		<bind name="watch" value="'subKey'; channelEntity.channel.channelId"/>
+		<bind name="watch" value="'chatBoxPositionX';	(userPrefs.chatBoxPositionX &amp;&amp; userPrefs.chatBoxPositionX[subKey])		?	userPrefs.chatBoxPositionX[subKey]	: undefined"/>
+		<bind name="watch" value="'chatBoxPositionY';	(userPrefs.chatBoxPositionY &amp;&amp; userPrefs.chatBoxPositionY[subKey])		?	userPrefs.chatBoxPositionY[subKey]	: undefined"/>
+		<bind name="watch" value="'dragPositionsWasSet'; (userPrefs.chatBoxPositionX &amp;&amp; userPrefs.chatBoxPositionX[subKey]) &amp;&amp; (userPrefs.chatBoxPositionY &amp;&amp; userPrefs.chatBoxPositionY[subKey])"/>
+		<bind name="changeDispatch" value="chatBoxPositionX &amp;&amp; dragPositionsWasSet;	'chatBoxPositionXchanged'; {}; true"/>
+		<bind name="changeDispatch" value="chatBoxPositionY &amp;&amp; dragPositionsWasSet;	'chatBoxPositionYchanged'; {}; true"/>
+		<bind name="action" value="'chatBoxPositionXchanged' ; 'setUserPref' ; {value : chatBoxPositionX, name : 'chatBoxPositionX', subName: subKey}"/>
+		<bind name="action" value="'chatBoxPositionYchanged' ; 'setUserPref' ; {value : chatBoxPositionY, name : 'chatBoxPositionY', subName: subKey}"/>
+		<bind name="left" value="chatBoxPositionX"/>
+		<bind name="top" value="chatBoxPositionY"/>
 		<bind name="var" value="{isEditing: false}"/>
 		<bind name="catch" value="'chatChannelRenameStart';		{isEditing : true}"/>
 		<bind name="catch" value="'chatChannelRenameCancelled';	{isEditing : false}"/>
@@ -30369,6 +30383,7 @@
 		<bind name="stageSize"/>
 		<bind name="watch" value="'IMPositionX';	(userPrefs.IMPositionX &amp;&amp; userPrefs.IMPositionX.IM)		?	userPrefs.IMPositionX.IM	:	stageWidth*0.6"/>
 		<bind name="watch" value="'IMPositionY';	(userPrefs.IMPositionY &amp;&amp; userPrefs.IMPositionY.IM)		?	userPrefs.IMPositionY.IM	:	stageHeight*0.15"/>
+		<bind name="watch" value="'dragPositionsWasSet'; (userPrefs.IMPositionX &amp;&amp; userPrefs.IMPositionX.IM) &amp;&amp; (userPrefs.IMPositionY &amp;&amp; userPrefs.IMPositionY.IM)"/>
 		<bind name="changeDispatch" value="IMPositionX;	'IMPositionXchanged'"/>
 		<bind name="changeDispatch" value="IMPositionY;	'IMPositionYchanged'"/>
 		<bind name="action" value="'IMPositionXchanged' ; 'setUserPref' ; {value : IMPositionX, name : 'IMPositionX', subName: 'IM'}"/>
