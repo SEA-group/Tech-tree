@@ -373,6 +373,7 @@
 				<ship shipid='3762206512' x='10' y='7' /> <!--PGSC508_Prinz_Eugen (T8 Germany demoWithoutStats Cruiser) -->
 				<ship shipid='4181604144' x='6' y='7' /> <!--PGSD108_Z_23 (T8 Germany demoWithoutStats Destroyer) -->
 				<ship shipid='3762272048' x='12' y='7' /> <!--PGSA508_Graf_Zeppelin (T8 Germany demoWithoutStats AirCarrier) -->
+				<ship shipid='3761223472' x='14' y='7' /> <!--PGSA509_Graf_Zeppelin_I (T8 Germany demoWithoutStats AirCarrier) -->
 
 				<ship shipid='4180588336' x='4' y='8' /> <!--PGSC109_Roon (T9 Germany upgradeable Cruiser) -->
 				<ship shipid='4180621104' x='2' y='8' /><!--PGSB109_Friedrich_der_Grosse (T9 Germany upgradeable Battleship) -->
