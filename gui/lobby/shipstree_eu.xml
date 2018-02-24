@@ -373,7 +373,8 @@
 				<ship shipid='3762206512' x='10' y='7' /> <!--PGSC508_Prinz_Eugen (T8 Germany demoWithoutStats Cruiser) -->
 				<ship shipid='4181604144' x='6' y='7' /> <!--PGSD108_Z_23 (T8 Germany demoWithoutStats Destroyer) -->
 				<ship shipid='3762272048' x='12' y='7' /> <!--PGSA508_Graf_Zeppelin (T8 Germany demoWithoutStats AirCarrier) -->
-				<ship shipid='3761223472' x='14' y='7' /> <!--PGSA509_Graf_Zeppelin_I (T8 Germany demoWithoutStats AirCarrier) -->
+				<ship shipid='3762173744' x='14' y='7' /> <!--PGSD508_Z_39 (T8 Germany demoWithoutStats Destroyer) -->
+				<!--<ship shipid='3761223472' x='14' y='7' /> PGSA509_Graf_Zeppelin_I (T8 Germany demoWithoutStats AirCarrier) -->
 
 				<ship shipid='4180588336' x='4' y='8' /> <!--PGSC109_Roon (T9 Germany upgradeable Cruiser) -->
 				<ship shipid='4180621104' x='2' y='8' /><!--PGSB109_Friedrich_der_Grosse (T9 Germany upgradeable Battleship) -->
@@ -785,6 +786,7 @@
 				<ship shipid='4186846672' x='6' y='2' /> <!--PRSD103_Derzky (T3 Russia upgradeable Destroyer) -->
 				<ship shipid='4293834192' x='10' y='2' /> <!--PRSC001_Avrora_1917 (T3 Russia premium Cruiser) -->
 				<ship shipid='3767449040' x='12' y='2' /> <!--PRSC503_Oleg (T3 Russia demoWithoutStats Cruiser) -->
+				<ship shipid='3756963280' x='14' y='2' /> <!--PRSC513_Varyag (T3 Russia demoWithoutStats Cruiser) -->
 
 				<!--<ship shipid='4185798096' x='6' y='3' /> PRSD104_Izyaslav (T4 Russia upgradeable Destroyer) -->
 				<ship shipid='4185830864' x='4' y='3' /> <!--PRSC104_Svetlana (T4 Russia event Cruiser) -->
@@ -822,6 +824,7 @@
 				<ship shipid='4180587984' x='4' y='8' /> <!--PRSC109_Dmitry_Donskoy (T9 Russia event Cruiser) -->
 				<ship shipid='3865982416' x='6' y='8' /> <!--PRSD409_Pr_20i_Tashkent (T9 Russia demoWithoutStats Destroyer) -->
 				<ship shipid='4182652368' x='8' y='8' /> <!--PRSD107_Pr_35_Udaloy (T9 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3761157584' x='10' y='8' /> <!--PRSC509_Kronshtadt (T9 Russia demoWithoutStats Cruiser) -->
 
 				<!--<ship shipid='4179506640' x='6' y='9' /> PRSD110_Pr_24_Khabarovsk (T10 Russia upgradeable Destroyer) -->
 				<ship shipid='4179539408' x='4' y='9' /> <!--PRSC110_Pr_66_Moskva (T10 Russia event Cruiser) --> 
