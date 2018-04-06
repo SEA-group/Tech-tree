@@ -136,92 +136,97 @@
 		</arrows>
 		<ships>
 				<ship shipid='4293834736' x='4' y='0' /> <!--PASC001_Erie_1936 (T1 USA start Cruiser) -->
-				<!-- <ship shipid='4293146608' x='10' y='0' /> Cimarron (T5 USA unavailable Auxiliary) -->
-				<!-- <ship shipid='3451828208' x='8' y='0' /> PASC804_FALSE_ENEMY_Erie_1936 (T1 USA unavailable Cruiser) -->			
-				<!-- <ship shipid='3450779632' x='10' y='0' /> PASC805_FALSE_ENEMY_Erie_1936 (T1 USA unavailable Cruiser) -->
+				<!-- <ship shipid='4293146608' x='12' y='0' /> Cimarron (T5 USA unavailable Auxiliary) -->
+				<!-- <ship shipid='3451828208' x='10' y='0' /> PASC804_FALSE_ENEMY_Erie_1936 (T1 USA unavailable Cruiser) -->			
+				<!-- <ship shipid='3450779632' x='12' y='0' /> PASC805_FALSE_ENEMY_Erie_1936 (T1 USA unavailable Cruiser) -->
 
-				<ship shipid='4292753392' x='6' y='1' /> <!--PASD002_Sampson_1917 (T2 USA upgradeable Destroyer) -->
+				<ship shipid='4292753392' x='8' y='1' /> <!--PASD002_Sampson_1917 (T2 USA upgradeable Destroyer) -->
 				<ship shipid='4292786160' x='4' y='1' /> <!--PASC002_Chester_1908 (T2 USA upgradeable Cruiser) -->
-				<ship shipid='4291737584' x='8' y='1' /> <!--PASC003_Albany_1898 (T2 USA special Cruiser) -->
-				<ship shipid='3768465392' x='10' y='1' /> <!--PASD502_Smith (T2 USA special Destroyer) -->
+				<ship shipid='4291737584' x='10' y='1' /> <!--PASC003_Albany_1898 (T2 USA special Cruiser) -->
+				<ship shipid='3768465392' x='12' y='1' /> <!--PASD502_Smith (T2 USA special Destroyer) -->
 
-				<ship shipid='4266538992' x='6' y='2' /> <!--PASD027_Wickes_1918 (T3 USA upgradeable Destroyer) -->
+				<ship shipid='4266538992' x='8' y='2' /> <!--PASD027_Wickes_1918 (T3 USA upgradeable Destroyer) -->
 				<ship shipid='4290689008' x='4' y='2' /> <!--PASC004_St_Louis_1906 (T3 USA upgradeable Cruiser) -->
 				<ship shipid='4293867504' x='2' y='2' /> <!--PASB001_Michigan_1916 (T3 USA upgradeable Battleship) -->
-				<!-- <ship shipid='3453925360' x='10' y='2' /> PASC802_Cimarron_Target (T5 USA unavailable Cruiser) -->
-				<!-- <ship shipid='3455006704' x='8' y='2' /> PASB801_False_Michigan_1916 (T3 USA unavailable Battleship) -->
-				<!--<ship shipid='3453958128' x='8' y='2' /> PASB802_FALSE_ENEMY_Michigan (T3 USA unavailable Battleship) -->
+				<!-- <ship shipid='3453925360' x='12' y='2' /> PASC802_Cimarron_Target (T5 USA unavailable Cruiser) -->
+				<!-- <ship shipid='3455006704' x='10' y='2' /> PASB801_False_Michigan_1916 (T3 USA unavailable Battleship) -->
+				<!--<ship shipid='3453958128' x='10' y='2' /> PASB802_FALSE_ENEMY_Michigan (T3 USA unavailable Battleship) -->
 
 				<ship shipid='4269717488' x='4' y='3' /> <!--PASC024_Phoenix_1917 (T4 USA upgradeable Cruiser) -->
-				<ship shipid='4274927600' x='6' y='3' /> <!--PASD019_Clemson_1920 (T4 USA upgradeable Destroyer) -->
+				<ship shipid='4274927600' x='8' y='3' /> <!--PASD019_Clemson_1920 (T4 USA upgradeable Destroyer) -->
 				<ship shipid='4290721776' x='2' y='3' /> <!--PASB004_Arkansas_1912 (T4 USA upgradeable Battleship) -->
 				<ship shipid='4290754544' x='0' y='3' /> <!--PASA004_Langley_1929 (T4 USA upgradeable AirCarrier) -->
-				<ship shipid='4281284592' x='8' y='3' /> <!--PASB013_Arkansas_1912 (T4 USA special Battleship) -->
-				<!--<ship shipid='3343824880' x='10' y='3' /> PASC907_Des_Moines_1948_Halloween (T4 USA disabled Cruiser) -->			
-				<!-- <ship shipid='3450779632' x='12' y='3' /> PASD801_FALSE_ENEMY_Sampson (T4 USA unavailable Destroyer) -->
+				<ship shipid='4281284592' x='10' y='3' /> <!--PASB013_Arkansas_1912 (T4 USA special Battleship) -->
+				<!--<ship shipid='3343824880' x='12' y='3' /> PASC907_Des_Moines_1948_Halloween (T4 USA disabled Cruiser) -->			
+				<!-- <ship shipid='3450779632' x='14' y='3' /> PASD801_FALSE_ENEMY_Sampson (T4 USA unavailable Destroyer) -->
 
-				<ship shipid='4280170480' x='6' y='4' /> <!--PASD014_Leader_1919 (T5 USA upgradeable Destroyer) -->
+				<ship shipid='4280170480' x='8' y='4' /> <!--PASD014_Leader_1919 (T5 USA upgradeable Destroyer) -->
 				<ship shipid='4288624624' x='2' y='4' /> <!--PASB006_New_York_1934 (T5 USA upgradeable Battleship) -->
 				<ship shipid='4289640432' x='4' y='4' /> <!--PASC005_Omaha_1923 (T5 USA upgradeable Cruiser) -->
 				<ship shipid='4292851696' x='0' y='4' /> <!--PASA002_Bogue_1942 (T5 USA upgradeable AirCarrier) -->
-				<ship shipid='4248745968' x='8' y='4' /> <!--PASC044_Marblehead_1924 (T5 USA special Cruiser) -->
-				<ship shipid='4247697392' x='10' y='4' /> <!--PASC045_Marblehead_1924_Asus (T5 USA special Cruiser) -->
-				<ship shipid='3555670000' x='12' y='4' /> <!--PASB705_Texas_1944 (T5 USA event Battleship) -->
-				<ship shipid='4291049456' x='14' y='4' /> <!--PASX003_Liberty (T5 USA event Auxiliary) -->
-				<ship shipid='4288952304' x='16' y='4' /> <!--PASX005_St_Clair (T5 USA event Auxiliary) -->
-				<ship shipid='3439605744' x='18' y='4' /> <!--PASX815_Bogue_Clone (T5 USA event Auxiliary) -->
+				<ship shipid='4248745968' x='10' y='4' /> <!--PASC044_Marblehead_1924 (T5 USA special Cruiser) -->
+				<ship shipid='4247697392' x='12' y='4' /> <!--PASC045_Marblehead_1924_Asus (T5 USA special Cruiser) -->
+				<ship shipid='3555670000' x='14' y='4' /> <!--PASB705_Texas_1944 (T5 USA event Battleship) -->
+				<ship shipid='4291049456' x='16' y='4' /> <!--PASX003_Liberty (T5 USA event Auxiliary) -->
+				<ship shipid='4288952304' x='18' y='4' /> <!--PASX005_St_Clair (T5 USA event Auxiliary) -->
+				<ship shipid='3439605744' x='20' y='4' /> <!--PASX815_Bogue_Clone (T5 USA event Auxiliary) -->
 												
 				<ship shipid='4259264496' x='2' y='5' /> <!--PASB034_New_Mexico_1941 (T6 USA upgradeable Battleship) -->
 				<ship shipid='4287543280' x='4' y='5' /> <!--PASC007_Cleveland_1945 (T6 USA upgradeable Cruiser) -->
+				<ship shipid='4183734256' x='6' y='5' /> <!--PASC106_Pensacola_1944 (T6 USA upgradeable Cruiser) -->
 				<ship shipid='4288657392' x='0' y='5' /> <!--PASA006_Independence_1945 (T6 USA upgradeable AirCarrier) -->
-				<ship shipid='4289607664' x='6' y='5' /> <!--PASD005_Farragut_1944 (T6 USA upgradeable Destroyer) -->
-				<!--<ship shipid='4287903728' x='10' y='5' /> PASX006_Cimarron_invisible (T5 USA unavailable Auxiliary) -->
-				<!-- <ship shipid='4286560240' x='8' y='5' /> PASA008_Saipan_1943 (T6 USA disabled AirCarrier) -->
-				<!--<ship shipid='3345987568' x='8' y='5' /> PASA905_Essex_1945_Halloween (T5 USA disabled AirCarrier) -->
-				<ship shipid='3764336624' x='8' y='5' /> <!--PASB506_Arizona_1941 (T6 USA special Battleship) -->
-				<ship shipid='3764271088' x='10' y='5' /> <!--PASD506_Monaghan (T6 USA special Destroyer) -->
+				<ship shipid='4289607664' x='8' y='5' /> <!--PASD005_Farragut_1944 (T6 USA upgradeable Destroyer) -->
+				<!--<ship shipid='4287903728' x='12' y='5' /> PASX006_Cimarron_invisible (T5 USA unavailable Auxiliary) -->
+				<!-- <ship shipid='4286560240' x='10' y='5' /> PASA008_Saipan_1943 (T6 USA disabled AirCarrier) -->
+				<!--<ship shipid='3345987568' x='10' y='5' /> PASA905_Essex_1945_Halloween (T5 USA disabled AirCarrier) -->
+				<ship shipid='3764336624' x='10' y='5' /> <!--PASB506_Arizona_1941 (T6 USA special Battleship) -->
+				<ship shipid='3764271088' x='12' y='5' /> <!--PASD506_Monaghan (T6 USA special Destroyer) -->
 
 				<ship shipid='4284463088' x='0' y='6' /> <!--PASA010_Ranger_1944 (T7 USA upgradeable AirCarrier) -->
 				<ship shipid='4286527472' x='2' y='6' /> <!--PASB008_Colorado_1945 (T7 USA upgradeable Battleship) -->
 				<ship shipid='4282300400' x='4' y='6' /> <!--PASC012_Pensacola_1944 (T7 USA upgradeable Cruiser) -->
-				<ship shipid='4288559088' x='6' y='6' /> <!--PASD006_Mahan_1936 (T7 USA upgradeable Destroyer) -->
-				<ship shipid='4288591856' x='8' y='6' /> <!--PASC006_Atlanta_1942 (T7 USA premium Cruiser) -->
-				<ship shipid='4264441840' x='10' y='6' /> <!--PASD029_Sims_1941 (T7 USA special Destroyer) -->
-				<ship shipid='3763320816' x='12' y='6' /> <!--PASA507_Saipan_1946 (T7 USA special AirCarrier) -->
-				<ship shipid='3763255280' x='14' y='6' /> <!--PASC507_Indianapolis_1945 (T7 USA special Cruiser) -->
-				<ship shipid='3553540080' x='16' y='6' /> <!--PASC707_Flint (T7 USA demoWithoutStats Cruiser) -->
+				<ship shipid='4182685680' x='6' y='6' /> <!--PASC107_New_Orlean_1944 (T7 USA upgradeable Cruiser) -->
+				<ship shipid='4288559088' x='8' y='6' /> <!--PASD006_Mahan_1936 (T7 USA upgradeable Destroyer) -->
+				<ship shipid='4288591856' x='10' y='6' /> <!--PASC006_Atlanta_1942 (T7 USA premium Cruiser) -->
+				<ship shipid='4264441840' x='12' y='6' /> <!--PASD029_Sims_1941 (T7 USA special Destroyer) -->
+				<ship shipid='3763320816' x='14' y='6' /> <!--PASA507_Saipan_1946 (T7 USA special AirCarrier) -->
+				<ship shipid='3763255280' x='16' y='6' /> <!--PASC507_Indianapolis_1945 (T7 USA special Cruiser) -->
+				<ship shipid='3553540080' x='18' y='6' /> <!--PASC707_Flint (T7 USA demoWithoutStats Cruiser) -->
 
 				<ship shipid='4280203248' x='4' y='7' /> <!--PASC014_New_Orlean_1944 (T8 USA upgradeable Cruiser) -->
+				<ship shipid='4181637104' x='6' y='7' /> <!--PASC108_Baltimore_1944 (T8 USA upgradeable Cruiser) -->
 				<ship shipid='4282333168' x='2' y='7' /> <!--PASB012_North_Carolina_1945 (T8 USA upgradeable Battleship) -->
 				<ship shipid='4282365936' x='0' y='7' /> <!--PASA012_Lexington_1944 (T8 USA upgradeable AirCarrier) -->
-				<ship shipid='4286461936' x='6' y='7' /> <!--PASD008_Benson_1945 (T8 USA upgradeable Destroyer) -->
-				<ship shipid='3552524272' x='8' y='7' /> <!--PASB708_Alabama (T8 USA demoWithoutStats Battleship) -->
-				<ship shipid='3762239472' x='10' y='7' /> <!--PASB508_Alabama (T8 USA demoWithoutStats Battleship) -->
-				<ship shipid='3762173936' x='12' y='7' /> <!--PASD508_Kidd (T8 USA demoWithoutStats Destroyer) -->
-				<ship shipid='3762272240' x='14' y='7' /> <!--PASA508_Enterprise (T8 USA special AirCarrier) -->
-				<ship shipid='3751753712' x='16' y='7' /> <!--PASB518_Massachusetts (T8 USA special Battleship) -->
+				<ship shipid='4286461936' x='8' y='7' /> <!--PASD008_Benson_1945 (T8 USA upgradeable Destroyer) -->
+				<ship shipid='3552524272' x='10' y='7' /> <!--PASB708_Alabama (T8 USA demoWithoutStats Battleship) -->
+				<ship shipid='3762239472' x='12' y='7' /> <!--PASB508_Alabama (T8 USA demoWithoutStats Battleship) -->
+				<ship shipid='3762173936' x='14' y='7' /> <!--PASD508_Kidd (T8 USA demoWithoutStats Destroyer) -->
+				<ship shipid='3762272240' x='16' y='7' /> <!--PASA508_Enterprise (T8 USA special AirCarrier) -->
+				<ship shipid='3751753712' x='18' y='7' /> <!--PASB518_Massachusetts (T8 USA special Battleship) -->
+				<ship shipid='4076779504' x='20' y='7' /> <!--PASC208_Cleveland (T8 USA special Battleship) -->
 
-				<ship shipid='4272830448' x='6' y='8' /> <!--PASD021_Fletcher_1943 (T9 USA upgradeable Destroyer) -->
+				<ship shipid='4272830448' x='8' y='8' /> <!--PASD021_Fletcher_1943 (T9 USA upgradeable Destroyer) -->
 				<ship shipid='4276041712' x='2' y='8' /> <!--PASB018_Iowa_1944 (T9 USA upgradeable Battleship) -->
 				<ship shipid='4277057520' x='4' y='8' /> <!--PASC017_Baltimore_1944 (T9 USA upgradeable Cruiser) -->
+				<ship shipid='4180588528' x='6' y='8' /> <!--PASC109_Buffalo (T9 USA upgradeable Cruiser) -->
 				<ship shipid='4281317360' x='0' y='8' /> <!--PASA013_Essex_1945 (T9 USA upgradeable AirCarrier) -->
-				<ship shipid='3551410160' x='8' y='8' /> <!--PASD709_Black (T9 USA demoWithoutStats Destroyer) -->
-				<ship shipid='3761190896' x='10' y='8' /> <!--PASB509_Missouri (T9 USA demoWithoutStats Battleship) -->
+				<ship shipid='3551410160' x='10' y='8' /> <!--PASD709_Black (T9 USA demoWithoutStats Destroyer) -->
+				<ship shipid='3761190896' x='12' y='8' /> <!--PASB509_Missouri (T9 USA demoWithoutStats Battleship) -->
 
 				<ship shipid='4273911792' x='4' y='9' /> <!--PASC020_Des_Moines_1948 (T10 USA upgradeable Cruiser) -->
 				<ship shipid='4277090288' x='2' y='9' /> <!--PASB017_Montana_1945 (T10 USA upgradeable Battleship) -->
 				<ship shipid='4279220208' x='0' y='9' /> <!--PASA015_Midway_1945 (T10 USA upgradeable AirCarrier) -->
-				<ship shipid='4281219056' x='6' y='9' /> <!--PASD013_Gearing_1945 (T10 USA upgradeable Destroyer) -->
-				<ship shipid='4274960368' x='8' y='9' /> <!--PASC019_Burlington_1944 (T10 USA disabled Cruiser)-->
-				<ship shipid='4278106096' x='10' y='9' /> <!--PASC016_Worcester_1948 (T10 USA disabled Cruiser) -->
-				<ship shipid='3550394352' x='12' y='9' /> <!--PASC710_Salem (T10 USA disabled Cruiser) -->
+				<ship shipid='4281219056' x='8' y='9' /> <!--PASD013_Gearing_1945 (T10 USA upgradeable Destroyer) -->
+				<ship shipid='4274960368' x='10' y='9' /> <!--PASC019_Burlington_1944 (T10 USA disabled Cruiser)-->
+				<ship shipid='4278106096' x='12' y='9' /> <!--PASC016_Worcester_1948 (T10 USA disabled Cruiser) -->
+				<ship shipid='3550394352' x='14' y='9' /> <!--PASC710_Salem (T10 USA disabled Cruiser) -->
 
 				<!--<ship shipid='3333371888' x='2' y='10' /> PASB917_Montana_1945 (T10 USA upgradeable Battleship) -->
 				<!--<ship shipid='3335501808' x='0' y='10' /> PASA915_Midway_1945 (T10 USA upgradeable AirCarrier) -->
-				<!--<ship shipid='3337500656' x='6' y='10' /> PASD913_Gearing_1945 (T10 USA upgradeable Destroyer) -->
+				<!--<ship shipid='3337500656' x='8' y='10' /> PASD913_Gearing_1945 (T10 USA upgradeable Destroyer) -->
 		</ships>
 		<types>
-				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='0' nameIDS='IDS_DESTROYER' x='8' y='-1' />
 				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
 				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
 				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
@@ -1020,15 +1025,23 @@
 			<ship shipid='4291769616' x='2' y='2' /> <!--PXSB003_Zeekasa (T2 Events unavailable Battleship)-->
 			<ship shipid='4290721040' x='2' y='3' /> <!--PXSB004_Tirpiz_1942_H2017 (T8 Events unavailable Battleship)-->
 			<ship shipid='4289672464' x='2' y='4' /> <!--PXSB005_Bismarck_H2017 (T8 Events unavailable Battleship)-->
+			<ship shipid='4288623888' x='2' y='5' /> <!--PXSB006_Paris (T7 Events unavailable Battleship)-->
+			<ship shipid='4287575312' x='2' y='6' /> <!--PXSB007_Alldestroyer (T7 Events unavailable Battleship)-->
 
 			<ship shipid='4293801232' x='6' y='0' /> <!--PXSD001_VanHellsink (T11 Events event Destroyer)-->
 			<ship shipid='4292752656' x='6' y='1' /> <!--PXSD002_Benson_1945_H2017 (T8 Events event Destroyer)-->
 			<ship shipid='4291704080' x='6' y='2' /> <!--PXSD003_Kagero_H2017 (T8 Events event Destroyer)-->
+			<ship shipid='4290655504' x='6' y='3' /> <!--PXSD004_FlyFire (T7 Events event Destroyer)-->
+			<ship shipid='4289606928' x='6' y='4' /> <!--PXSD005_Blue_Aster (T7 Events event Destroyer)-->
 			<!--<ship shipid='4287509776' x='6' y='6' /> PXSD007_Scnellboot_S38 (T8 Events event Destroyer)-->
 
 			<ship shipid='4293834000' x='4' y='0' /> <!--PXSC001_Dr_Frankenship (T11 Events event Cruiser)-->
 			<ship shipid='4292785424' x='4' y='1' /> <!--PXSC002_Charles_Martel_H2017 (T8 Events event Cruiser)-->
 			<ship shipid='4291736848' x='4' y='2' /> <!--PXSC003_Pr_68_Chapaev_H2017 (T8 Events event Cruiser)-->
+			<ship shipid='4290688272' x='4' y='3' /> <!--PXSC004_Galaxy (T7 Events event Cruiser)-->
+			<ship shipid='4289639696' x='4' y='4' /> <!--PXSC005_Zaya (T7 Events event Cruiser)-->
+			<ship shipid='4288591120' x='4' y='5' /> <!--PXSC006_Norma (T7 Events event Cruiser)-->
+			<ship shipid='4287542544' x='4' y='6' /> <!--PXSC007_Aurora (T7 Events event Cruiser)-->
 
 			<ship shipid='4293145872' x='8' y='0' /> <!--PXSX001_Transylvania (T5 Events unavailable Auxiliary)-->
 	        <!--<ship shipid='4278465808' x='2' y='5' /> PXSX015_Schuka (T11 Events event Auxiliary)-->
@@ -1041,6 +1054,7 @@
 			<ship shipid='4292850960' x='0' y='1' /> <!--PXSA002_Invisible_Air_Ally_1 (T4 Events event AirCarrier)-->
 			<ship shipid='4291802384' x='0' y='2' /> <!--PXSA003_Lexington_1944_H2017 (T8 Events event AirCarrier)-->
 			<ship shipid='4290753808' x='0' y='3' /> <!--PXSA004_Zuikaku_1944_H2017 (T8 Events event AirCarrier)-->
+			<ship shipid='4289705232' x='0' y='4' /> <!--PXSA005_Hellcarrier (T7 Events event AirCarrier)-->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
