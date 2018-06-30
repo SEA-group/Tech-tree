@@ -1772,6 +1772,34 @@
 					<bind name="instance" value="'PremshopBanner'; realmConstants.premshopUIAvailable || isExternalPlatformClient ? {} : null"/>
 				</block>
 				<block>
+					<bind name="feature" value="29; 'click'"/>
+					<bind name="visible" value="feature_29 != 'locked'"/>
+					<bind name="firstEntityDH" value="'loginEntity'; CC.loginData"/>
+					<bind name="watchDH" value="'isExternalPlatformClient'; ['loginEntity.loginData.evUpdate']; loginEntity.loginData.isExternalPlatformClient"/>
+					<bind name="appear" value="'addedToStage'; 0.3; 0.2; {alpha: 0, top: 5}; {alpha: 1, top: 0}"/>
+					<bind name="appear" value="'beforeClose'; 0.3; 0.2; {alpha: 1, top: 0}; {alpha: 0, top: 5}"/>
+					<style>
+						<marginBottom value="10px"/>
+						<marginRight value="10px"/>
+					</style>
+					<block>
+						<bind name="instance" value="'MetashopBanner';{}"/>
+					</block>
+					<block>
+						<style>
+							<position value="absolute"/>
+							<marginTop value="-3px"/>
+							<left value="9px"/>
+						</style>
+						<block className="icon_sticker_new" type="native">
+							<bind name="fade" value="feature_29 == 'new'; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}; {alpha: 0, top: -10}; 2"/>
+							<style>
+								<hitTest value="false"/>
+							</style>
+						</block>
+					</block>
+				</block>
+				<block>
 					<bind name="feature" value="9; 'click'"/>
 					<bind name="visible" value="feature_9 != 'locked'"/>
 					<bind name="appear" value="'addedToStage'; 0.3; 0.2; {alpha: 0, top: 5}; {alpha: 1, top: 0}"/>
@@ -2026,6 +2054,41 @@
 			<bind name="gotoAndStop!" value="'premshop'"/>
 		</block>
 	</block>
+	<block className="MetashopBanner">
+		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
+		<bind name="appear" value="'addedToStage'; 0.3; 0.3; {alpha: 0, top: 5}; {alpha: 1, top: 0}"/>
+		<bind name="soundSet" value="default_button"/>
+		<bind name="request" value="'click'; 'webBrowser'; {url: URL.METASHOP }"/>
+		<bind name="tooltip" value="'MouseInstructionTooltip'; { _mouseInstructions: [{_type: 'left', _instructionText: 'IDS_METASHOP_INSTRUCTION'}], _maxWidth: 250}"/>
+		<style>
+			<width value="223px"/>
+			<height value="36px"/>
+		</style>
+		<block>
+			<bind name="transition" value="rollOver &amp;&amp; !(mouseDown); 0.15; {alpha: 0.75}; {alpha: 1.0}"/>
+			<styleClass value="$FullsizeAbsolute"/>
+			<block className="quest_thumb_title" type="native">
+				<styleClass value="$Fullsize"/>
+			</block>
+		</block>
+		<block type="text">
+			<style>
+				<marginLeft value="10px"/>
+				<width value="100%"/>
+			</style>
+			<styleClass value="$TextHeaderWhiteBold"/>
+			<styleClass value="$MiddleVAligned"/>
+			<bind name="text" value="toUpperCase(tr('IDS_METASHOP'))"/>
+		</block>
+		<block className="icons_account_renderer" type="native">
+			<style>
+				<right value="5px"/>
+				<top value="4px"/>
+				<position value="absolute"/>
+			</style>
+			<bind name="gotoAndStop!" value="'metashop'"/>
+		</block>
+	</block>
 	<block className="BigSimpleBanner">
 		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
 		<bind name="appear" value="'addedToStage'; 0.3; 0.3; {alpha: 0, top: 5}; {alpha: 1, top: 0}"/>
@@ -2123,6 +2186,14 @@
 		<selectable value="false"/>
 		<textColor value="0x08222a"/>
 	</css>
+	<css name="$SmallNationButtonText">
+		<fontSize value="13"/>
+		<marginRight value="10px"/>
+	</css>
+	<css name="$BigNationButtonText">
+		<fontSize value="15"/>
+		<marginRight value="18px"/>
+	</css>
 	<block className="NationButton">
 		<bind name="scaleX" value="0.8"/>
 		<bind name="scaleY" value="0.8"/>		
@@ -2142,10 +2213,23 @@
 			</block>
 		</block>
 		<bind name="name" value="'upgrade_tree_button' + labelTF"/>
-		<bind name="watch" value="'isBigButton'; (stageHeight &gt;= 900)"/>
+		<bind name="watch" value="'isBigButton'; (stageHeight &gt;= 1000) &amp;&amp; (stageWidth &gt;= 1315)"/>
 		<block className="button_navigation" type="native">
-			<bind name="style" value="'width'; isBigButton ? '150px' : '125px'"/>
-			<bind name="style" value="'height'; isBigButton ? '72px' : '60px'"/>
+			<bind name="visible" value="isBigButton == true"/>
+			<style>
+				<width value="150px"/>
+				<height value="72px"/>
+			</style>
+			<bind name="name" value="'upgrade_tree_button' + labelTF + ':' + (currentNationName == labelTF)"/>
+			<bind name="selected" value="currentNationName == labelTF"/>
+			<bind name="enabled" value="currentNationName != labelTF"/>
+			<bind name="event" value="'buttonClick'; onNationButtonClick; labelTF"/>
+		</block>
+		<block className="button_navigation_small_no_label" type="native">
+			<bind name="visible" value="isBigButton != true"/>
+			<style>
+				<width value="116px"/>
+			</style>
 			<bind name="name" value="'upgrade_tree_button' + labelTF + ':' + (currentNationName == labelTF)"/>
 			<bind name="selected" value="currentNationName == labelTF"/>
 			<bind name="enabled" value="currentNationName != labelTF"/>
@@ -2159,23 +2243,22 @@
 			<bind name="transition" value="currentNationName == labelTF; 0.3; {alpha: 0.8}; {alpha: 1}"/>
 			<bind name="instance" value="'NationFlagsSmall'; {	shipCountry: labelTF, 
 												_alpha: 0.6, 
-												_width: isBigButton ? '117px' : '98px', 
-												_height: isBigButton ? '72px' : '60px'}"/>
+												_width: isBigButton ? '117px' : '52px', 
+												_height: isBigButton ? '72px' : '32px'}"/>
 		</block>
 		<block type="text">
 			<styleClass value="$TextSecondaryNoFilter"/>
 			<style>
-				<marginRight value="18px"/>
-				<textAlign value="right"/>
-				<position value="absolute"/>
-				<bottom value="1px"/>
 				<width value="100%"/>
+				<position value="absolute"/>
+				<textAlign value="right"/>
+				<bottom value="1px"/>
 				<leading value="-1"/>
 			</style>
 			<bind name="class" value="'$Bold'"/>
-			<bind name="class" value=" (currentNationName == labelTF) ? '$FontColorAlmostBlack': '$FontColorDefault'"/>
-			<bind name="class" value=" (currentNationName == labelTF) ? '$FontGlowFilterBrightStrong': '$FontDropShadowFilter1'"/>
-			<bind name="class" value=" isBigButton ? '$FontSizeDefault': '$FontSizeSmall'"/>
+			<bind name="class" value=" (currentNationName == labelTF) ? '$FontColorAlmostBlack' : '$FontColorDefault'"/>
+			<bind name="class" value=" (currentNationName == labelTF) ? '$FontGlowFilterBrightStrong' : '$FontDropShadowFilter1'"/>
+			<bind name="class" value=" isBigButton ? '$BigNationButtonText' : '$SmallNationButtonText'"/>
 			<bind name="text" value="toUpperCase(tr('IDS_' + toUpperCase(labelTF)))"/>
 		</block>
 	</block>
@@ -3769,11 +3852,6 @@
 		</block>
 		<block className="icon_gold_small" type="native">
 			<styleClass value="$MiddleVAligned"/>
-			<style>
-				<marginRight value="1px"/>
-				<width value="11px"/>
-				<height value="11px"/>
-			</style>
 		</block>
 	</block>
 	<block className="CostSteelNano">
@@ -3788,8 +3866,9 @@
 			<bind name="class" value="_class"/>
 			<bind name="text" value="format(_costSteel, -1)"/>
 		</block>
-		<block className="icon_credit_small" type="native">
+		<block className="icon_currency" type="native">
 			<styleClass value="$MiddleVAligned"/>
+			<bind name="gotoAndStop!" value="'steel'"/>
 		</block>
 	</block>
 	<block className="CostCoalNano">
@@ -3804,8 +3883,9 @@
 			<bind name="class" value="_class"/>
 			<bind name="text" value="format(_costCoal, -1)"/>
 		</block>
-		<block className="icon_credit_small" type="native">
+		<block className="icon_currency" type="native">
 			<styleClass value="$MiddleVAligned"/>
+			<bind name="gotoAndStop!" value="'coal'"/>
 		</block>
 	</block>
 	<block className="XPDeficitNano">
@@ -4788,8 +4868,8 @@
 			<block type="text">
 				<styleClass value="$TextDefault"/>
 				<bind name="class" value="'$FontColorUnready'"/>
+				<bind name="style" value="'maxWidth'; _maxWidth ? _maxWidth : 240"/>
 				<style>
-					<maxWidth value="240"/>
 					<leading value="-3"/>
 				</style>
 				<bind name="text" value="_text"/>
@@ -12466,7 +12546,7 @@
 				</block>
 				<block>
 					<style>
-						<marginLeft value="22px"/>
+						<marginLeft value="12px"/>
 						<marginRight value="12px"/>
 						<width value="100%"/>
 					</style>
@@ -15176,6 +15256,35 @@
 						<height value="80px"/>
 					</style>
 					<bind name="style" value="'backgroundImage'; 'url:../dogTags/small/' + data.iconPath"/>
+					<bind name="watch" value="'dogTagId'; data.itemID"/>
+					<bind name="primaryEntityDH" value="'dogTagEntity'; CC.dogTagComponent; dogTagId"/>
+					<bind name="watchDH" value="'clanTagOffsetX';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagOffsetX"/>
+					<bind name="watchDH" value="'clanTagOffsetY';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagOffsetY"/>
+					<bind name="watchDH" value="'clanTagFont';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagFont"/>
+					<bind name="watchDH" value="'clanTagVisible';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagVisible"/>
+					<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+					<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+					<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+					<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
+					<bind name="watchDH" value="'clanId'; ['selfPlayerEntity.clanman.evClanIdChanged']; selfPlayerEntity.clanman.clanId"/>
+					<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; clanId"/>
+					<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
+					<block>
+						<style>
+							<position value="absolute"/>
+						</style>
+						<bind name="style" value="'top'; clanTagOffsetY + '%'"/>
+						<bind name="style" value="'left'; clanTagOffsetX + '%'"/>
+						<block>
+							<style>
+								<position value="absolute"/>
+								<marginLeft value="-50%"/>
+								<marginTop value="-50%"/>
+							</style>
+							<bind name="visible" value="clanTagVisible"/>
+							<bind name="atlasText" value="clanTagVisible ?  (clanTag ? '[' + clanTag + ']' : '^') : '' ; '../fonts/small/' + clanTagFont; 0"/>
+						</block>
+					</block>
 				</block>
 				<block>
 					<styleClass value="$InfoBlockHorizontalIndent"/>
@@ -15238,6 +15347,35 @@
 						<height value="80px"/>
 					</style>
 					<bind name="style" value="'backgroundImage'; 'url:../dogTags/small/' + data.iconPath"/>
+					<bind name="watch" value="'dogTagId'; data.itemID"/>
+					<bind name="primaryEntityDH" value="'dogTagEntity'; CC.dogTagComponent; dogTagId"/>
+					<bind name="watchDH" value="'clanTagOffsetX';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagOffsetX"/>
+					<bind name="watchDH" value="'clanTagOffsetY';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagOffsetY"/>
+					<bind name="watchDH" value="'clanTagFont';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagFont"/>
+					<bind name="watchDH" value="'clanTagVisible';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagVisible"/>
+					<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+					<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+					<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+					<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
+					<bind name="watchDH" value="'clanId'; ['selfPlayerEntity.clanman.evClanIdChanged']; selfPlayerEntity.clanman.clanId"/>
+					<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; clanId"/>
+					<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
+					<block>
+						<style>
+							<position value="absolute"/>
+						</style>
+						<bind name="style" value="'top'; clanTagOffsetY + '%'"/>
+						<bind name="style" value="'left'; clanTagOffsetX + '%'"/>
+						<block>
+							<style>
+								<position value="absolute"/>
+								<marginLeft value="-50%"/>
+								<marginTop value="-50%"/>
+							</style>
+							<bind name="visible" value="clanTagVisible"/>
+							<bind name="atlasText" value="clanTagVisible ?  (clanTag ? '[' + clanTag + ']' : '^') : '' ; '../fonts/small/' + clanTagFont; 0"/>
+						</block>
+					</block>
 				</block>
 				<block>
 					<styleClass value="$InfoBlockHorizontalIndent"/>
@@ -15343,12 +15481,21 @@
 	</block>
 	<css name="$ChatDivisionDefaultWidth">
 		<width value="280px"/>
+		<userData value="{
+		minResizeWidth: 220,
+		maxResizeWidth: 300
+	}"/>
 	</css>
 	<block className="FormationResizableMainElement">
 		<styleClass value="$ChatDivisionDefaultWidth"/>
 		<style>
 			<height value="100%"/>
 		</style>
+		<bind name="collectionDH" value="CC.userPrefs; 'userPrefsCollection'"/>
+		<bind name="entityDH" value="'userPrefsEntity'; userPrefsCollection[0].id"/>
+		<bind name="watchDH" value="'userPrefs'; ['userPrefsEntity.userPrefs.evUserPrefsChanged']; userPrefsEntity.userPrefs.userPrefs"/>
+		<bind name="watch" value="'divisionPlayersListWidth'; (userPrefs.divisionPlayersListWidth) ? userPrefs.divisionPlayersListWidth : '280'"/>
+		<bind name="width" value="divisionPlayersListWidth"/>
 		<block className="FormationMainElement">
 			<bind name="name" value="'FormationMainElement_' + _teamId"/>
 			<bind name="firstEntityDH" value="'trainingRoomEntity'; CC.trainingRoomWindowState"/>
@@ -15387,7 +15534,7 @@
 			<bind name="watchDH" value="'selfTeamId'; ['selfPlayerEntity.preBattlePlayerSimple.evStateChanged']; selfPlayerEntity.preBattlePlayerSimple.teamId"/>
 			<bind name="watchDH" value="'selfPreBattleId'; ['selfPlayerEntity.preBattlePlayerSimple.evPreBattleIdChanged']; selfPlayerEntity.preBattlePlayerSimple.preBattleId"/>
 			<bind name="watch" value="'preBattlePlayersFilter'; _isTrainingRoom 	? 'byPreBattleAndTeam.' + selfPreBattleId + '_' + teamId + '.preBattleMembers.sorted' 
-															: 'byPreBattle.' + selfPreBattleId + '.preBattleMembers'"/>
+															: 'byPreBattle.' + selfPreBattleId + '.preBattleMembers.sorted'"/>
 			<bind name="collectionDH" value="CC.preBattlePlayerSimple; 'preBattlePlayers'; preBattlePlayersFilter"/>
 			<bind name="watch" value="'preBattleInvitedPlayersFilter'; _isTrainingRoom 	? 'byPreBattleAndTeam.' + selfPreBattleId + '_' + teamId + '.invitedPlayers' 
 																	: 'byPreBattle.' + selfPreBattleId + '.invitedPlayers'"/>
@@ -15524,6 +15671,20 @@
 				</block>
 			</block>
 		</block>
+		<block>
+			<bind name="controller" value="lesta.unbound.controls.UbInteractiveController; 'HANGAR_DRAGGING_RIGHT'"/>
+			<style>
+				<position value="absolute"/>
+				<width value="8px"/>
+				<height value="100%"/>
+				<right value="-4px"/>
+				<backgroundColor value="0x01ff0000"/>
+			</style>
+			<params>
+				<param name="name" value="gripper_right"/>
+			</params>
+		</block>
+		<bind name="resize" value="'gripper_right'; 'right'; 'divisionPlayersListWidth'"/>
 	</block>
 	<block className="FormationMainElement">
 		<bind name="name" value="'FormationMainElement_' + _teamId"/>
@@ -15563,7 +15724,7 @@
 		<bind name="watchDH" value="'selfTeamId'; ['selfPlayerEntity.preBattlePlayerSimple.evStateChanged']; selfPlayerEntity.preBattlePlayerSimple.teamId"/>
 		<bind name="watchDH" value="'selfPreBattleId'; ['selfPlayerEntity.preBattlePlayerSimple.evPreBattleIdChanged']; selfPlayerEntity.preBattlePlayerSimple.preBattleId"/>
 		<bind name="watch" value="'preBattlePlayersFilter'; _isTrainingRoom 	? 'byPreBattleAndTeam.' + selfPreBattleId + '_' + teamId + '.preBattleMembers.sorted' 
-															: 'byPreBattle.' + selfPreBattleId + '.preBattleMembers'"/>
+															: 'byPreBattle.' + selfPreBattleId + '.preBattleMembers.sorted'"/>
 		<bind name="collectionDH" value="CC.preBattlePlayerSimple; 'preBattlePlayers'; preBattlePlayersFilter"/>
 		<bind name="watch" value="'preBattleInvitedPlayersFilter'; _isTrainingRoom 	? 'byPreBattleAndTeam.' + selfPreBattleId + '_' + teamId + '.invitedPlayers' 
 																	: 'byPreBattle.' + selfPreBattleId + '.invitedPlayers'"/>
@@ -15735,6 +15896,18 @@
 		<bind name="watchDH" value="'selfPreBattleId'; ['selfPlayerEntity.preBattlePlayerSimple.evPreBattleIdChanged']; selfPlayerEntity.preBattlePlayerSimple.preBattleId"/>
 		<bind name="primaryEntityDH" value="'preBattleEntity'; CC.preBattle; selfPreBattleId"/>
 		<bind name="watchDH" value="'isFormationInBattle'; ['preBattleEntity.preBattle.evStatusChanged']; preBattleEntity.preBattle.isInBattle"/>
+		<bind name="watchDH" value="'ownerId'; ['preBattleEntity.preBattle.evOwnerIdChanged']; preBattleEntity.preBattle.ownerId"/>
+		<bind name="primaryEntityDH" value="'preBattleOwnerPlayerEntity'; CC.preBattlePlayerSimple; ownerId"/>
+		<bind name="watchDH" value="'clanId'; ['preBattleOwnerPlayerEntity.clanman.evClanIdChanged']; preBattleOwnerPlayerEntity.clanman.clanId"/>
+		<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; clanId"/>
+		<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
+		<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
+		<bind name="primaryEntityDH" value="'clanTeamEntity'; CC.clanTeam; selfPreBattleId"/>
+		<bind name="watchDH" value="'squadId'; ['clanTeamEntity.clanTeam.evSquadIdChanged']; clanTeamEntity.clanTeam.squadId"/>
+		<bind name="primaryEntityDH" value="'clanLadderInfoEntity'; CC.clanLadderInfo; clanId"/>
+		<bind name="watchDH" value="'leadingSquadId'; []; clanLadderInfoEntity.clanLadderInfo.leadingSquadId"/>
+		<bind name="watch" value="'isLeadingSquad'; squadId == leadingSquadId"/>
+		<bind name="watchDH" value="'hasClanSquadModifier'; ['selfPlayerEntity.clanmanSupplyInfo.evHasClanSquadModifierChanged']; selfPlayerEntity.clanmanSupplyInfo.hasClanSquadModifier"/>
 		<bind name="collectionDH" value="CC.battleType; 'selectedBattleTypes'; 'selected'"/>
 		<bind name="entityDH" value="'selectedBattleTypeEntity'; selectedBattleTypes[0].id"/>
 		<bind name="watchDH" value="'trainingRoomTeamSize'; ['trainingRoomEntity.trainingRoom.evUpdate']; trainingRoomEntity.trainingRoom.teamSize"/>
@@ -15746,14 +15919,24 @@
 		<bind name="collectionDH" value="CC.preBattlePlayerSimple; 'preBattlePlayers'; preBattlePlayersFilter"/>
 		<bind name="collectionDH" value="CC.preBattlePlayerSimple; 'preBattleInvitedPlayers'; 'byPreBattleAndTeam.' + selfPreBattleId + '_' + _teamId + '.invitedPlayers'"/>
 		<bind name="watch" value="'curPlayersInFormation'; (preBattlePlayers.length + preBattleInvitedPlayers.length)"/>
-		<bind name="watch" value="'label'; 	_isTrainingRoom 	? toUpperCase(tr('IDS_DIVISION_' + _teamId)) :
-							isFormationInBattle ? toUpperCase(tr('IDS_IN_BATTLE'))
-												: toUpperCase(tr('IDS_DIVISION'))"/>
+		<bind name="watch" value="'label'; 	_isTrainingRoom 	? 	toUpperCase(tr('IDS_DIVISION_' + _teamId)) :
+							isFormationInBattle ? 	tr('IDS_IN_BATTLE') :
+							_isClanDivision		? 	'['+clanTag+'] ' + tr( hasClanSquadModifier ? 'IDS_CLAN_SQUAD_' + squadId : 'IDS_DIVISION')
+												: 	tr('IDS_DIVISION')"/>
 		<bind name="watch" value="'limitExceed'; curPlayersInFormation &gt;= maxPlayersInFormation"/>
 		<bind name="name" value="'headerDivision'"/>
 		<style>
 			<flow value="horizontal"/>
 		</style>
+		<block className="icon_channel_types" type="native">
+			<bind name="visible" value="_isTrainingRoom != true"/>
+			<style>
+				<hitTest value="false"/>
+				<marginRight value="8px"/>
+				<marginTop value="-2px"/>
+			</style>
+			<innerBind elementName="channel_icon" name="gotoAndStop!" value="'division'"/>
+		</block>
 		<block type="text">
 			<styleClass value="$TextDefaultBold19NM"/>
 			<bind name="class" value="	_isTrainingRoom &amp;&amp; _teamId == -1				? '$FontColorWhite'	 :
@@ -15762,6 +15945,16 @@
 						(isFormationInBattle || !(divisionEntranceData.divisionAvailable))	? '$FontColorUnready'
 																							: '$FontColorGolden'"/>
 			<bind name="text" value="label"/>
+		</block>
+		<block>
+			<bind name="watch" value="'isLeadingIconVisible'; _isClanDivision &amp;&amp; hasClanSquadModifier &amp;&amp; isLeadingSquad &amp;&amp; !isFormationInBattle"/>
+			<bind name="visible" value="isLeadingIconVisible"/>
+			<style>
+				<hitTest value="false"/>
+				<marginLeft value="8px"/>
+				<marginTop value="-2px"/>
+			</style>
+			<bind name="instance" value="'LeadingClanSquadIcon'; isLeadingIconVisible ? { _isGolden: true } : null"/>
 		</block>
 		<bind name="watch" value="'colorClass'; 	_isTrainingRoom &amp;&amp; selfTeamId == _teamId 	? '$FontColorGolden' :
 								_isTrainingRoom &amp;&amp; selfTeamId != _teamId 	? '$FontColorWhite'	 :
@@ -19066,6 +19259,100 @@
 	<css name="$FontSize14">
 		<fontSize value="14"/>
 	</css>
+	<block className="ClanSquadSwitchMenuItem">
+		<style>
+			<width value="100%"/>
+			<height value="100%f"/>
+			<backgroundColor value="0x01000000"/>
+		</style>
+		<bind name="dataRefDH" value="'clanSquadEntity'; '$dataRef.ref'"/>
+		<bind name="watchDH" value="'squadId'; []; clanSquadEntity.clanSquadLadderInfo.squadId"/>
+		<bind name="watch" value="'selected'; _currentSquad == squadId"/>
+		<bind name="action" value="'click'; 'ClanProxy.setClanSquad'; !(selected) ? {newSquadId: squadId} : null"/>
+		<block className="dock_submenu_item" type="native">
+			<styleClass value="$FullsizeAbsolute"/>
+			<bind name="selected" value="selected"/>
+		</block>
+		<block>
+			<style>
+				<hitTest value="false"/>
+				<width value="100%"/>
+				<height value="100%f"/>
+			</style>
+			<bind name="instance" value="'ClanSquadRatingInfo'; { _clanSquadEntityId: clanSquadEntity.id, _currentSquad: _currentSquad, _leadingSquadId: _leadingSquadId, _selected: selected }"/>
+		</block>
+	</block>
+	<block className="SwitchClanSquadContextMenu">
+		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'shipOverview'"/>
+		<bind name="transition" value="shipOverview.enabled; shipOverview.enabled ? 0.4 : 0.25; {alpha: 1}; {alpha: 0}; {alpha: 1}; 2; !(shipOverview.enabled) &amp;&amp; !(inPort) ? 0.15 : 0.5"/>
+		<bind name="style" value="'hitTest'; !(shipOverview.enabled)"/>
+		<styleClass value="$RightSubMenuBehaviour"/>
+		<styleClass value="$ContextMenuDimentions"/>
+		<block className="MenuBg">
+			<styleClass value="$FullsizeAbsolute"/>
+			<block className="DeclareBlurLayer">
+				<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+				<bind name="visible" value="optionData.blurEnabled"/>
+				<block className="transparentPixel" type="native">
+					<bind name="blurLayer" value="0"/>
+				</block>
+				<style>
+					<position value="absolute"/>
+				</style>
+			</block>
+			<block className="BlurMap">
+				<bind name="visible" value="optionData.blurEnabled"/>
+				<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+				<style>
+					<hitTest value="false"/>
+				</style>
+				<styleClass value="$FullsizeAbsolute"/>
+				<block className="mc_blurmap_medium" type="native">
+					<bind name="appear" value="'startShow'; 0.3; 0; {alpha: 0}; {alpha: 1}"/>
+					<bind name="appear" value="'startHide'; 0.15; 0; {alpha: 1}; {alpha: 0}"/>
+					<styleClass value="$FullsizeAbsolute"/>
+					<bind name="blurMap" value="0"/>
+				</block>
+				<block className="inner_panel" type="native">
+					<style>
+						<alpha value="0.5"/>
+					</style>
+					<styleClass value="$FullsizeAbsolute"/>
+				</block>
+			</block>
+			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+			<block className="contrast_panel" type="native">
+				<bind name="visible" value="optionData.contrast &amp;&amp; !(false)"/>
+				<styleClass value="$FullsizeAbsolute"/>
+			</block>
+			<block>
+				<styleClass value="$FullsizeAbsolute"/>
+				<bind name="visible" value="!(false)"/>
+				<block className="hint_panel" type="native">
+					<styleClass value="$FullsizeAbsolute"/>
+				</block>
+			</block>
+			<block>
+				<styleClass value="$FullsizeAbsolute"/>
+				<bind name="visible" value="false"/>
+				<block className="dock_panel" type="native">
+					<styleClass value="$FullsizeAbsolute"/>
+					<style>
+						<marginBottom value="-19px"/>
+						<marginRight value="-14px"/>
+						<marginLeft value="-14px"/>
+						<marginTop value="-9px"/>
+					</style>
+				</block>
+			</block>
+		</block>
+		<block>
+			<style>
+				<width value="100%"/>
+			</style>
+			<bind name="collectionRepeatDH" value="CC.clanSquadLadderInfo; 'ClanSquadSwitchMenuItem'; ''; {_currentSquad: _currentSquad, _leadingSquadId: _leadingSquadId}"/>
+		</block>
+	</block>
 	<block className="ChatDropDownMenu">
 		<bind name="firstEntityDH" value="'dockStateEntity'; CC.dockState"/>
 		<bind name="watchDH" value="'dockStateName'; ['dockStateEntity.dockState.evUpdate']; dockStateEntity.dockState.stateName"/>
@@ -19084,6 +19371,14 @@
 		<bind name="watch" value="'isMyChannel'; isIn(ChannelGroup.MYCHANNELS, groupIds)"/>
 		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
 		<bind name="watchDH" value="'isSelfPlayerCommander'; ['selfPlayerEntity.preBattlePlayerSimple.evIsCommanderChanged']; selfPlayerEntity.preBattlePlayerSimple.isCommander"/>
+		<bind name="watchDH" value="'selfPreBattleId'; ['selfPlayerEntity.preBattlePlayerSimple.evPreBattleIdChanged']; selfPlayerEntity.preBattlePlayerSimple.preBattleId"/>
+		<bind name="watchDH" value="'hasClanSquadModifier'; ['selfPlayerEntity.clanmanSupplyInfo.evHasClanSquadModifierChanged']; selfPlayerEntity.clanmanSupplyInfo.hasClanSquadModifier"/>
+		<bind name="watchDH" value="'role'; ['selfPlayerEntity.clanman.evRoleChanged']; selfPlayerEntity.clanman.role"/>
+		<bind name="watchDH" value="'clanId'; ['selfPlayerEntity.clanman.evClanIdChanged']; selfPlayerEntity.clanman.clanId"/>
+		<bind name="primaryEntityDH" value="'clanLadderInfoEntity'; CC.clanLadderInfo; clanId"/>
+		<bind name="watchDH" value="'leadingSquadId'; []; clanLadderInfoEntity.clanLadderInfo.leadingSquadId"/>
+		<bind name="primaryEntityDH" value="'clanTeamEntity'; CC.clanTeam; selfPreBattleId"/>
+		<bind name="watchDH" value="'squadId'; ['clanTeamEntity.clanTeam.evSquadIdChanged'];	clanTeamEntity.clanTeam.squadId"/>
 		<styleClass value="$DefaultMenuBehaviour"/>
 		<styleClass value="$ContextMenuDimentions"/>
 		<block className="MenuBg">
@@ -19232,6 +19527,39 @@
 				<bind name="request" value="'click'; 'leaveDivision'; {subtitle : 'IDS_LEAVE_DIVISION_QUESTION'}"/>
 			</block>
 		</block>
+		<block>
+			<bind name="visible" value="hasClanSquadModifier &amp;&amp; _isClanDivision &amp;&amp; isSelfPlayerCommander &amp;&amp; (role == 'commander' || role == 'executive_officer' || role == 'recruitment_officer')"/>
+			<styleClass value="$ContextMenuListItem"/>
+			<bind name="tooltip" value="'SwitchClanSquadContextMenu'; { _currentSquad: squadId, _leadingSquadId: leadingSquadId }; 13; null; 'switchClanSquadContextMenu'"/>
+			<block className="dock_submenu_item" type="native">
+				<styleClass value="$Fullsize"/>
+				<bind name="selected" value="switchClanSquadContextMenu"/>
+				<block>
+					<style>
+						<width value="100%"/>
+						<height value="100%"/>
+						<hitTest value="false"/>
+					</style>
+					<styleClass value="$ContextMenuListItemContent"/>
+					<block type="text">
+						<styleClass value="$TextDefault"/>
+						<styleClass value="$MiddleVAligned"/>
+						<bind name="text" value="'IDS_SWITCH_CLAN_SQUAD'"/>
+					</block>
+					<block className="button_expand_h" type="native">
+						<style>
+							<position value="absolute"/>
+							<right value="3px"/>
+						</style>
+						<styleClass value="$MouseDisable"/>
+						<styleClass value="$MiddleVAligned"/>
+					</block>
+					<style>
+						<flow value="horizontal"/>
+					</style>
+				</block>
+			</block>
+		</block>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'playersInDivision'; 'playersInDivision'"/>
 		<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'playersInvitedToDivision'; 'playersInvitedToDivision'"/>
 		<bind name="watch" value="'freePlaces'; (divisionData.maxPlayersInDivision - playersInDivision.length - playersInvitedToDivision.length)"/>
@@ -19354,6 +19682,7 @@
 		<bind name="watchDH" value="'selfIsInBattle'; ['selfPlayerEntity.preBattlePlayerSimple.evStateChanged']; selfPlayerEntity.preBattlePlayerSimple.isInBattle"/>
 		<bind name="primaryEntityDH" value="'preBattleEntity'; CC.preBattle; selfPreBattleId"/>
 		<bind name="watchDH" value="'isFormationInBattle'; ['preBattleEntity.preBattle.evStatusChanged']; preBattleEntity.preBattle.isInBattle"/>
+		<bind name="dispatch" value="'draggingChangedEv'; 'Tooltip.Close'; null; 2"/>
 		<styleClass value="$Fullsize"/>
 		<block>
 			<bind name="visible" value="!(_isEditing)"/>
@@ -19386,8 +19715,8 @@
 						<marginRight value="-4px"/>
 						<marginLeft value="2px"/>
 					</style>
-					<bind name="tooltip" value="'MouseInstructionTooltip'; { _mouseInstructions: [{_type: 'left', _instructionText: 'IDS_HINT_CLICK_TO_CHOOSE_ACTION'}], _maxWidth: 250}"/>
-					<bind name="tooltip" value="'ChatDropDownMenu'; {_dropDown: true, channelEntityId: _channelEntityId, _isDivision: _isDivision}; 6"/>
+					<bind name="tooltip" value="'DivisionHeaderTooltip'; {_isClanDivision: _isClanDivision}"/>
+					<bind name="tooltip" value="'ChatDropDownMenu'; {_dropDown: true, channelEntityId: _channelEntityId, _isDivision: _isDivision, _isClanDivision: _isClanDivision}; 6"/>
 				</block>
 				<block>
 					<bind name="visible" value="!_isDivision"/>
@@ -19401,20 +19730,20 @@
 					<bind name="visible" value="_isDivision"/>
 					<style>
 						<hitTest value="false"/>
-						<marginBottom value="5px"/>
+						<marginBottom value="4px"/>
 						<marginTop value="6px"/>
-						<marginLeft value="10px"/>
+						<marginLeft value="6px"/>
 						<marginRight value="3px"/>
 					</style>
-					<bind name="instance" value="'FormationHeader'; {}"/>
+					<bind name="instance" value="'FormationHeader'; {_isClanDivision: _isClanDivision}"/>
 				</block>
 				<block className="icon_navigate" type="native">
 					<bind name="visible" value="!(_isPasswordNeeded || _isSteadyChannel || _isInvitation || (_isDivision &amp;&amp; isFormationInBattle &amp;&amp; selfIsInBattle))"/>
 					<style>
 						<hitTest value="false"/>
 						<marginRight value="2px"/>
-						<top value="60%"/>
 					</style>
+					<bind name="style" value="'top'; _isDivision ? '50%' : '60%'"/>
 					<styleClass value="$MiddleVAligned"/>
 					<bind name="gotoAndStop!" value="'down'"/>
 				</block>
@@ -19596,6 +19925,7 @@
 		<bind name="entityDH" value="'channelEntity'; channelEntityId"/>
 		<bind name="actionIsDisplay" value="'setChannelChatBoxIsDisplay'; {entityId: channelEntityId}"/>
 		<bind name="draggableWindow" value="'chatBoxDragZone'; 'chatBoxPosition'; channelEntity.channel.channelId"/>
+		<bind name="changeDispatch" value="dragging; 'draggingChangedEv'; null; true"/>
 		<bind name="appear" value="'addedToStage'; 0.3; 0; {alpha: 0}; {alpha: 1}"/>
 		<bind name="collectionDH" value="CC.userPrefs; 'userPrefsCollection'"/>
 		<bind name="entityDH" value="'userPrefsEntity'; userPrefsCollection[0].id"/>
@@ -19611,6 +19941,10 @@
 		<bind name="action" value="'chatBoxPositionYchanged' ; 'setUserPref' ; {value : chatBoxPositionY, name : 'chatBoxPositionY', subName: subKey}"/>
 		<bind name="left" value="chatBoxPositionX"/>
 		<bind name="top" value="chatBoxPositionY"/>
+		<bind name="watch" value="'chatBoxWidth';	(userPrefs.chatBoxWidth &amp;&amp; userPrefs.chatBoxWidth[subKey])		?	userPrefs.chatBoxWidth[subKey]	: undefined"/>
+		<bind name="watch" value="'chatBoxHeight';	(userPrefs.chatBoxHeight &amp;&amp; userPrefs.chatBoxHeight[subKey])	?	userPrefs.chatBoxHeight[subKey]	: undefined"/>
+		<bind name="width" value="chatBoxWidth"/>
+		<bind name="height" value="chatBoxHeight"/>
 		<bind name="var" value="{isEditing: false}"/>
 		<bind name="catch" value="'chatChannelRenameStart';		{isEditing : true}"/>
 		<bind name="catch" value="'chatChannelRenameCancelled';	{isEditing : false}"/>
@@ -19619,6 +19953,9 @@
 		<bind name="watchDH" value="'isPasswordNeeded'; ['channelEntity.channel.evOpenChanged']; channelEntity.channel.isWaitingPassword"/>
 		<bind name="watch" value="'isSteadyChannel'; (channelEntity.channel.typeIdent == 'clan') || (channelEntity.channel.typeIdent == 'training_room')"/>
 		<bind name="watch" value="'isDivision'; channelEntity.channel.typeIdent == 'division'"/>
+		<bind name="firstEntityDH" value="'enterBattleEntity'; CC.enterBattle"/>
+		<bind name="watchDH" value="'selectedBattle'; ['enterBattleEntity.enterBattle.evBattleTypesUpdated']; enterBattleEntity.enterBattle.selectedBattle"/>
+		<bind name="watch" value="'isClanDivision'; selectedBattle.type == BattleTypes.CLAN_BATTLE"/>
 		<bind name="class" value="isDivision ? '$ChatBoxDivisionSize' : '$ChatBoxDefaultSize'"/>
 		<styleClass value="$ChatBoxDefaultPosition"/>
 		<block className="DeclareBlurLayer">
@@ -19675,7 +20012,8 @@
 				<bind name="instance" value="'ChatBoxHeader'; { 	_channelEntityId: channelEntityId, 
 												_isInvitation: isInvitation, 
 												_isPasswordNeeded: isPasswordNeeded, 
-												_isDivision: isDivision, 
+												_isDivision: isDivision,
+												_isClanDivision: isClanDivision, 
 												_isEditing: isEditing,
 												_isSteadyChannel: isSteadyChannel }"/>
 			</block>
@@ -19834,14 +20172,14 @@
 				</block>
 			</block>
 		</block>
-		<bind name="resize" value="'grip_top';			'up'; 'chatBoxWidth'; 'chatBoxHeight'; channelEntity.channel.channelId"/>
-		<bind name="resize" value="'grip_bottom';		'down'; 'chatBoxWidth'; 'chatBoxHeight'; channelEntity.channel.channelId"/>
-		<bind name="resize" value="'grip_left';			'left'; 'chatBoxWidth'; 'chatBoxHeight'; channelEntity.channel.channelId"/>
-		<bind name="resize" value="'grip_right';			'right'; 'chatBoxWidth'; 'chatBoxHeight'; channelEntity.channel.channelId"/>
-		<bind name="resize" value="'grip_top_left';		'up,left'; 'chatBoxWidth'; 'chatBoxHeight'; channelEntity.channel.channelId"/>
-		<bind name="resize" value="'grip_top_right';		'up,right'; 'chatBoxWidth'; 'chatBoxHeight'; channelEntity.channel.channelId"/>
-		<bind name="resize" value="'grip_bottom_left';	'down,left'; 'chatBoxWidth'; 'chatBoxHeight'; channelEntity.channel.channelId"/>
-		<bind name="resize" value="'grip_bottom_right';	'down,right'; 'chatBoxWidth'; 'chatBoxHeight'; channelEntity.channel.channelId"/>
+		<bind name="resize" value="'grip_top';			'up'; 'chatBoxWidth'; 'chatBoxHeight'; subKey"/>
+		<bind name="resize" value="'grip_bottom';		'down'; 'chatBoxWidth'; 'chatBoxHeight'; subKey"/>
+		<bind name="resize" value="'grip_left';			'left'; 'chatBoxWidth'; 'chatBoxHeight'; subKey"/>
+		<bind name="resize" value="'grip_right';			'right'; 'chatBoxWidth'; 'chatBoxHeight'; subKey"/>
+		<bind name="resize" value="'grip_top_left';		'up,left'; 'chatBoxWidth'; 'chatBoxHeight'; subKey"/>
+		<bind name="resize" value="'grip_top_right';		'up,right'; 'chatBoxWidth'; 'chatBoxHeight'; subKey"/>
+		<bind name="resize" value="'grip_bottom_left';	'down,left'; 'chatBoxWidth'; 'chatBoxHeight'; subKey"/>
+		<bind name="resize" value="'grip_bottom_right';	'down,right'; 'chatBoxWidth'; 'chatBoxHeight'; subKey"/>
 	</block>
 	<block className="ParticipantsPanel">
 		<styleClass value="$Fullsize"/>
@@ -19925,29 +20263,20 @@
 		<block>
 			<styleClass value="$Fullsize"/>
 			<style>
-				<marginLeft value="0px"/>
-				<marginRight value="0px"/>
-				<marginTop value="0px"/>
-				<marginBottom value="0px"/>
+				<scrollbar value="ModernScrollBar"/>
+				<scrollbarAlign value="right"/>
+				<scrollbarController value="lesta.unbound.style.UbScrollingControllerChat"/>
+				<scrollArea value="ModernScrollArea"/>
+				<scrollbarTrackMode value="scrollToCursor"/>
+				<wheelScrollSpeed value="30"/>
+				<overflow value="scroll"/>
+				<layout value="lesta.unbound.layout.measure.CarouselVariableItemSizeLayout"/>
+				<itemWidth value="260px"/>
+				<itemHeight value="22px"/>
 			</style>
-			<block>
-				<styleClass value="$Fullsize"/>
-				<style>
-					<scrollbar value="ModernScrollBar"/>
-					<scrollbarAlign value="right"/>
-					<scrollbarController value="lesta.unbound.style.UbScrollingControllerChat"/>
-					<scrollArea value="ModernScrollArea"/>
-					<scrollbarTrackMode value="scrollToCursor"/>
-					<wheelScrollSpeed value="30"/>
-					<overflow value="scroll"/>
-					<layout value="lesta.unbound.layout.measure.CarouselVariableItemSizeLayout"/>
-					<itemWidth value="260px"/>
-					<itemHeight value="22px"/>
-				</style>
-				<bind name="controller" value="lesta.unbound.controls.ControllerAutoScroll"/>
-				<bind name="event" value="'addedToStage'; instantScrollToLastItem"/>
-				<bind name="generatorDH" value="CC.channelMessage; 'ChannelMessageRenderer'; 'byChannel.' + _channelEntityId; {}"/>
-			</block>
+			<bind name="controller" value="lesta.unbound.controls.ControllerAutoScroll"/>
+			<bind name="event" value="'addedToStage'; instantScrollToLastItem"/>
+			<bind name="generatorDH" value="CC.channelMessage; 'ChannelMessageRenderer'; 'byChannel.' + _channelEntityId; {}"/>
 		</block>
 		<block>
 			<style>
@@ -20263,6 +20592,9 @@
 		<bind name="watchDH" value="'isPasswordNeeded';['channelEntity.channel.evOpenChanged'];channelEntity.channel.isWaitingPassword"/>
 		<bind name="watch" value="'isDivision'; channelEntity.channel.typeIdent == 'division'"/>
 		<bind name="watch" value="'isTrainingRoom'; channelEntity.channel.typeIdent == 'training_room'"/>
+		<bind name="firstEntityDH" value="'enterBattleEntity'; CC.enterBattle"/>
+		<bind name="watchDH" value="'selectedBattle'; ['enterBattleEntity.enterBattle.evBattleTypesUpdated']; enterBattleEntity.enterBattle.selectedBattle"/>
+		<bind name="watch" value="'isClanDivision'; selectedBattle.type == BattleTypes.CLAN_BATTLE"/>
 		<style>
 			<height value="30px"/>
 			<marginRight value="4px"/>
@@ -20284,10 +20616,9 @@
 			</style>
 			<bind name="watchDH" value="'isChatBoxOpened';['$dataRef.ref.channel.evChatBoxOpenChanged']; $dataRef.ref.channel.isChatBoxOpened"/>
 			<bind name="menu" value="!(isSteadyChannel) ? 'ChatDropDownMenu' : 'EmptyItem' ;
-					!(isSteadyChannel) ? {_dropDown: false, channelEntityId: $dataRef.ref.id} : null; null; 'chatDropDownMenuVisible'"/>
+					!(isSteadyChannel) ? {_dropDown: false, channelEntityId: $dataRef.ref.id, _isDivision: isDivision} : null; null; 'chatDropDownMenuVisible'"/>
 			<bind name="tooltip" value="'ChatBox'; {channelEntityId: $dataRef.ref.id}; TooltipBehaviour.window; null; 'chatBoxVisible'; 'chatBoxState'; isChatBoxOpened"/>
-			<bind name="tooltip" value="'OpenedChannelHintTooltip';{	_isSteadyChannel: isSteadyChannel,
-													_isChatBoxOpened: isChatBoxOpened}"/>
+			<bind name="tooltip" value="'OpenedChannelHintTooltip';{	_isSteadyChannel: isSteadyChannel, _isChatBoxOpened: isChatBoxOpened, _isDivision: isDivision}"/>
 			<bind name="gotoAndStop!" value="'down'"/>
 			<bind name="transition" value="rollOver || _active || chatDropDownMenuVisible; 0.15; {alpha: _active ? 0.9 : 0}; {alpha: 1}"/>
 			<block>
@@ -20300,16 +20631,7 @@
 				</style>
 				<block>
 					<styleClass value="$MiddleVAligned"/>
-					<bind name="visible" value="!isDivision"/>
-					<bind name="instance" value="'ChannelTitleWithIcon'; isDivision ? null : {channelEntityId: $dataRef.ref.id, _bold: false, _maxWidth: 120}"/>
-				</block>
-				<block>
-					<style>
-						<marginTop value="8px"/>
-						<hitTest value="false"/>
-					</style>
-					<bind name="visible" value="isDivision"/>
-					<bind name="instance" value="'FormationHeader'; isDivision ? {} : null"/>
+					<bind name="instance" value="'ChannelTitleWithIcon'; {channelEntityId: $dataRef.ref.id, _bold: isDivision, _maxWidth: 120, _isClanDivision: isClanDivision}"/>
 				</block>
 				<block>
 					<bind name="visible" value="!(isSteadyChannel)"/>
@@ -20346,26 +20668,31 @@
 		<bind name="watchDH" value="'accountOnline'; ['channel.user.ref.accountStatus.evOnlineChanged']; channel.user.ref.accountStatus.online"/>
 		<bind name="watchDH" value="'inBattle'; ['channel.user.ref.accountStatus.evInBattleChanged']; channel.user.ref.accountStatus.inBattle"/>
 		<bind name="watchDH" value="'channelTypeIdent'; ['channel.evTypeChanged']; channel.typeIdent"/>
-		<bind name="watchDH" value="'rawChannelName'; ['channel.evNameChanged', 'channel.user', 'channel.user.ref.accountName.evChanged'];	(channelTypeIdent == 'club')		? channel.name :
-																																(channel.nameIds != null)		? tr(channel.nameIds) :
+		<bind name="watchDH" value="'rawChannelName'; ['channel.evNameChanged', 'channel.user', 'channel.user.ref.accountName.evChanged'];		(channel.nameIds != null)		? tr(channel.nameIds) :
 																																(channel.user.ref != null)		? channel.user.ref.accountName.nickName
 																																								: channel.name"/>
-		<bind name="collectionDH" value="CC.club; 'clubs'"/>
-		<bind name="watch" value="'clubEntityId'; (channelTypeIdent == 'club')	? 	(clubs[0].club.id == rawChannelName)	? clubs[0].id : 
-								 									(clubs[1].club.id == rawChannelName)	? clubs[1].id :
-																	(clubs[2].club.id == rawChannelName)	? clubs[2].id
-																											: false
-																: false"/>
-		<bind name="entityDH" value="'entityClub'; clubEntityId"/>
-		<bind name="watchDH" value="'clubName';['entityClub.club.evNameChanged']; entityClub.club.name"/>
 		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
 		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
 		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
 		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
-		<bind name="watchDH" value="'clanId'; ['selfPlayerEntity.clanman.evClanIdChanged']; selfPlayerEntity.clanman.clanId"/>
+		<bind name="watchDH" value="'selfPreBattleId'; ['selfPlayerEntity.preBattlePlayerSimple.evPreBattleIdChanged']; selfPlayerEntity.preBattlePlayerSimple.preBattleId"/>
+		<bind name="primaryEntityDH" value="'preBattleEntity'; CC.preBattle; selfPreBattleId"/>
+		<bind name="watchDH" value="'preBattleOwnerId'; ['preBattleEntity.preBattle.evOwnerIdChanged']; preBattleEntity.preBattle.ownerId"/>
+		<bind name="primaryEntityDH" value="'preBattleOwnerPlayerEntity'; CC.preBattlePlayerSimple; preBattleOwnerId"/>
+		<bind name="watchDH" value="'clanId'; ['preBattleOwnerPlayerEntity.clanman.evClanIdChanged']; preBattleOwnerPlayerEntity.clanman.clanId"/>
 		<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; clanId"/>
 		<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
 		<bind name="watchDH" value="'clanName'; ['clanEntity.clanExtended.evNameChanged']; clanEntity.clanExtended.name"/>
+		<bind name="primaryEntityDH" value="'clanTeamEntity'; CC.clanTeam; selfPreBattleId"/>
+		<bind name="watchDH" value="'squadId'; ['clanTeamEntity.clanTeam.evSquadIdChanged']; clanTeamEntity.clanTeam.squadId"/>
+		<bind name="primaryEntityDH" value="'clanLadderInfoEntity'; CC.clanLadderInfo; clanId"/>
+		<bind name="watchDH" value="'leadingSquadId'; []; clanLadderInfoEntity.clanLadderInfo.leadingSquadId"/>
+		<bind name="watch" value="'isLeadingSquad'; squadId == leadingSquadId"/>
+		<bind name="watchDH" value="'hasClanSquadModifier'; ['selfPlayerEntity.clanmanSupplyInfo.evHasClanSquadModifierChanged']; selfPlayerEntity.clanmanSupplyInfo.hasClanSquadModifier"/>
+		<bind name="watchDH" value="'selfClanId'; ['selfPlayerEntity.clanman.evClanIdChanged']; selfPlayerEntity.clanman.clanId"/>
+		<bind name="primaryEntityDH" value="'selfClanEntity'; CC.clan; selfClanId"/>
+		<bind name="watchDH" value="'selfClanTag'; ['selfClanEntity.clan.evTagChanged']; selfClanEntity.clan.tag"/>
+		<bind name="watchDH" value="'selfClanName'; ['selfClanEntity.clanExtended.evNameChanged']; selfClanEntity.clanExtended.name"/>
 		<bind name="name" value="_channelHeader                                                                     ? '' :
             (channelTypeIdent == 'division' &amp;&amp; divisionEntranceData.divisionType == 'division')    ? ('channelTitle_' + channelTypeIdent) :
             (channelTypeIdent == 'clan')                                                           ? ('channelTitle_' + clanTag)
@@ -20380,26 +20707,15 @@
 					<marginRight value="2px"/>
 					<marginTop value="4px"/>
 				</style>
+				<bind name="style" value="'marginLeft'; channelTypeIdent == 'division' ? '-2px' : '0px'"/>
 				<innerBind elementName="channel_icon" name="gotoAndStop!" value="	(isInvitation)						? 'group_open' :
 													(channel.isSecured)					? 'group_closed' :
-													(channelTypeIdent == 'division' &amp;&amp; divisionEntranceData.divisionType == 'party') ? 'party'
+													(channelTypeIdent == 'division')	? 'division'
 													: channelTypeIdent"/>
 				<bind name="gotoAndPlay!" value="isInvitation ? 'flicker' : 'normal'"/>
 			</block>
 			<block>
 				<bind name="style" value="'marginTop'; _bold ? '-1px' : 'auto'"/>
-				<block type="text">
-					<bind name="fade" value="countNewMessages != 0; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
-					<styleClass value="$TextDefault"/>
-					<bind name="class" value="_bold ? '$Bold' : '$None'"/>
-					<bind name="class" value="	(channelTypeIdent == 'division') ? '$FontColorGolden':
-								(channelTypeIdent == 'club')	 ? '$FontColorWhite' :
-								(channelTypeIdent == 'clan')	 ? '$FontColorWhite'
-																 : '$None'"/>
-					<bind name="class" value="_channelHeader ? '$FontColorBlueish' : '$None'"/>
-					<bind name="style" value="'width'; countNewMessages &lt; 10 ? 7 : 16"/>
-					<bind name="pureText" value="(countNewMessages==0) ? '' : '(' + countNewMessages + ')'"/>
-				</block>
 				<block>
 					<bind name="visible" value="(!(accountOnline) || inBattle) &amp;&amp; (channel.user.ref != null)"/>
 					<style>
@@ -20432,13 +20748,39 @@
 							 (channel.typeIdent == 'clan')	? '$FontColorWhite' :
 							 (_channelHeader)	? '$FontColorBlueish'
 												: '$FontColorDefault'"/>
-					<bind name="watch" value="'_channelName'; 	(channelTypeIdent == 'clan')														? '['+clanTag+'] ' + clanName :
-												(channelTypeIdent == 'club')														? clubName :
-											 	(channelTypeIdent == 'division' &amp;&amp; divisionEntranceData.divisionType == 'party')	? (divisionData.creatorInfo.clubName + ' + ' + toLowerCase(tr('IDS_MERCENARIES')))
+					<bind name="watch" value="'_channelName'; 	(channelTypeIdent == 'clan')														? 	'['+selfClanTag+'] ' + selfClanName :
+												(channelTypeIdent == 'division') &amp;&amp; (_isClanDivision)								? 	'['+clanTag+'] ' + tr( hasClanSquadModifier ? 'IDS_CLAN_SQUAD_' + squadId : 'IDS_DIVISION' ) :
+											 	(channelTypeIdent == 'division')													? 	tr('IDS_DIVISION')
 												: (rawChannelName + ((channel.ownerNickName != null &amp;&amp; _isSearch)	? ' (' + channel.ownerNickName + ')'
 																													: ''))"/>
 					<bind name="text" value="channelTypeIdent != 'clan'	?	_channelName :
-							clanTag &amp;&amp; clanName			?	_channelName : 'IDS_CLAN_CHAT_HEADER'"/>
+							selfClanTag &amp;&amp; selfClanName	?	_channelName : 'IDS_CLAN_CHAT_HEADER'"/>
+				</block>
+				<block>
+					<bind name="watch" value="'isLeadingIconVisible'; (channelTypeIdent == 'division') &amp;&amp; _isClanDivision &amp;&amp; hasClanSquadModifier &amp;&amp; isLeadingSquad"/>
+					<bind name="visible" value="isLeadingIconVisible"/>
+					<style>
+						<hitTest value="false"/>
+						<marginRight value="4px"/>
+						<marginLeft value="Ч4px"/>
+						<marginTop value="4px"/>
+					</style>
+					<bind name="instance" value="'LeadingClanSquadIcon'; isLeadingIconVisible ? { _isGolden: true } : null"/>
+				</block>
+				<block type="text">
+					<bind name="fade" value="countNewMessages != 0; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
+					<styleClass value="$TextDefault"/>
+					<style>
+						<marginTop value="2px"/>
+					</style>
+					<bind name="class" value="_bold ? '$Bold' : '$None'"/>
+					<bind name="class" value="	(channelTypeIdent == 'division') ? '$FontColorGolden':
+								(channelTypeIdent == 'club')	 ? '$FontColorWhite' :
+								(channelTypeIdent == 'clan')	 ? '$FontColorWhite'
+																 : '$None'"/>
+					<bind name="class" value="_channelHeader ? '$FontColorBlueish' : '$None'"/>
+					<bind name="style" value="'width'; countNewMessages &lt; 10 ? 7 : 16"/>
+					<bind name="pureText" value="(countNewMessages==0) ? '' : '(' + countNewMessages + ')'"/>
 				</block>
 				<style>
 					<flow value="horizontal"/>
@@ -20645,7 +20987,9 @@
 					<marginTop value="10px"/>
 					<marginBottom value="5px"/>
 				</style>
-				<bind name="instance" value="'MouseInstruction'; {_type: 'left', _instructionText: _isChatBoxOpened ? 'IDS_HINT_COLLAPSE_WINDOW' : 'IDS_HINT_LEFT_CLICK_TO_OPEN_CHAT', _maxWidth: 220}"/>
+				<bind name="instance" value="'MouseInstruction'; {_type: 'left', _instructionText: _isChatBoxOpened ? 	'IDS_HINT_COLLAPSE_WINDOW' : 
+	 																									_isDivision ? 'IDS_HINT_EXPAND_WINDOW'
+	 																												: 'IDS_HINT_LEFT_CLICK_TO_OPEN_CHAT', _maxWidth: 220}"/>
 			</block>
 		</block>
 		<block>
@@ -20697,6 +21041,7 @@
 			<style>
 				<width value="100%"/>
 			</style>
+			<bind name="visible" value="messageEntity.channelMessage.extraData == null"/>
 			<block type="text">
 				<style>
 					<marginLeft value="8px"/>
@@ -20705,7 +21050,6 @@
 					<fontSize value="13"/>
 					<fontFamily value="$ZurichCondensed"/>
 				</style>
-				<bind name="visible" value="messageEntity.channelMessage.extraData == null"/>
 				<bind name="text" value="messageEntity.channelMessage.time"/>
 			</block>
 			<block type="text">
@@ -20743,10 +21087,10 @@
 			</style>
 			<block type="text">
 				<style>
-					<marginLeft value="2px"/>
+					<marginLeft value="8px"/>
 					<marginTop value="2px"/>
 					<width value="36px"/>
-					<alpha value="0.5"/>
+					<alpha value="0.25"/>
 					<fontSize value="13"/>
 					<fontFamily value="$ZurichCondensed"/>
 				</style>
@@ -20767,6 +21111,7 @@
 			<bind name="watch" value="'progress';		messageEntity.channelMessage.extraData.progress"/>
 			<bind name="watch" value="'ratingDelta';		messageEntity.channelMessage.extraData.ratingDelta"/>
 			<bind name="watch" value="'stageResult';		messageEntity.channelMessage.extraData.stageResult"/>
+			<bind name="watch" value="'squadId';			messageEntity.channelMessage.extraData.squadId"/>
 			<bind name="watch" value="'ratingDeltaStr';	ratingDelta &gt; 0 ? ('+' + ratingDelta) : ratingDelta"/>
 			<bind name="watch" value="'clanLeagueStr';	(stageResult == 'division_victory') 	? 'IDS_CLAN_BATTLE_RAISED_DIVISION' :
 										(stageResult == 'division_defeat') 		? 'IDS_CLAN_BATTLE_DESCENDED_DIVISION' :
@@ -20779,20 +21124,19 @@
 																				: ''"/>
 			<block>
 				<style>
-					<width value="100%f"/>
+					<width value="100%"/>
+					<marginTop value="1px"/>
 				</style>
 				<block>
 					<style>
-						<width value="100%f"/>
-						<marginTop value="-1px"/>
+						<width value="100%"/>
+						<marginBottom value="-3px"/>
 					</style>
 					<block type="text">
 						<style>
-							<width value="100%f"/>
 							<marginRight value="4px"/>
 							<leading value="-3"/>
 							<fontSize value="15"/>
-							<selectable value="true"/>
 						</style>
 						<bind name="class" value="	(battleResult == 'defeat') 	? '$FontColorCompareNegative':
 									(battleResult == 'draw') 	? '$FontColorBlueish'
@@ -20803,11 +21147,9 @@
 					<block type="text">
 						<bind name="visible" value="ratingDeltaStr != 0"/>
 						<style>
-							<width value="100%f"/>
 							<marginRight value="4px"/>
 							<leading value="-3"/>
 							<fontSize value="15"/>
-							<selectable value="true"/>
 						</style>
 						<bind name="class" value="'$FontFamilyDefaultBold'"/>
 						<bind name="class" value="	(battleResult == 'defeat') 	? '$FontColorCompareNegative':
@@ -20831,11 +21173,9 @@
 				</block>
 				<block type="text">
 					<style>
-						<width value="100%f"/>
 						<marginRight value="4px"/>
-						<leading value="-3"/>
+						<leading value="-2"/>
 						<fontSize value="15"/>
-						<selectable value="true"/>
 					</style>
 					<bind name="class" value="(stage == 'league') 	? '$FontFamilyDefaultBold' 		: '$FontFamilyDefault'"/>
 					<bind name="class" value="(stage == 'league') 	? 	(battleResult == 'defeat') 	? '$FontColorCompareNegative':
@@ -20846,16 +21186,23 @@
 				</block>
 				<block>
 					<style>
-						<width value="100%f"/>
-						<marginTop value="-4px"/>
+						<marginTop value="-3px"/>
 					</style>
 					<block type="text">
 						<style>
-							<width value="100%f"/>
 							<marginRight value="4px"/>
 							<leading value="-3"/>
 							<fontSize value="15"/>
-							<selectable value="true"/>
+						</style>
+						<bind name="class" value="'$FontColorDefault'"/>
+						<styleClass value="$FontFamilyDefault"/>
+						<bind name="text" value="tr('IDS_CLAN_SQUAD_' + squadId) + ','"/>
+					</block>
+					<block type="text">
+						<style>
+							<marginRight value="4px"/>
+							<leading value="-3"/>
+							<fontSize value="15"/>
 						</style>
 						<bind name="class" value="'$FontColorDefault'"/>
 						<styleClass value="$FontFamilyDefault"/>
@@ -20863,11 +21210,10 @@
 					</block>
 					<block type="text">
 						<style>
-							<width value="100%f"/>
 							<marginRight value="4px"/>
 							<leading value="-3"/>
 							<fontSize value="15"/>
-							<selectable value="true"/>
+							<alpha value="0.8"/>
 						</style>
 						<styleClass value="$FontFamilyDefaultBold"/>
 						<bind name="class" value="'$FontColorDefault'"/>
@@ -20876,11 +21222,9 @@
 					</block>
 					<block type="text">
 						<style>
-							<width value="100%f"/>
 							<marginRight value="4px"/>
 							<leading value="-3"/>
 							<fontSize value="15"/>
-							<selectable value="true"/>
 						</style>
 						<styleClass value="$FontFamilyDefault"/>
 						<bind name="class" value="'$FontColorDefault'"/>
@@ -20895,6 +21239,174 @@
 			<style>
 				<flow value="horizontal"/>
 			</style>
+		</block>
+	</block>
+	<block className="ClanSquadRatingInfo">
+		<bind name="entityDH" value="'clanSquadEntity'; _clanSquadEntityId ? _clanSquadEntityId : $dataRef.ref.id"/>
+		<bind name="watchDH" value="'league'; 	['clanSquadEntity.clanSquadLadderInfo.evLeagueIdChanged']; 		clanSquadEntity.clanSquadLadderInfo.leagueId"/>
+		<bind name="watchDH" value="'division'; 	['clanSquadEntity.clanSquadLadderInfo.evDivisionIdChanged']; 	clanSquadEntity.clanSquadLadderInfo.divisionId"/>
+		<bind name="watchDH" value="'rating'; 	['clanSquadEntity.clanSquadLadderInfo.evRatingChanged'];		clanSquadEntity.clanSquadLadderInfo.rating"/>
+		<bind name="watch" value="'isLeading'; clanSquadEntity.clanSquadLadderInfo.squadId == _leadingSquadId"/>
+		<bind name="watch" value="'selected'; _selected || _currentSquad == clanSquadEntity.clanSquadLadderInfo.squadId"/>
+		<style>
+			<width value="100%"/>
+		</style>
+		<bind name="style" value="'alpha'; selected ? 1.0 : 0.8"/>
+		<block>
+			<style>
+				<marginTop value="12px"/>
+				<marginLeft value="12px"/>
+				<marginBottom value="12px"/>
+			</style>
+			<block>
+				<block type="text">
+					<styleClass value="$TextDefaultBold17NM"/>
+					<bind name="class" value="selected ? '$FontColorGolden' : '$FontColorDefault'"/>
+					<bind name="text" value="tr('IDS_CLAN_SQUAD_' + clanSquadEntity.clanSquadLadderInfo.squadId)"/>
+				</block>
+				<block>
+					<bind name="visible" value="isLeading"/>
+					<style>
+						<marginLeft value="8px"/>
+						<marginTop value="-3px"/>
+						<marginBottom value="-4px"/>
+					</style>
+					<bind name="instance" value="'LeadingClanSquadIcon'; isLeading ? { _isGolden: selected } : null"/>
+				</block>
+				<style>
+					<flow value="horizontal"/>
+				</style>
+			</block>
+			<block>
+				<style>
+					<marginTop value="12px"/>
+				</style>
+				<block type="text">
+					<style>
+						<marginRight value="8px"/>
+						<leading value="-3"/>
+					</style>
+					<styleClass value="$TextDefault17NM"/>
+					<bind name="text" value="tr('IDS_CLAN_LEAGUE_' + league))"/>
+				</block>
+				<block type="text">
+					<style>
+						<marginRight value="8px"/>
+						<leading value="-3"/>
+						<alpha value="0.8"/>
+					</style>
+					<styleClass value="$TextDefaultBold17NM"/>
+					<bind name="text" value="RDigits.rdigits[division]"/>
+				</block>
+				<block type="text">
+					<style>
+						<leading value="-3"/>
+					</style>
+					<styleClass value="$TextDefault17NM"/>
+					<bind name="text" value="rating"/>
+				</block>
+				<style>
+					<flow value="horizontal"/>
+				</style>
+			</block>
+			<block type="text">
+				<bind name="visible" value="isLeading"/>
+				<style>
+					<marginTop value="12px"/>
+				</style>
+				<styleClass value="$TextDefault17NM"/>
+				<bind name="text" value="'IDS_LEADING_CLAN_SQUAD'"/>
+			</block>
+		</block>
+		<block>
+			<bind name="visible" value="selected"/>
+			<style>
+				<right value="12px"/>
+				<top value="12px"/>
+				<position value="absolute"/>
+			</style>
+			<block className="icon_check" type="native"/>
+		</block>
+		<block className="HorizontalDivider">
+			<styleClass value="$PxHorizontalCorrection"/>
+			<style>
+				<width value="100%"/>
+				<height value="3px"/>
+			</style>
+			<block className="divider_h" type="native">
+				<styleClass value="$Fullsize"/>
+			</block>
+		</block>
+	</block>
+	<block className="DivisionHeaderTooltip">
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPreBattleId'; ['selfPlayerEntity.preBattlePlayerSimple.evPreBattleIdChanged']; selfPlayerEntity.preBattlePlayerSimple.preBattleId"/>
+		<bind name="watchDH" value="'hasClanSquadModifier'; ['selfPlayerEntity.clanmanSupplyInfo.evHasClanSquadModifierChanged']; selfPlayerEntity.clanmanSupplyInfo.hasClanSquadModifier"/>
+		<bind name="watchDH" value="'clanId'; ['selfPlayerEntity.clanman.evClanIdChanged']; selfPlayerEntity.clanman.clanId"/>
+		<bind name="primaryEntityDH" value="'clanLadderInfoEntity'; CC.clanLadderInfo; clanId"/>
+		<bind name="watchDH" value="'leadingSquadId'; []; clanLadderInfoEntity.clanLadderInfo.leadingSquadId"/>
+		<bind name="primaryEntityDH" value="'clanTeamEntity'; CC.clanTeam; selfPreBattleId"/>
+		<bind name="watchDH" value="'squadId'; ['clanTeamEntity.clanTeam.evSquadIdChanged'];	clanTeamEntity.clanTeam.squadId"/>
+		<styleClass value="$DefaultTooltipBehaviour"/>
+		<style>
+			<width value="250px"/>
+			<hitTest value="false"/>
+		</style>
+		<block className="DeclareBlurLayer">
+			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+			<bind name="visible" value="optionData.blurEnabled"/>
+			<block className="transparentPixel" type="native">
+				<bind name="blurLayer" value="0"/>
+			</block>
+			<style>
+				<position value="absolute"/>
+			</style>
+		</block>
+		<block className="BlurMap">
+			<bind name="visible" value="optionData.blurEnabled"/>
+			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+			<style>
+				<hitTest value="false"/>
+			</style>
+			<styleClass value="$FullsizeAbsolute"/>
+			<block className="mc_blurmap_medium" type="native">
+				<bind name="appear" value="'startShow'; 0.3; 0; {alpha: 0}; {alpha: 1}"/>
+				<bind name="appear" value="'startHide'; 0.15; 0; {alpha: 1}; {alpha: 0}"/>
+				<styleClass value="$FullsizeAbsolute"/>
+				<bind name="blurMap" value="0"/>
+			</block>
+			<block className="inner_panel" type="native">
+				<style>
+					<alpha value="0.5"/>
+				</style>
+				<styleClass value="$FullsizeAbsolute"/>
+			</block>
+		</block>
+		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+		<block className="contrast_panel" type="native">
+			<styleClass value="$FullsizeAbsolute"/>
+			<bind name="visible" value="optionData.contrast"/>
+		</block>
+		<block className="hint_panel" type="native">
+			<style>
+				<position value="absolute"/>
+			</style>
+			<styleClass value="$Fullsize"/>
+		</block>
+		<block>
+			<bind name="visible" value="_isClanDivision &amp;&amp; hasClanSquadModifier"/>
+			<style>
+				<width value="100%"/>
+			</style>
+			<bind name="collectionRepeatDH" value="CC.clanSquadLadderInfo; 'ClanSquadRatingInfo'; ''; {_currentSquad: squadId, _leadingSquadId: leadingSquadId}"/>
+		</block>
+		<block>
+			<style>
+				<marginTop value="12px"/>
+				<marginLeft value="10px"/>
+				<marginBottom value="12px"/>
+			</style>
+			<bind name="instance" value="'MouseInstruction'; { _type: 'left', _instructionText: 'IDS_HINT_CLICK_TO_CHOOSE_ACTION', _maxWidth: 220 }"/>
 		</block>
 	</block>
 	<css name="$DefaultContactsSize">
@@ -25891,19 +26403,28 @@
 		</block>
 	</block>
 	<block className="CamoColorPreview">
-		<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
 		<bind name="firstEntityDH" value="'resourceEntity'; CC.accountResource"/>
 		<bind name="entityDH" value="'colorSchemeEntity'; $value"/>
 		<bind name="watchDH" value="'operationsAccountLocked'; ['resourceEntity.accountResource.evOperationsLockChanged']; resourceEntity.accountResource.operationsLocked"/>
 		<style>
 			<marginRight value="15px"/>
+			<backgroundColor value="0x01FFFFFF"/>
 		</style>
 		<bind name="watch" value="'isInstalled'; 		!!(_exteriors[_exteriorId])"/>
 		<bind name="watch" value="'thisColorPicked'; 	(_pickedCamoColorScheme == $value)"/>
 		<bind name="watch" value="'allowClick'; 			(_pickedCamoColorScheme != $value)"/>
 		<bind name="watch" value="'thisColorPreviewed'; 	(_previewCamoColorScheme == $value)"/>
+		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
+		<bind name="watchDH" value="'shipId'; ['dockEntity.shipSelection.evShipUpdate']; dockEntity.shipSelection.currentShipId"/>
+		<bind name="watchDH" value="'shipIdForModuleInset'; ['dockEntity.shipSelection.evShipViewUpdate']; dockEntity.shipSelection.currentShipIdForModuleInset"/>
+		<bind name="primaryEntityDH" value="'shipOwnEntity'; CC.ownShip; shipId; 'evUpdate'"/>
+		<bind name="watchDH" value="'playerShipInfo'; ['shipOwnEntity.ownShip.evUpdate', 'shipOwnEntity.ownShip.evCrewChanged']; shipOwnEntity.ownShip"/>
+		<bind name="tooltip" value="'SimpleWarningTooltip';	playerShipInfo.isInFormation	? {_text: tr('IDS_SET_UNREADY_DIVISION_FIRST_TO_OPERATE_CAMO'), _maxWidth: 280} :
+											playerShipInfo.isLocked			? {_text: tr('IDS_LEAVE_BATTLE_FIRST_TO_OPERATE_CAMOUFLAGE'), _maxWidth: 280}
+																			: null"/>
 		<block>
-			<bind name="style" value="'hitTest'; operationsAccountLocked ? false : true"/>
+			<bind name="controller" value="lesta.unbound.controls.UbInteractiveController"/>
+			<bind name="style" value="'hitTest'; operationsAccountLocked || playerShipInfo.isLocked ? false : true"/>
 			<bind name="action" value="'click'; isInstalled 	? allowClick	? 'changeCamouflageColor'
 															: null
 											: 'previewExterior'; 
@@ -26201,6 +26722,7 @@
 		<bind name="action" value="'animateNewEv'; 'playGiftBoxSound'"/>
 		<bind name="dispatch" value="'animateGiftboxShowEv'; ((rewardsAmount != 0) &amp;&amp; (rewardsAmount != rewardsAmountNext)) ? 'animateAddEv' : null; null; 2; 4"/>
 		<bind name="dispatch" value="'animateAddEv'; 'animateGiftboxCounterEv'; null; 2; 0.7"/>
+		<bind name="appear" value="'animateAddEv'; 0.3; 0.2; {alpha: 0, top: 5}; {alpha: 1, top: 0}; 3"/>
 		<bind name="action" value="'animateAddEv'; 'playGiftBoxSound'"/>
 		<bind name="dispatch" value="'animateGiftboxShowEv'; ((rewardsAmount != 0) &amp;&amp; (rewardsAmount == rewardsAmountNext)) ? 'animateSimpleShowEv' : null; null; 0"/>
 		<bind name="appear" value="'animateSimpleShowEv'; 0.3; 0.2; {alpha: 0, top: 5}; {alpha: 1, top: 0}; 3"/>
@@ -26214,7 +26736,6 @@
 			<style>
 				<backgroundColor value="0x01000000"/>
 			</style>
-			<bind name="fade" value="!isHidden; 0.15; {alpha: 0, top: -10}; {alpha: 1, top: 0}"/>
 			<bind name="transition" value="(visibilityState == 2); 0.15; {alpha: 1}; {alpha: 0.6}"/>
 			<block className="quest_thumb_title" type="native">
 				<bind name="transition" value="rollOver &amp;&amp; !(mouseDown); 0.1; {alpha: 0.75}; {alpha: 1.0}"/>
@@ -26226,9 +26747,9 @@
 			</block>
 			<block type="text">
 				<styleClass value="$TextHeaderWhiteBold"/>
-				<styleClass value="$MiddleAligned"/>
 				<style>
 					<marginTop value="4px"/>
+					<marginLeft value="10px"/>
 				</style>
 				<bind name="text" value="toUpperCase(tr('IDS_GIFTS_FOR_HEROES'))"/>
 			</block>
@@ -26377,9 +26898,7 @@
 		disappearDuration: 0.1,
 		disappearOffset: -10.0,
 		tinyOffset: 0,
-		rightOffset: -67,
-		bottomOffset: 0,
-		isTipCenter: true
+		rightOffset: -67
 	}"/>
 	</css>
 	<block className="GiftboxInfotip">
@@ -26387,119 +26906,127 @@
 		<bind name="transition" value="shipOverview.enabled; shipOverview.enabled ? 0.4 : 0.25; {alpha: 1}; {alpha: 0}; {alpha: 1}; 2; !(shipOverview.enabled) &amp;&amp; !(inPort) ? 0.15 : 0.5"/>
 		<bind name="style" value="'hitTest'; !(shipOverview.enabled)"/>
 		<styleClass value="$GiftboxInfotipBehaviour"/>
-		<block className="MenuBg">
-			<styleClass value="$FullsizeAbsolute"/>
-			<block className="DeclareBlurLayer">
-				<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
-				<bind name="visible" value="optionData.blurEnabled"/>
-				<block className="transparentPixel" type="native">
-					<bind name="blurLayer" value="0"/>
-				</block>
-				<style>
-					<position value="absolute"/>
-				</style>
-			</block>
-			<block className="BlurMap">
-				<bind name="visible" value="optionData.blurEnabled"/>
-				<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
-				<style>
-					<hitTest value="false"/>
-				</style>
-				<styleClass value="$FullsizeAbsolute"/>
-				<block className="mc_blurmap_medium" type="native">
-					<bind name="appear" value="'startShow'; 0.3; 0; {alpha: 0}; {alpha: 1}"/>
-					<bind name="appear" value="'startHide'; 0.15; 0; {alpha: 1}; {alpha: 0}"/>
-					<styleClass value="$FullsizeAbsolute"/>
-					<bind name="blurMap" value="0"/>
-				</block>
-				<block className="inner_panel" type="native">
-					<style>
-						<alpha value="0.5"/>
-					</style>
-					<styleClass value="$FullsizeAbsolute"/>
-				</block>
-			</block>
-			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
-			<block className="contrast_panel" type="native">
-				<bind name="visible" value="optionData.contrast &amp;&amp; !(true)"/>
-				<styleClass value="$FullsizeAbsolute"/>
-			</block>
-			<block>
-				<styleClass value="$FullsizeAbsolute"/>
-				<bind name="visible" value="!(true)"/>
-				<block className="hint_panel" type="native">
-					<styleClass value="$FullsizeAbsolute"/>
-				</block>
-			</block>
-			<block>
-				<styleClass value="$FullsizeAbsolute"/>
-				<bind name="visible" value="true"/>
-				<block className="dock_panel" type="native">
-					<styleClass value="$FullsizeAbsolute"/>
-					<style>
-						<marginBottom value="-19px"/>
-						<marginRight value="-14px"/>
-						<marginLeft value="-14px"/>
-						<marginTop value="-9px"/>
-					</style>
-				</block>
-			</block>
-		</block>
-		<block className="GiftboxRewardsContent">
-			<bind name="collectionDH" value="CC.rewardComponent; 'specialRewardsCollection'; 'special.sort'"/>
-			<bind name="collectionDH" value="CC.rewardComponent; 'regularRewardsCollection'; 'common.sort'"/>
-			<bind name="name" value="'GiftboxRewardsWindow'"/>
+		<style>
+			<width value="430px"/>
+		</style>
+		<block>
 			<style>
-				<width value="425px"/>
+				<width value="100%"/>
 			</style>
-			<block type="text">
-				<styleClass value="$InfoBlockHorizontalIndentNoWidth"/>
-				<style>
-					<marginTop value="18px"/>
-					<width value="100%"/>
-					<marginBottom value="2px"/>
-					<textAlign value="center"/>
-				</style>
-				<styleClass value="$TextHeaderBigDefaultTech"/>
-				<bind name="text" value="'IDS_GIFTS_EARNED_AVAILABLE_INFO'"/>
-			</block>
-			<block>
-				<styleClass value="$InfoBlockHorizontalIndentNoWidth"/>
-				<bind name="visible" value="regularRewardsCollection.length &gt; 0"/>
-				<style>
-					<flow value="htile"/>
-					<marginBottom value="12px"/>
-					<width value="425px"/>
-				</style>
-				<bind name="repeat" value="regularRewardsCollection; 'RewardItemEntity'"/>
-			</block>
-			<block>
-				<style>
-					<width value="100%"/>
-				</style>
-				<bind name="visible" value="regularRewardsCollection.length &gt; 0 &amp;&amp; specialRewardsCollection.length &gt; 0 "/>
-				<block className="HorizontalDivider">
-					<styleClass value="$PxHorizontalCorrection"/>
+			<block className="MenuBg">
+				<styleClass value="$FullsizeAbsolute"/>
+				<block className="DeclareBlurLayer">
+					<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+					<bind name="visible" value="optionData.blurEnabled"/>
+					<block className="transparentPixel" type="native">
+						<bind name="blurLayer" value="0"/>
+					</block>
 					<style>
-						<width value="100%"/>
-						<height value="3px"/>
+						<position value="absolute"/>
 					</style>
-					<block className="divider_h" type="native">
-						<styleClass value="$Fullsize"/>
+				</block>
+				<block className="BlurMap">
+					<bind name="visible" value="optionData.blurEnabled"/>
+					<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+					<style>
+						<hitTest value="false"/>
+					</style>
+					<styleClass value="$FullsizeAbsolute"/>
+					<block className="mc_blurmap_medium" type="native">
+						<bind name="appear" value="'startShow'; 0.3; 0; {alpha: 0}; {alpha: 1}"/>
+						<bind name="appear" value="'startHide'; 0.15; 0; {alpha: 1}; {alpha: 0}"/>
+						<styleClass value="$FullsizeAbsolute"/>
+						<bind name="blurMap" value="0"/>
+					</block>
+					<block className="inner_panel" type="native">
+						<style>
+							<alpha value="0.5"/>
+						</style>
+						<styleClass value="$FullsizeAbsolute"/>
+					</block>
+				</block>
+				<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
+				<block className="contrast_panel" type="native">
+					<bind name="visible" value="optionData.contrast &amp;&amp; !(true)"/>
+					<styleClass value="$FullsizeAbsolute"/>
+				</block>
+				<block>
+					<styleClass value="$FullsizeAbsolute"/>
+					<bind name="visible" value="!(true)"/>
+					<block className="hint_panel" type="native">
+						<styleClass value="$FullsizeAbsolute"/>
+					</block>
+				</block>
+				<block>
+					<styleClass value="$FullsizeAbsolute"/>
+					<bind name="visible" value="true"/>
+					<block className="dock_panel" type="native">
+						<styleClass value="$FullsizeAbsolute"/>
+						<style>
+							<marginBottom value="-19px"/>
+							<marginRight value="-14px"/>
+							<marginLeft value="-14px"/>
+							<marginTop value="-9px"/>
+						</style>
 					</block>
 				</block>
 			</block>
-			<block>
-				<styleClass value="$InfoBlockHorizontalIndentNoWidth"/>
-				<bind name="visible" value="specialRewardsCollection.length &gt; 0"/>
-				<style>
-					<flow value="htile"/>
-					<marginTop value="14px"/>
-					<marginBottom value="18px"/>
-					<width value="425px"/>
-				</style>
-				<bind name="repeat" value="specialRewardsCollection; 'RewardItemEntity'"/>
+			<block className="GiftBoxRewardsHeader">
+				<block type="text">
+					<styleClass value="$InfoBlockHorizontalIndentNoWidth"/>
+					<style>
+						<marginTop value="8px"/>
+						<marginLeft value="12px"/>
+						<marginBottom value="8px"/>
+					</style>
+					<styleClass value="$TextHeader"/>
+					<bind name="text" value="'IDS_GIFTS_EARNED_AVAILABLE_INFO'"/>
+				</block>
 			</block>
+			<block>
+				<styleClass value="$DefaultScrollBar"/>
+				<style>
+					<width value="100%"/>
+					<maxHeight value="620"/>
+					<overflow value="scroll"/>
+				</style>
+				<bind name="var" value="{sliceRewards: false}"/>
+				<block className="GiftboxRewardsContent">
+					<style>
+						<width value="430px"/>
+					</style>
+					<bind name="collectionDH" value="CC.rewardComponent; 'rewardsCollectionFull'; 'rewards.sorted'"/>
+					<bind name="slice" value="'rewardsCollection'; DES_rewardsCollectionFull; 0; 18"/>
+					<bind name="watch" value="'moreItemsCount'; rewardsCollectionFull.length - rewardsCollection.length"/>
+					<bind name="name" value="'GiftboxRewardsWindow'"/>
+					<block>
+						<styleClass value="$InfoBlockHorizontalIndentNoWidth"/>
+						<bind name="visible" value="rewardsCollectionFull.length &gt; 0"/>
+						<style>
+							<flow value="htile"/>
+							<marginTop value="14px"/>
+							<marginBottom value="18px"/>
+							<width value="410px"/>
+						</style>
+						<bind name="repeat" value="sliceRewards ? rewardsCollection : rewardsCollectionFull; 'RewardItemEntity'"/>
+					</block>
+					<block>
+						<bind name="visible" value="sliceRewards &amp;&amp; moreItemsCount &gt; 0"/>
+						<style>
+							<marginTop value="-13px"/>
+							<marginBottom value="6px"/>
+						</style>
+						<bind name="instance" value="'MoreRewardsText'; moreItemsCount &gt; 0 ? {_count: moreItemsCount} : null"/>
+					</block>
+				</block>
+			</block>
+		</block>
+		<block>
+			<style>
+				<height value="30px"/>
+				<width value="100%"/>
+				<hitTest value="false"/>
+			</style>
 		</block>
 	</block>
 	<block className="GiftboxTooltip">
@@ -26545,60 +27072,45 @@
 				<position value="absolute"/>
 			</style>
 		</block>
-		<block className="GiftboxRewardsContent">
-			<bind name="collectionDH" value="CC.rewardComponent; 'specialRewardsCollection'; 'special.sort'"/>
-			<bind name="collectionDH" value="CC.rewardComponent; 'regularRewardsCollection'; 'common.sort'"/>
-			<bind name="name" value="'GiftboxRewardsWindow'"/>
-			<style>
-				<width value="425px"/>
-			</style>
+		<block className="GiftBoxRewardsHeader">
 			<block type="text">
 				<styleClass value="$InfoBlockHorizontalIndentNoWidth"/>
 				<style>
-					<marginTop value="18px"/>
-					<width value="100%"/>
-					<marginBottom value="2px"/>
-					<textAlign value="center"/>
+					<marginTop value="8px"/>
+					<marginLeft value="12px"/>
+					<marginBottom value="8px"/>
 				</style>
-				<styleClass value="$TextHeaderBigDefaultTech"/>
+				<styleClass value="$TextHeader"/>
 				<bind name="text" value="'IDS_GIFTS_EARNED_AVAILABLE_INFO'"/>
 			</block>
+		</block>
+		<bind name="var" value="{sliceRewards: true}"/>
+		<block className="GiftboxRewardsContent">
+			<style>
+				<width value="430px"/>
+			</style>
+			<bind name="collectionDH" value="CC.rewardComponent; 'rewardsCollectionFull'; 'rewards.sorted'"/>
+			<bind name="slice" value="'rewardsCollection'; DES_rewardsCollectionFull; 0; 18"/>
+			<bind name="watch" value="'moreItemsCount'; rewardsCollectionFull.length - rewardsCollection.length"/>
+			<bind name="name" value="'GiftboxRewardsWindow'"/>
 			<block>
 				<styleClass value="$InfoBlockHorizontalIndentNoWidth"/>
-				<bind name="visible" value="regularRewardsCollection.length &gt; 0"/>
-				<style>
-					<flow value="htile"/>
-					<marginBottom value="12px"/>
-					<width value="425px"/>
-				</style>
-				<bind name="repeat" value="regularRewardsCollection; 'RewardItemEntity'"/>
-			</block>
-			<block>
-				<style>
-					<width value="100%"/>
-				</style>
-				<bind name="visible" value="regularRewardsCollection.length &gt; 0 &amp;&amp; specialRewardsCollection.length &gt; 0 "/>
-				<block className="HorizontalDivider">
-					<styleClass value="$PxHorizontalCorrection"/>
-					<style>
-						<width value="100%"/>
-						<height value="3px"/>
-					</style>
-					<block className="divider_h" type="native">
-						<styleClass value="$Fullsize"/>
-					</block>
-				</block>
-			</block>
-			<block>
-				<styleClass value="$InfoBlockHorizontalIndentNoWidth"/>
-				<bind name="visible" value="specialRewardsCollection.length &gt; 0"/>
+				<bind name="visible" value="rewardsCollectionFull.length &gt; 0"/>
 				<style>
 					<flow value="htile"/>
 					<marginTop value="14px"/>
 					<marginBottom value="18px"/>
-					<width value="425px"/>
+					<width value="410px"/>
 				</style>
-				<bind name="repeat" value="specialRewardsCollection; 'RewardItemEntity'"/>
+				<bind name="repeat" value="sliceRewards ? rewardsCollection : rewardsCollectionFull; 'RewardItemEntity'"/>
+			</block>
+			<block>
+				<bind name="visible" value="sliceRewards &amp;&amp; moreItemsCount &gt; 0"/>
+				<style>
+					<marginTop value="-13px"/>
+					<marginBottom value="6px"/>
+				</style>
+				<bind name="instance" value="'MoreRewardsText'; moreItemsCount &gt; 0 ? {_count: moreItemsCount} : null"/>
 			</block>
 		</block>
 		<block>
@@ -26621,60 +27133,53 @@
 			<bind name="instance" value="'MouseInstruction'; {_type: 'left', _instructionText: 'IDS_GIFTBOX_INSTRUCTION', _maxWidth: 425}"/>
 		</block>
 	</block>
-	<block className="GiftboxRewardsContent">
-		<bind name="collectionDH" value="CC.rewardComponent; 'specialRewardsCollection'; 'special.sort'"/>
-		<bind name="collectionDH" value="CC.rewardComponent; 'regularRewardsCollection'; 'common.sort'"/>
-		<bind name="name" value="'GiftboxRewardsWindow'"/>
-		<style>
-			<width value="425px"/>
-		</style>
+	<block className="GiftBoxRewardsHeader">
 		<block type="text">
 			<styleClass value="$InfoBlockHorizontalIndentNoWidth"/>
 			<style>
-				<marginTop value="18px"/>
-				<width value="100%"/>
-				<marginBottom value="2px"/>
-				<textAlign value="center"/>
+				<marginTop value="8px"/>
+				<marginLeft value="12px"/>
+				<marginBottom value="8px"/>
 			</style>
-			<styleClass value="$TextHeaderBigDefaultTech"/>
+			<styleClass value="$TextHeader"/>
 			<bind name="text" value="'IDS_GIFTS_EARNED_AVAILABLE_INFO'"/>
 		</block>
+	</block>
+	<block className="GiftboxRewardsContent">
+		<style>
+			<width value="430px"/>
+		</style>
+		<bind name="collectionDH" value="CC.rewardComponent; 'rewardsCollectionFull'; 'rewards.sorted'"/>
+		<bind name="slice" value="'rewardsCollection'; DES_rewardsCollectionFull; 0; 18"/>
+		<bind name="watch" value="'moreItemsCount'; rewardsCollectionFull.length - rewardsCollection.length"/>
+		<bind name="name" value="'GiftboxRewardsWindow'"/>
 		<block>
 			<styleClass value="$InfoBlockHorizontalIndentNoWidth"/>
-			<bind name="visible" value="regularRewardsCollection.length &gt; 0"/>
-			<style>
-				<flow value="htile"/>
-				<marginBottom value="12px"/>
-				<width value="425px"/>
-			</style>
-			<bind name="repeat" value="regularRewardsCollection; 'RewardItemEntity'"/>
-		</block>
-		<block>
-			<style>
-				<width value="100%"/>
-			</style>
-			<bind name="visible" value="regularRewardsCollection.length &gt; 0 &amp;&amp; specialRewardsCollection.length &gt; 0 "/>
-			<block className="HorizontalDivider">
-				<styleClass value="$PxHorizontalCorrection"/>
-				<style>
-					<width value="100%"/>
-					<height value="3px"/>
-				</style>
-				<block className="divider_h" type="native">
-					<styleClass value="$Fullsize"/>
-				</block>
-			</block>
-		</block>
-		<block>
-			<styleClass value="$InfoBlockHorizontalIndentNoWidth"/>
-			<bind name="visible" value="specialRewardsCollection.length &gt; 0"/>
+			<bind name="visible" value="rewardsCollectionFull.length &gt; 0"/>
 			<style>
 				<flow value="htile"/>
 				<marginTop value="14px"/>
 				<marginBottom value="18px"/>
-				<width value="425px"/>
+				<width value="410px"/>
 			</style>
-			<bind name="repeat" value="specialRewardsCollection; 'RewardItemEntity'"/>
+			<bind name="repeat" value="sliceRewards ? rewardsCollection : rewardsCollectionFull; 'RewardItemEntity'"/>
+		</block>
+		<block>
+			<bind name="visible" value="sliceRewards &amp;&amp; moreItemsCount &gt; 0"/>
+			<style>
+				<marginTop value="-13px"/>
+				<marginBottom value="6px"/>
+			</style>
+			<bind name="instance" value="'MoreRewardsText'; moreItemsCount &gt; 0 ? {_count: moreItemsCount} : null"/>
+		</block>
+	</block>
+	<block className="MoreRewardsText">
+		<block type="text">
+			<style>
+				<marginLeft value="12px"/>
+			</style>
+			<styleClass value="$TextDefault"/>
+			<bind name="text" value="subst('IDS_AND_MORE_REWARDS_COUNT', [], {count: _count}, _count)"/>
 		</block>
 	</block>
 	<block className="RewardItemEntity">
@@ -31467,6 +31972,14 @@
 		<bind name="action" value="'addedToStage'; 'openClansWindow'; pageData"/>
 		<bind name="action" value="'evPageDataChanged'; 'navigateClansWindow' : ''; { 'urlParams': pageData}"/>
 		<bind name="action" value="'removedFromStage'; 'closeClansWindow'; {}"/>
+	</block>
+	<block className="LeadingClanSquadIcon">
+		<style>
+			<backgroundSize value="cover"/>
+		</style>
+		<bind name="style" value="'width'; _isBig ? '30px' : '18px'"/>
+		<bind name="style" value="'height'; _isBig ? '30px' : '18px'"/>
+		<bind name="style" value="'backgroundImage'; 'url:../service_kit/icons/icon_leading_squad_' + (_isGolden ? 'golden_' : 'white_') + (_isBig ? 'big' : 'small') + '.png'"/>
 	</block>
 	<block className="InteractiveNotifications">
 		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'shipOverview'"/>
@@ -45114,6 +45627,7 @@
 		<bind name="dispatch" value="'addedToStage'; ($value == unPastedCardIndex) || ($value == unPastedCardIndexSubColl) ? 'startFlameAnimation' : null; { flameStarted: true }; 2; 0.2"/>
 		<bind name="dispatch" value="'unPastedCardIndex' 		+ varChanged; ($value == unPastedCardIndex) 		? 'startFlameAnimation' : null; { flameStarted: true }; 2; 0.2"/>
 		<bind name="dispatch" value="'unPastedCardIndexSubColl' 	+ varChanged; ($value == unPastedCardIndexSubColl) 	? 'startFlameAnimation' : null; { flameStarted: true }; 2; 0.2"/>
+		<bind name="soundOn" value="'startFlameAnimation'; 'collection_paste'; 'collection_soundset'"/>
 		<bind name="catch" value="'startUnglowAnimation'"/>
 		<bind name="catch" value="'startFlameAnimation'"/>
 		<bind name="var" value="{ unglowStarted: false }"/>
@@ -45380,11 +45894,8 @@
 			</block>
 		</block>
 		<block>
-			<style>
-				<width value="100%"/>
-			</style>
 			<styleClass value="$InfoBlockIndent"/>
-			<bind name="instance" value="'MouseInstruction'; {_type: 'left', _instructionText: isOwned ? 'IDS_GO_TO_OBJECT_SCREEN' : 'IDS_BUY_COLLECTION_FOR_DUPLICATE', _maxWidth: 300}"/>
+			<bind name="instance" value="'MouseInstruction'; {_type: 'left', _instructionText: isOwned ? 'IDS_GO_TO_OBJECT_SCREEN' : 'IDS_BUY_COLLECTION_FOR_DUPLICATE', _maxWidth: 286}"/>
 		</block>
 	</block>
 	<block className="CollectionDescription">
@@ -49183,8 +49694,8 @@
 			<block>
 				<style>
 					<width value="100%"/>
-					<marginTop value="8px"/>
-					<marginBottom value="8px"/>
+					<marginTop value="12px"/>
+					<marginBottom value="12px"/>
 				</style>
 				<bind name="instance" value="'SkillLearnStatus'; { _learned: skill.learned, _dependenciesLearned: skill.hasLearnedSkillOnPreviousTier, _cost: skill.tier, _deficit: (skill.tier - crew.freeSkillPoints) }"/>
 			</block>
@@ -49356,14 +49867,16 @@
 				<bind name="instance" value="'SkillAdaptationStatus'; skill.learned &amp;&amp; _penalty ? {_skillsEffectiveness: crew.skillsEffectiveness, _blockable: skill.blockable } : null"/>
 			</block>
 			<block>
-				<bind name="visible" value="!(_isLocked) &amp;&amp;
+				<bind name="visible" value="(!(_isLocked) &amp;&amp;
 							skill.learned != true &amp;&amp;
 							skill.hasLearnedSkillOnPreviousTier &amp;&amp;
 							(crew.freeSkillPoints - skill.tier &gt;= 0) &amp;&amp;
-							!(_noMouseInstructions)"/>
+							!(_noMouseInstructions))
+							|| isLocked || _isInFormation"/>
 				<style>
 					<width value="100%"/>
 					<marginLeft value="-16px"/>
+					<marginTop value="-1px"/>
 					<marginRight value="-16px"/>
 				</style>
 				<block className="HorizontalDivider">
@@ -49392,15 +49905,21 @@
 			</block>
 			<block>
 				<bind name="visible" value="_isLocked || _isInFormation"/>
-				<styleClass value="$InfoBlockIndent"/>
+				<style>
+					<width value="100%"/>
+					<marginLeft value="-1px"/>
+					<marginBottom value="12px"/>
+					<marginTop value="12px"/>
+				</style>
 				<block className="icon_module_state" type="native">
 					<bind name="gotoAndStop!" value="'action'"/>
 				</block>
 				<block type="text">
 					<styleClass value="$TextDefault"/>
 					<style>
-						<maxWidth value="270"/>
-						<marginTop value="-3px"/>
+						<width value="100%"/>
+						<marginLeft value="2px"/>
+						<marginTop value="-4px"/>
 					</style>
 					<bind name="class" value="'$FontColorUnready'"/>
 					<bind name="text" value="(_isInFormation ? tr('IDS_READY_TO_BATTLE_IN_' + toUpperCase(divisionEntranceData.divisionType)) : tr('IDS_IN_BATTLE')) + '. ' + tr('IDS_CANT_LEARN_SKILLS')"/>
@@ -50150,6 +50669,8 @@
 						<marginRight value="6px"/>
 					</style>
 					<block>
+						<bind name="visible" value="(((missionState == 0) || (missionState == 2)) &amp;&amp; !isMainTask) ||
+									(!isLooted &amp;&amp; !canOpenFinalTask)"/>
 						<styleClass value="$MiddleAligned"/>
 						<style>
 							<height value="40px"/>
@@ -52770,9 +53291,11 @@
 			</block>
 			<bind name="fade" value="groupExpanded; 0.15; {scaleY: 0, ubScaleY: 0, alpha: 0}; {scaleY: 1, ubScaleY: 1, alpha: 1}; {scaleY: 0, ubScaleY: 0, alpha: 0}; 2; 0"/>
 			<bind name="collectionDH" value="CC.clanTeam; 'clanBattleDivisionGroups'"/>
-			<bind name="collectionDesign" value="DES_clanBattleDivisionGroups; 'availableClanTeams'; {	'sort': ['clanTeam.isClanBattleType','clanTeam.isInBattle','clanTeam.isPrivate'],
+			<bind name="collectionDesign" value="DES_clanBattleDivisionGroups; 'availableClanTeams'; {	'sort': ['clanTeam.isClanBattleType','clanTeam.isInBattle','clanTeam.isLocked'],
 																						'sortOrder':[SortType.DESCENDING, 0, 0]
-																					}; ['clanTeam.evBattleTypeChanged', 'clanTeam.evIsInBattleChanged', 'clanTeam.evIsPrivateChanged']"/>
+																					}; ['clanTeam.evBattleTypeChanged', 'clanTeam.evIsInBattleChanged', 'clanTeam.evIsLockedChanged']"/>
+			<bind name="collectionDH" value="CC.clanSquadLadderInfo; 'squadsCollection'"/>
+			<bind name="watchDH" value="'hasClanSquadModifier'; ['selfPlayerEntity.clanmanSupplyInfo.evHasClanSquadModifierChanged']; selfPlayerEntity.clanmanSupplyInfo.hasClanSquadModifier"/>
 			<block>
 				<style>
 					<width value="100%"/>
@@ -52797,32 +53320,38 @@
 		</style>
 		<bind name="fade" value="((groupExpanded != null) ? groupExpanded : true); 0.15; {alpha: 0, height: 0}; {alpha: 1, height: 50}"/>
 		<bind name="entityDH" value="'clanTeamEntity'; id"/>
-		<bind name="watchDH" value="'clanTeamIndex'; []; clanTeamEntity.clanTeam.teamIndex"/>
+		<bind name="watchDH" value="'clanTeamIndex'; ['clanTeamEntity.clanTeam.evTeamIndexChanged']; clanTeamEntity.clanTeam.teamIndex"/>
 		<bind name="watchDH" value="'playersCount'; ['clanTeamEntity.clanTeam.evPlayersCountChanged']; clanTeamEntity.clanTeam.playersCount"/>
 		<bind name="watchDH" value="'playersLimit'; ['clanTeamEntity.clanTeam.evPlayersLimitChanged']; clanTeamEntity.clanTeam.playersLimit"/>
 		<bind name="watchDH" value="'battleType'; ['clanTeamEntity.clanTeam.evBattleTypeChanged']; clanTeamEntity.clanTeam.battleType"/>
 		<bind name="watchDH" value="'isInBattle'; ['clanTeamEntity.clanTeam.evIsInBattleChanged']; clanTeamEntity.clanTeam.isInBattle"/>
 		<bind name="watchDH" value="'ownerName'; ['clanTeamEntity.clanTeam.evOwnerNameChanged']; clanTeamEntity.clanTeam.ownerName"/>
-		<bind name="watchDH" value="'isPrivate'; ['clanTeamEntity.clanTeam.evIsPrivateChanged']; clanTeamEntity.clanTeam.isPrivate"/>
+		<bind name="watchDH" value="'isLocked'; ['clanTeamEntity.clanTeam.evIsLockedChanged']; clanTeamEntity.clanTeam.isLocked"/>
 		<bind name="watchDH" value="'hasNonClanMembers'; ['clanTeamEntity.clanTeam.evHasNonClanMembersChanged']; clanTeamEntity.clanTeam.hasNonClanMembers"/>
+		<bind name="watchDH" value="'squadId'; ['clanTeamEntity.clanTeam.evSquadIdChanged']; clanTeamEntity.clanTeam.squadId"/>
+		<bind name="watchDH" value="'isClanBattleType'; ['clanTeamEntity.clanTeam.evIsClanBattleTypeChanged']; clanTeamEntity.clanTeam.isClanBattleType"/>
 		<bind name="watch" value="'isDivisionFull'; playersCount == playersLimit"/>
 		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
 		<bind name="watchDH" value="'myDivisionId'; ['selfPlayerEntity.preBattlePlayerSimple.evPreBattleIdChanged']; selfPlayerEntity.preBattlePlayerSimple.preBattleId"/>
 		<bind name="watchDH" value="'clanTeamId'; []; clanTeamEntity.clanTeam.id"/>
-		<bind name="watch" value="'isOtherDivision'; myDivisionId != clanTeamId"/>
-		<bind name="watch" value="'isInDivision'; selfPlayerEntity.preBattlePlayerSimple ? true : false"/>
-		<bind name="watch" value="'iconType'; isOtherDivision ? 'player_ready_other_division' : 'player_ready_division'"/>
+		<bind name="watch" value="'isInDivision'; (selfPlayerEntity.preBattlePlayerSimple) &amp;&amp; !(selfPlayerEntity.playerInvitedToPrebattleInfo)"/>
+		<bind name="watch" value="'isOtherDivision'; !(isInDivision &amp;&amp; (myDivisionId == clanTeamId))"/>
+		<bind name="watch" value="'isOwnerSelfPlayer'; selfPlayerEntity.accountName.name == ownerName"/>
+		<bind name="watchDH" value="'hasClanSquadModifier'; ['selfPlayerEntity.clanmanSupplyInfo.evHasClanSquadModifierChanged']; selfPlayerEntity.clanmanSupplyInfo.hasClanSquadModifier"/>
+		<bind name="watch" value="'iconType'; isOtherDivision ? 'player_ready_division_other_division' : 'player_ready_division'"/>
 		<bind name="firstEntityDH" value="'dockEntity'; CC.dockDataMarker"/>
 		<bind name="watchDH" value="'shipId'; ['dockEntity.shipSelection.evShipUpdate']; dockEntity.shipSelection.currentShipId"/>
 		<bind name="watchDH" value="'shipIdForModuleInset'; ['dockEntity.shipSelection.evShipViewUpdate']; dockEntity.shipSelection.currentShipIdForModuleInset"/>
-		<bind name="action" value="'click'; (isPrivate || isInBattle || !isInDivision) ? 'DockProxy.joinToPreBattle' : null; {preBattleId: clanTeamId, shipId: 0}"/>
+		<bind name="action" value="'click'; (!isLocked &amp;&amp; !isInBattle &amp;&amp; !isInDivision) ? 'DockProxy.joinToPreBattle' : null; {preBattleId: clanTeamId, shipId: 0}"/>
 		<block>
 			<styleClass value="$FullsizeAbsolute"/>
 			<bind name="tooltip" value="'ClanBattleDivisionsTooltip'; {	_clanTeamIndex						: clanTeamIndex,
 														_clanTeamId							: clanTeamId,
+														_squadId							: squadId,
+														_hasClanSquadModifier				: hasClanSquadModifier,
 														iconType							: iconType,
 														isOtherDivision						: isOtherDivision,
-														isPrivate							: isPrivate,
+														isLocked							: isLocked,
 														hasNonClanMembers					: hasNonClanMembers,
 														isInBattle							: isInBattle,
 														isInDivision						: isInDivision,
@@ -52840,7 +53369,7 @@
 			</style>
 			<block>
 				<styleClass value="$MiddleVAligned"/>
-				<bind name="style" value="'colorMatrixFilter';	isPrivate		? '0 -100 0 -40' : '0 0 0 0' "/>
+				<bind name="style" value="'colorMatrixFilter';	isLocked		? '0 -100 0 -40' : '0 0 0 0' "/>
 				<block className="icon_battletypes_small" type="native">
 					<bind name="gotoAndStop!" value="battleType"/>
 				</block>
@@ -52852,6 +53381,8 @@
 				</style>
 				<styleClass value="$MiddleVAligned"/>
 				<block type="text">
+					<bind name="class" value="isOwnerSelfPlayer ? '$Bold' : '$None'"/>
+					<bind name="class" value="isOtherDivision ? '$FontColorWhite' : '$FontColorGolden'"/>
 					<styleClass value="$TextDefaultNM"/>
 					<bind name="text" value="ownerName"/>
 				</block>
@@ -52861,7 +53392,20 @@
 					<height value="100%"/>
 				</style>
 				<block>
-					<bind name="visible" value="(hasNonClanMembers &amp;&amp; !isPrivate) || ((hasNonClanMembers || isInDivision || isDivisionFull) &amp;&amp; !isPrivate &amp;&amp; isOtherDivision)"/>
+					<bind name="visible" value="isClanBattleType &amp;&amp; hasClanSquadModifier"/>
+					<style>
+						<marginLeft value="8px"/>
+						<marginRight value="4px"/>
+					</style>
+					<styleClass value="$MiddleVAligned"/>
+					<block type="text">
+						<styleClass value="$TextDefaultNM"/>
+						<bind name="class" value="isOtherDivision ? '$FontColorGrey' : '$FontColorGolden'"/>
+						<bind name="text" value="tr('IDS_CLAN_SQUAD_' + squadId)"/>
+					</block>
+				</block>
+				<block>
+					<bind name="visible" value="(hasNonClanMembers &amp;&amp; !isLocked) || ((hasNonClanMembers || isInDivision || isDivisionFull) &amp;&amp; !isLocked &amp;&amp; isOtherDivision)"/>
 					<style>
 						<marginRight value="4px"/>
 					</style>
@@ -52879,14 +53423,14 @@
 					</block>
 				</block>
 				<block>
-					<bind name="visible" value="isPrivate"/>
+					<bind name="visible" value="isLocked"/>
 					<styleClass value="$MiddleVAligned"/>
 					<block className="button_lock" type="native">
 						<bind name="selected" value="true"/>
 					</block>
 				</block>
 				<block>
-					<bind name="visible" value="!isPrivate"/>
+					<bind name="visible" value="!isLocked"/>
 					<styleClass value="$MiddleVAligned"/>
 					<block>
 						<style>
@@ -52896,9 +53440,13 @@
 						<styleClass value="$MiddleVAligned"/>
 						<bind name="instance" value="'DivisionIconWithIndex'; {_divisionIndex: clanTeamIndex, _iconType: iconType}"/>
 					</block>
+					<bind name="watch" value="'colorClass'; 	isDivisionFull 	? '$FontColorAlmostBlack' 
+															: isOtherDivision 	? '$FontColorWhite' 
+																				: '$FontColorGolden'"/>
+					<bind name="watch" value="'shadowClass'; isDivisionFull ? '$FontDropShadowWhite' : '$None'"/>
 					<block type="text">
-						<bind name="class" value="isDivisionFull ? '$FontColorAlmostBlack' : '$FontColorDefault'"/>
-						<bind name="class" value="isDivisionFull ? '$FontDropShadowWhite' : '$None'"/>
+						<bind name="class" value="colorClass"/>
+						<bind name="class" value="shadowClass"/>
 						<styleClass value="$TextDefaultBold19NM"/>
 						<bind name="text" value="playersCount"/>
 					</block>
@@ -52908,8 +53456,8 @@
 							<marginLeft value="4px"/>
 						</style>
 						<bind name="style" value="'alpha'; isDivisionFull ? 1 : 0.65"/>
-						<bind name="class" value="isDivisionFull ? '$FontColorAlmostBlack' : '$FontColorDefault'"/>
-						<bind name="class" value="isDivisionFull ? '$FontDropShadowWhite' : '$None'"/>
+						<bind name="class" value="colorClass"/>
+						<bind name="class" value="shadowClass"/>
 						<styleClass value="$TextDefault17NM"/>
 						<bind name="text" value="'/ ' + playersLimit"/>
 					</block>
@@ -52960,8 +53508,8 @@
 		<block>
 			<style>
 				<height value="36px"/>
+				<marginLeft value="12px"/>
 			</style>
-			<styleClass value="$MiddleAligned"/>
 			<block>
 				<style>
 					<marginRight value="8px"/>
@@ -52972,8 +53520,9 @@
 			<block>
 				<styleClass value="$MiddleVAligned"/>
 				<block type="text">
+					<bind name="class" value="isOtherDivision ? '$FontColorWhite' : '$FontColorGolden'"/>
 					<styleClass value="$TextDefaultBold21NM"/>
-					<bind name="text" value="isInBattle ? 'IDS_IN_BATTLE' : 'IDS_DIVISION'"/>
+					<bind name="text" value="isInBattle ? 'IDS_IN_BATTLE' : tr('IDS_DIVISION') + (_hasClanSquadModifier ? '. ' + tr('IDS_CLAN_SQUAD_' + _squadId) : '')"/>
 				</block>
 			</block>
 			<style>
@@ -53024,7 +53573,7 @@
 							!isOtherDivision &amp;&amp; hasNonClanMembers	? [ {_type: 'warning', _instructionText: 'IDS_STRANGERS_IN_THE_CLAN_DIVISION'} ] :
 							isOtherDivision &amp;&amp; hasNonClanMembers	? [ {_type: 'warning', _instructionText: 'IDS_STRANGERS_IN_THE_CLAN_DIVISION'}, {_type: 'left', _instructionText: 'IDS_JOIN_DYNAMIC_DIVISION_MOUSE_HINT'} ] :
 							isInDivision							? [ {_type: 'warning', _instructionText: 'IDS_YOU_ARE_IN_DIVISION_ALREADY'} ] :
-							isPrivate								? [ {_type: 'warning', _instructionText: 'IDS_CLAN_DIVISION_IS_PRIVATE'} ] :
+							isLocked								? [ {_type: 'warning', _instructionText: 'IDS_CLAN_DIVISION_IS_PRIVATE'} ] :
 							isDivisionFull							? [ {_type: 'warning', _instructionText: 'IDS_CLAN_DIVISION_IS_FULL'} ] :
 							isInBattle								? [ {_type: 'warning', _instructionText: 'IDS_CLAN_DIVISION_IN_BATTLE'} ]
 																	: [ {_type: 'left', _instructionText: 'IDS_JOIN_DYNAMIC_DIVISION_MOUSE_HINT'} ]; 'MouseInstructionRepeater'; {_maxWidth: 260, _lastIndex: 1}"/>
@@ -53057,6 +53606,7 @@
 		<bind name="watchDH" value="'nickName'; ['playerEntity.accountName.evChanged']; playerEntity.accountName.nickName"/>
 		<bind name="watchDH" value="'shipId'; ['playerEntity.preBattlePlayerSimple.evShipIdChanged']; playerEntity.preBattlePlayerSimple.shipId"/>
 		<bind name="watchDH" value="'isReady'; ['playerEntity.preBattlePlayerSimple.evStateChanged']; playerEntity.preBattlePlayerSimple.isReady"/>
+		<bind name="watchDH" value="'isSelf'; []; playerEntity.accountSimple.isSelfPlayer"/>
 		<style>
 			<width value="100%"/>
 			<height value="26px"/>
@@ -53080,7 +53630,9 @@
 					<width value="100%"/>
 					<multiline value="false"/>
 				</style>
-				<styleClass value="$TextDefaultBoldNM"/>
+				<bind name="class" value="isSelf ? '$Bold' : '$None'"/>
+				<bind name="class" value="isSelf || !(isOtherDivision) ? '$FontColorGolden' : '$FontColorWhite'"/>
+				<styleClass value="$TextDefaultNM"/>
 				<bind name="text" value="nickName"/>
 			</block>
 		</block>
@@ -54464,13 +55016,9 @@
 		<bind name="watch" value="'isVoteInCurClub';	(clubsVoted[0] == entityClub.club.id) ||
 									(clubsVoted[1] == entityClub.club.id) ||
 									(clubsVoted[2] == entityClub.club.id) ? true : false"/>
-		<bind name="watch" value="'actionDenyReason';	(_playerContext.type == 'inviteToClub')		?	!(clubBattleFeatureUnLocked)	? 'IDS_INVITE_TO_CLUB_ACTION_DENY_REASON_LOW_LEVEL' :
-																						isInvitationSent					? 'IDS_INVITE_TO_CLUB_ACTION_DENY_REASON_ALREADY_INVITED' :
-																						isClubMember					? 'IDS_INVITE_TO_CLUB_ACTION_DENY_REASON_ALREADY_IN_CLUB' :
-																						(isVoteInCurClub &amp;&amp; (selfPlayerDbId != _playerContext.clubLeaderDbId)) ? tr('IDS_UNABLE_TO_START_VOTE_TILL_CURRENT_NOT_FINISHED')
+		<bind name="watch" value="'actionDenyReason';	(_playerContext.type == 'inviteToDivision') ?	!(accountOnline)				? 'IDS_INVITE_TO_DIVISION_ACTION_DENY_REASON_OFFLINE' :
+																						isInvitedToDivision 			? 'IDS_INVITE_TO_DIVISION_ACTION_DENY_REASON_ALREADY_INVITED'
 																														: 'no_reason' :
-										(_playerContext.type == 'inviteToDivision') ?	!(accountOnline)	? 'IDS_INVITE_TO_DIVISION_ACTION_DENY_REASON_OFFLINE'
-																											: 'no_reason' :
 										(_playerContext.type == 'inviteToParty')	?	!(clubBattleFeatureUnLocked)	? 'IDS_INVITE_TO_PARTY_ACTION_DENY_REASON_LOW_LEVEL' :
 																						!(accountOnline)				? 'IDS_INVITE_TO_PARTY_ACTION_DENY_REASON_OFFLINE' :
 																						isInvitedToYourParty			? 'IDS_INVITE_TO_PARTY_ACTION_DENY_REASON_ALREADY_INVITED' :
@@ -54511,7 +55059,10 @@
 														: null; null; 'contactContextMenuVisible'"/>
 			<bind name="tooltip" value="'ContactInfoTooltip'; !(isSuspended) ? {_entityAccountId: _entityAccountId, _playerContext: _playerContext, _actionDenyReason: actionDenyReason, _isWardog: isWardog, _dogTagView: dogtagview} : null"/>
 			<bind name="clickSplit"/>
-			<bind name="watch" value="'isActionEnabled'; (!(isSelf) &amp;&amp; (actionDenyReason == 'no_reason') &amp;&amp; !(isSuspended))"/>
+			<bind name="watch" value="'isActionEnabled'; (	!(isSelf) &amp;&amp; 
+											(actionDenyReason == 'no_reason') &amp;&amp; 
+											!(isSuspended)
+										)"/>
 			<bind name="var" value="{showBusyIndicator: false, isInvitationSent: false}"/>
 			<bind name="catch" value="'evPlayerInvitationToClub'"/>
 			<bind name="catch" value="'evPlayerInvitationToClubRevoked'"/>
@@ -54521,6 +55072,7 @@
 			<bind name="contains" value="invitedPlayers; ($item.accountEntityId == entityAccount.id); 'isInvitationSent'"/>
 			<bind name="changeDispatch" value="isInvitationSent; 'evPlayerInvitationToClub'; {showBusyIndicator: false}"/>
 			<bind name="watchDH" value="'clubMembers'; ['entityClub.club.evMembersChanged']; entityClub.club.members"/>
+			<bind name="watch" value="'isInvitedToDivision'; entityAccount.playerInvitedToPrebattleInfo != null"/>
 			<bind name="action" value="'left_click';	(isActionEnabled == false)						? '' :
 									(_playerContext.type == 'startPrivateChat')		? 'openChannelForPrivateMessages' :
 									(_playerContext.type == 'inviteToChannel')		? 'sendChannelInvite' :
@@ -54616,7 +55168,6 @@
 								<marginRight value="4px"/>
 							</style>
 							<block className="button_division_invite" type="native">
-								<bind name="watch" value="'isInvitedToDivision'; entityAccount.playerInvitedToPrebattleInfo != null"/>
 								<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'playersInvitedToDivision'; 'name'; entityAccount.accountName.name; 'sentInvitationData'"/>
 								<bind name="controller" value="lesta.dialogs.controllers.CollectionController; 'invitationsToDivision'; 'playerName'; entityAccount.accountName.name; 'receivedInvitationData'"/>
 								<bind name="enabled" value="(sentInvitationData.length == 0) &amp;&amp; (receivedInvitationData.length == 0) &amp;&amp; !isInvitedToDivision"/>
@@ -54867,7 +55418,7 @@
 				</block>
 			</block>
 			<block>
-				<bind name="visible" value="isInDivision || isInvitedToDivision ? true : false"/>
+				<bind name="visible" value="isInDivision || (isInvitedToDivision &amp;&amp; !(isSelf)) ? true : false"/>
 				<style>
 					<marginLeft value="10px"/>
 				</style>
@@ -55138,8 +55689,8 @@
 			<style>
 				<width value="100%"/>
 			</style>
-			<bind name="instance" value="'PlayerTooltipInvitationCountdown'; isInvitedToDivision ? { _expirationTime: expirationTime, _formationType: 'division',
-																					_text: 'IDS_INVITED_IN_DIVISION'} : null"/>
+			<bind name="instance" value="'PlayerTooltipInvitationCountdown'; isInvitedToDivision &amp;&amp; !(isSelf) ? { 	_expirationTime: expirationTime, _formationType: 'division',
+																									_text: 'IDS_INVITED_IN_DIVISION'} : null"/>
 		</block>
 		<block>
 			<bind name="visible" value="isFormationStatusVisible"/>
@@ -57044,7 +57595,7 @@
 				<width value="70px"/>
 				<height value="54px"/>
 			</style>
-			<bind name="gotoAndStop!" value="'personalTasks'"/>
+			<bind name="gotoAndStop!" value="'personalTasksBonus'"/>
 		</block>
 	</block>
 	<block className="GiftboxRewardExterior">
@@ -59099,11 +59650,9 @@
 		<block>
 			<style>
 				<width value="80px"/>
+				<height value="80px"/>
 			</style>
-			<block>
-				<styleClass value="$MiddleAligned"/>
-				<bind name="instance" value="'RewardSSEItem'; {rewardItem: rewardItem}"/>
-			</block>
+			<bind name="style" value="'backgroundImage'; 'url:../reward_icons/icon_reward_sse.png'"/>
 		</block>
 		<bind name="watch" value="'title'; sseCollection[0].titleText"/>
 		<bind name="watch" value="'description'; rewardItem.subtype == SSETypes.CHALLENGE ? 'IDS_PERSONAL_CHALLENGE' : 'IDS_PERSONAL_BATTLE_TASK'"/>
@@ -59349,7 +59898,7 @@
 					<bind name="entityDH" value="'entityToView'; _entityToViewId"/>
 					<bind name="watchDH" value="'id'; ['entityToView.dogTagComponent.evUpdate']; entityToView.dogTagComponent.id"/>
 					<bind name="catch" value="'viewDogTagChanged'"/>
-					<bind name="repeat" value="currentDogTagComponents; 'DogTagDollImageItemRenderer'"/>
+					<bind name="repeat" value="currentDogTagComponents; 'DogTagDollImageItemRenderer'; {_size: 512}"/>
 					<bind name="tooltip" value="'DogTagComponentTooltip'; (!_entityToViewId || _entityToViewId == -1) ? null : {_id: id}"/>
 				</block>
 				<block>
@@ -59399,7 +59948,7 @@
 							<width value="80px"/>
 							<height value="80px"/>
 						</style>
-						<bind name="repeat" value="currentDogTagComponents; 'PlayerDogTagItem'; {_path: 'url:../dogTags/small/'}"/>
+						<bind name="repeat" value="currentDogTagComponents; 'PlayerDogTagItem'; {_path: 'url:../dogTags/small/', _playerDbId : selfPlayerDbId, _clanTagPaths:'../fonts/small/', _size:80}"/>
 					</block>
 					<block>
 						<style>
@@ -59506,6 +60055,11 @@
 		</block>
 	</block>
 	<block className="DogTagDollImageItemRenderer">
+		<style>
+			<width value="100%"/>
+			<height value="100%"/>
+			<position value="absolute"/>
+		</style>
 		<bind name="entityDH" value="'entity'; id"/>
 		<bind name="watchDH" value="'gpName'; ['entity.dogTagComponent.evUpdate']; entity.dogTagComponent.gpName"/>
 		<bind name="watchDH" value="'iconPath'; ['entity.dogTagComponent.evUpdate']; entity.dogTagComponent.iconPath"/>
@@ -59513,6 +60067,33 @@
 		<bind name="mc" value="gpName + '_big_mask'; ['objUnderPoint', 'noObjUnderPoint']"/>
 		<bind name="dispatch" value="'objUnderPoint'; 'viewDogTagChanged'; {_entityToViewId:id}"/>
 		<bind name="dispatch" value="'noObjUnderPoint'; 'viewDogTagChanged'; {_entityToViewId:-1}"/>
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
+		<bind name="watchDH" value="'clanId'; ['selfPlayerEntity.clanman.evClanIdChanged']; selfPlayerEntity.clanman.clanId"/>
+		<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; clanId"/>
+		<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
+		<bind name="watchDH" value="'clanTagOffsetX';['entity.dogTagComponent.evUpdate']; entity.dogTagComponent.clanTagOffsetX"/>
+		<bind name="watchDH" value="'clanTagOffsetY';['entity.dogTagComponent.evUpdate']; entity.dogTagComponent.clanTagOffsetY"/>
+		<bind name="watchDH" value="'clanTagFont';['entity.dogTagComponent.evUpdate']; entity.dogTagComponent.clanTagFont"/>
+		<bind name="watchDH" value="'clanTagVisible';['entity.dogTagComponent.evUpdate']; entity.dogTagComponent.clanTagVisible"/>
+		<block>
+			<style>
+				<position value="absolute"/>
+			</style>
+			<bind name="style" value="'top'; clanTagOffsetY + '%'"/>
+			<bind name="style" value="'left'; clanTagOffsetX + '%'"/>
+			<block>
+				<style>
+					<position value="absolute"/>
+					<marginLeft value="-50%"/>
+					<marginTop value="-50%"/>
+				</style>
+				<bind name="visible" value="clanTagVisible"/>
+				<bind name="atlasText" value="clanTagVisible ?  (clanTag ? '[' + clanTag + ']' : '^') : '' ; '../fonts/big/' + clanTagFont; 0"/>
+			</block>
+		</block>
 	</block>
 	<block className="DogTagDollImageItemMiniRenderer">
 		<bind name="entityDH" value="'entity'; id"/>
@@ -59572,6 +60153,33 @@
 				<block className="icon_module_state" type="native">
 					<bind name="gotoAndStop!" value="'installed'"/>
 				</block>
+			</block>
+		</block>
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
+		<bind name="watchDH" value="'clanId'; ['selfPlayerEntity.clanman.evClanIdChanged']; selfPlayerEntity.clanman.clanId"/>
+		<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; clanId"/>
+		<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
+		<bind name="watchDH" value="'clanTagOffsetX';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagOffsetX"/>
+		<bind name="watchDH" value="'clanTagOffsetY';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagOffsetY"/>
+		<bind name="watchDH" value="'clanTagFont';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagFont"/>
+		<bind name="watchDH" value="'clanTagVisible';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagVisible"/>
+		<block>
+			<style>
+				<position value="absolute"/>
+			</style>
+			<bind name="style" value="'top'; clanTagOffsetY + '%'"/>
+			<bind name="style" value="'left'; clanTagOffsetX + '%'"/>
+			<block>
+				<style>
+					<position value="absolute"/>
+					<marginLeft value="-50%"/>
+					<marginTop value="-50%"/>
+				</style>
+				<bind name="visible" value="clanTagVisible"/>
+				<bind name="atlasText" value="clanTagVisible ?  (clanTag ? '[' + clanTag + ']' : '^') : '' ; '../fonts/small/' + clanTagFont; 0"/>
 			</block>
 		</block>
 	</block>
@@ -59728,10 +60336,10 @@
 				<styleClass value="$MiddleAligned"/>
 				<block>
 					<style>
-						<width value="150px"/>
-						<height value="150px"/>
+						<width value="190px"/>
+						<height value="190px"/>
 					</style>
-					<bind name="repeat" value="$root.slots; 'PlayerDogTagItemByPK'; {_path: 'url:../dogTags/big/'}"/>
+					<bind name="repeat" value="$root.slots; 'PlayerDogTagItemByPK'; {_path: 'url:../dogTags/medium/', _clanTagPaths: '../fonts/medium/', _size: 190}"/>
 				</block>
 				<style>
 					<flow value="horizontal"/>
@@ -59837,11 +60445,42 @@
 														  _size == 'profile' 	? 'url:../dogTags/medium/' :
 														  _size == 'medium' 	? 'url:../dogTags/medium/' :
 														  _size == 'big' 		? 'url:../dogTags/big/'
-														  						: 'url:../dogTags/big/'}"/>
+														  						: 'url:../dogTags/big/'
+														  						, _playerDbId : _playerDbId,
+													_clanTagPaths: _size == 'small' 	? '../fonts/small/'  :
+																   _size == 'profile' 	? '../fonts/medium/' :
+																   _size == 'medium' 	? '../fonts/medium/' :
+																   _size == 'big' 		? '../fonts/big/'
+																				: '../fonts/big/'
+																				, _size: size}"/>
 	</block>
 	<block className="PlayerDogTagItem">
 		<bind name="entityDH" value="'dogTagEntity'; id"/>
 		<bind name="watchDH" value="'iconPath'; ['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.iconPath"/>
+		<bind name="primaryEntityDH" value="'playerEntity'; CC.accountSimple; _playerDbId"/>
+		<bind name="watchDH" value="'clanId'; ['playerEntity.clanman.evClanIdChanged']; playerEntity.clanman.clanId"/>
+		<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; clanId"/>
+		<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
+		<bind name="watchDH" value="'clanTagOffsetX';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagOffsetX"/>
+		<bind name="watchDH" value="'clanTagOffsetY';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagOffsetY"/>
+		<bind name="watchDH" value="'clanTagFont';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagFont"/>
+		<bind name="watchDH" value="'clanTagVisible';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagVisible"/>
+		<block>
+			<style>
+				<position value="absolute"/>
+			</style>
+			<bind name="style" value="'top'; clanTagOffsetY + '%'"/>
+			<bind name="style" value="'left'; clanTagOffsetX + '%'"/>
+			<block>
+				<style>
+					<position value="absolute"/>
+					<marginLeft value="-50%"/>
+					<marginTop value="-50%"/>
+				</style>
+				<bind name="visible" value="clanTagVisible"/>
+				<bind name="atlasText" value="clanTagVisible ?  (clanTag ? '[' + clanTag + ']' : '^') : '' ; _clanTagPaths + clanTagFont; 0"/>
+			</block>
+		</block>
 		<styleClass value="$FullsizeAbsolute"/>
 		<style>
 			<backgroundStretchX value="true"/>
@@ -59853,6 +60492,33 @@
 	<block className="PlayerDogTagItemByPK">
 		<bind name="primaryEntityDH" value="'dogTagEntity'; CC.dogTagComponent; $value"/>
 		<bind name="watchDH" value="'iconPath'; ['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.iconPath"/>
+		<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+		<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+		<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+		<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
+		<bind name="watchDH" value="'clanId'; ['selfPlayerEntity.clanman.evClanIdChanged']; selfPlayerEntity.clanman.clanId"/>
+		<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; clanId"/>
+		<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
+		<bind name="watchDH" value="'clanTagOffsetX';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagOffsetX"/>
+		<bind name="watchDH" value="'clanTagOffsetY';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagOffsetY"/>
+		<bind name="watchDH" value="'clanTagFont';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagFont"/>
+		<bind name="watchDH" value="'clanTagVisible';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagVisible"/>
+		<block>
+			<style>
+				<position value="absolute"/>
+			</style>
+			<bind name="style" value="'top'; clanTagOffsetY + '%'"/>
+			<bind name="style" value="'left'; clanTagOffsetX + '%'"/>
+			<block>
+				<style>
+					<position value="absolute"/>
+					<marginLeft value="-50%"/>
+					<marginTop value="-50%"/>
+				</style>
+				<bind name="visible" value="clanTagVisible"/>
+				<bind name="atlasText" value="clanTagVisible ?  (clanTag ? '[' + clanTag + ']' : '^') : '' ; _clanTagPaths + clanTagFont; 0"/>
+			</block>
+		</block>
 		<styleClass value="$FullsizeAbsolute"/>
 		<style>
 			<backgroundStretchX value="true"/>
@@ -59953,9 +60619,14 @@
 		<bind name="watchDH" value="'description'; ['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.description"/>
 		<bind name="watchDH" value="'quest'; ['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.quest"/>
 		<bind name="watchDH" value="'unique'; ['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.unique"/>
+		<bind name="watchDH" value="'clanTagOffsetX';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagOffsetX"/>
+		<bind name="watchDH" value="'clanTagOffsetY';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagOffsetY"/>
+		<bind name="watchDH" value="'clanTagFont';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagFont"/>
+		<bind name="watchDH" value="'clanTagVisible';['dogTagEntity.dogTagComponent.evUpdate']; dogTagEntity.dogTagComponent.clanTagVisible"/>
 		<block>
 			<styleClass value="$InfoBlockIndent"/>
-			<bind name="instance" value="'DogTagComponentTooltipHeader'; {_iconPath: iconPath, _categoryId: categoryId, _gpName: gpName, _unique: unique}"/>
+			<bind name="instance" value="'DogTagComponentTooltipHeader'; {_iconPath: iconPath, _categoryId: categoryId, _gpName: gpName, _unique: unique,
+				_clanTagOffsetX: clanTagOffsetX, _clanTagOffsetY: clanTagOffsetY, _clanTagFont: clanTagFont, _clanTagVisible: clanTagVisible}"/>
 		</block>
 		<block className="HorizontalDivider">
 			<styleClass value="$PxHorizontalCorrection"/>
@@ -60156,6 +60827,29 @@
 				<height value="80px"/>
 			</style>
 			<bind name="style" value="'backgroundImage'; 'url:../dogTags/small/' + _iconPath"/>
+			<bind name="firstEntityDH" value="'selfPlayerEntity'; CC.accountSelf"/>
+			<bind name="watchDH" value="'selfPlayerDbId'; 		[]; selfPlayerEntity.accountSimple.dbId"/>
+			<bind name="watchDH" value="'selfPlayerName'; 		['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.name"/>
+			<bind name="watchDH" value="'selfPlayerNickName'; 	['selfPlayerEntity.accountName.evChanged']; selfPlayerEntity.accountName.nickName"/>
+			<bind name="watchDH" value="'clanId'; ['selfPlayerEntity.clanman.evClanIdChanged']; selfPlayerEntity.clanman.clanId"/>
+			<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; clanId"/>
+			<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
+			<block>
+				<style>
+					<position value="absolute"/>
+				</style>
+				<bind name="style" value="'top'; _clanTagOffsetY + '%'"/>
+				<bind name="style" value="'left'; _clanTagOffsetX + '%'"/>
+				<block>
+					<style>
+						<position value="absolute"/>
+						<marginLeft value="-50%"/>
+						<marginTop value="-50%"/>
+					</style>
+					<bind name="visible" value="clanTagVisible"/>
+					<bind name="atlasText" value="_clanTagVisible ? (clanTag ? '[' + clanTag + ']' : '^') : '' ; '../fonts/small/' + _clanTagFont; 0"/>
+				</block>
+			</block>
 		</block>
 		<block>
 			<style>
@@ -60537,225 +61231,6 @@
 				<marginTop value="6px"/>
 			</style>
 			<bind name="gotoAndStop!" value="filterEntity.shipFilterItem.field"/>
-		</block>
-	</block>
-	<block className="GuideBrowserWindow">
-		<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'realmConstants'"/>
-		<styleClass value="$Fullsize"/>
-		<block className="DeclareBlurLayer">
-			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
-			<bind name="visible" value="optionData.blurEnabled"/>
-			<block className="transparentPixel" type="native">
-				<bind name="blurLayer" value="0"/>
-			</block>
-			<style>
-				<position value="absolute"/>
-			</style>
-		</block>
-		<block className="BlurMapCustom">
-			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
-			<styleClass value="$FullsizeAbsolute"/>
-			<style>
-				<hitTest value="false"/>
-			</style>
-			<bind name="visible" value="optionData.blurEnabled"/>
-			<block className="mc_blurmap3" type="native">
-				<bind name="appear" value="'startShow'; 0.3; 0; {alpha: 0}; {alpha: 1}"/>
-				<bind name="appear" value="'startHide'; 0.15; 0; {alpha: 1}; {alpha: 0}"/>
-				<styleClass value="$Fullsize"/>
-				<bind name="blurMap" value="0"/>
-			</block>
-		</block>
-		<bind name="var" value="{authorizing: false}"/>
-		<bind name="catch" value="'browser.onAuthorizationStarted'; {authorizing: true}"/>
-		<bind name="catch" value="'browser.onAuthorizationFinished'; {authorizing: false}"/>
-		<bind name="action" value="'startHide'; realmConstants.newsUIAvailable ? 'IngameNewsProxy.getIngameNews' : null; {}"/>
-		<block>
-			<bind name="appear" value="'startShow'; 0.15; 0.15; {alpha: 0}; {alpha: 1}"/>
-			<bind name="appear" value="'startHide'; 0.15; 0.45; {alpha: 1}; {alpha: 0}"/>
-			<styleClass value="$FullsizeAbsolute"/>
-			<bind name="controller" value="lesta.dialogs.controllers.EntitySingletonController; 'optionData'"/>
-			<block className="contrast_panel" type="native">
-				<styleClass value="$FullsizeAbsolute"/>
-				<bind name="visible" value="optionData.contrast"/>
-			</block>
-			<block className="modal_panel" type="native">
-				<styleClass value="$FullsizeAbsolute"/>
-			</block>
-		</block>
-		<block>
-			<bind name="var" value="{paddingTop: $root.paddingTop}"/>
-			<bind name="var" value="{hideHeader: $root.hideHeader}"/>
-			<bind name="style" value="'paddingTop'; paddingTop"/>
-			<bind name="appear" value="'startShow'; 0.15; 0.3; {alpha: 0}; {alpha: 1}"/>
-			<bind name="appear" value="'startHide'; 0.15; 0.3; {alpha: 1}; {alpha: 0}"/>
-			<styleClass value="$Fullsize"/>
-			<block>
-				<bind name="visible" value="!hideHeader"/>
-				<bind name="appear" value="'startShow'; 0.15; 0.15; {alpha: 0, top: 5}; {alpha: 1, top: 0}"/>
-				<bind name="appear" value="'startHide'; 0.15; 0; {alpha: 1, top: 0}; {alpha: 0, top: -10}"/>
-				<style>
-					<width value="100%"/>
-					<marginTop value="8px"/>
-				</style>
-				<bind name="instance" value="'ModalWindowHeader'; { _header: browserTitle, _headerWidth: '100%', _innerCloseButton: true, _noHotkey: $root.fullInput}"/>
-			</block>
-			<bind name="var" value="{firstRequestedPageLoaded: false}"/>
-			<bind name="watch" value="'loadFailed'; ((httpStatusCode &lt; 200) || (httpStatusCode &gt;= 400) &amp;&amp; (httpStatusCode != 403))"/>
-			<bind name="catch" value="'browser.onLoadEnd'; {firstRequestedPageLoaded: true}"/>
-			<bind name="name" value="firstRequestedPageLoaded ? 'BrowserIsLoaded' : 'BrowserIsNotLoaded'"/>
-			<block>
-				<styleClass value="$Fullsize"/>
-				<bind name="appear" value="'startShow'; 0.15; 0.3; {alpha: 0, top: 5}; {alpha: 1, top: 0}"/>
-				<bind name="appear" value="'startHide'; 0.15; 0.15;  {alpha: 1, top: 0}; {alpha: 0, top: -10}"/>
-				<block className="indicator_busy_1" type="native">
-					<bind name="transition" value="firstRequestedPageLoaded; 0.15; {alpha: 1}; {alpha: 0}"/>
-					<style>
-						<position value="absolute"/>
-						<hitTest value="false"/>
-					</style>
-					<styleClass value="$MiddleAligned"/>
-					<styleClass value="$MiddleVAligned"/>
-				</block>
-				<bind name="visible" value="!authorizing"/>
-				<bind name="var" value="{browserTextureName: $root.browserTextureName}"/>
-				<bind name="controller" value="lesta.unbound.controls.UbWebBrowserController; browserTextureName"/>
-				<bind name="event" value="'browser.onInitializationComplete'; readyToNavigate"/>
-				<block className="BrowserRender">
-					<bind name="visible" value="!(loadFailed)"/>
-					<styleClass value="$Fullsize"/>
-					<block>
-						<styleClass value="$Fullsize"/>
-						<params>
-							<param name="name" value="browser_target"/>
-						</params>
-						<block className="lesta.controls.BitmapEx" type="native">
-							<params>
-								<param name="name" value="browser_target_texture"/>
-							</params>
-							<styleClass value="$Fullsize"/>
-							<bind name="event" value="'browser.onInitializationComplete'; registerMouseHandlers; 'browser_target'; 'browser_target_texture'"/>
-							<bind name="event" value="'browser.onInitializationComplete'; resizeBrowser; 'browser_target'"/>
-							<bind name="event" value="'resize'; resizeBrowser; 'browser_target' "/>
-							<bind name="bitmapDataClassName" value="firstRequestedPageLoaded ? browserTextureName : null"/>
-						</block>
-					</block>
-					<bind name="instance" value="'BrowserIMEInput'; {_browserTextureName: browserTextureName}"/>
-				</block>
-			</block>
-			<block className="BrowserLoadFailed">
-				<bind name="visible" value="loadFailed"/>
-				<styleClass value="$FullsizeAbsolute"/>
-				<block type="text">
-					<bind name="transition" value="loadFailed; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
-					<styleClass value="$MiddleAligned"/>
-					<styleClass value="$TextAccentBold"/>
-					<bind name="class" value="'$FontColorUnready'"/>
-					<style>
-						<top value="33%"/>
-						<hitTest value="false"/>
-					</style>
-					<bind name="text" value="toUpperCase(tr('IDS_SERVICE_IS_UNAVAILABLE_WEB'))"/>
-				</block>
-			</block>
-			<block className="BrowserAuthorizing">
-				<bind name="visible" value="authorizing"/>
-				<styleClass value="$FullsizeAbsolute"/>
-				<block type="text">
-					<bind name="transition" value="authorizing; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
-					<styleClass value="$MiddleAligned"/>
-					<styleClass value="$TextAccentBold"/>
-					<bind name="class" value="'$FontColorBlueish'"/>
-					<style>
-						<top value="33%"/>
-						<hitTest value="false"/>
-					</style>
-					<bind name="text" value="toUpperCase(tr('IDS_WAITING_SCREEN_AUTHORIZATION'))"/>
-				</block>
-			</block>
-		</block>
-	</block>
-	<block className="BrowserRender">
-		<bind name="visible" value="!(loadFailed)"/>
-		<styleClass value="$Fullsize"/>
-		<block>
-			<styleClass value="$Fullsize"/>
-			<params>
-				<param name="name" value="browser_target"/>
-			</params>
-			<block className="lesta.controls.BitmapEx" type="native">
-				<params>
-					<param name="name" value="browser_target_texture"/>
-				</params>
-				<styleClass value="$Fullsize"/>
-				<bind name="event" value="'browser.onInitializationComplete'; registerMouseHandlers; 'browser_target'; 'browser_target_texture'"/>
-				<bind name="event" value="'browser.onInitializationComplete'; resizeBrowser; 'browser_target'"/>
-				<bind name="event" value="'resize'; resizeBrowser; 'browser_target' "/>
-				<bind name="bitmapDataClassName" value="firstRequestedPageLoaded ? browserTextureName : null"/>
-			</block>
-		</block>
-		<bind name="instance" value="'BrowserIMEInput'; {_browserTextureName: browserTextureName}"/>
-	</block>
-	<block className="BrowserLoadFailed">
-		<bind name="visible" value="loadFailed"/>
-		<styleClass value="$FullsizeAbsolute"/>
-		<block type="text">
-			<bind name="transition" value="loadFailed; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
-			<styleClass value="$MiddleAligned"/>
-			<styleClass value="$TextAccentBold"/>
-			<bind name="class" value="'$FontColorUnready'"/>
-			<style>
-				<top value="33%"/>
-				<hitTest value="false"/>
-			</style>
-			<bind name="text" value="toUpperCase(tr('IDS_SERVICE_IS_UNAVAILABLE_WEB'))"/>
-		</block>
-	</block>
-	<block className="BrowserAuthorizing">
-		<bind name="visible" value="authorizing"/>
-		<styleClass value="$FullsizeAbsolute"/>
-		<block type="text">
-			<bind name="transition" value="authorizing; 0.15; {alpha: 0, top: 10}; {alpha: 1, top: 0}"/>
-			<styleClass value="$MiddleAligned"/>
-			<styleClass value="$TextAccentBold"/>
-			<bind name="class" value="'$FontColorBlueish'"/>
-			<style>
-				<top value="33%"/>
-				<hitTest value="false"/>
-			</style>
-			<bind name="text" value="toUpperCase(tr('IDS_WAITING_SCREEN_AUTHORIZATION'))"/>
-		</block>
-	</block>
-	<block className="BrowserIMEInput">
-		<bind name="primaryEntityDH" value="'widgetEntity'; CC.webBrowserIMEInputWidget; _browserTextureName"/>
-		<bind name="watchDH" value="'widgetEnabled'; ['widgetEntity.webBrowserIMEInputWidget.evIsEnabledChanged']; widgetEntity.webBrowserIMEInputWidget.enabled"/>
-		<bind name="watchDH" value="'widgetPosition'; ['widgetEntity.webBrowserIMEInputWidget.evBoundRectUpdate']; widgetEntity.webBrowserIMEInputWidget.position"/>
-		<bind name="watchDH" value="'widgetWidth'; ['widgetEntity.webBrowserIMEInputWidget.evBoundRectUpdate']; widgetEntity.webBrowserIMEInputWidget.width"/>
-		<bind name="watchDH" value="'widgetHeight'; ['widgetEntity.webBrowserIMEInputWidget.evBoundRectUpdate']; widgetEntity.webBrowserIMEInputWidget.height"/>
-		<bind name="watchDH" value="'widgetMaxTextLength'; ['widgetEntity.webBrowserIMEInputWidget.evMaxTextLengthUpdate']; widgetEntity.webBrowserIMEInputWidget.maxTextLength"/>
-		<bind name="watchDH" value="'isWidgetTextArea'; ['widgetEntity.webBrowserIMEInputWidget.evTextAreaUpdate']; widgetEntity.webBrowserIMEInputWidget.isTextArea"/>
-		<bind name="handleEventDH" value="'widgetEntity.webBrowserIMEInputWidget.evExternalTextUpdate'; 'widgetExternalTextChangeEvent'; { text: widgetEntity.webBrowserIMEInputWidget.externalText }; 1"/>
-		<bind name="handleEventDH" value="'widgetEntity.webBrowserIMEInputWidget.evIsEnabledEvent'; 'widgetIsEnabledEvent'; {}; 1"/>
-		<bind name="handleEventDH" value="'widgetEntity.webBrowserIMEInputWidget.evIsDisabledEvent'; 'widgetIsDisabledEvent'; {}; 1"/>
-		<bind name="visible" value="widgetEnabled"/>
-		<bind name="var" value="{inputText: ''}"/>
-		<bind name="style" value="'left'; widgetPosition.x + 'px'"/>
-		<bind name="style" value="'top';  widgetPosition.y + 'px'"/>
-		<style>
-			<position value="absolute"/>
-		</style>
-		<block className="text_area_default" type="native">
-			<bind name="controller" value="lesta.dialogs.ime.UbIMEWidgetInputController; 0; 'widgetIsEnabledEvent'; 'widgetIsDisabledEvent'; 'widgetExternalTextChangeEvent'; 'inputText'; 'controllerChangeTextEvent'"/>
-			<bind name="name" value="'IMEWidget.'+_browserTextureName"/>
-			<bind name="multiline" value="isWidgetTextArea"/>
-			<bind name="maxChars" value="widgetMaxTextLength ? widgetMaxTextLength : 500"/>
-			<params>
-				<param name="actAsButton" value="true"/>
-				<param name="forceSelectionOnFocus" value="false"/>
-			</params>
-			<bind name="style" value="'width'; widgetWidth + 'px'"/>
-			<bind name="style" value="'height'; widgetHeight + 'px'"/>
-			<bind name="action" value="'controllerChangeTextEvent'; 'webBrowserInputIMEWidget.sendResultText.'+_browserTextureName; { text: inputText }"/>
 		</block>
 	</block>
 	<block className="ClubInfoTooltip">
@@ -63855,11 +64330,11 @@
 		<bind name="watchDH" value="'enemyName'; ['killerEntity.accountName.evChanged']; killerEntity.accountName.name"/>
 		<block>
 			<style>
-				<width value="280px"/>
-				<height value="280px"/>
+				<width value="190px"/>
+				<height value="190px"/>
 				<position value="absolute"/>
-				<left value="-140px"/>
-				<top value="-280px"/>
+				<left value="-95px"/>
+				<top value="-230px"/>
 			</style>
 			<bind name="instance" value="'BattleKillerDogTag'; killerId != 0 ? {_killerId: killerId, _enemyName: enemyName} : null"/>
 		</block>
@@ -63870,15 +64345,16 @@
 		<bind name="appear" value="'addedToStage'; 1; 0.5; {alpha: 0}; {alpha: 1}"/>
 		<bind name="appear" value="'hideDogTagEv'; 1; 0.5; {alpha: 1}; {alpha: 0}"/>
 		<bind name="primaryEntityDH" value="'killerEntity'; CC.avatar; _killerId"/>
+		<bind name="watchDH" value="'playerDbId'; [] ; killerEntity.accountSimple.dbId "/>
 		<style>
-			<width value="280px"/>
-			<height value="280px"/>
+			<width value="190px"/>
+			<height value="190px"/>
 		</style>
-		<bind name="repeat" value="killerEntity.dogTagView.components; 'DogTagViewImageItemAvatar'"/>
+		<bind name="repeat" value="killerEntity.dogTagView.components; 'DogTagViewImageItemAvatar'; {_playerDbId : playerDbId}"/>
 		<block>
 			<styleClass value="$MiddleAlignedAbsolutely"/>
 			<style>
-				<top value="280px"/>
+				<top value="190px"/>
 			</style>
 			<block type="text">
 				<styleClass value="$TextDefaultBold21NM"/>
@@ -63894,14 +64370,38 @@
 		<bind name="watchDH" value="'enabled'; ['entity.dogTagComponent.evUpdate']; entity.dogTagComponent.enabled"/>
 		<bind name="watchDH" value="'iconPath'; ['entity.dogTagComponent.evUpdate']; entity.dogTagComponent.iconPath"/>
 		<style>
-			<width value="280px"/>
-			<height value="280px"/>
+			<width value="190px"/>
+			<height value="190px"/>
 			<backgroundStretchX value="true"/>
 			<backgroundStretchY value="true"/>
 			<position value="absolute"/>
 		</style>
-		<bind name="style" value="'backgroundImage'; 'url:../dogTags/big/' + iconPath"/>
+		<bind name="style" value="'backgroundImage'; 'url:../dogTags/medium/' + iconPath"/>
 		<bind name="name" value="'dogTagBattle_' + $index + '_' + entity.dogTagComponent.gpName"/>
+		<bind name="primaryEntityDH" value="'playerEntity'; CC.accountSimple; _playerDbId"/>
+		<bind name="watchDH" value="'clanId'; ['playerEntity.clanman.evClanIdChanged']; playerEntity.clanman.clanId"/>
+		<bind name="primaryEntityDH" value="'clanEntity'; CC.clan; clanId"/>
+		<bind name="watchDH" value="'clanTag'; ['clanEntity.clan.evTagChanged']; clanEntity.clan.tag"/>
+		<bind name="watchDH" value="'clanTagOffsetX';['entity.dogTagComponent.evUpdate']; entity.dogTagComponent.clanTagOffsetX"/>
+		<bind name="watchDH" value="'clanTagOffsetY';['entity.dogTagComponent.evUpdate']; entity.dogTagComponent.clanTagOffsetY"/>
+		<bind name="watchDH" value="'clanTagFont';['entity.dogTagComponent.evUpdate']; entity.dogTagComponent.clanTagFont"/>
+		<bind name="watchDH" value="'clanTagVisible';['entity.dogTagComponent.evUpdate']; entity.dogTagComponent.clanTagVisible"/>
+		<block>
+			<style>
+				<position value="absolute"/>
+			</style>
+			<bind name="style" value="'top'; clanTagOffsetY + '%'"/>
+			<bind name="style" value="'left'; clanTagOffsetX + '%'"/>
+			<block>
+				<style>
+					<position value="absolute"/>
+					<marginLeft value="-50%"/>
+					<marginTop value="-50%"/>
+				</style>
+				<bind name="visible" value="clanTagVisible"/>
+				<bind name="atlasText" value="clanTagVisible ?  (clanTag ? '[' + clanTag + ']' : '^') : '' ; '../fonts/medium/' + clanTagFont; 0"/>
+			</block>
+		</block>
 	</block>
 	<block className="ConfirmationModalWindow">
 		<style>
@@ -65885,7 +66385,7 @@
 		<bind name="watchDH" value="'selfPreBattleId'; ['selfPlayerEntity.preBattlePlayerSimple.evPreBattleIdChanged']; selfPlayerEntity.preBattlePlayerSimple.preBattleId"/>
 		<bind name="collectionDH" value="CC.preBattlePlayerSimple; 'preBattlePlayers'; 'byPreBattle.' + selfPreBattleId + '.preBattleMembers'"/>
 		<bind name="collectionDH" value="CC.playerInvitedToPrebattleInfo; 'preBattleInvitedPlayers'"/>
-		<bind name="watch" value="'isInPrebattle'; (selfPlayerEntity.preBattlePlayerSimple != null)"/>
+		<bind name="watch" value="'isInPrebattle'; (selfPlayerEntity.preBattlePlayerSimple != null &amp;&amp; selfPlayerEntity.playerInvitedToPrebattleInfo == null)"/>
 		<bind name="watch" value="'curPlayersInFormation'; (preBattlePlayers.length + preBattleInvitedPlayers.length)"/>
 		<bind name="watch" value="'maxPlayersInFormation'; battleTypeEntity.divisionRestrictions.shipsCount[1]"/>
 		<bind name="watch" value="'preBattleTypeStr'; 	(selectedBattle.type == BattleTypes.CLUB_BATTLE)	? 'party'

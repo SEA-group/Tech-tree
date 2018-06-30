@@ -624,12 +624,14 @@
 				<ship shipid='4279219920' x='0' y='8' /> <!--PJSA015_Taiho_1944 (T9 Japan upgradeable AirCarrier) -->
 				<ship shipid='4282300112' x='4' y='8' /> <!--PJSC012_Ibuki_1944 (T9 Japan upgradeable Cruiser) -->
 				<ship shipid='4075697872' x='6' y='8' /> <!--PJSD209_Yugumo (T9 Japan upgradeable Destroyer) -->
-				<ship shipid='3761190608' x='8' y='8' /> <!--PJSB509_Musashi (T9 Japan premium Battleship) -->
+				<ship shipid='4065212112' x='8' y='8' /> <!--PJSD219_Kitakaze (T9 Japan upgradeable Destroyer) -->
+				<ship shipid='4074649296' x='10' y='8' /> <!--PJSB509_Musashi (T9 Japan premium Battleship) -->
 
 				<ship shipid='4259231440' x='4' y='9' /> <!--PJSC034_Zao_1944 (T10 Japan upgradeable Cruiser) -->
 				<ship shipid='4276041424' x='2' y='9' /> <!--PJSB018_Yamato_1944 (T10 Japan upgradeable Battleship) -->
 				<ship shipid='4277122768' x='0' y='9' /> <!--PJSA017_Hakuryu_1942 (T10 Japan upgradeable AirCarrier) -->
 				<ship shipid='4282267344' x='6' y='9' /> <!--PJSD012_Shimakaze_1943 (T10 Japan upgradeable Destroyer) -->
+				<ship shipid='4074649296' x='8' y='9' /> <!--PJSD210_Harugumo (T10 Japan upgradeable Destroyer) -->
 				<!-- <ship shipid='3247355600' x='10' y='9' /> PJSC999_Yubari_Special (T10 Japan event Cruiser) -->
 				<!-- <ship shipid='3452843728' x='10' y='9' />  PJSD803_False_Isokaze_1917 (T4 Japan unavailable Destroyer) -->
 
@@ -684,6 +686,8 @@
 				<ship shipid='3767416176' x='6' y='2' /> <!--PUSD503_Vampire (T3 Commonwealth special Destroyer) -->
 
 				<ship shipid='3764303216' x='4' y='5' /> <!--PUSC506_Perth_1942 (T6 Commonwealth special Cruiser) -->
+
+				<ship shipid='3763221872' x='6' y='6' /> <!--PUSD507_Haida (T7 Commonwealth special Destroyer) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
@@ -842,6 +846,7 @@
 
 				<ship shipid='3340678608' x='4' y='10' /> <!--PRSC910_Pr_66_Moskva (T10 Russia event Cruiser) --> 
 				<ship shipid='3340645840' x='8' y='10' /> <!--PRSD910_Grozovoy_pr_40N (T10 Russia demoWithoutStats Destroyer) -->
+				<ship shipid='3749623248' x='10' y='10' /> <!--PRSC520_Stalingrad (T10 Russia demoWithoutStats Cruiser) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
@@ -882,10 +887,10 @@
 				<ship shipid='3763288016' x='10' y='6' /> <!--PBSB507_Hood (T7 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='3752802256' x='12' y='6' /> <!--PBSB517_Nelson (T7 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='3742316496' x='14' y='6' /> <!--PBSB527_Duke_of_York (T7 United_Kingdom demoWithoutStats Battleship) -->
-				<ship shipid='3763222480' x='16' y='6' /> <!--PBSD507_Cossack (T7 United_Kingdom demoWithoutStats Destroyer) -->
 
 				<ship shipid='4181669840' x='0' y='7' /> <!--PBSB108_King_George_V (T8 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='4181637072' x='2' y='7' /> <!--PBSC108_Edinburgh (T8 United_Kingdom demoWithoutStats Cruiser) -->
+				<ship shipid='3752736720' x='8' y='7' /> <!--PBSD517_Cossack (T7 United_Kingdom demoWithoutStats Destroyer) -->
 
 				<ship shipid='4180621264' x='0' y='8' /> <!--PBSB109_Lion (T9 United_Kingdom demoWithoutStats Battleship) -->
 				<ship shipid='4180588496' x='2' y='8' /> <!--PBSC109_Neptune (T9 United_Kingdom demoWithoutStats Cruiser) -->
@@ -955,6 +960,20 @@
 		</arrows>
 		<ships>
 				<ship shipid='3769513264' x='8' y='6' /> <!--PWSD501_Blyskawica (T7 Poland special Destroyer) -->
+		</ships>
+		<types>
+				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
+				<type id='1' nameIDS='IDS_CRUISER' x='4' y='-1' />
+				<type id='2' nameIDS='IDS_BATTLESHIP' x='2' y='-1' />
+				<type id='3' nameIDS='IDS_CARRIER' x='0' y='-1' />
+				<type id='4' nameIDS='IDS_PREMIUM' x='10' y='-1' />
+		</types>
+	</nation>
+	<nation name='Pan_America'>
+		<arrows>
+		</arrows>
+		<ships>
+				<ship shipid='3763254608' x='8' y='6' /> <!--PVSC507_Nueve_de_Julio_1951 (T7 Poland special Cruiser) -->
 		</ships>
 		<types>
 				<type id='0' nameIDS='IDS_DESTROYER' x='6' y='-1' />
